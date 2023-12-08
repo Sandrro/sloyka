@@ -4,11 +4,11 @@ location in the text.
 In this scenario texts are comments in social networks (e.g. Vkontakte).
 Thus the model was trained on the corpus of comments on Russian language.
 """
-import numpy as np
+import numpy as np 
 import re
 import warnings
 from typing import List, Optional
-
+import os
 import flair
 import geopandas as gpd
 import networkx as nx
@@ -17,8 +17,10 @@ import osmnx as ox
 import pandas as pd
 import pymorphy2
 import requests
-import os
 import torch
+import string
+import math
+import pdb
 from flair.data import Sentence
 from flair.models import SequenceTagger
 from geopy.exc import GeocoderUnavailable
@@ -28,20 +30,24 @@ from tqdm import tqdm
 from natasha import (
     Segmenter,
     MorphVocab,
+    
     NewsEmbedding,
     NewsMorphTagger,
     NewsSyntaxParser,
     NewsNERTagger,
+    
     PER,
     NamesExtractor,
     DatesExtractor,
     MoneyExtractor,
     AddrExtractor,
-    Doc,
+
+    Doc
 )
 
 segmenter = Segmenter()
 morph_vocab = MorphVocab()
+morph = pymorphy2.MorphAnalyzer()
 
 emb = NewsEmbedding()
 morph_tagger = NewsMorphTagger(emb)
@@ -179,7 +185,25 @@ class Streets:
         df_streets = pd.DataFrame(names, columns=["street"])
 
         return df_streets
+    
+    @staticmethod
+    def find_toponim_words_from_name(x: str) -> str:
 
+        pattern = re.compile(
+            r"путепровод|улица|набережная реки|проспект"
+            r"|бульвар|мост|переулок|площадь|переулок"
+            r"|набережная|канала|канал|дорога на|дорога в"
+            r"|шоссе|аллея|проезд|линия",
+            re.IGNORECASE  
+        )
+
+        match = pattern.search(x)
+
+        if match:
+            return match.group().strip().lower()
+        else:
+            return None
+    
     @staticmethod
     def drop_words_from_name(x: str) -> str:
         """
@@ -211,7 +235,9 @@ class Streets:
         and requires almost exact match between addresses in the OSM database
         and the geocoding address.
         """
-
+        streets_df["toponim_name"] = streets_df["street"].progress_apply(
+            lambda x: Streets.find_toponim_words_from_name(x)
+        )
         streets_df["street_name"] = streets_df["street"].progress_apply(
             lambda x: Streets.drop_words_from_name(x)
         )
@@ -233,23 +259,7 @@ class Geocoder:
     This class provides a functionality of simple geocoder
     """
 
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-
     global_crs: int = 4326
-    exceptions = pd.merge(
-        pd.read_csv(
-            os.path.join(dir_path, "exceptions_countries.csv"),
-            encoding="utf-8",
-            sep=",",
-        ),
-        pd.read_csv(
-            os.path.join(dir_path, "exсeptions_city.csv"),
-            encoding="utf-8",
-            sep=",",
-        ),
-        on="Сокращенное наименование",
-        how="outer",
-    )
 
     def __init__(
         self,
@@ -287,22 +297,25 @@ class Geocoder:
                 .replace('"', "")
             )
             score = round(sentence.get_labels("ner")[0].score, 3)
-            if score > 0.7:
+            if score>0.9:
                 return pd.Series([res, score])
             else:
                 return pd.Series([None, None])
+    
 
         except IndexError:
             return pd.Series([None, None])
-
+    
     # Блок с Наташей
-    def get_ner_address_natasha(
-        row, exceptions, text_col
-    ):  # input: string, list, series... output: string
+    exceptions = pd.merge(pd.read_csv(os.path.join("exceptions_countries.csv"), encoding="utf-8", sep=",")
+                        ,pd.read_csv(os.path.join("exсeptions_city.csv"), encoding="utf-8", sep=","), 
+                        on='Сокращенное наименование', how='outer')
+
+    def get_ner_address_natasha(row, exceptions, text_col): #input: string, list, series... output: string
         if row["Street"] == None or row["Street"] == np.nan:
             i = row[text_col]
             location_final = []
-            i = re.sub(r"\[.*?\]", "", i)
+            i = re.sub(r'\[.*?\]', '', i)
             doc = Doc(i)
             doc.segment(segmenter)
             doc.tag_morph(morph_tagger)
@@ -310,14 +323,9 @@ class Geocoder:
             doc.tag_ner(ner_tagger)
             for span in doc.spans:
                 span.normalize(morph_vocab)
-            location = list(filter(lambda x: x.type == "LOC", doc.spans))
+            location = list(filter(lambda x: x.type == 'LOC', doc.spans))
             for span in location:
-                if (
-                    span.normal.lower()
-                    not in exceptions["Сокращенное наименование"]
-                    .str.lower()
-                    .values
-                ):
+                if span.normal.lower() not in exceptions['Сокращенное наименование'].str.lower().values:
                     location_final.append(span)
             location_final = [(span.text) for span in location_final]
             if not location_final:
@@ -325,6 +333,65 @@ class Geocoder:
             return location_final[0]
         else:
             return row["Street"]
+    
+    # Извлечение номера дома
+    def extract_bild_num(t, s):
+        if isinstance(t, float) and math.isnan(t):
+            return None  
+
+        clear_text = str(t).translate(str.maketrans("", "", string.punctuation))
+        clear_text = clear_text.lower().split(' ')
+        street_word = s
+        positions = [index for index, item in enumerate(clear_text) if item == street_word]
+
+        if not positions:
+            return None
+
+        position = positions[0]
+        search_start = max(0, position - 3)
+        search_end = min(len(clear_text), position + 4)
+
+        num_result = None
+
+        for f_index in range(max(0, search_start), min(len(clear_text), search_end)):
+            element = clear_text[f_index]
+            if any(character.isdigit() for character in str(element)):
+                num_result = element
+                break
+
+        return num_result
+
+    # Извлечение топонима в название улицы
+    def extract_toponym(t, s):
+        if isinstance(t, float) and math.isnan(t):
+            return s  
+
+        clear_text = str(t).translate(str.maketrans("", "", string.punctuation))
+        clear_text = clear_text.lower().split(' ')
+        street_word = s
+        positions = [index for index, item in enumerate(clear_text) if item == street_word]
+
+        if not positions:
+            return s  
+
+        position = positions[0]
+        search_start = max(0, position - 3)
+        search_end = min(len(clear_text), position + 4)
+
+        ad_result = []
+        target_values = ["пр", "проспект", "проспекте", "ул", "улица", "улице", "площадь", "площади", "п", "пер", "переулок", "проезд", "проезде", "дорога", "дороге"]
+
+        for i in range(search_start, min(search_end + 1, len(clear_text))):
+            word = clear_text[i]
+            normal_form = morph.parse(word)[0].normal_form  
+            if normal_form in target_values:
+                ad_result.append(normal_form)
+
+        if ad_result:
+            return f"{s} {' '.join(ad_result)}"  
+        else:
+            return s  
+
 
     @staticmethod
     def get_stem(street_names_df: pd.DataFrame) -> pd.DataFrame:
@@ -396,9 +463,8 @@ class Geocoder:
         df = df.merge(new_df, left_on=df.index, right_on=new_df.index)
 
         df["location_options"] = df["location_options"].astype(str)
-
         return df
-
+        
     @staticmethod
     def get_level(row: pd.Series) -> str:
         """
@@ -428,12 +494,7 @@ class Geocoder:
         df[["Street", "Score"]] = df[text_column].progress_apply(
             lambda t: self.extract_ner_street(t)
         )
-        df["Street"] = df[[text_column, "Street"]].progress_apply(
-            lambda row: Geocoder.get_ner_address_natasha(
-                row, self.exceptions, text_column
-            ),
-            axis=1,
-        )
+        df["Street"] = df[[text_column,"Street"]].progress_apply(lambda row: Geocoder.get_ner_address_natasha(row, self.exceptions, text_column), axis=1)
         df = df[df.Street.notna()]
         df = df[df["Street"].str.contains("[а-яА-Я]")]
 
@@ -446,7 +507,9 @@ class Geocoder:
         )
         df["Street"] = df["Street"].apply(lambda x: pattern2.sub("", x).strip())
         df["Street"] = df["Street"].str.lower()
-
+        df['Numbers'] = df.apply(lambda row: Geocoder.extract_bild_num(row['Numbers'], row['Street']), axis=1)
+        df['Numbers'].fillna(df.apply(lambda row: Geocoder.extract_bild_num(row['Текст комментария'], row['Street']), axis=1), inplace=True)
+        df['Toponims'] = df.apply(lambda row: Geocoder.extract_toponym(row['Текст комментария'], row['Street']), axis=1)
         return df
 
     def create_gdf(self, df: pd.DataFrame) -> gpd.GeoDataFrame:
