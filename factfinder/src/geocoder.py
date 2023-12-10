@@ -335,33 +335,6 @@ class Geocoder:
             return row["Street"]
     
     # Извлечение номера дома
-    # def extract_bild_num(t, s):
-    #     if pd.notna(t) and t != "":
-    #         return t
-    #     if isinstance(t, float) and math.isnan(t):
-    #         return None  
-
-    #     clear_text = str(t).translate(str.maketrans("", "", string.punctuation))
-    #     clear_text = clear_text.lower().split(' ')
-    #     street_word = s
-    #     positions = [index for index, item in enumerate(clear_text) if item == street_word]
-
-    #     if not positions:
-    #         return None
-
-    #     position = positions[0]
-    #     search_start = max(0, position - 3)
-    #     search_end = min(len(clear_text), position + 4)
-
-    #     num_result = None
-
-    #     for f_index in range(max(0, search_start), min(len(clear_text), search_end)):
-    #         element = clear_text[f_index]
-    #         if any(character.isdigit() for character in str(element)):
-    #             num_result = element
-    #             break
-
-    #     return num_result
     def extract_bild_num(t, s, n):
         if pd.notna(n) and n != "":
             return n
