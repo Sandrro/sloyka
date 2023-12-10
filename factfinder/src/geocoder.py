@@ -335,9 +335,69 @@ class Geocoder:
             return row["Street"]
     
     # Извлечение номера дома
-    def extract_bild_num(t, s):
+    # def extract_bild_num(t, s):
+    #     if pd.notna(t) and t != "":
+    #         return t
+    #     if isinstance(t, float) and math.isnan(t):
+    #         return None  
+
+    #     clear_text = str(t).translate(str.maketrans("", "", string.punctuation))
+    #     clear_text = clear_text.lower().split(' ')
+    #     street_word = s
+    #     positions = [index for index, item in enumerate(clear_text) if item == street_word]
+
+    #     if not positions:
+    #         return None
+
+    #     position = positions[0]
+    #     search_start = max(0, position - 3)
+    #     search_end = min(len(clear_text), position + 4)
+
+    #     num_result = None
+
+    #     for f_index in range(max(0, search_start), min(len(clear_text), search_end)):
+    #         element = clear_text[f_index]
+    #         if any(character.isdigit() for character in str(element)):
+    #             num_result = element
+    #             break
+
+    #     return num_result
+    def extract_bild_num(t, s, n):
+        if pd.notna(n) and n != "":
+            return n
         if isinstance(t, float) and math.isnan(t):
-            return None  
+            return ""  
+
+        clear_text = str(t).translate(str.maketrans("", "", string.punctuation))
+        clear_text = clear_text.lower().split(' ')
+        street_word = s
+        positions = [index for index, item in enumerate(clear_text) if item == street_word]
+
+        if not positions:
+            return ""
+
+        position = positions[0]
+        search_start = max(0, position - 3)
+        search_end = min(len(clear_text), position + 4)
+
+        num_result = []
+
+        for f_index in range(max(0, search_start), min(len(clear_text), search_end)):
+            element = clear_text[f_index]
+            if any(character.isdigit() for character in str(element)) and len(str(element)) <= 3:
+                # num_result.append((f_index, element))
+                num_result.append(element)
+                break
+
+        if num_result:
+            return num_result[0]
+        else:
+            return ""
+
+    # Извлечение топонима в название улицы
+    def extract_toponym(t, s):
+        if isinstance(t, float) and math.isnan(t):
+            return None
 
         clear_text = str(t).translate(str.maketrans("", "", string.punctuation))
         clear_text = clear_text.lower().split(' ')
@@ -351,46 +411,30 @@ class Geocoder:
         search_start = max(0, position - 3)
         search_end = min(len(clear_text), position + 4)
 
-        num_result = None
-
-        for f_index in range(max(0, search_start), min(len(clear_text), search_end)):
-            element = clear_text[f_index]
-            if any(character.isdigit() for character in str(element)):
-                num_result = element
-                break
-
-        return num_result
-
-    # Извлечение топонима в название улицы
-    def extract_toponym(t, s):
-        if isinstance(t, float) and math.isnan(t):
-            return s  
-
-        clear_text = str(t).translate(str.maketrans("", "", string.punctuation))
-        clear_text = clear_text.lower().split(' ')
-        street_word = s
-        positions = [index for index, item in enumerate(clear_text) if item == street_word]
-
-        if not positions:
-            return s  
-
-        position = positions[0]
-        search_start = max(0, position - 3)
-        search_end = min(len(clear_text), position + 4)
-
         ad_result = []
-        target_values = ["пр", "проспект", "проспекте", "ул", "улица", "улице", "площадь", "площади", "п", "пер", "переулок", "проезд", "проезде", "дорога", "дороге"]
+        target_values = ["пр", "проспект", "проспекте", "ул", "улица", "улице", "площадь", "площади", "пер", "переулок", "проезд", "проезде", "дорога", "дороге"]
+
+        replacement_dict = {
+            "пр": "проспект",
+            "ул": "улица",
+            "пер": "переулок",
+            "улице": "улица",
+            "проспекте": "проспект",
+            "площади": "площадь",
+            "проезде": "проезд",
+            "дороге": "дорога"
+        }
 
         for i in range(search_start, min(search_end + 1, len(clear_text))):
             word = clear_text[i]
-            normal_form = morph.parse(word)[0].normal_form  
+            normal_form = morph.parse(word)[0].normal_form
             if normal_form in target_values:
-                ad_result.append(normal_form)
+                ad_result.append(replacement_dict.get(normal_form, normal_form))
 
         if ad_result:
-            return f"{s} {' '.join(ad_result)}"  
+            return ad_result[0]
         else:
-            return s  
+            return None
 
 
     @staticmethod
@@ -417,34 +461,39 @@ class Geocoder:
             )
         return street_names_df
 
+
     def find_word_form(
         self, df: pd.DataFrame, strts_df: pd.DataFrame
     ) -> pd.DataFrame:
         """
-        In the russian language any word has different forms.
-        Since addresses are extracted from the texts in social networks
+        In the Russian language, any word has different forms.
+        Since addresses are extracted from the texts in social networks,
         they might be in any possible form. This function is aimed to match that
         free form to the one that is used in the OSM database.
 
         Since the stem is found there would be several streets with that stem
         in their name.
-        However the searching street name has its specific ending (form) and
+        However, the searching street name has its specific ending (form) and
         not each matched street name could have it.
 
-        TODO: add spellcheker since there might be misspelled words.
+        TODO: add spellchecker since there might be misspelled words.
         """
 
         df["full_street_name"] = None
 
         for idx, row in df.iterrows():
             search_val = row["Street"]
+            search_top = row["Toponims"]
             val_num = row["Numbers"]
 
             for col in strts_df.columns[2:]:
-                if search_val in strts_df[col].values:
-                    streets_full = strts_df.loc[
-                        strts_df[col] == search_val, "street"
-                    ].values
+                search_rows = strts_df.loc[strts_df[col] == search_val]
+
+                # Check for matching toponim_name
+                matching_rows = search_rows[search_rows['toponim_name'] == search_top]
+
+                if not matching_rows.empty:
+                    streets_full = matching_rows["street"].values
                     streets_full = [
                         street
                         + f" {val_num}"
@@ -454,6 +503,20 @@ class Geocoder:
                     ]
 
                     df.loc[idx, "full_street_name"] = ",".join(streets_full)
+                else:
+                    if search_val in strts_df[col].values:
+                        streets_full = strts_df.loc[
+                            strts_df[col] == search_val, "street"
+                        ].values
+                        streets_full = [
+                            street
+                            + f" {val_num}"
+                            + f" {self.osm_city_name}"
+                            + " Россия"
+                            for street in streets_full
+                        ]
+
+                        df.loc[idx, "full_street_name"] = ",".join(streets_full)
 
         df.dropna(subset="full_street_name", inplace=True)
         df["location_options"] = df["full_street_name"].str.split(",")
@@ -507,8 +570,7 @@ class Geocoder:
         )
         df["Street"] = df["Street"].apply(lambda x: pattern2.sub("", x).strip())
         df["Street"] = df["Street"].str.lower()
-        df['Numbers'] = df.apply(lambda row: Geocoder.extract_bild_num(row['Numbers'], row['Street']), axis=1)
-        df['Numbers'].fillna(df.apply(lambda row: Geocoder.extract_bild_num(row['Текст комментария'], row['Street']), axis=1), inplace=True)
+        df['Numbers'] = df.apply(lambda row: Geocoder.extract_bild_num(row['Текст комментария'], row['Street'], row['Numbers']), axis=1)
         df['Toponims'] = df.apply(lambda row: Geocoder.extract_toponym(row['Текст комментария'], row['Street']), axis=1)
         return df
 
@@ -582,10 +644,11 @@ class Geocoder:
         street_names = Streets.run(self.osm_city_name, self.osm_city_level)
 
         df = self.get_street(df, text_column)
-        street_names = self.get_stem(street_names)
-        df = self.find_word_form(df, street_names)
-        gdf = self.create_gdf(df)
+        street_names = self.get_stem(street_names)        
+        df = self.find_word_form(df, street_names)   
+        gdf = self.create_gdf(df)  
         gdf = self.merge_to_initial_df(gdf, initial_df)
+        
 
         # Add a new 'level' column using the get_level function
         gdf["level"] = gdf.apply(self.get_level, axis=1)
