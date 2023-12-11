@@ -37,11 +37,6 @@ from natasha import (
     NewsNERTagger,
     
     PER,
-    NamesExtractor,
-    DatesExtractor,
-    MoneyExtractor,
-    AddrExtractor,
-
     Doc
 )
 
@@ -53,13 +48,6 @@ emb = NewsEmbedding()
 morph_tagger = NewsMorphTagger(emb)
 syntax_parser = NewsSyntaxParser(emb)
 ner_tagger = NewsNERTagger(emb)
-
-names_extractor = NamesExtractor(morph_vocab)
-dates_extractor = DatesExtractor(morph_vocab)
-money_extractor = MoneyExtractor(morph_vocab)
-addr_extractor = AddrExtractor(morph_vocab)
-
-
 warnings.simplefilter(action="ignore", category=FutureWarning)
 
 tqdm.pandas()
@@ -258,7 +246,23 @@ class Geocoder:
     """
     This class provides a functionality of simple geocoder
     """
+    dir_path = os.path.dirname(os.path.realpath(__file__))
 
+    global_crs: int = 4326
+    exceptions = pd.merge(
+        pd.read_csv(
+            os.path.join(dir_path, "exceptions_countries.csv"),
+            encoding="utf-8",
+            sep=",",
+        ),
+        pd.read_csv(
+            os.path.join(dir_path, "exсeptions_city.csv"),
+            encoding="utf-8",
+            sep=",",
+        ),
+        on="Сокращенное наименование",
+        how="outer",
+    )
     global_crs: int = 4326
 
     def __init__(
@@ -297,7 +301,7 @@ class Geocoder:
                 .replace('"', "")
             )
             score = round(sentence.get_labels("ner")[0].score, 3)
-            if score>0.9:
+            if score > 0.7:
                 return pd.Series([res, score])
             else:
                 return pd.Series([None, None])
@@ -307,10 +311,6 @@ class Geocoder:
             return pd.Series([None, None])
     
     # Блок с Наташей
-    exceptions = pd.merge(pd.read_csv(os.path.join("exceptions_countries.csv"), encoding="utf-8", sep=",")
-                        ,pd.read_csv(os.path.join("exсeptions_city.csv"), encoding="utf-8", sep=","), 
-                        on='Сокращенное наименование', how='outer')
-
     def get_ner_address_natasha(row, exceptions, text_col): #input: string, list, series... output: string
         if row["Street"] == None or row["Street"] == np.nan:
             i = row[text_col]
@@ -335,30 +335,29 @@ class Geocoder:
             return row["Street"]
     
     # Извлечение номера дома
-    def extract_bild_num(t, s, n):
-        if pd.notna(n) and n != "":
-            return n
-        if isinstance(t, float) and math.isnan(t):
+    def extract_building_num(text, street_name, number): #input: string, list, series... output: string
+        if pd.notna(number) and number != "":
+            return number
+        if isinstance(text, float) and math.isnan(text):
             return ""  
 
-        clear_text = str(t).translate(str.maketrans("", "", string.punctuation))
+        clear_text = str(text).translate(str.maketrans("", "", string.punctuation))
         clear_text = clear_text.lower().split(' ')
-        street_word = s
-        positions = [index for index, item in enumerate(clear_text) if item == street_word]
+        positions = [index for index, item in enumerate(clear_text) if item == street_name]
 
         if not positions:
             return ""
 
+        end_index_position = "4"
         position = positions[0]
-        search_start = max(0, position - 3)
-        search_end = min(len(clear_text), position + 4)
+        search_start = max(0, position)
+        search_end = min(len(clear_text), position + int(end_index_position))
 
         num_result = []
 
         for f_index in range(max(0, search_start), min(len(clear_text), search_end)):
             element = clear_text[f_index]
             if any(character.isdigit() for character in str(element)) and len(str(element)) <= 3:
-                # num_result.append((f_index, element))
                 num_result.append(element)
                 break
 
@@ -368,21 +367,22 @@ class Geocoder:
             return ""
 
     # Извлечение топонима в название улицы
-    def extract_toponym(t, s):
-        if isinstance(t, float) and math.isnan(t):
+    def extract_toponym(text, street_name): #input: string, list, series... output: string
+        if isinstance(text, float) and math.isnan(text):
             return None
 
-        clear_text = str(t).translate(str.maketrans("", "", string.punctuation))
+        clear_text = str(text).translate(str.maketrans("", "", string.punctuation))
         clear_text = clear_text.lower().split(' ')
-        street_word = s
-        positions = [index for index, item in enumerate(clear_text) if item == street_word]
+        positions = [index for index, item in enumerate(clear_text) if item == street_name]
 
         if not positions:
             return None
 
+        start_index_position = "3"
+        end_index_position = "4"
         position = positions[0]
-        search_start = max(0, position - 3)
-        search_end = min(len(clear_text), position + 4)
+        search_start = max(0, position - int(start_index_position))
+        search_end = min(len(clear_text), position + int(end_index_position))
 
         ad_result = []
         target_values = ["пр", "проспект", "проспекте", "ул", "улица", "улице", "площадь", "площади", "пер", "переулок", "проезд", "проезде", "дорога", "дороге"]
@@ -543,7 +543,7 @@ class Geocoder:
         )
         df["Street"] = df["Street"].apply(lambda x: pattern2.sub("", x).strip())
         df["Street"] = df["Street"].str.lower()
-        df['Numbers'] = df.apply(lambda row: Geocoder.extract_bild_num(row['Текст комментария'], row['Street'], row['Numbers']), axis=1)
+        df['Numbers'] = df.apply(lambda row: Geocoder.extract_building_num(row['Текст комментария'], row['Street'], row['Numbers']), axis=1)
         df['Toponims'] = df.apply(lambda row: Geocoder.extract_toponym(row['Текст комментария'], row['Street']), axis=1)
         return df
 
