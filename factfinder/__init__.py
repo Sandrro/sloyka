@@ -5,4 +5,5 @@ __all__ = [
     "TextClassifier",
     "TextClassifierTopics",
     "Geocoder",
+    "GeoDataGetter",
 ]
