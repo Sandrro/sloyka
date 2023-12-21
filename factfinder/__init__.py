@@ -1,4 +1,4 @@
-from .src import EventDetection, Geocoder, TextClassifier, TextClassifierTopics, GeoDataGetter,
+from .src import EventDetection, Geocoder, TextClassifier, TextClassifierTopics, GeoDataGetter
 
 __all__ = [
     "EventDetection",
