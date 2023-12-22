@@ -1,10 +1,9 @@
 import osmnx as ox
 import geopandas as gpd
 import pandas as pd
-from osmnx._errors import InsufficientResponseError as NoResponse
-from constants import OSM_TAGS
+#from osmnx._errors import InsufficientResponseError as NoResponse
+from factfinder.src.constants import OSM_TAGS, GLOBAL_CRS, GLOBAL_METRIC_CRS, GLOBAL_EPSG
 from shapely.ops import transform
-from constants import GLOBAL_CRS, GLOBAL_METRIC_CRS, GLOBAL_EPSG
 from tqdm import tqdm
 import sys
 
@@ -35,7 +34,7 @@ class GeoDataGetter:
                     tmpgdf = None
                     gdf_list.append(gdf)
                     
-                except (NoResponse, AttributeError):
+                except (AttributeError):
                     print(f'\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}')
                     pass
                 
