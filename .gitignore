@@ -130,3 +130,6 @@ dmypy.json
 .pyre/
 /poetry.lock
 cache/
+
+#semantic_models
+/.model
