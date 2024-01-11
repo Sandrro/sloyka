@@ -1,6 +1,6 @@
 # SLOYKA
 
-![Your logo](/sloyka/data/photo_2023-12-12_09-56-55.jpg)
+![Your logo](data/photo_2023-12-12_09-56-55.jpg)
 [![Documentation Status](https://readthedocs.org/projects/soika/badge/?version=latest)](https://soika.readthedocs.io/en/latest/?badge=latest)
 [![PythonVersion](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue)](https://pypi.org/project/scikit-learn/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
@@ -28,13 +28,13 @@ SLOYKA включает в себя две группы методов: мето
 3. Процесс может выполняться периодично, в таком случае появляется возможность определения активных и латентных территорий
 
 Сравнение результата геокодирования с существующим решением:
-![Geocoder comparison](/sloyka/data/Сравнение_эффективности_извлечения_адреса_3.png)
+![Geocoder comparison](/data/Сравнение_эффективности_извлечения_адреса_3.png)
 
 Выделение комьюнити на основе жалоб горожан по различным тематикам:
-![Spatial graph communities](/sloyka/data/photo_2023-12-25_01-44-15.jpg)
+![Spatial graph communities](/data/photo_2023-12-25_01-44-15.jpg)
 
 Процентное соотношение жалоб по категориям среди выделенных комьюнити:
-![Spatial graph communities](/sloyka/data/photo_2023-12-25_01-44-14.jpg)
+![Spatial graph communities](/data/photo_2023-12-25_01-44-14.jpg)
 
 
 Семантический граф строится по следующему алгоритму:
@@ -45,7 +45,7 @@ SLOYKA включает в себя две группы методов: мето
 5. Формируются фактологические связи в виде ребер
 6. Сущности не удаляются из графа с течением времени, но имеют период активности. Повторное упоминание обновляет его
 
-![Semantic graph](/sloyka/data/photo_2024-01-11_20-31-29.jpg)
+![Semantic graph](/data/photo_2024-01-11_20-31-29.jpg)
 
 **Модуль моделирования социальных процессов с помощью пространственного-семантического графа**
 - В процессе разработки -
