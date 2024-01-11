@@ -1,17 +1,8 @@
-"""
-These are constants that are used in many factfinder files.
-"""
-
-global_crs: int = 4326
-device: str = "cpu"
-osm_city_level: int = 5
-osm_city_name: str = "Санкт-Петербург"
-model_path: str = "Geor111y/flair-ner-addresses-extractor"
-target_score: int = 0.7
-end_index_position: int = 4
-start_index_position: int = 3
-target_toponyms = ["пр", "проспект", "проспекте", "ул", "улица", "улице", "площадь", "площади", "пер", "переулок", "проезд", "проезде", "дорога", "дороге"]
-replacement_dict = {
+TARGET_SCORE: int = 0.7
+END_INDEX_POSITION: int = 4
+START_INDEX_POSITION: int = 3
+TARGET_TOPONYMS = ["пр", "проспект", "проспекте", "ул", "улица", "улице", "площадь", "площади", "пер", "переулок", "проезд", "проезде", "дорога", "дороге"]
+REPLACEMENT_DICT = {
             "пр": "проспект",
             "ул": "улица",
             "пер": "переулок",
@@ -21,3 +12,4 @@ replacement_dict = {
             "проезде": "проезд",
             "дороге": "дорога"
 }
+CRS_GLOBAL: int = 4326

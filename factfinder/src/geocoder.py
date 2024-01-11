@@ -20,8 +20,7 @@ import requests
 import torch
 import string
 import math
-import pdb
-
+from factfinder.src.constants import START_INDEX_POSITION, REPLACEMENT_DICT, TARGET_TOPONYMS, END_INDEX_POSITION
 
 from flair.data import Sentence
 from flair.models import SequenceTagger
@@ -355,10 +354,9 @@ class Geocoder:
         if not positions:
             return ""
 
-        end_index_position: int = 7
         position = positions[0]
         search_start = max(0, position)
-        search_end = min(len(clear_text), position + end_index_position)
+        search_end = min(len(clear_text), position + END_INDEX_POSITION)
 
         num_result = []
 
@@ -390,31 +388,16 @@ class Geocoder:
         if not positions:
             return None
 
-        start_index_position = "3"
-        end_index_position = "4"
         position = positions[0]
-        search_start = max(0, position - int(start_index_position))
-        search_end = min(len(clear_text), position + int(end_index_position))
+        search_start = max(0, position - int(START_INDEX_POSITION))
+        search_end = min(len(clear_text), position + int(END_INDEX_POSITION))
 
         ad_result = []
-        target_toponyms = ["пр", "проспект", "проспекте", "ул", "улица", "улице", "площадь", "площади", "пер", "переулок", "проезд", "проезде", "дорога", "дороге"]
-
-        replacement_dict = {
-            "пр": "проспект",
-            "ул": "улица",
-            "пер": "переулок",
-            "улице": "улица",
-            "проспекте": "проспект",
-            "площади": "площадь",
-            "проезде": "проезд",
-            "дороге": "дорога"
-        }
-
         for i in range(search_start, min(search_end + 1, len(clear_text))):
             word = clear_text[i]
             normal_form = morph.parse(word)[0].normal_form
-            if normal_form in target_toponyms:
-                ad_result.append(replacement_dict.get(normal_form, normal_form))
+            if normal_form in TARGET_TOPONYMS:
+                ad_result.append(REPLACEMENT_DICT.get(normal_form, normal_form))
 
         if ad_result:
             return ad_result[0]
@@ -629,7 +612,6 @@ class Geocoder:
         gdf = self.create_gdf(df)  
         gdf = self.merge_to_initial_df(gdf, initial_df)
         
-
         # Add a new 'level' column using the get_level function
         gdf["level"] = gdf.apply(self.get_level, axis=1)
         gdf = self.set_global_repr_point(gdf)
