@@ -2,7 +2,6 @@ pandas==2.0.1
 geopandas==0.12.2
 numpy==1.24.3
 flair==0.12.2
-networkx==3.1
 osm2geojson==0.2.3
 osmnx==1.5.1
 pymorphy2==0.9.1
