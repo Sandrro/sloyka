@@ -1,17 +1,15 @@
-# SLOIKA
+# SLOYKA
 
-![Your logo](https://i.ibb.co/qBjVx8N/soika.jpg)
-
-
+![Your logo](/sloyka/data/photo_2023-12-12_09-56-55.jpg)
 [![Documentation Status](https://readthedocs.org/projects/soika/badge/?version=latest)](https://soika.readthedocs.io/en/latest/?badge=latest)
 [![PythonVersion](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue)](https://pypi.org/project/scikit-learn/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ## Цель проекта
 
-**SLOIKA** - это библиотека, нацеленная на обогащение цифровых моделей городов данными, получаемыми из текстовых данных цифрового следа горожан, а также на моделирование вернакулярной оценки качества городской среды. Она основывается на методах обработки естественных языков (NLP) и методах работы с графами. Основным ее элементом является конструируемый пространственно-семантический граф, пополняемый при помощи машинного распознавания городских сущностей и локаций.
+**SLOYKA** - это библиотека, нацеленная на обогащение цифровых моделей городов данными, получаемыми из текстовых данных цифрового следа горожан, а также на моделирование вернакулярной оценки качества городской среды. Она основывается на методах обработки естественных языков (NLP) и методах работы с графами. Основным ее элементом является конструируемый пространственно-семантический граф, пополняемый при помощи машинного распознавания городских сущностей и локаций.
 
-SLOIKA включает в себя две группы методов: методы для генерации пространственно-семантического графа и методы для моделирования социальных процессов с его помощью.
+SLOYKA включает в себя две группы методов: методы для генерации пространственно-семантического графа и методы для моделирования социальных процессов с его помощью.
 
 **Модуль генерации пространственного-семантического графа**
 
@@ -23,11 +21,21 @@ SLOIKA включает в себя две группы методов: мето
 1. Пользователь подает на вход набор текстов и указание на территорию
 2. Из OSM загружается сеть УДС в виде графа и именованные сущности
 3. От именованных сущностей строится евклидово расстояние до ближайшего узла графа, оно пишется в новое ребро
-4. В текстах выявляются урбанонимы (городские названия). Процесс выполняется при помощи дообученной модели NER
-[Link to the model](https://huggingface.co/Geor111y/flair-ner-addresses-extractor)
-5. Сначала они геокодируются по адресной системе, потом по названиям объектов. Также учитываются варианты народных написаний
-6. Для событий в тексте определяется вероятность локализации. Она может быть увеличена при появлении новых текстов для тех же событий
-7. Процесс может выполняться периодично, в таком случае появляется возможность определения активных и латентных территорий
+4. В текстах выявляются урбанонимы (городские названия). Процесс выполняется при помощи дообученной
+[модели](https://huggingface.co/Geor111y/flair-ner-addresses-extractor) RuBert и набора эвристик для геокодирования без использования сторонних сервисов
+1. Сначала они геокодируются по адресной системе, потом по названиям объектов. Также учитываются варианты народных написаний
+2. Для событий в тексте определяется вероятность локализации. Она может быть увеличена при появлении новых текстов для тех же событий
+3. Процесс может выполняться периодично, в таком случае появляется возможность определения активных и латентных территорий
+
+Сравнение результата геокодирования с существующим решением:
+![Geocoder comparison](/sloyka/data/Сравнение_эффективности_извлечения_адреса_3.png)
+
+Выделение комьюнити на основе жалоб горожан по различным тематикам:
+![Spatial graph communities](/sloyka/data/photo_2023-12-25_01-44-15.jpg)
+
+Процентное соотношение жалоб по категориям среди выделенных комьюнити:
+![Spatial graph communities](/sloyka/data/photo_2023-12-25_01-44-14.jpg)
+
 
 Семантический граф строится по следующему алгоритму:
 1. Пользователь подает на вход набор текстов и указание на территорию (Санкт-Петербург)
@@ -36,6 +44,8 @@ SLOIKA включает в себя две группы методов: мето
 4. Дополнительно выделяются опорные узлы-урбанонимы
 5. Формируются фактологические связи в виде ребер
 6. Сущности не удаляются из графа с течением времени, но имеют период активности. Повторное упоминание обновляет его
+
+![Semantic graph](/sloyka/data/photo_2024-01-11_20-31-29.jpg)
 
 **Модуль моделирования социальных процессов с помощью пространственного-семантического графа**
 - В процессе разработки -
@@ -51,19 +61,21 @@ SLOIKA включает в себя две группы методов: мето
 
 ## Table of Contents
 
-- [Core features](#soika-features)
-- [Installation](#installation)
-- [Project Structure](#project-structure)
-- [Examples](#examples)
-- [Documentation](#documentation)
-- [Developing](#developing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
-- [Contacts](#contacts)
-- [Citation](#citation)
+- [SLOYKA](#sloyka)
+  - [Цель проекта](#цель-проекта)
+  - [Table of Contents](#table-of-contents)
+  - [Особенности SLOYKA](#особенности-sloyka)
+  - [Installation](#installation)
+  - [Project Structure](#project-structure)
+  - [Examples](#examples)
+  - [Documentation](#documentation)
+  - [Developing](#developing)
+  - [License](#license)
+  - [Contacts](#contacts)
+  - [Citation](#citation)
 
 
-## Особенности SLOIKA
+## Особенности SLOYKA
 
 - Готовый к использованию инструмент для исследователей и аналитиков, работающих с неструктурированными социальными данными. Наша библиотека поможет извлечь факты из текстов, описывающих городские процессы и явления
 - Модульная структура библиотеки позволяет получать и использовать только необходимые части, например, если ваша единственная цель - обогащение модели города пространственными данными о дорожно-транспортных происшествиях
@@ -71,12 +83,12 @@ SLOIKA включает в себя две группы методов: мето
 
 ## Installation
 
-All details about first steps with SOIKA might be found in the [install guide](https://soika.readthedocs.io/en/latest/soika/installation.html)
+All details about first steps with SLOYKA might be found in the [install guide](https://soika.readthedocs.io/en/latest/soika/installation.html)
 and in the [tutorial for novices](https://soika.readthedocs.io/en/latest/soika/quickstart.html)
 
 ## Project Structure
 
-The latest stable release of SOIKA is on the [master branch](https://github.com/iduprojects/SOIKA/tree/master) 
+The latest stable release of SOIKA is on the [master branch](https://github.com/GeorgeKontsevik/sloyka/tree/master) 
 
 The repository includes the following directories:
 
@@ -98,7 +110,7 @@ We have a [documentation](https://soika.readthedocs.io/en/latest/?badge=latest),
 
 To start developing the library, one must perform following actions:
 
-1. Clone repository (`git clone https://github.com/iduprojects/SOIKA`)
+1. Clone repository (`git clone https://github.com/GeorgeKontsevik/sloyka.git`)
 2. (optionally) create a virtual environment as the library demands exact packages versions: `python -m venv venv` and activate it.
 3. Install the library in editable mode: `python -m pip install -e '.[dev]' --config-settings editable_mode=strict`
 4. Install pre-commit hooks: `pre-commit install`
@@ -113,10 +125,6 @@ A more detailed guide to contributing is available in the [documentation](docs/s
 ## License
 
 The project has [MIT License](./LICENSE)
-
-## Acknowledgments
-
-Библиотека разработана в рамках проекта Университета ИТМО #623083 **"Библиотека алгоритмов машинной обработки естественных языков для обогащения пространственных городских моделей и моделирования вернакулярной оценки качества городской среды"**
 
 ## Contacts
 
