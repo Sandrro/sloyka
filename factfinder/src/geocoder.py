@@ -236,20 +236,20 @@ class Geocoder:
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
     global_crs: int = 4326
-    exceptions = pd.merge(
-        pd.read_csv(
-            os.path.join(dir_path, "exceptions_countries.csv"),
-            encoding="utf-8",
-            sep=",",
-        ),
-        pd.read_csv(
-            os.path.join(dir_path, "exсeptions_city.csv"),
-            encoding="utf-8",
-            sep=",",
-        ),
-        on="Сокращенное наименование",
-        how="outer",
-    )
+    # exceptions = pd.merge(
+    #     pd.read_csv(
+    #         os.path.join(dir_path, "exceptions_countries.csv"),
+    #         encoding="utf-8",
+    #         sep=",",
+    #     ),
+    #     pd.read_csv(
+    #         os.path.join(dir_path, "exсeptions_city.csv"),
+    #         encoding="utf-8",
+    #         sep=",",
+    #     ),
+    #     on="Сокращенное наименование",
+    #     how="outer",
+    # )
 
     def __init__(
         self,
