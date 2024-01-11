@@ -20,4 +20,4 @@ natasha==1.6.0
 nltk==3.8.1
 bs4==0.0.1
 gensim==4.3.2
-networkx=3.2.1
+networkx==3.2.1
