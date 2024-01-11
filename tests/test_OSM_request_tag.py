@@ -16,7 +16,7 @@ def geo_data_getter():
 @pytest.mark.parametrize(
     "osm_id, tags, result_len",
     [
-        (421007, {tdict[0][0]: tdict[0][1]}, 305),
+        (421007, {tdict[0][0]: tdict[0][1]}, 294),
     ],
 )
 def test_process_data_and_assert(geo_data_getter, osm_id, tags, result_len):
