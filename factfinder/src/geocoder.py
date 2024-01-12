@@ -618,7 +618,6 @@ class Geocoder:
         """
 
         initial_df.reset_index(drop=False, inplace=True)
-        print(initial_df, gdf)
         gdf = initial_df.merge(
             gdf[
                 [
