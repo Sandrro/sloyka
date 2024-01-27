@@ -21,7 +21,7 @@ class Preprocessor:
     '''
 
     def __init__(self, filename: str, column: str='', delimeter: str=';'):
-        # Функция инициализирует класс.
+        '''Функция инициализирует класс.'''
 
         self.file_path = str(Path(RAW_DATA_DIR_PATH).joinpath(filename)) # Путь к файлу
         self.tokenizer = nltk.data.load('tokenizers/punkt/russian.pickle') # Получение токинизатора
@@ -29,7 +29,7 @@ class Preprocessor:
         self.delimeter = delimeter # Разделитель для работы с файловыми расширениями .csv
 
     def review_to_word_list(self, review: str, remove_stopwords: bool=True) -> list:
-        # Функция преобразует предложение в список слов и возвращает этот список.
+        '''Функция преобразует предложение в список слов и возвращает этот список.'''
 
         # Избавление от лишнего в данных
         review = re.sub(r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", " ", review)
@@ -46,7 +46,7 @@ class Preprocessor:
         return words
     
     def review_to_sentence(self, review: str, remove_stopwords: bool=False) -> list:
-        # Функция преобразует текст в список предложений и возвращает этот список.
+        '''Функция преобразует текст в список предложений и возвращает этот список.'''
 
         raw_sentensces = self.tokenizer.tokenize(review.strip())
 
@@ -60,7 +60,7 @@ class Preprocessor:
         return sentences
     
     def normolize_words(self, sentenses_list: list) -> list:
-        #Функция приводит слова в начальную форму русского языка и возвращает двумерный список предложений.
+        '''Функция приводит слова в начальную форму русского языка и возвращает двумерный список предложений.'''
 
         morph = pymorphy2.MorphAnalyzer()
         
@@ -74,7 +74,8 @@ class Preprocessor:
         return sentenses_list
 
     def clean_file(self) -> list:
-        # Функция очищает файл с расширением .csv или .txt и приводит его в вид датасета для обучения модели, возвращает двумерный список.
+        '''Функция очищает файл с расширением .csv или .txt, 
+        приводит его в вид датасета для обучения модели, возвращает двумерный список.'''
         preprocessed_data = []
 
         # Если файл .csv

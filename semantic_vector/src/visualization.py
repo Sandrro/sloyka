@@ -14,7 +14,7 @@ class Visualiztor:
     Класс визуализирует данные модели в граф знаний на основе подающегося в него слова и наиболее близких к нему слов.
     '''
     def __init__(self, word: str, model_name: str='trained_model.model', depth: int=2, topn: int=10):
-        # Функция инициализирует класс.
+        '''Функция инициализирует класс.'''
 
         self.word = word # Слово, от которого строится граф
         self.model_path = str(Path(CUSTOM_MODELS_DIR_PATH).joinpath(model_name)) # Путь к модели Word2Vec
@@ -22,7 +22,8 @@ class Visualiztor:
         self.topn = topn # Количество ближайших слов для поиска
 
     def wright_nodes_in_csv(self):
-        # Функция записывает связанные слова в качестве узлов графа в файл с расширением .csv, а косинусную близоасть в качестве направления.
+        '''Функция записывает связанные слова в качестве узлов графа в файл с расширением .csv, 
+        а косинусную близоасть в качестве направления.'''
 
         # Загрузка модели 
         model = word2vec.Word2Vec.load(self.model_path)
