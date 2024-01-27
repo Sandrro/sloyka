@@ -4,6 +4,7 @@
 [![Documentation Status](https://readthedocs.org/projects/soika/badge/?version=latest)](https://soika.readthedocs.io/en/latest/?badge=latest)
 [![PythonVersion](https://img.shields.io/badge/python-3.8%20%7C%203.9%20%7C%203.10-blue)](https://pypi.org/project/scikit-learn/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Tests](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/tests.yml/badge.svg?branch=dev)](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/tests.yml)
 
 ## Цель проекта
 
@@ -81,32 +82,31 @@ SLOYKA включает в себя две группы методов: мето
 - Модульная структура библиотеки позволяет получать и использовать только необходимые части, например, если ваша единственная цель - обогащение модели города пространственными данными о дорожно-транспортных происшествиях
 - Эта библиотека может быть использована для моделирования и анализа социальных процессов в городе на основе текстовых данных, выявляя их смысловые и пространственные параметры
 
-## Installation
+## Установка
 
-All details about first steps with SLOYKA might be found in the [install guide](https://soika.readthedocs.io/en/latest/soika/installation.html)
-and in the [tutorial for novices](https://soika.readthedocs.io/en/latest/soika/quickstart.html)
+- В разработке
 
-## Project Structure
+## Структура проекта
 
-The latest stable release of SOIKA is on the [master branch](https://github.com/GeorgeKontsevik/sloyka/tree/master) 
+Последняя стабильная версия библиотеки SLOYKA находится в [master branch](https://github.com/GeorgeKontsevik/sloyka/tree/master) 
 
-The repository includes the following directories:
+Репозиторий включает в себя следующие директории:
 
-* Package [core](https://github.com/iduprojects/SOIKA/tree/master/factfinder)  contains the main classes and scripts. It is the *core* of SOIKA;
-* Package [examples](https://github.com/iduprojects/SOIKA/tree/master/examples) includes several *how-to-use-cases* where you can start to discover how SOIKA works;
+* Пакет [core](https://github.com/GeorgeKontsevik/sloyka/tree/master/factfinder)  содержит основные классы и скрипты. Это *ядро* SLOYKA;
+* Пакет [examples](https://github.com/GeorgeKontsevik/sloyka/tree/master/examples) включает в себя несколько *how-to-use кейсов*, где вы можете разобраться в принципах работы SLOYKA;
 * All *unit and integration tests* can be observed in the [test]() directory;
-* The sources of the documentation are in the [docs](https://github.com/iduprojects/SOIKA/tree/master/docs) 
+* The sources of the documentation are in the [docs](https://github.com/GeorgeKontsevik/sloyka/tree/master/docs) 
                                                         
 ## Examples
 Вы можете использовать свои собственные данные, но они должны соответствовать спецификации. Следующие примеры помогут освоиться с библиотекой:
 
 1. [Geocoder](examples/geocoder_example.ipynb) - как извлечь топонимы и получить их координаты
 
-## Documentation
+## Документация
 
-We have a [documentation](https://soika.readthedocs.io/en/latest/?badge=latest), but our [examples](#examples) will explain the use cases cleaner.
+- В разработке
 
-## Developing
+## Разработка
 
 To start developing the library, one must perform following actions:
 
@@ -122,17 +122,17 @@ Editable installation allows to keep the number of re-installs to the minimum. A
 
 A more detailed guide to contributing is available in the [documentation](docs/source/contribution.rst).
 
-## License
+## Лицензия
 
 The project has [MIT License](./LICENSE)
 
-## Contacts
+## Контакты
 
 - [NCCR](https://actcognitive.org/o-tsentre/kontakty) - National Center for Cognitive Research
 - [IDU](https://idu.itmo.ru/en/contacts/contacts.htm) - Institute of Design and Urban Studies
 - If you have questions or suggestions, you can contact us at the following address: asantonov@itmo.ru (Aleksandr Antonov)
 
-## Citation
+## Цитирование
 
 ---
 
