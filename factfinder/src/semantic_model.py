@@ -15,6 +15,7 @@ import pandas as pd
 import pymorphy2
 import re
 
+from geocoder import Geocoder
 
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -64,17 +65,22 @@ class Preprocessor:
 
         return sentences
     
-    def normolize_words(self, sentenses_list: list) -> list:
+    def normolize_words(self, sentenses_list: list, street_names: pd.DataFrame) -> list:
         '''The function puts words into the initial form of Russian and returns a two-dimensional list of sentences.'''
 
         morph = pymorphy2.MorphAnalyzer()
-        
+ 
+        for i in range(len(sentenses_list)):
+            for j in range(len(sentenses_list[i])):
+                if sentenses_list[i][j] in street_names['Street'].values:
+                    sentenses_list[i][j] = street_names.loc[street_names['Street'] == sentenses_list[i][j], 'Location'].values[0]
+
         for i in sentenses_list:
             for j in i:
-
-                form_list = morph.normal_forms(j)
-                index = i.index(j)
-                i[index] = form_list[0]
+                if j not in street_names['Location'].values:
+                    form_list = morph.normal_forms(j)
+                    index = i.index(j)
+                    i[index] = form_list[0]
 
         return sentenses_list
 
@@ -97,7 +103,9 @@ class Preprocessor:
             for review in data[self.column]:
                 clean_sents += self.review_to_sentence(review, self.tokenizer)
 
-            preprocessed_data = self.normolize_words(clean_sents)
+            street_names = Geocoder().run(df=data, text_column=self.column)
+
+            preprocessed_data = self.normolize_words(clean_sents, street_names)
 
         # If the .txt file
         elif '.txt' in self.file_path:
@@ -130,7 +138,7 @@ class Semantic_model:
     '''
     The main library class that creates and trains models.
     '''
-    def __init__(self, file_path: str, column:str='', workers: int=4, min_count: int=2, window:int=10, sample: float=1e-3):
+    def __init__(self, file_path: str, column:str='', workers: int=4, min_count: int=1, window:int=10, sample: float=1e-3):
         '''The function initialises the class.'''
         
         self.file_path = file_path # File path

@@ -20,7 +20,7 @@ import requests
 import torch
 import string
 import math
-from factfinder.src.constants import (
+from constants import (
     START_INDEX_POSITION,
     REPLACEMENT_DICT,
     TARGET_TOPONYMS,
@@ -566,13 +566,13 @@ class Geocoder:
         df["Street"] = df["Street"].str.lower()
         df["Numbers"] = df.apply(
             lambda row: Geocoder.extract_building_num(
-                row["Текст комментария"], row["Street"], row["Numbers"]
+                row[text_column], row["Street"], row["Numbers"]
             ),
             axis=1,
         )
         df["Toponims"] = df.apply(
             lambda row: Geocoder.extract_toponym(
-                row["Текст комментария"], row["Street"]
+                row[text_column], row["Street"]
             ),
             axis=1,
         )
