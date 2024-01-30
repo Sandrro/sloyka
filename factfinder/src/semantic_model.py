@@ -24,16 +24,21 @@ class Preprocessor:
     A class for preprocessing data from .csv and .txt file extensions.
     '''
 
-    def __init__(self, training_df: pd.DataFrame, column: str='', delimeter: str=';') -> None:
+    def __init__(self, 
+                 training_df: pd.DataFrame,
+                 text_column: str,
+                 street_text_colum: str=None,
+                 street_clean_column: str=None) -> None:
         '''The function initialises the class.'''
 
-        self.training_df = training_df # Trining dataframe
-        self.tokenizer = nltk.data.load('tokenizers/punkt/russian.pickle') # Receipt of the tokeniser
-        self.column = column # Column name for working with .csv file extensions
-        self.delimeter = delimeter # Separator for working with .csv file extensions
+        self.training_df = training_df                                      # Trining dataframe
+        self.tokenizer = nltk.data.load('tokenizers/punkt/russian.pickle')  # Receipt of the tokeniser
+        self.text_column = text_column                                      # text_ name for working with .csv file extensions
+        self.street_text_colum = street_text_colum                          # Location name in original form in corpus
+        self.street_clean_column = street_clean_column                      # Location name in clean form
 
     def review_to_word_list(self, review: str, remove_stopwords: bool=True) -> list:
-        '''Функция преобразует предложение в список слов и возвращает этот список.'''
+        '''The function converts a sentence into a list of words and returns that list.'''
 
         # Getting rid of unnecessary data
         review = re.sub(r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+", " ", review)
@@ -63,15 +68,15 @@ class Preprocessor:
 
         return sentences
     
-    def normolize_words(self, sentenses_list: list) -> list:
+    def normolize_words(self, sentenses_list: list, street_names: pd.DataFrame=None) -> list:
         '''The function puts words into the initial form of Russian and returns a two-dimensional list of sentences.'''
 
         morph = pymorphy2.MorphAnalyzer()
- 
-        # for i in range(len(sentenses_list)):
-        #     for j in range(len(sentenses_list[i])):
-        #         if sentenses_list[i][j] in street_names['Street'].values:
-        #             sentenses_list[i][j] = street_names.loc[street_names['Street'] == sentenses_list[i][j], 'Location'].values[0]
+        if  not street_names.empty:
+            for i in range(len(sentenses_list)):
+                for j in range(len(sentenses_list[i])):
+                    if sentenses_list[i][j] in street_names[self.street_text_colum].values:
+                        sentenses_list[i][j] = street_names.loc[street_names[self.street_text_colum] == sentenses_list[i][j], self.street_clean_column].values[0]
 
         for i in sentenses_list:
             for j in i:
@@ -91,40 +96,61 @@ class Preprocessor:
         clean_sents = []
             
         # Initialising a DataFrame
-        data = self.training_df.dropna(subset=self.column)
+        data = self.training_df.dropna(subset=self.text_column)
             
         print("Parsing sentences from training set...")
 
         # Text clearing
-        for review in data[self.column]:
+        for review in data[self.text_column]:
             clean_sents += self.review_to_sentence(review, self.tokenizer)
 
-        # TODO: add street names cleas support
-                
-        preprocessed_data = self.normolize_words(clean_sents)
+        # street names cleaning
+        if self.street_text_colum is not None and self.street_clean_column is not None:
+            street_names = data[[self.street_text_colum, self.street_clean_column]].copy()
+            preprocessed_data = self.normolize_words(clean_sents, street_names)
+
+        else:
+            preprocessed_data = self.normolize_words(clean_sents)
 
         return preprocessed_data
 
 
-class Semantic_model:
+class Semanticmodel:
     '''
-    The main library class that creates and trains models.
+    The main library class that creates and trains semantic models.
     '''
-    def __init__(self, training_df: str, column:str, workers: int=4, min_count: int=1, window:int=10, sample: float=1e-3):
+    def __init__(self, training_df: str, 
+                 text_column:str,
+                 text_street_column: str=None,
+                 street_clean_column: str=None, 
+                 workers: int=4, 
+                 min_count: int=1, 
+                 window:int=10, 
+                 sample: float=1e-3):
         '''The function initialises the class.'''
         
-        self.training_df = training_df # File path
-        self.workers = workers # Number of streams
-        self.min_count = min_count # Minimum number of word repetitions to enter the model corpus
-        self.window = window # Observation window
-        self.sample = sample # Size of downsampling of frequently occurring words
-        self.column = column # Column name for working with .csv file extensions
+        self.training_df = training_df                  # training dataframe
+        self.text_streat_column = text_street_column    # Location name in original form in corpus
+        self.street_clean_column = street_clean_column  # Location name in clean form
+        self.workers = workers                          # Number of streams
+        self.min_count = min_count                      # Minimum number of word repetitions to enter the model corpus
+        self.window = window                            # Observation window
+        self.sample = sample                            # Size of downsampling of frequently occurring words
+        self.text_column = text_column                  # text column og pandas df
 
     def make_model(self) -> word2vec.Word2Vec:
         '''The function creates and returns a model of the Word2Vec class, must be saved to a variable.'''
 
-        training_data = Preprocessor(self.training_df, self.column).clean_file()
-        model = word2vec.Word2Vec(training_data, workers=self.workers, min_count=self.min_count, window=self.window, sample=self.sample)
+        training_data = Preprocessor(self.training_df, 
+                                     self.text_column, 
+                                     self.text_streat_column, 
+                                     self.street_clean_column).clean_file()
+        
+        model = word2vec.Word2Vec(training_data, 
+                                  workers=self.workers, 
+                                  min_count=self.min_count, 
+                                  window=self.window, 
+                                  sample=self.sample)
 
         return model
      
@@ -135,14 +161,14 @@ class Semantic_model:
 
         print(f'Model saved in {model_path}')
 
-    def train_model(self, model_path: str, training_data: str, column: str='', epochs: int=5) -> word2vec.Word2Vec:
+    def train_model(self, model_path: str, epochs: int=5) -> word2vec.Word2Vec:
         '''The function trains a pre-trained user model and returns a new one, must be written to a variable.'''
 
         # Loading the model
         model = word2vec.Word2Vec.load(model_path)
 
         # Data preprocessing
-        training_data = Preprocessor(training_data, column).clean_file()
+        training_data = Preprocessor(self.training_df, self.text_column, self.text_streat_column, self.street_clean_column).clean_file()
 
         # Creating a model dictionary and training on a dataset
         model.build_vocab(training_data, update=True)
@@ -151,7 +177,7 @@ class Semantic_model:
         return model
 
 
-class Visualiztor:
+class Visualizator:
     '''
     The class visualises the model data into a knowledge graph based on the word fed into it and the closest words to it.
     '''
@@ -212,15 +238,15 @@ class Visualiztor:
         df = self.write_nodes_in_dataframe()
 
         # Creating an object to record a graph
-        G=nx.from_pandas_edgelist(df,"subject","object", edge_attr=True, create_using=nx.MultiDiGraph())
+        g = nx.from_pandas_edgelist(df,"subject","object", edge_attr=True, create_using=nx.MultiDiGraph())
 
         # Visualisation into an image
         plt.figure(figsize=(30,30))
-        pos = nx.spring_layout(G)
+        pos = nx.spring_layout(g)
         
         # Visualising the graph into an image and saving it
-        nx.draw(G, with_labels=True, pos = pos, **options)
-        nx.draw_networkx_edge_labels(G, pos=pos)
+        nx.draw(g, with_labels=True, pos = pos, **options)
+        nx.draw_networkx_edge_labels(g, pos=pos)
 
         # Save the picture
         plt.savefig(img_path)
