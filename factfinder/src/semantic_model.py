@@ -15,8 +15,6 @@ import pandas as pd
 import pymorphy2
 import re
 
-from geocoder import Geocoder
-
 nltk.download('punkt')
 nltk.download('stopwords')
 
@@ -26,10 +24,10 @@ class Preprocessor:
     A class for preprocessing data from .csv and .txt file extensions.
     '''
 
-    def __init__(self, filepath: str, column: str='', delimeter: str=';') -> None:
+    def __init__(self, training_df: pd.DataFrame, column: str='', delimeter: str=';') -> None:
         '''The function initialises the class.'''
 
-        self.file_path = filepath # File path
+        self.training_df = training_df # Trining dataframe
         self.tokenizer = nltk.data.load('tokenizers/punkt/russian.pickle') # Receipt of the tokeniser
         self.column = column # Column name for working with .csv file extensions
         self.delimeter = delimeter # Separator for working with .csv file extensions
@@ -65,22 +63,22 @@ class Preprocessor:
 
         return sentences
     
-    def normolize_words(self, sentenses_list: list, street_names: pd.DataFrame) -> list:
+    def normolize_words(self, sentenses_list: list) -> list:
         '''The function puts words into the initial form of Russian and returns a two-dimensional list of sentences.'''
 
         morph = pymorphy2.MorphAnalyzer()
  
-        for i in range(len(sentenses_list)):
-            for j in range(len(sentenses_list[i])):
-                if sentenses_list[i][j] in street_names['Street'].values:
-                    sentenses_list[i][j] = street_names.loc[street_names['Street'] == sentenses_list[i][j], 'Location'].values[0]
+        # for i in range(len(sentenses_list)):
+        #     for j in range(len(sentenses_list[i])):
+        #         if sentenses_list[i][j] in street_names['Street'].values:
+        #             sentenses_list[i][j] = street_names.loc[street_names['Street'] == sentenses_list[i][j], 'Location'].values[0]
 
         for i in sentenses_list:
             for j in i:
-                if j not in street_names['Location'].values:
-                    form_list = morph.normal_forms(j)
-                    index = i.index(j)
-                    i[index] = form_list[0]
+                # if j not in street_names['Location'].values:
+                form_list = morph.normal_forms(j)
+                index = i.index(j)
+                i[index] = form_list[0]
 
         return sentenses_list
 
@@ -90,46 +88,20 @@ class Preprocessor:
 
         preprocessed_data = []
 
-        # If the .csv file
-        if '.csv' in self.file_path:
-            clean_sents = []
+        clean_sents = []
             
-            # Initialising a DataFrame
-            data = pd.read_csv(self.file_path, delimiter=self.delimeter).dropna(subset=self.column)
+        # Initialising a DataFrame
+        data = self.training_df.dropna(subset=self.column)
             
-            print("Parsing sentences from training set...")
+        print("Parsing sentences from training set...")
 
-            # Text clearing
-            for review in data[self.column]:
-                clean_sents += self.review_to_sentence(review, self.tokenizer)
+        # Text clearing
+        for review in data[self.column]:
+            clean_sents += self.review_to_sentence(review, self.tokenizer)
 
-            street_names = Geocoder().run(df=data, text_column=self.column)
-
-            preprocessed_data = self.normolize_words(clean_sents, street_names)
-
-        # If the .txt file
-        elif '.txt' in self.file_path:
-            with open(self.file_path, 'r', encoding='utf-8') as f:
-                text = f.read()
-
-                text = re.sub('\n', ' ', text)
-                sents = sent_tokenize(text)
-
-                punct = '!"#$%&()*+,-./:;<=>?@[\]^_`{|}~„“«»†*—/\-‘’'
-                clean_sents = []
-
-                # Text clearing
-                print("Parsing sentences from training set...")
-
-                for sent in sents:
-                    s = [w.lower().strip(punct) for w in sent.split()]
-                    clean_sents.append(s)
-
-                preprocessed_data = self.normolize_words(clean_sents)
-        
-        # If the file extension is unknown
-        else:
-            print('Datatype is not supported for preprocessing training data.\nPlease, use .csv or .txt file')
+        # TODO: add street names cleas support
+                
+        preprocessed_data = self.normolize_words(clean_sents)
 
         return preprocessed_data
 
@@ -138,10 +110,10 @@ class Semantic_model:
     '''
     The main library class that creates and trains models.
     '''
-    def __init__(self, file_path: str, column:str='', workers: int=4, min_count: int=1, window:int=10, sample: float=1e-3):
+    def __init__(self, training_df: str, column:str, workers: int=4, min_count: int=1, window:int=10, sample: float=1e-3):
         '''The function initialises the class.'''
         
-        self.file_path = file_path # File path
+        self.training_df = training_df # File path
         self.workers = workers # Number of streams
         self.min_count = min_count # Minimum number of word repetitions to enter the model corpus
         self.window = window # Observation window
@@ -151,11 +123,11 @@ class Semantic_model:
     def make_model(self) -> word2vec.Word2Vec:
         '''The function creates and returns a model of the Word2Vec class, must be saved to a variable.'''
 
-        training_data = Preprocessor(self.file_path, self.column).clean_file()
+        training_data = Preprocessor(self.training_df, self.column).clean_file()
         model = word2vec.Word2Vec(training_data, workers=self.workers, min_count=self.min_count, window=self.window, sample=self.sample)
 
         return model
-    
+     
     def save_model(self, model: word2vec.Word2Vec, model_path: str='model.model') -> None:
         '''The function saves the model to a non-binary file.'''
 
@@ -163,14 +135,14 @@ class Semantic_model:
 
         print(f'Model saved in {model_path}')
 
-    def train_model(self, model_path: str, training_data_path: str, column: str='', epochs: int=5) -> word2vec.Word2Vec:
+    def train_model(self, model_path: str, training_data: str, column: str='', epochs: int=5) -> word2vec.Word2Vec:
         '''The function trains a pre-trained user model and returns a new one, must be written to a variable.'''
 
         # Loading the model
         model = word2vec.Word2Vec.load(model_path)
 
         # Data preprocessing
-        training_data = Preprocessor(training_data_path, column).clean_file()
+        training_data = Preprocessor(training_data, column).clean_file()
 
         # Creating a model dictionary and training on a dataset
         model.build_vocab(training_data, update=True)
@@ -225,15 +197,16 @@ class Visualiztor:
 
         return pd.DataFrame(data)
 
-    def save_graph_img(self, img_path: str='kg1.jpg', options: dict={'node_color': 'yellow',     # Цвет узлов
-                                                                    'node_size': 1000,          # Размер узлов
-                                                                    'width': 1,                 # Ширина линий связи
-                                                                    'arrowstyle': '-|>',        # Стиль стрелки для напрвленного графа
-                                                                    'arrowsize': 18,            # Размер стрелки
-                                                                    'edge_color':'blue',        # Цвет связи
-                                                                    'font_size':20              # Размер шрифта
-                                                                    }):
+    def save_graph_img(self, img_path: str='kg1.jpg') -> None:
         '''The function creates and saves a graph into an image.'''
+
+        options = {'node_color': 'yellow',  # Цвет узлов
+                   'node_size': 1000,       # Размер узлов
+                   'width': 1,              # Ширина линий связи
+                   'arrowstyle': '-|>',     # Стиль стрелки для напрвленного графа
+                   'arrowsize': 18,         # Размер стрелки
+                   'edge_color':'blue',     # Цвет связи
+                   'font_size':20}          # Размер шрифта
 
         # Initialising a DataFrame
         df = self.write_nodes_in_dataframe()
