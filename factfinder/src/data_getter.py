@@ -4,6 +4,7 @@ import pandas as pd
 from factfinder.src.constants import OSM_TAGS, GLOBAL_CRS, GLOBAL_METRIC_CRS, GLOBAL_EPSG
 from shapely.ops import transform
 from tqdm import tqdm
+import requests
 import sys
 import datetime
 import time
