@@ -43,6 +43,11 @@ from natasha import (
     Doc,
 )
 
+from loguru import logger
+
+from pandarallel import pandarallel
+pandarallel.initialize(progress_bar=True, nb_workers=6)
+
 segmenter = Segmenter()
 morph_vocab = MorphVocab()
 morph = pymorphy2.MorphAnalyzer()
@@ -224,6 +229,7 @@ class Streets:
         and requires almost exact match between addresses in the OSM database
         and the geocoding address.
         """
+        logger.info('clear_names started')
         streets_df["toponim_name"] = streets_df["street"].progress_apply(
             lambda x: Streets.find_toponim_words_from_name(x)
         )
@@ -436,6 +442,7 @@ class Geocoder:
         Function finds the stem of the word to find this stem in the street
         names dictionary (df).
         """
+        logger.info('get_stem started')
 
         morph = pymorphy2.MorphAnalyzer()
         cases = ["nomn", "gent", "datv", "accs", "ablt", "loct"]
@@ -469,7 +476,7 @@ class Geocoder:
 
         df["full_street_name"] = None
 
-        for idx, row in df.iterrows():
+        for idx, row in tqdm(df.iterrows(), total=df.shape[0]):
             search_val = row["Street"]
             search_top = row["Toponims"]
             val_num = row["Numbers"]
@@ -481,19 +488,21 @@ class Geocoder:
                 ]
 
                 if not matching_rows.empty:
-                    streets_full = matching_rows["street"].values
+                    only_streets_full = matching_rows["street"].values
                     streets_full = [
                         street
                         + f" {val_num}"
                         + f" {self.osm_city_name}"
                         + " Россия"
-                        for street in streets_full
+                        for street in only_streets_full
                     ]
 
                     df.loc[idx, "full_street_name"] = ",".join(streets_full)
+                    df.loc[idx, "only_full_street_name"] = ",".join(only_streets_full)
+
                 else:
                     if search_val in strts_df[col].values:
-                        streets_full = strts_df.loc[
+                        only_streets_full = strts_df.loc[
                             strts_df[col] == search_val, "street"
                         ].values
                         streets_full = [
@@ -501,10 +510,12 @@ class Geocoder:
                             + f" {val_num}"
                             + f" {self.osm_city_name}"
                             + " Россия"
-                            for street in streets_full
+                            for street in only_streets_full
                         ]
 
                         df.loc[idx, "full_street_name"] = ",".join(streets_full)
+                        df.loc[idx, "only_full_street_name"] = ",".join(only_streets_full)
+
 
         df.dropna(subset="full_street_name", inplace=True)
         df["location_options"] = df["full_street_name"].str.split(",")
@@ -513,7 +524,14 @@ class Geocoder:
         new_df.name = "addr_to_geocode"
         df = df.merge(new_df, left_on=df.index, right_on=new_df.index)
 
-        df["location_options"] = df["location_options"].astype(str)
+        df["only_full_street_name"] = df["only_full_street_name"].str.split(",")
+        new_df = df["only_full_street_name"].explode()
+        new_df.name = "only_full_street_name"
+        df.drop(columns=['key_0', 'only_full_street_name'], inplace=True)
+        df = df.merge(new_df, left_on=df.index, right_on=new_df.index)
+        # print(df.head())
+        df["only_full_street_name"] = df["only_full_street_name"].astype(str)
+
         return df
 
     @staticmethod
@@ -540,9 +558,13 @@ class Geocoder:
         Function calls NER model and post-process result in order to extract
         the address mentioned in the text.
         """
+        logger.info('get_street started')
 
         df[text_column].dropna(inplace=True)
         df[text_column] = df[text_column].astype(str)
+        
+        logger.info('extract_ner_street started')
+
         df[["Street", "Score"]] = df[text_column].progress_apply(
             lambda t: self.extract_ner_street(t)
         )
@@ -552,25 +574,45 @@ class Geocoder:
             ),
             axis=1,
         )
+
         df = df[df.Street.notna()]
         df = df[df["Street"].str.contains("[а-яА-Я]")]
 
+        logger.info('pattern1.sub started')
+
         pattern1 = re.compile(r"(\D)(\d)(\D)")
-        df["Street"] = df["Street"].apply(lambda x: pattern1.sub(r"\1 \2\3", x))
+        df["Street"] = df["Street"].progress_apply(lambda x: pattern1.sub(r"\1 \2\3", x))
+
+        logger.info('pattern2.findall started')
 
         pattern2 = re.compile(r"\d+")
-        df["Numbers"] = df["Street"].apply(
+        df["Numbers"] = df["Street"].progress_apply(
             lambda x: " ".join(pattern2.findall(x))
         )
-        df["Street"] = df["Street"].apply(lambda x: pattern2.sub("", x).strip())
+
+
+        logger.info('pattern2.sub started')
+
+
+        df["Street"] = df["Street"].progress_apply(lambda x: pattern2.sub("", x).strip())
+
+        df['initial_street'] = df['Street'].copy()
+
         df["Street"] = df["Street"].str.lower()
-        df["Numbers"] = df.apply(
+
+        logger.info('extract_building_num started')
+
+        df["Numbers"] = df.progress_apply(
             lambda row: Geocoder.extract_building_num(
                 row[text_column], row["Street"], row["Numbers"]
             ),
             axis=1,
         )
-        df["Toponims"] = df.apply(
+
+        logger.info('extract_toponym started')
+
+
+        df["Toponims"] = df.progress_apply(
             lambda row: Geocoder.extract_toponym(
                 row[text_column], row["Street"]
             ),
@@ -582,13 +624,15 @@ class Geocoder:
         """
         Function simply creates gdf from the recognised geocoded geometries.
         """
+        logger.info('create_gdf started')
+
 
         df["Location"] = df["addr_to_geocode"].progress_apply(Location().query)
         df = df.dropna(subset=["Location"])
-        df["geometry"] = df.Location.apply(
+        df["geometry"] = df.Location.progress_apply(
             lambda x: Point(x.longitude, x.latitude)
         )
-        df["Location"] = df.Location.apply(lambda x: x.address)
+        df["Location"] = df.Location.progress_apply(lambda x: x.address)
         gdf = gpd.GeoDataFrame(df, geometry="geometry", crs=Geocoder.global_crs)
 
         return gdf
@@ -618,11 +662,14 @@ class Geocoder:
         """
 
         initial_df.reset_index(drop=False, inplace=True)
+        # initial_df.drop(columns=['key_0'], inplace=True)
         gdf = initial_df.merge(
             gdf[
                 [
                     "key_0",
                     "Street",
+                    "initial_street",
+                    "only_full_street_name",
                     "Numbers",
                     "Score",
                     "location_options",
@@ -649,11 +696,11 @@ class Geocoder:
         df = self.get_street(df, text_column)
         street_names = self.get_stem(street_names)
         df = self.find_word_form(df, street_names)
-        gdf = self.create_gdf(df)
-        gdf = self.merge_to_initial_df(gdf, initial_df)
+        # gdf = self.create_gdf(df)
+        # gdf = self.merge_to_initial_df(gdf, initial_df)
 
         # Add a new 'level' column using the get_level function
-        gdf["level"] = gdf.apply(self.get_level, axis=1)
-        gdf = self.set_global_repr_point(gdf)
+        # gdf["level"] = gdf.progress_apply(self.get_level, axis=1)
+        # gdf = self.set_global_repr_point(gdf)
 
-        return gdf
+        return df

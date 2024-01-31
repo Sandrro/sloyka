@@ -15,6 +15,8 @@ import pandas as pd
 import pymorphy2
 import re
 
+from tqdm import tqdm, trange
+
 nltk.download('punkt')
 nltk.download('stopwords')
 
@@ -73,12 +75,12 @@ class Preprocessor:
 
         morph = pymorphy2.MorphAnalyzer()
         if  not street_names.empty:
-            for i in range(len(sentenses_list)):
+            for i in trange(len(sentenses_list)):
                 for j in range(len(sentenses_list[i])):
                     if sentenses_list[i][j] in street_names[self.street_text_colum].values:
                         sentenses_list[i][j] = street_names.loc[street_names[self.street_text_colum] == sentenses_list[i][j], self.street_clean_column].values[0]
 
-        for i in sentenses_list:
+        for i in tqdm(sentenses_list):
             for j in i:
                 # if j not in street_names['Location'].values:
                 form_list = morph.normal_forms(j)
@@ -101,7 +103,7 @@ class Preprocessor:
         print("Parsing sentences from training set...")
 
         # Text clearing
-        for review in data[self.text_column]:
+        for review in tqdm(data[self.text_column]):
             clean_sents += self.review_to_sentence(review, self.tokenizer)
 
         # street names cleaning
@@ -138,15 +140,15 @@ class Semanticmodel:
         self.sample = sample                            # Size of downsampling of frequently occurring words
         self.text_column = text_column                  # text column og pandas df
 
-    def make_model(self) -> word2vec.Word2Vec:
-        '''The function creates and returns a model of the Word2Vec class, must be saved to a variable.'''
-
-        training_data = Preprocessor(self.training_df, 
+        self.training_data = Preprocessor(self.training_df, 
                                      self.text_column, 
                                      self.text_streat_column, 
                                      self.street_clean_column).clean_file()
+
+    def make_model(self) -> word2vec.Word2Vec:
+        '''The function creates and returns a model of the Word2Vec class, must be saved to a variable.'''
         
-        model = word2vec.Word2Vec(training_data, 
+        model = word2vec.Word2Vec(self.training_data, 
                                   workers=self.workers, 
                                   min_count=self.min_count, 
                                   window=self.window, 
