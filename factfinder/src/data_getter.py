@@ -5,6 +5,8 @@ from factfinder.src.constants import OSM_TAGS, GLOBAL_CRS, GLOBAL_METRIC_CRS, GL
 from shapely.ops import transform
 from tqdm import tqdm
 import sys
+import datetime
+import time
 
 class GeoDataGetter:
     def get_features_from_id(
