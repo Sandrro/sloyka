@@ -57,3 +57,52 @@ class GeoDataGetter:
 
     def _handle_error(self, category, tag):
         print(f'\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}')
+
+class VkCommentsParser:  
+    def unix_to_date(ts):
+        return datetime.datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d')
+
+    def nes_params(post_id, all_comments):
+        nes_dict = {}
+        nes_dict = {}
+        profiles = all_comments['profiles']
+        comments = all_comments['items']
+        first_string = ['NONE', 'NONE', 'NONE']
+        for comment in comments:
+            if len(comment['text']) > 3:
+                second_string = [VkCommentsParser.unix_to_date(comment['date']), comment['likes']['count'],
+                                comment['text']]
+                for profile in profiles:
+                    if comment['from_id'] == profile['id']:
+                        first_string = [profile['first_name'], profile['last_name']]
+                nes_dict[comment['id']] = first_string + second_string
+        return nes_dict
+
+    def get_Comments(post_id, owner_id, token, nes_dict={}): 
+        version = 5.131
+        offset = 0
+        count = 100
+        while offset < 500:
+            response = requests.get('https://api.vk.com/method/wall.getComments',
+                                params={
+                                    'access_token': token,
+                                    'v': version,
+                                    'owner_id': owner_id,
+                                    'post_id': post_id,
+                                    'need_likes': 1,
+                                    'count': count,
+                                    'offset': offset,
+                                    'extended': 1
+                                }
+                                )
+            data_comments = response.json()['response']
+            tempDict = VkCommentsParser.nes_params(post_id, data_comments)
+            nes_dict.update(tempDict)
+            offset += 100
+            time.sleep(0.5)
+        return nes_dict
+
+    def to_df(nes_dict):
+        df = pd.DataFrame.from_dict(nes_dict, orient='index',
+                                    columns=['name', 'last_name', 'date', 'likes', 'text', 'post_id'])
+        return df
