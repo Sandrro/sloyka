@@ -1,6 +1,6 @@
 import pytest
 
-from factfinder.src.geocoder import Geocoder
+from sloyka.src.geocoder import Geocoder
 
 # def test_geocode_with_retry(input_address, geocode_result):
 #     result = Location().geocode_with_retry(input_address)

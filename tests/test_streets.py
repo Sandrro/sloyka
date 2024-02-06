@@ -1,6 +1,6 @@
 import geopandas as gpd
 
-from factfinder.src.geocoder import Streets
+from sloyka.src.geocoder import Streets
 
 
 def test_get_city_bounds():

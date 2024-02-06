@@ -4,8 +4,8 @@ import os
 
 project_root = os.path.dirname(os.path.dirname(__file__))
 sys.path.append(project_root)
-from factfinder.src.data_getter import GeoDataGetter
-from factfinder.src.constants import OSM_TAGS
+from sloyka.src.data_getter import GeoDataGetter
+from sloyka.src.constants import OSM_TAGS
 
 tdict = [(category, category_tags) for category, category_tags in OSM_TAGS.items()]
 

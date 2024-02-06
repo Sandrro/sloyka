@@ -1,9 +1,9 @@
 import pytest
 import geopandas as gpd
-from factfinder.src.data_getter import VkCommentsParser
-from factfinder.src.data_getter import Streets
-from factfinder.src.data_getter import GeoDataGetter
-from factfinder.src.constants import OSM_TAGS
+from sloyka.src.data_getter import VkCommentsParser
+from sloyka.src.data_getter import Streets
+from sloyka.src.data_getter import GeoDataGetter
+from sloyka.src.constants import OSM_TAGS
 
 tdict = [(category, category_tags) for category, category_tags in OSM_TAGS.items()]
 
