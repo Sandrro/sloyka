@@ -8,6 +8,7 @@ import requests
 import sys
 import datetime
 import time
+import osm2geojson
 
 class GeoDataGetter:
     def get_features_from_id(
@@ -109,3 +110,40 @@ class VkCommentsParser:
         df = pd.DataFrame.from_dict(nes_dict, orient='index',
                                     columns=['name', 'last_name', 'date', 'likes', 'text', 'post_id'])
         return df
+
+class Streets:
+    """
+    This class encapsulates functionality for retrieving street data
+    for a specified city from OSM and processing it to extract useful
+    information for geocoding purposes.
+    """
+
+    global_crs: int = 4326
+
+    @staticmethod
+    def get_city_bounds(
+        osm_city_name: str, osm_city_level: int
+    ) -> gpd.GeoDataFrame:
+        """
+        Method retrieves the boundary of a specified city from OSM
+        using Overpass API and returns a GeoDataFrame representing
+        the boundary as a polygon.
+        """
+        overpass_url = "http://overpass-api.de/api/interpreter"
+        overpass_query = f"""
+        [out:json];
+                area[name="{osm_city_name}"]->.searchArea;
+                (
+                relation["admin_level"="{osm_city_level}"](area.searchArea);
+                );
+        out geom;
+        """
+
+        result = requests.get(
+            overpass_url, params={"data": overpass_query}
+        ).json()
+        resp = osm2geojson.json2geojson(result)
+        city_bounds = gpd.GeoDataFrame.from_features(resp["features"]).set_crs(
+            Streets.global_crs
+        )
+        return city_bounds
