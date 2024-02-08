@@ -67,8 +67,6 @@ def test_data():
     df_predict = df_predict.head(3)
     return df_predict
 
-
-#@pytest.fixture(name="model")
 @pytest.fixture
 def model():
     return TextClassifiers(
