@@ -1,4 +1,3 @@
-import pytest
 
 from sloyka.src.geocoder import Geocoder
 
