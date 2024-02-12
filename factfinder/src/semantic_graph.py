@@ -1,40 +1,38 @@
-import pandas as pd
-import pymorphy3
-from keybert import KeyBERT
-from transformers import BertTokenizer, BertModel
-import nltk 
-from nltk.corpus import stopwords 
-from pyvis.network import Network
-import networkx as nx
 import time
-from tqdm import tqdm
-from pyvis.network import Network
-import networkx as nx
 import itertools
+from tqdm import tqdm
+import torch
+import nltk
+import pymorphy3
+import pandas as pd
+import networkx as nx
+from nltk.corpus import stopwords
+from transformers import BertTokenizer, BertModel
+from keybert import KeyBERT
 import torch
 
 nltk.download('stopwords')
 
 
 class Semgraph:
+    """
+    This is the main class of semantic graph module. It is aimed to build a semantic graph based on the provided data and parameters.
+    More convinient to use after extracting data from geocoder.
 
+    Param:
+    bert_name: the name of the BERT model to use (default is 'DeepPavlov/rubert-base-cased')
+    language: the language of the BERT model (default is 'russian')
+    device: the device to use for inference (default is 'cpu')
+    """
     def __init__(self,
                  bert_name: str = 'DeepPavlov/rubert-base-cased',
                  language: str = 'russian',
                  device: str = 'cpu') -> None:
-        """
-    	Initialize the class with the specified BERT model name, language, and device for inference.
-
-    	:param bert_name: the name of the BERT model to use (default is 'DeepPavlov/rubert-base-cased')
-    	:param language: the language of the BERT model (default is 'russian')
-    	:param device: the device to use for inference (default is 'cpu')
-    	:return: None
-    	"""
 
         self.language = language
         self.device = device
         self.tokenizer = BertTokenizer.from_pretrained(bert_name)
-        self.model = BertModel.from_pretrained(bert_name.to(device))
+        self.model = BertModel.from_pretrained(bert_name).to(device)
 
     @staticmethod
     def clean_from_digits(data: pd.DataFrame,
@@ -109,16 +107,17 @@ class Semgraph:
 
         toponims = list(set(data[toponims_column]))
         new_df_rows = []
+
         for i in toponims:
-            tmp_df = data.loc[data[text_colum] == i].reset_index(drop=True)
-            text = str(tmp_df[toponims_column].iloc[0])
+            tmp_df = data.loc[data[toponims_column] == i].reset_index(drop=True)
+            text = str(tmp_df[text_colum].iloc[0])
             for j in range(1, len(tmp_df)):
 
-                text = text + ' ' + str(tmp_df[toponims_column].iloc[j])
+                text = text + ' ' + str(tmp_df[text_colum].iloc[j])
 
             new_df_rows.append([text, i])
 
-        new_data = pd.DataFrame(new_df_rows, columns = [toponims_column, text_colum])
+        new_data = pd.DataFrame(new_df_rows, columns = [text_colum, toponims_column])
         
         return new_data
 
@@ -128,8 +127,8 @@ class Semgraph:
                          toponim_column: str,
                          toponim_name_column: str,
                          toponim_type_column: str,
-                         semantic_score_filter: float,
-                         top_n: int=5,) -> pd.DataFrame:
+                         semantic_score_filter: float=0.4,
+                         top_n: int=5) -> pd.DataFrame:
         """
         Extracts keywords from the given data using KeyBERT, cleans the data from digits and toponims, aggregates the data, and extracts keywords for each toponim with a semantic score filter. Returns a DataFrame containing the extracted keywords, their associated toponim, and their semantic score.
         
@@ -151,15 +150,16 @@ class Semgraph:
         nodes = []
 
         data = Semgraph.clean_from_digits(data, text_column=text_column)
-        data = Semgraph.clean_from_toponims(data, 
+        data = Semgraph.clean_from_toponims(data,
                                             text_column=text_column,
                                             name_column=toponim_name_column,
                                             toponim_type_column=toponim_type_column)
 
         consolidated_df = Semgraph.aggregte_data(data,
                                                  text_colum=text_column,
-                                                 toponims_column= toponim_column)
+                                                 toponims_column=toponim_column)
 
+        print('Extracting keywords')
         for i in tqdm(range(len(consolidated_df))):
 
             toponim = consolidated_df[toponim_column].iloc[i]
@@ -168,21 +168,24 @@ class Semgraph:
             keywords_list = keybert_model.extract_keywords(text,
                                                            top_n=top_n,
                                                            stop_words=stopwords.words(self.language))
-            # new_list = [j for j in keywords_list]
+
             for j in (keywords_list):
                 if j[1] >= semantic_score_filter:
                     p = morph.parse(j[0])[0]
-                    nodes.append([toponim, p.normal_form, j[1]])
+                    if p.tag.POS in ['NOUN', 'ADJF', 'ADJS', 'VERB', 'INFN']:
+                        nodes.append([toponim, p.normal_form, j[1]])
 
             time.sleep(0.01)
 
+
+        print('Keywords extracted')
         new_df = pd.DataFrame(nodes, columns=['FROM', 'TO', 'SIMILARITY_SCORE'])
 
         return new_df
     
     def get_semantic_closeness(self, data: pd.DataFrame,
                                column: str,
-                               similaryty_filter: float = 0.8) -> pd.DataFrame:
+                               similaryty_filter: float = 0.5) -> pd.DataFrame:
         """
     	Calculate the semantic closeness between unique words in the specified column of the input DataFrame.
     	
@@ -195,15 +198,16 @@ class Semgraph:
     	"""
 
         unic_words = tuple(set(data[column]))
-        words_tokens = tuple([self.tokenizer.encode(i, add_special_tokens=False, return_tensors='pt').to('cuda') for i in unic_words])
+        words_tokens = tuple([self.tokenizer.encode(i, add_special_tokens=False, return_tensors='pt').to(self.device) for i in unic_words])
         potential_new_nodes_embendings = tuple([[unic_words[i], self.model(words_tokens[i]).last_hidden_state.mean(dim=1)] for i in range(len(unic_words))])
         new_nodes = []
 
         combinations = list(itertools.combinations(potential_new_nodes_embendings, 2))
 
+        print('Calculating semantic closeness')
         for word1, word2 in tqdm(combinations):
 
-            similarity = torch.nn.functional.cosine_similarity(word1[1], word2[1])
+            similarity = float(torch.nn.functional.cosine_similarity(word1[1], word2[1]))
 
             if similarity >= similaryty_filter:
 
@@ -218,6 +222,73 @@ class Semgraph:
 
         return result_df
     
+    @staticmethod
+    def get_attributes(nodes: list,
+                       toponims: list) -> dict:
+        """
+        Get attributes of part of speech for the given nodes, with the option to specify toponims.
+        
+        :param nodes: list of strings representing the nodes
+        :param toponims: list of strings representing the toponims
+        :return: dictionary containing attributes for the nodes
+        """
+                
+        morph = pymorphy3.MorphAnalyzer()
+        attrs = {}
+
+        for i in nodes:
+            if i not in toponims:
+                attrs[i] = str(morph.parse(i)[0].tag.POS)
+            else:
+                attrs[i] = 'TOPONIM'
+
+        return attrs
+    
     def build_semantic_graph(self,
                              data: pd.DataFrame,
-                             ) -> nx.classes.graph.Graph:
+                             text_column: str,
+                             toponim_column: str,
+                             toponim_name_column: str,
+                             toponim_type_column: str,
+                             semantic_score_filter: float = 0.5,
+                             top_n: int=5) -> nx.classes.graph.Graph:
+        
+        """
+        Builds a semantic graph based on the provided data and parameters.
+
+        Parameters:
+            data (pd.DataFrame): The input dataframe containing the data.
+            text_column (str): The name of the column containing the text data.
+            toponim_column (str): The name of the column containing the toponim data.
+            toponim_name_column (str): The name of the column containing the toponim name data in text.
+            toponim_type_column (str): The name of the column containing the toponim type data.
+            semantic_score_filter (float): The threshold for semantic score filtering.
+            top_n (int, optional): The number of top results to return. Defaults to 5.
+
+        Returns:
+            nx.classes.graph.Graph: The semantic graph constructed from the input data.
+        """
+
+        df = self.extract_keywords(data,
+                                   text_column,
+                                   toponim_column,
+                                   toponim_name_column,
+                                   toponim_type_column,
+                                   semantic_score_filter,
+                                   top_n)
+        
+        words_df = self.get_semantic_closeness(df, 'TO')
+
+        graph_df = pd.concat([df, words_df], ignore_index=True)
+
+        G = nx.from_pandas_edgelist(graph_df, 
+                                    source='FROM', 
+                                    target='TO', 
+                                    edge_attr='SIMILARITY_SCORE')
+        
+        nodes = list(G.nodes())
+        attributes = self.get_attributes(nodes, set(data[toponim_column]))
+
+        nx.set_node_attributes(G, attributes, 'tag')
+
+        return G
