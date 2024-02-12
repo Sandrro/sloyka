@@ -20,7 +20,7 @@ import requests
 import torch
 import string
 import math
-from constants import (
+from .constants import (
     START_INDEX_POSITION,
     REPLACEMENT_DICT,
     TARGET_TOPONYMS,

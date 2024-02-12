@@ -7,6 +7,16 @@ class TextClassifiers:
     This class is aimed to classify input texts into themes, or structured types of events. It uses a Huggingface transformer model trained on rubert-tiny.
     In many cases count of messages per theme was too low to efficiently train, so we used synthetic themes based on the categories as upper level (for example, 'unknown_ЖКХ')
     """
+    def __init__(
+        self,
+        repository_id:str,
+        number_of_categories=1,
+        device_type=None,
+    ):
+        self.REP_ID = repository_id
+        self.CATS_NUM = number_of_categories
+        self.device_type = device_type
+
     def initialize_classifier(self, device_type):
         return pipeline(
             "text-classification",
@@ -17,16 +27,6 @@ class TextClassifiers:
             device=device_type,
         )
 
-    def __init__(
-        self,
-        repository_id:str,
-        number_of_categories=1,
-        device_type=None,
-    ):
-        self.REP_ID = repository_id
-        self.CATS_NUM = number_of_categories
-        self.classifier = self.initialize_classifier(device_type)
-
 
     def run_text_classifier_topics(self, t):
         """
@@ -34,8 +34,10 @@ class TextClassifiers:
         :param t: text to classify
         :return: list of predicted themes and probabilities
         """
-        preds = pd.DataFrame(self.classifier(t, top_k=self.CATS_NUM))
-        self.classifier.call_count = 0
+        classifier = self.initialize_classifier(self.device_type)
+
+        preds = pd.DataFrame(classifier(t, top_k=self.CATS_NUM))
+        classifier.call_count = 0
         if self.CATS_NUM > 1:
             cats = "; ".join(preds["label"].tolist())
             probs = "; ".join(preds["score"].round(3).astype(str).tolist())
@@ -50,9 +52,11 @@ class TextClassifiers:
         :param t: text to classify
         :return: list of predicted categories and probabilities
         """
+        classifier = self.initialize_classifier(self.device_type)
+
         if isinstance(t, str):
-            preds = pd.DataFrame(self.classifier(t, top_k=self.CATS_NUM))
-            self.classifier.call_count = 0
+            preds = pd.DataFrame(classifier(t, top_k=self.CATS_NUM))
+            classifier.call_count = 0
             if self.CATS_NUM > 1:
                 cats = "; ".join(preds["label"].tolist())
                 probs = "; ".join(preds["score"].round(3).astype(str).tolist())

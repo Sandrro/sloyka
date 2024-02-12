@@ -1,9 +1,15 @@
-from .src import EventDetection, Geocoder, TextClassifier, TextClassifierTopics, GeoDataGetter
+from .src import (
+    EventDetection,
+    Geocoder,
+    TextClassifiers,
+    GeoDataGetter,
+    Semgraph
+)
 
 __all__ = [
     "EventDetection",
-    "TextClassifier",
-    "TextClassifierTopics",
+    "TextClassifiers",
     "Geocoder",
     "GeoDataGetter",
+    "Semgraph",
 ]

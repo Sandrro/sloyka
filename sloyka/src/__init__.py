@@ -1,13 +1,13 @@
 from .event_detection import EventDetection
 from .geocoder import Geocoder
-from .text_classifier import TextClassifier
-from .text_classifier_topics import TextClassifierTopics
+from .text_classifiers import TextClassifiers
 from .data_getter import GeoDataGetter
+from .semantic_graph import Semgraph
 
 __all__ = [
     "EventDetection",
-    "TextClassifier",
-    "TextClassifierTopics",
+    "TextClassifiers",
     "Geocoder",
     "GeoDataGetter",
+    "Semgraph",
 ]
