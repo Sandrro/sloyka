@@ -37,5 +37,10 @@ jobs:
     - name: Install dependencies
       run: poetry install
 
+    - name: Set up Python environment
+      run: |
+        export CUDA_VISIBLE_DEVICES=-1
+        poetry install
+
     - name: Run tests
       run: poetry run pytest -v -cov=pp_from_python
