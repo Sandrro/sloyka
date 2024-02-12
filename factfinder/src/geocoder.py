@@ -528,7 +528,7 @@ class Geocoder:
         new_df = df["only_full_street_name"].explode()
         new_df.name = "only_full_street_name"
         df.drop(columns=['key_0', 'only_full_street_name'], inplace=True)
-        df = df.merge(new_df, left_on=df.index, right_on=new_df.index)
+        df = pd.concat([df, new_df], axis=1)
         # print(df.head())
         df["only_full_street_name"] = df["only_full_street_name"].astype(str)
 
