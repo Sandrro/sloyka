@@ -3,7 +3,7 @@ import torch
 import geopandas as gpd
 import pandas as pd
 from shapely import Point
-from factfinder import EventDetection
+from sloyka import EventDetection
 
 path_to_population = "data/raw/population.geojson"
 path_to_data = "data/processed/messages.geojson"
