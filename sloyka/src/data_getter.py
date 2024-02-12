@@ -9,6 +9,7 @@ import sys
 import datetime
 import time
 import osm2geojson
+from typing import List
 
 class GeoDataGetter:
     def get_features_from_id(
@@ -147,3 +148,119 @@ class Streets:
             Streets.global_crs
         )
         return city_bounds
+    
+class PostGetter:
+    def __init__():
+        pass
+
+    API_VERISON = 5.131
+    OFFSET_STEP = 100
+    OFFSET_LIMIT = 700
+    COUNT_ITEMS = 100
+    SLEEP_TIME = 0.5
+    TIMEOUT_LIMIT = 15
+
+    def get_group_post_ids(owner_id, your_token) -> List[int]:
+        offset = 0
+        post_ids = []
+
+        while offset < PostGetter.OFFSET_LIMIT:
+            res = requests.get(
+                "https://api.vk.com/method/wall.get",
+                params={
+                    "access_token": your_token,
+                    "v": PostGetter.API_VERISON,
+                    "owner_id": owner_id,
+                    "count": PostGetter.COUNT_ITEMS,
+                    "offset": offset,
+                },
+            ).json()["response"]
+
+            post_ids_new = [k["id"] for k in res["items"]]
+            post_ids += post_ids_new
+            offset += PostGetter.OFFSET_STEP
+
+        return post_ids
+
+    def unix_to_date(ts):  # перевод даты из unix-формата в привычный
+        return datetime.datetime.utcfromtimestamp(ts).strftime("%Y-%m-%d")
+
+    def nes_params(post_id, all_comments):  # работа с необходимыми параметрами.
+        nes_dict = {}
+        profiles = all_comments["profiles"]
+        comments = all_comments["items"]
+        first_string = ["NONE", "NONE", "NONE"]
+        for comment in comments:
+            #TODO: refactor
+            if len(comment["text"]) > 3: 
+                second_string = [
+                    PostGetter.unix_to_date(comment["date"]),
+                    comment["text"],
+                ]
+                for profile in profiles:
+                    #TODO: refactor
+                    if comment["from_id"] == profile["id"]: 
+                        first_string = [
+                            profile["first_name"],
+                            profile["last_name"],
+                        ]
+                #TODO: refactor
+                nes_dict[comment["id"]] = (
+                    first_string + second_string + [post_id]
+                )
+        return nes_dict
+
+    def get_Comments(
+        post_id, owner_id, token
+    ):  # парсинг комментариев по id постов
+        temp_dict = {}
+        offset = 0
+        while offset < PostGetter.OFFSET_LIMIT:
+            response = requests.get(
+                "https://api.vk.com/method/wall.getComments",
+                params={
+                    "access_token": token,
+                    "v": PostGetter.API_VERISON,
+                    "owner_id": owner_id,
+                    "post_id": post_id,
+                    "count": PostGetter.COUNT_ITEMS,
+                    "offset": offset,
+                    "extended": 1,
+                },
+                timeout=PostGetter.TIMEOUT_LIMIT,
+            )
+            data_comments = response.json()["response"]
+            comments_dict = PostGetter.nes_params(post_id, data_comments)
+            temp_dict.update(comments_dict)
+            
+            offset += PostGetter.OFFSET_STEP
+            time.sleep(PostGetter.SLEEP_TIME)
+        return temp_dict
+    
+    def _to_df(nes_dict):  # перевод словаря в датафрейм
+        #TODO: determine the cause of columns shift
+        df = pd.DataFrame.from_dict(
+            nes_dict,
+            orient="index",
+        )
+        if 5 in df.columns:
+            temp_df = df[df[0] == "NONE"]
+            df = df.drop(temp_df.index)
+            df = df.drop(columns=[5])
+            temp_df = temp_df.drop(columns=[0])
+            df.columns = ["name", "last_name", "date", "text", "post_id"]
+            temp_df.columns = ["name", "last_name", "date", "text", "post_id"]
+            df = pd.concat([df, temp_df]).sort_values(by='post_id')
+        else:
+            df.columns = ["name", "last_name", "date", "text", "post_id"]
+        df.text = df["text"].str.replace("\n", " ")
+        return df
+    
+    def run(your_owner_id, your_token, limit_posts=None):
+        nes_dict = {}
+        post_ids = PostGetter.get_group_post_ids(your_owner_id, your_token)
+        for post_id in tqdm(post_ids[:limit_posts]):
+            comments_dict = PostGetter.get_Comments(post_id, your_owner_id, your_token)
+            nes_dict.update(comments_dict)
+        
+        return PostGetter._to_df(nes_dict)
