@@ -25,7 +25,7 @@ jobs:
 
     - name: Install requirements
       run: |
-          pip install -r requirements.txt
+          poetry install
           pip install pytest
 
     - name: pytest
