@@ -1,7 +1,7 @@
 import pytest
 import torch
 import pandas as pd
-from factfinder import TextClassifierTopics
+from sloyka import TextClassifierTopics
 
 path_to_file = "data/raw/Адмиралтейский.csv"
 
