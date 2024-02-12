@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from factfinder.src.geocoder import Geocoder
+from sloyka import Geocoder
 
 osm_city_level: int = 5
 osm_city_name: str = "Санкт-Петербург"

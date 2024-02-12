@@ -21,7 +21,7 @@ def test_event_detection(gdf):
     expected_risk = 0.405
     expected_messages = [4, 5, 3, 2]
     event_model = EventDetection()
-    messages, events, connections = event_model.run(
+    _, events, _ = event_model.run(
         gdf, path_to_population, "Санкт-Петербург", 32636, min_event_size=3
     )
     event_name = events.iloc[0]["name"]
