@@ -7,33 +7,27 @@ on:
   pull_request:
   workflow_dispatch:
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
-  checks:
+  test:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup Python
-      uses: actions/setup-python@v4
+    - name: Set up Python
+      uses: actions/setup-python@v3
       with:
         python-version: '3.x'
 
     - name: Install Poetry
-      uses: snok/install-poetry@v1
-      with:
-        virtualenvs-create: true
-        virtualenvs-in-project: true
-        installer-parallel: true
+      run: |
+        pip install poetry
+        poetry config virtualenvs.create true
+        poetry config virtualenvs.in-project true
 
-    - name: Load cached venv
-      id: cached-poetry-dependencies
-      uses: actions/cache@v3
+    - name: Cache Poetry dependencies
+      uses: actions/cache@v2
       with:
         path: |
           ~/.cache/pypoetry
@@ -41,10 +35,7 @@ jobs:
         key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
 
     - name: Install dependencies
-      if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-      run: poetry install --no-interaction --no-root
+      run: poetry install
 
     - name: Run tests
-      run: |
-        export PYTHONPATH=$PWD
-        poetry run pytest -v -cov=pp_from_python
+      run: poetry run pytest -v -cov=pp_from_python
