@@ -279,8 +279,7 @@ class Streets:
 
 
 class VkPostGetter:
-    
-class PostGetter:
+
     """
     A class used to retrieve post and comment data from the VK API.
 
@@ -292,8 +291,6 @@ class PostGetter:
     - _to_df(nes_dict): Converts the processed dictionary data into a DataFrame.
     - run(your_owner_id, your_token, limit_posts=None): Runs the entire process to retrieve and process post and comment data.
     """
-    def __init__():
-        pass
 
     API_VERISON = 5.131
     # OFFSET_STEP = 100
@@ -303,7 +300,6 @@ class PostGetter:
     TIMEOUT_LIMIT = 15
 
     def get_group_post_ids(owner_id, your_token, post_num_limit, step) -> List[int]:
-    def get_group_post_ids(owner_id, your_token) -> List[int]:
         """
         Get a list of post IDs for a given owner ID using the VK API.
 
@@ -326,7 +322,7 @@ class PostGetter:
                     "owner_id": owner_id,
                     "count": step,
                     "offset": offset,
-                },
+                }, timeout=90
             ).json()["response"]
 
             post_ids_new = [k["id"] for k in res["items"]]
