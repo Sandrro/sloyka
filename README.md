@@ -7,12 +7,11 @@
 
 [![sloyka_community_chat](https://img.shields.io/badge/-community-blue?logo=telegram)](https://t.me/sloyka_community)
 
-<div align="center">
-  <img src="images\placeholder.png" alt="Your Banner" width="100%">
-</div>
+<img align="right" src="logo/logo.png" alt="Your Banner" width="30%">
 
 **SLOYKA** - это библиотека, нацеленная на обогащение цифровых моделей городов данными, получаемыми из текстовых данных цифрового следа горожан, 
 а также на моделирование вернакулярной оценки качества городской среды.
+
 Основным ее элементом является конструируемый 
 пространственно-семантический граф, пополняемый при помощи машинного распознавания городских сущностей и локаций.
 
