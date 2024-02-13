@@ -19,6 +19,8 @@
 SLOYKA включает в себя две группы методов: методы для генерации пространственно-семантического графа и методы для моделирования
 социальных процессов с его помощью.
 
+!(/images/Схема_Слойки.png)
+
 **Модуль генерации пространственного-семантического графа**
 
 Пространственно-семантический граф состоит из двух взаимосвязанных компонентов: 
@@ -62,6 +64,16 @@ SLOYKA включает в себя две группы методов: мето
 - Модульная структура библиотеки позволяет получать и использовать только необходимые части, например, если ваша единственная цель - обогащение модели города пространственными данными о дорожно-транспортных происшествиях
 - Эта библиотека может быть использована для моделирования и анализа социальных процессов в городе на основе текстовых данных, выявляя их смысловые и пространственные параметры
 
+Сравнение результата геокодирования с существующим решением:
+![Geocoder comparison](/images/Сравнение_эффективности_извлечения_адреса_3.png)
+
+Выделение комьюнити на основе жалоб горожан по различным тематикам:
+![Spatial graph communities](/images/photo_2023-12-25_01-44-15.jpg)
+
+Процентное соотношение жалоб по категориям среди выделенных комьюнити:
+![Spatial graph communities](/images/photo_2023-12-25_01-44-14.jpg)
+
+
 <!-- Сравнение результата геокодирования с существующим решением:
 ![Geocoder comparison](/data/Сравнение_эффективности_извлечения_адреса_3.png) -->
 <!-- 
@@ -91,29 +103,29 @@ SLOYKA включает в себя две группы методов: мето
 
 ## Разработка
 
-To start developing the library, one must perform following actions:
+Чтобы начать разработку библиотеки, необходимо выполнить следующие действия:
 
-1. Clone repository (`git clone https://github.com/GeorgeKontsevik/sloyka.git`)
-2. (optionally) create a virtual environment as the library demands exact packages versions: `python -m venv venv` and activate it.
-3. Install the library in editable mode: `python -m pip install -e '.[dev]' --config-settings editable_mode=strict`
-4. Install pre-commit hooks: `pre-commit install`
-5. Create a new branch based on **develop**: `git checkout -b develop <new_branch_name>`
-6. Add changes to the code
-7. Make a commit, push the new branch and create a pull-request into **develop**
+1. Клонировать репозиторий (`git clone https://github.com/GeorgeKontsevik/sloyka.git`);
+2. Создайте виртуальную среду, так как для библиотеки требуются точные версии пакетов, и активировать ее: `python -m venv venv`;
+3. Установить библиотеку в редактируемом режиме: `python -m pip install -e '.[dev]' --config-settings editable_mode=strict`;
+4. Установить pre-commit hooks: `pre-commit install`;
+5. Создать новую ветку на основе **develop**: `git checkout -b develop <new_branch_name>`;
+6. Внести изменения в код;
+7. Сделайте коммит, переместите новую ветку и создайте запрос на мердж **develop**.
 
-Editable installation allows to keep the number of re-installs to the minimum. A developer will need to repeat step 3 in case of adding new files to the library.
+Редактируемая установка позволяет свести количество переустановок к минимуму. Разработчику необходимо повторить шаг 3 в случае добавления новых файлов в библиотеку.
 
 A more detailed guide to contributing is available in the [documentation](docs/source/contribution.rst). -->
 
 ## Лицензия
 
-The project has [MIT License](./LICENSE)
+Проект имеет лицензию [MIT License](./LICENSE)
 
 ## Контакты
 
-- [NCCR](https://actcognitive.org/o-tsentre/kontakty) - National Center for Cognitive Research
-- [IDU](https://idu.itmo.ru/en/contacts/contacts.htm) - Institute of Design and Urban Studies
-- If you have questions or suggestions, you can contact us at the following address: asantonov@itmo.ru (Aleksandr Antonov)
+- [НЦКР](https://actcognitive.org/o-tsentre/kontakty) - Национальный Центр Когнитивных Разработок
+- [ИДУ](https://idu.itmo.ru/en/contacts/contacts.htm) - Институт Дизайна и Урбанистики
+- Если у вас есть вопросы или предложения, вы можете связаться с нами по следующему адресу: asantonov@itmo.ru (Александр Антонов)
 
 ## Цитирование
 
