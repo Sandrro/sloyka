@@ -4,7 +4,7 @@ from .src import (
     TextClassifiers,
     GeoDataGetter,
     Semgraph,
-    PostGetter,
+    VkPostGetter,
     Streets, 
     VkCommentsParser
 )
@@ -15,7 +15,7 @@ __all__ = [
     "Geocoder",
     "GeoDataGetter",
     "Semgraph",
-    "PostGetter", 
+    "VkPostGetter", 
     "Streets", 
     "VkCommentsParser"
 ]
