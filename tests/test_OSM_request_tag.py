@@ -2,8 +2,6 @@ import pytest
 import sys
 import os
 
-project_root = os.path.dirname(os.path.dirname(__file__))
-sys.path.append(project_root)
 from sloyka.src.data_getter import GeoDataGetter
 from sloyka.src.constants import OSM_TAGS
 

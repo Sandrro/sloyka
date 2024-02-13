@@ -3,7 +3,7 @@ import torch
 import pandas as pd
 from sloyka import TextClassifiers
 
-path_to_file = "data/raw/Адмиралтейский.csv"
+path_to_file = "sloyka/sample_data/raw/Адмиралтейский.csv"
 
 @pytest.fixture
 def test_data():
