@@ -9,7 +9,7 @@ import networkx as nx
 from nltk.corpus import stopwords
 from transformers import BertTokenizer, BertModel
 from keybert import KeyBERT
-import torch
+
 
 nltk.download('stopwords')
 
@@ -33,6 +33,28 @@ class Semgraph:
         self.device = device
         self.tokenizer = BertTokenizer.from_pretrained(bert_name)
         self.model = BertModel.from_pretrained(bert_name).to(device)
+
+    @staticmethod
+    def clean_from_dublicates(data: pd.DataFrame,
+                              text_column: str,
+                              toponim_column: str) -> pd.DataFrame:
+        """
+        A function to clean a DataFrame from duplicates based on specified columns.
+        
+        Args:
+            data (pd.DataFrame): The input DataFrame to be cleaned.
+            text_column (str): The name of the text column to check for duplicates.
+            toponim_column (str): The name of the toponims column.
+        
+        Returns:
+            pd.DataFrame: A cleaned DataFrame without duplicates based on the specified text column.
+        """
+
+        uniq_df = data.drop_duplicates(subset=[text_column], keep='first')
+        uniq_df = uniq_df.dropna(subset=[text_column, toponim_column])
+        uniq_df = uniq_df.reset_index(drop=True)
+
+        return uniq_df
 
     @staticmethod
     def clean_from_digits(data: pd.DataFrame,
@@ -109,13 +131,14 @@ class Semgraph:
         new_df_rows = []
 
         for i in toponims:
-            tmp_df = data.loc[data[toponims_column] == i].reset_index(drop=True)
-            text = str(tmp_df[text_colum].iloc[0])
-            for j in range(1, len(tmp_df)):
+            if i is not None:
+                tmp_df = data.loc[data[toponims_column] == i].reset_index(drop=True)
+                text = tmp_df[text_colum].iloc[0]
+                for j in range(1, len(tmp_df)):
 
-                text = text + ' ' + str(tmp_df[text_colum].iloc[j])
+                    text = text + ' ' + str(tmp_df[text_colum].iloc[j])
 
-            new_df_rows.append([text, i])
+                new_df_rows.append([text, i])
 
         new_data = pd.DataFrame(new_df_rows, columns = [text_colum, toponims_column])
         
@@ -149,7 +172,13 @@ class Semgraph:
         morph = pymorphy3.MorphAnalyzer()
         nodes = []
 
-        data = Semgraph.clean_from_digits(data, text_column=text_column)
+        data = Semgraph.clean_from_dublicates(data,
+                                              text_column=text_column,
+                                              toponim_column=toponim_column)
+        
+        data = Semgraph.clean_from_digits(data,
+                                          text_column=text_column)
+        
         data = Semgraph.clean_from_toponims(data,
                                             text_column=text_column,
                                             name_column=toponim_name_column,
@@ -228,9 +257,12 @@ class Semgraph:
         """
         Get attributes of part of speech for the given nodes, with the option to specify toponims.
         
-        :param nodes: list of strings representing the nodes
-        :param toponims: list of strings representing the toponims
-        :return: dictionary containing attributes for the nodes
+        Args:
+            nodes: list of strings representing the nodes
+            toponims: list of strings representing the toponims
+
+        Returns: 
+            dict: dictionary containing attributes for the nodes
         """
                 
         morph = pymorphy3.MorphAnalyzer()
@@ -256,7 +288,7 @@ class Semgraph:
         """
         Builds a semantic graph based on the provided data and parameters.
 
-        Parameters:
+        Args::
             data (pd.DataFrame): The input dataframe containing the data.
             text_column (str): The name of the column containing the text data.
             toponim_column (str): The name of the column containing the toponim data.
