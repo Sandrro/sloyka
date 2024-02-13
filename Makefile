@@ -1,4 +1,4 @@
-FILES = ./factfinder/src/*
+FILES = ./sloyka/src/*
 
 lint:
 	@echo "Running pylint check..."

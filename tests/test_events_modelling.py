@@ -1,12 +1,9 @@
 import pytest
-import torch
 import geopandas as gpd
-import pandas as pd
-from shapely import Point
-from factfinder import EventDetection
+from sloyka import EventDetection
 
-path_to_population = "data/raw/population.geojson"
-path_to_data = "data/processed/messages.geojson"
+path_to_population = "sloyka/sample_data/raw/population.geojson"
+path_to_data = "sloyka/sample_data/processed/messages.geojson"
 
 
 @pytest.fixture
@@ -21,7 +18,7 @@ def test_event_detection(gdf):
     expected_risk = 0.405
     expected_messages = [4, 5, 3, 2]
     event_model = EventDetection()
-    messages, events, connections = event_model.run(
+    _, events, _ = event_model.run(
         gdf, path_to_population, "Санкт-Петербург", 32636, min_event_size=3
     )
     event_name = events.iloc[0]["name"]

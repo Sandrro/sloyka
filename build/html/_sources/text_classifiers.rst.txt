@@ -1,0 +1,35 @@
+.. module:: text_classifiers
+   :synopsis: Module is aimed to classify input texts into themes, or structured types of events.
+
+Text Classifiers Module
+=======================
+
+.. automodule:: text_classifiers
+   :members:
+   :undoc-members:
+   :show-inheritance:
+   
+Module Overview
+---------------
+
+Module is aimed to classify input texts into themes, or structured types of events.
+
+.. code-block:: python
+
+    device_type = torch.device("cuda:0")
+    path_to_file = "SOIKA/data/raw/Адмиралтейский.csv"
+    #Step 1. Enter path to file with texts and number of categories to return
+    model = TextClassifier(
+    repository_id="Sandrro/text_to_function_v2",
+    number_of_categories=1,
+    device_type=device_type,
+    )
+    #Step 2. Create DataFrame and make sure that the name of the column with texts is 'Текст' and there are no empty rows
+    df_predict = pd.read_csv(path_to_file, sep=";")
+    df_predict.rename(columns={"Текст комментария": "Текст"}, inplace=True)
+    df_predict = df_predict.dropna(subset=["Текст"])
+    df_predict = df_predict.head(100)
+    #Step 3. Start the script and wait! It will return two columns: one with categories ('ЖКХ; Транспорт; Энергетика' or 'ЖКХ', depending on the number of categories) and one with probabilities of these categories
+    df_predict[["cats", "probs"]] = pd.DataFrame(
+    df_predict["Текст"].progress_map(lambda x: model.run(x)).to_list()
+    )

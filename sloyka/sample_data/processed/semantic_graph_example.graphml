@@ -1,0 +1,1177 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d1" for="edge" attr.name="SIMILARITY_SCORE" attr.type="double"/>
+<key id="d0" for="node" attr.name="tag" attr.type="string"/>
+<graph edgedefault="undirected"><node id="Гагаринская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="лифт">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Дудко">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="скрыться">
+  <data key="d0">INFN</data>
+</node>
+<node id="очистить">
+  <data key="d0">INFN</data>
+</node>
+<node id="подъезд">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Пражская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="жильё">
+  <data key="d0">NOUN</data>
+</node>
+<node id="дом">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Карпинского">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="дверь">
+  <data key="d0">NOUN</data>
+</node>
+<node id="дверной">
+  <data key="d0">ADJF</data>
+</node>
+<node id="Старо-Петергофский проспект">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="жилец">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Фёдора Котанова">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="электроэнергия">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Жени Егоровой">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="мусоропровод">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Туристская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="заставить">
+  <data key="d0">INFN</data>
+</node>
+<node id="улица Декабристов">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="уборка">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Петергофский переулок">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="путин">
+  <data key="d0">NOUN</data>
+</node>
+<node id="владимирович">
+  <data key="d0">NOUN</data>
+</node>
+<node id="владимир">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Прямой переулок">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="глыба">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Прямой проспект">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="улица Корнея Чуковского">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="снег">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Изборская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="Яковлевский переулок">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="песочек">
+  <data key="d0">NOUN</data>
+</node>
+<node id="мост Ветеранов">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="мусорщик">
+  <data key="d0">NOUN</data>
+</node>
+<node id="мост Подвойского">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="убрать">
+  <data key="d0">INFN</data>
+</node>
+<node id="улица Рылеева">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="улица Евдокима Огнева">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="улица">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Пилотов">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="авиагородок">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Ивана Фомина">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="дмитриевич">
+  <data key="d0">NOUN</data>
+</node>
+<node id="александрович">
+  <data key="d0">NOUN</data>
+</node>
+<node id="проспект Художников">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="туалет">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Витебская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="Московский проспект">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="Камышовая улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="улица Маршала Казакова">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="собственник">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Среднеохтинский проспект">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="отопление">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Рабфаковская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="ждать">
+  <data key="d0">INFN</data>
+</node>
+<node id="корп">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Садовая улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="крыса">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Подвойского">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="Прямая улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="Суворовский проспект">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="проживать">
+  <data key="d0">INFN</data>
+</node>
+<node id="Комендантский проспект">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="лифтовый">
+  <data key="d0">ADJF</data>
+</node>
+<node id="Загородный проспект">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="владимирский">
+  <data key="d0">ADJF</data>
+</node>
+<node id="февраль">
+  <data key="d0">NOUN</data>
+</node>
+<edge source="Гагаринская улица" target="лифт">
+  <data key="d1">0.6387</data>
+</edge>
+<edge source="лифт" target="Московский проспект">
+  <data key="d1">0.6362</data>
+</edge>
+<edge source="лифт" target="Камышовая улица">
+  <data key="d1">0.61</data>
+</edge>
+<edge source="лифт" target="Комендантский проспект">
+  <data key="d1">0.6254</data>
+</edge>
+<edge source="лифт" target="авиагородок">
+  <data key="d1">0.5231907367706299</data>
+</edge>
+<edge source="лифт" target="подъезд">
+  <data key="d1">0.5737007856369019</data>
+</edge>
+<edge source="лифт" target="улица">
+  <data key="d1">0.5720464587211609</data>
+</edge>
+<edge source="лифт" target="дом">
+  <data key="d1">0.6100584864616394</data>
+</edge>
+<edge source="лифт" target="убрать">
+  <data key="d1">0.5440894365310669</data>
+</edge>
+<edge source="лифт" target="крыса">
+  <data key="d1">0.5385618209838867</data>
+</edge>
+<edge source="лифт" target="дверь">
+  <data key="d1">0.6272685527801514</data>
+</edge>
+<edge source="лифт" target="собственник">
+  <data key="d1">0.5141490697860718</data>
+</edge>
+<edge source="лифт" target="снег">
+  <data key="d1">0.5442297458648682</data>
+</edge>
+<edge source="лифт" target="лифтовый">
+  <data key="d1">0.7242944240570068</data>
+</edge>
+<edge source="лифт" target="очистить">
+  <data key="d1">0.6415952444076538</data>
+</edge>
+<edge source="лифт" target="жильё">
+  <data key="d1">0.6024410724639893</data>
+</edge>
+<edge source="лифт" target="туалет">
+  <data key="d1">0.6080909371376038</data>
+</edge>
+<edge source="лифт" target="мусорщик">
+  <data key="d1">0.5864431858062744</data>
+</edge>
+<edge source="лифт" target="ждать">
+  <data key="d1">0.5869965553283691</data>
+</edge>
+<edge source="лифт" target="отопление">
+  <data key="d1">0.5825055241584778</data>
+</edge>
+<edge source="лифт" target="корп">
+  <data key="d1">0.524387538433075</data>
+</edge>
+<edge source="лифт" target="электроэнергия">
+  <data key="d1">0.5017462372779846</data>
+</edge>
+<edge source="лифт" target="мусоропровод">
+  <data key="d1">0.5531874895095825</data>
+</edge>
+<edge source="улица Дудко" target="скрыться">
+  <data key="d1">0.8143</data>
+</edge>
+<edge source="улица Дудко" target="очистить">
+  <data key="d1">0.7062</data>
+</edge>
+<edge source="улица Дудко" target="подъезд">
+  <data key="d1">0.6769</data>
+</edge>
+<edge source="скрыться" target="подъезд">
+  <data key="d1">0.6122819781303406</data>
+</edge>
+<edge source="скрыться" target="улица">
+  <data key="d1">0.5277292728424072</data>
+</edge>
+<edge source="скрыться" target="дом">
+  <data key="d1">0.5675109624862671</data>
+</edge>
+<edge source="скрыться" target="убрать">
+  <data key="d1">0.6753228902816772</data>
+</edge>
+<edge source="скрыться" target="крыса">
+  <data key="d1">0.5130324363708496</data>
+</edge>
+<edge source="скрыться" target="дверь">
+  <data key="d1">0.6239771246910095</data>
+</edge>
+<edge source="скрыться" target="собственник">
+  <data key="d1">0.5228009819984436</data>
+</edge>
+<edge source="скрыться" target="снег">
+  <data key="d1">0.6654005646705627</data>
+</edge>
+<edge source="скрыться" target="лифтовый">
+  <data key="d1">0.501603901386261</data>
+</edge>
+<edge source="скрыться" target="очистить">
+  <data key="d1">0.5883095264434814</data>
+</edge>
+<edge source="скрыться" target="февраль">
+  <data key="d1">0.5264427065849304</data>
+</edge>
+<edge source="скрыться" target="жильё">
+  <data key="d1">0.521318793296814</data>
+</edge>
+<edge source="скрыться" target="владимир">
+  <data key="d1">0.5109692811965942</data>
+</edge>
+<edge source="скрыться" target="туалет">
+  <data key="d1">0.703154444694519</data>
+</edge>
+<edge source="скрыться" target="мусорщик">
+  <data key="d1">0.5512809753417969</data>
+</edge>
+<edge source="скрыться" target="ждать">
+  <data key="d1">0.5771999359130859</data>
+</edge>
+<edge source="скрыться" target="уборка">
+  <data key="d1">0.5066068172454834</data>
+</edge>
+<edge source="скрыться" target="мусоропровод">
+  <data key="d1">0.6212835907936096</data>
+</edge>
+<edge source="очистить" target="авиагородок">
+  <data key="d1">0.5962656736373901</data>
+</edge>
+<edge source="очистить" target="подъезд">
+  <data key="d1">0.5993230938911438</data>
+</edge>
+<edge source="очистить" target="улица">
+  <data key="d1">0.650459885597229</data>
+</edge>
+<edge source="очистить" target="дом">
+  <data key="d1">0.6160250306129456</data>
+</edge>
+<edge source="очистить" target="убрать">
+  <data key="d1">0.6025456190109253</data>
+</edge>
+<edge source="очистить" target="крыса">
+  <data key="d1">0.6412934064865112</data>
+</edge>
+<edge source="очистить" target="владимирович">
+  <data key="d1">0.5213587284088135</data>
+</edge>
+<edge source="очистить" target="дверь">
+  <data key="d1">0.5927610397338867</data>
+</edge>
+<edge source="очистить" target="собственник">
+  <data key="d1">0.5488559007644653</data>
+</edge>
+<edge source="очистить" target="песочек">
+  <data key="d1">0.5374672412872314</data>
+</edge>
+<edge source="очистить" target="снег">
+  <data key="d1">0.6218435764312744</data>
+</edge>
+<edge source="очистить" target="лифтовый">
+  <data key="d1">0.5020913481712341</data>
+</edge>
+<edge source="очистить" target="жилец">
+  <data key="d1">0.5038721561431885</data>
+</edge>
+<edge source="очистить" target="владимирский">
+  <data key="d1">0.5517591238021851</data>
+</edge>
+<edge source="очистить" target="февраль">
+  <data key="d1">0.5727089643478394</data>
+</edge>
+<edge source="очистить" target="жильё">
+  <data key="d1">0.6279692649841309</data>
+</edge>
+<edge source="очистить" target="владимир">
+  <data key="d1">0.5768370628356934</data>
+</edge>
+<edge source="очистить" target="александрович">
+  <data key="d1">0.5312982797622681</data>
+</edge>
+<edge source="очистить" target="туалет">
+  <data key="d1">0.5937918424606323</data>
+</edge>
+<edge source="очистить" target="мусорщик">
+  <data key="d1">0.6172538995742798</data>
+</edge>
+<edge source="очистить" target="ждать">
+  <data key="d1">0.639722466468811</data>
+</edge>
+<edge source="очистить" target="уборка">
+  <data key="d1">0.5472266674041748</data>
+</edge>
+<edge source="очистить" target="отопление">
+  <data key="d1">0.5237597823143005</data>
+</edge>
+<edge source="очистить" target="глыба">
+  <data key="d1">0.5096719264984131</data>
+</edge>
+<edge source="очистить" target="корп">
+  <data key="d1">0.6054458618164062</data>
+</edge>
+<edge source="очистить" target="проживать">
+  <data key="d1">0.5584955811500549</data>
+</edge>
+<edge source="очистить" target="заставить">
+  <data key="d1">0.5684769153594971</data>
+</edge>
+<edge source="очистить" target="мусоропровод">
+  <data key="d1">0.6386496424674988</data>
+</edge>
+<edge source="подъезд" target="авиагородок">
+  <data key="d1">0.5031189322471619</data>
+</edge>
+<edge source="подъезд" target="улица">
+  <data key="d1">0.6417555809020996</data>
+</edge>
+<edge source="подъезд" target="дом">
+  <data key="d1">0.6782093048095703</data>
+</edge>
+<edge source="подъезд" target="убрать">
+  <data key="d1">0.5237016677856445</data>
+</edge>
+<edge source="подъезд" target="крыса">
+  <data key="d1">0.5672399401664734</data>
+</edge>
+<edge source="подъезд" target="владимирович">
+  <data key="d1">0.5017985105514526</data>
+</edge>
+<edge source="подъезд" target="дверь">
+  <data key="d1">0.608418345451355</data>
+</edge>
+<edge source="подъезд" target="собственник">
+  <data key="d1">0.6676561236381531</data>
+</edge>
+<edge source="подъезд" target="снег">
+  <data key="d1">0.7211044430732727</data>
+</edge>
+<edge source="подъезд" target="лифтовый">
+  <data key="d1">0.5368370413780212</data>
+</edge>
+<edge source="подъезд" target="владимирский">
+  <data key="d1">0.5375866293907166</data>
+</edge>
+<edge source="подъезд" target="февраль">
+  <data key="d1">0.6276196837425232</data>
+</edge>
+<edge source="подъезд" target="жильё">
+  <data key="d1">0.5227921605110168</data>
+</edge>
+<edge source="подъезд" target="владимир">
+  <data key="d1">0.5994442105293274</data>
+</edge>
+<edge source="подъезд" target="туалет">
+  <data key="d1">0.5727810859680176</data>
+</edge>
+<edge source="подъезд" target="мусорщик">
+  <data key="d1">0.564835786819458</data>
+</edge>
+<edge source="подъезд" target="ждать">
+  <data key="d1">0.5348014831542969</data>
+</edge>
+<edge source="подъезд" target="отопление">
+  <data key="d1">0.6462611556053162</data>
+</edge>
+<edge source="подъезд" target="корп">
+  <data key="d1">0.5605443716049194</data>
+</edge>
+<edge source="подъезд" target="электроэнергия">
+  <data key="d1">0.5960085391998291</data>
+</edge>
+<edge source="подъезд" target="проживать">
+  <data key="d1">0.5841200351715088</data>
+</edge>
+<edge source="подъезд" target="мусоропровод">
+  <data key="d1">0.5643150806427002</data>
+</edge>
+<edge source="Пражская улица" target="жильё">
+  <data key="d1">0.6482</data>
+</edge>
+<edge source="Пражская улица" target="дом">
+  <data key="d1">0.628</data>
+</edge>
+<edge source="жильё" target="авиагородок">
+  <data key="d1">0.5588704347610474</data>
+</edge>
+<edge source="жильё" target="улица">
+  <data key="d1">0.529999852180481</data>
+</edge>
+<edge source="жильё" target="дом">
+  <data key="d1">0.5639737248420715</data>
+</edge>
+<edge source="жильё" target="убрать">
+  <data key="d1">0.5949035882949829</data>
+</edge>
+<edge source="жильё" target="крыса">
+  <data key="d1">0.5077340006828308</data>
+</edge>
+<edge source="жильё" target="дверь">
+  <data key="d1">0.5357581973075867</data>
+</edge>
+<edge source="жильё" target="лифтовый">
+  <data key="d1">0.5572383999824524</data>
+</edge>
+<edge source="жильё" target="туалет">
+  <data key="d1">0.5967435240745544</data>
+</edge>
+<edge source="жильё" target="мусорщик">
+  <data key="d1">0.5171477198600769</data>
+</edge>
+<edge source="жильё" target="ждать">
+  <data key="d1">0.5510295629501343</data>
+</edge>
+<edge source="жильё" target="электроэнергия">
+  <data key="d1">0.5021153688430786</data>
+</edge>
+<edge source="жильё" target="мусоропровод">
+  <data key="d1">0.5295302867889404</data>
+</edge>
+<edge source="дом" target="улица Евдокима Огнева">
+  <data key="d1">0.6001</data>
+</edge>
+<edge source="дом" target="улица">
+  <data key="d1">0.6666871905326843</data>
+</edge>
+<edge source="дом" target="убрать">
+  <data key="d1">0.5420377850532532</data>
+</edge>
+<edge source="дом" target="крыса">
+  <data key="d1">0.5405673384666443</data>
+</edge>
+<edge source="дом" target="дверь">
+  <data key="d1">0.6179932951927185</data>
+</edge>
+<edge source="дом" target="собственник">
+  <data key="d1">0.5884875059127808</data>
+</edge>
+<edge source="дом" target="песочек">
+  <data key="d1">0.5149024128913879</data>
+</edge>
+<edge source="дом" target="снег">
+  <data key="d1">0.6431983709335327</data>
+</edge>
+<edge source="дом" target="лифтовый">
+  <data key="d1">0.5610114932060242</data>
+</edge>
+<edge source="дом" target="февраль">
+  <data key="d1">0.6568170189857483</data>
+</edge>
+<edge source="дом" target="владимир">
+  <data key="d1">0.5381414294242859</data>
+</edge>
+<edge source="дом" target="туалет">
+  <data key="d1">0.6017513275146484</data>
+</edge>
+<edge source="дом" target="ждать">
+  <data key="d1">0.5824924111366272</data>
+</edge>
+<edge source="дом" target="уборка">
+  <data key="d1">0.5271944403648376</data>
+</edge>
+<edge source="дом" target="отопление">
+  <data key="d1">0.5649421215057373</data>
+</edge>
+<edge source="дом" target="корп">
+  <data key="d1">0.5669456720352173</data>
+</edge>
+<edge source="дом" target="электроэнергия">
+  <data key="d1">0.5609307289123535</data>
+</edge>
+<edge source="дом" target="проживать">
+  <data key="d1">0.5482541918754578</data>
+</edge>
+<edge source="дом" target="заставить">
+  <data key="d1">0.5645966529846191</data>
+</edge>
+<edge source="дом" target="мусоропровод">
+  <data key="d1">0.5177243947982788</data>
+</edge>
+<edge source="улица Карпинского" target="дверь">
+  <data key="d1">0.6131</data>
+</edge>
+<edge source="улица Карпинского" target="дверной">
+  <data key="d1">0.6283</data>
+</edge>
+<edge source="дверь" target="улица">
+  <data key="d1">0.5466802716255188</data>
+</edge>
+<edge source="дверь" target="убрать">
+  <data key="d1">0.5890710353851318</data>
+</edge>
+<edge source="дверь" target="крыса">
+  <data key="d1">0.5685830116271973</data>
+</edge>
+<edge source="дверь" target="собственник">
+  <data key="d1">0.5769709944725037</data>
+</edge>
+<edge source="дверь" target="снег">
+  <data key="d1">0.5911868810653687</data>
+</edge>
+<edge source="дверь" target="лифтовый">
+  <data key="d1">0.5122557878494263</data>
+</edge>
+<edge source="дверь" target="дверной">
+  <data key="d1">0.553951621055603</data>
+</edge>
+<edge source="дверь" target="жилец">
+  <data key="d1">0.5267097353935242</data>
+</edge>
+<edge source="дверь" target="февраль">
+  <data key="d1">0.5723233222961426</data>
+</edge>
+<edge source="дверь" target="александрович">
+  <data key="d1">0.5200316905975342</data>
+</edge>
+<edge source="дверь" target="туалет">
+  <data key="d1">0.6529344916343689</data>
+</edge>
+<edge source="дверь" target="мусорщик">
+  <data key="d1">0.5474866628646851</data>
+</edge>
+<edge source="дверь" target="ждать">
+  <data key="d1">0.7135261297225952</data>
+</edge>
+<edge source="дверь" target="отопление">
+  <data key="d1">0.5682858228683472</data>
+</edge>
+<edge source="дверь" target="корп">
+  <data key="d1">0.521216094493866</data>
+</edge>
+<edge source="дверь" target="электроэнергия">
+  <data key="d1">0.5488264560699463</data>
+</edge>
+<edge source="дверь" target="заставить">
+  <data key="d1">0.5812224745750427</data>
+</edge>
+<edge source="дверь" target="мусоропровод">
+  <data key="d1">0.5273008942604065</data>
+</edge>
+<edge source="дверной" target="крыса">
+  <data key="d1">0.5195575952529907</data>
+</edge>
+<edge source="дверной" target="собственник">
+  <data key="d1">0.5248903632164001</data>
+</edge>
+<edge source="дверной" target="жилец">
+  <data key="d1">0.5646061897277832</data>
+</edge>
+<edge source="дверной" target="мусоропровод">
+  <data key="d1">0.5018094778060913</data>
+</edge>
+<edge source="Старо-Петергофский проспект" target="жилец">
+  <data key="d1">0.6118</data>
+</edge>
+<edge source="жилец" target="улица">
+  <data key="d1">0.5302186012268066</data>
+</edge>
+<edge source="жилец" target="владимирович">
+  <data key="d1">0.547128438949585</data>
+</edge>
+<edge source="жилец" target="песочек">
+  <data key="d1">0.5799801349639893</data>
+</edge>
+<edge source="жилец" target="снег">
+  <data key="d1">0.524492621421814</data>
+</edge>
+<edge source="жилец" target="владимир">
+  <data key="d1">0.5120709538459778</data>
+</edge>
+<edge source="жилец" target="александрович">
+  <data key="d1">0.5338358879089355</data>
+</edge>
+<edge source="жилец" target="туалет">
+  <data key="d1">0.5080721378326416</data>
+</edge>
+<edge source="жилец" target="мусорщик">
+  <data key="d1">0.5360491871833801</data>
+</edge>
+<edge source="жилец" target="уборка">
+  <data key="d1">0.533964991569519</data>
+</edge>
+<edge source="жилец" target="глыба">
+  <data key="d1">0.5213608145713806</data>
+</edge>
+<edge source="жилец" target="корп">
+  <data key="d1">0.5272955298423767</data>
+</edge>
+<edge source="жилец" target="проживать">
+  <data key="d1">0.5086724758148193</data>
+</edge>
+<edge source="жилец" target="мусоропровод">
+  <data key="d1">0.5603916645050049</data>
+</edge>
+<edge source="улица Фёдора Котанова" target="электроэнергия">
+  <data key="d1">0.6084</data>
+</edge>
+<edge source="электроэнергия" target="улица Рылеева">
+  <data key="d1">0.6111</data>
+</edge>
+<edge source="электроэнергия" target="улица">
+  <data key="d1">0.5306671857833862</data>
+</edge>
+<edge source="электроэнергия" target="крыса">
+  <data key="d1">0.579249382019043</data>
+</edge>
+<edge source="электроэнергия" target="собственник">
+  <data key="d1">0.6985076069831848</data>
+</edge>
+<edge source="электроэнергия" target="снег">
+  <data key="d1">0.5496597290039062</data>
+</edge>
+<edge source="электроэнергия" target="лифтовый">
+  <data key="d1">0.5194370746612549</data>
+</edge>
+<edge source="электроэнергия" target="владимирский">
+  <data key="d1">0.5289172530174255</data>
+</edge>
+<edge source="электроэнергия" target="февраль">
+  <data key="d1">0.5626053214073181</data>
+</edge>
+<edge source="электроэнергия" target="владимир">
+  <data key="d1">0.5204910635948181</data>
+</edge>
+<edge source="электроэнергия" target="александрович">
+  <data key="d1">0.5052750706672668</data>
+</edge>
+<edge source="электроэнергия" target="туалет">
+  <data key="d1">0.5334597826004028</data>
+</edge>
+<edge source="электроэнергия" target="ждать">
+  <data key="d1">0.5069799423217773</data>
+</edge>
+<edge source="электроэнергия" target="отопление">
+  <data key="d1">0.6357499361038208</data>
+</edge>
+<edge source="электроэнергия" target="проживать">
+  <data key="d1">0.6082833409309387</data>
+</edge>
+<edge source="электроэнергия" target="заставить">
+  <data key="d1">0.5398831963539124</data>
+</edge>
+<edge source="улица Жени Егоровой" target="мусоропровод">
+  <data key="d1">0.6045</data>
+</edge>
+<edge source="мусоропровод" target="авиагородок">
+  <data key="d1">0.5720338821411133</data>
+</edge>
+<edge source="мусоропровод" target="улица">
+  <data key="d1">0.5432553887367249</data>
+</edge>
+<edge source="мусоропровод" target="снег">
+  <data key="d1">0.6100485324859619</data>
+</edge>
+<edge source="мусоропровод" target="лифтовый">
+  <data key="d1">0.5250141620635986</data>
+</edge>
+<edge source="мусоропровод" target="владимир">
+  <data key="d1">0.5040509104728699</data>
+</edge>
+<edge source="мусоропровод" target="туалет">
+  <data key="d1">0.5783644914627075</data>
+</edge>
+<edge source="мусоропровод" target="мусорщик">
+  <data key="d1">0.7307400107383728</data>
+</edge>
+<edge source="мусоропровод" target="ждать">
+  <data key="d1">0.5304983258247375</data>
+</edge>
+<edge source="мусоропровод" target="уборка">
+  <data key="d1">0.5462450981140137</data>
+</edge>
+<edge source="мусоропровод" target="дмитриевич">
+  <data key="d1">0.5347428321838379</data>
+</edge>
+<edge source="Туристская улица" target="заставить">
+  <data key="d1">0.6248</data>
+</edge>
+<edge source="заставить" target="улица">
+  <data key="d1">0.5044447183609009</data>
+</edge>
+<edge source="заставить" target="крыса">
+  <data key="d1">0.5300590991973877</data>
+</edge>
+<edge source="заставить" target="песочек">
+  <data key="d1">0.517824113368988</data>
+</edge>
+<edge source="заставить" target="снег">
+  <data key="d1">0.509270191192627</data>
+</edge>
+<edge source="заставить" target="владимирский">
+  <data key="d1">0.5211295485496521</data>
+</edge>
+<edge source="заставить" target="февраль">
+  <data key="d1">0.5264899134635925</data>
+</edge>
+<edge source="заставить" target="владимир">
+  <data key="d1">0.5023331642150879</data>
+</edge>
+<edge source="заставить" target="туалет">
+  <data key="d1">0.5439082980155945</data>
+</edge>
+<edge source="заставить" target="ждать">
+  <data key="d1">0.5509086847305298</data>
+</edge>
+<edge source="заставить" target="корп">
+  <data key="d1">0.5342627763748169</data>
+</edge>
+<edge source="улица Декабристов" target="уборка">
+  <data key="d1">0.6029</data>
+</edge>
+<edge source="уборка" target="владимирович">
+  <data key="d1">0.5016255974769592</data>
+</edge>
+<edge source="уборка" target="песочек">
+  <data key="d1">0.5512392520904541</data>
+</edge>
+<edge source="уборка" target="мусорщик">
+  <data key="d1">0.5353609323501587</data>
+</edge>
+<edge source="Петергофский переулок" target="путин">
+  <data key="d1">0.6923</data>
+</edge>
+<edge source="Петергофский переулок" target="владимирович">
+  <data key="d1">0.6776</data>
+</edge>
+<edge source="Петергофский переулок" target="владимир">
+  <data key="d1">0.6047</data>
+</edge>
+<edge source="путин" target="песочек">
+  <data key="d1">0.5148493647575378</data>
+</edge>
+<edge source="путин" target="владимирский">
+  <data key="d1">0.5155041217803955</data>
+</edge>
+<edge source="владимирович" target="собственник">
+  <data key="d1">0.5361431837081909</data>
+</edge>
+<edge source="владимирович" target="владимирский">
+  <data key="d1">0.6521843671798706</data>
+</edge>
+<edge source="владимирович" target="владимир">
+  <data key="d1">0.6622577905654907</data>
+</edge>
+<edge source="владимирович" target="александрович">
+  <data key="d1">0.7493067383766174</data>
+</edge>
+<edge source="владимирович" target="корп">
+  <data key="d1">0.545928955078125</data>
+</edge>
+<edge source="владимирович" target="проживать">
+  <data key="d1">0.5071542859077454</data>
+</edge>
+<edge source="владимир" target="улица">
+  <data key="d1">0.6245212554931641</data>
+</edge>
+<edge source="владимир" target="крыса">
+  <data key="d1">0.599027693271637</data>
+</edge>
+<edge source="владимир" target="собственник">
+  <data key="d1">0.6354183554649353</data>
+</edge>
+<edge source="владимир" target="снег">
+  <data key="d1">0.6622484922409058</data>
+</edge>
+<edge source="владимир" target="владимирский">
+  <data key="d1">0.6220318675041199</data>
+</edge>
+<edge source="владимир" target="февраль">
+  <data key="d1">0.5416463613510132</data>
+</edge>
+<edge source="владимир" target="александрович">
+  <data key="d1">0.5034234523773193</data>
+</edge>
+<edge source="владимир" target="туалет">
+  <data key="d1">0.5223389863967896</data>
+</edge>
+<edge source="владимир" target="мусорщик">
+  <data key="d1">0.5405376553535461</data>
+</edge>
+<edge source="владимир" target="корп">
+  <data key="d1">0.6026074886322021</data>
+</edge>
+<edge source="владимир" target="проживать">
+  <data key="d1">0.6722236275672913</data>
+</edge>
+<edge source="Прямой переулок" target="глыба">
+  <data key="d1">0.6213</data>
+</edge>
+<edge source="глыба" target="Прямой проспект">
+  <data key="d1">0.6213</data>
+</edge>
+<edge source="глыба" target="Прямая улица">
+  <data key="d1">0.6213</data>
+</edge>
+<edge source="глыба" target="владимирский">
+  <data key="d1">0.5487421751022339</data>
+</edge>
+<edge source="глыба" target="александрович">
+  <data key="d1">0.5064229965209961</data>
+</edge>
+<edge source="улица Корнея Чуковского" target="снег">
+  <data key="d1">0.6389</data>
+</edge>
+<edge source="снег" target="Изборская улица">
+  <data key="d1">0.7334</data>
+</edge>
+<edge source="снег" target="авиагородок">
+  <data key="d1">0.5194093585014343</data>
+</edge>
+<edge source="снег" target="улица">
+  <data key="d1">0.6284088492393494</data>
+</edge>
+<edge source="снег" target="убрать">
+  <data key="d1">0.5437749624252319</data>
+</edge>
+<edge source="снег" target="крыса">
+  <data key="d1">0.5770604610443115</data>
+</edge>
+<edge source="снег" target="собственник">
+  <data key="d1">0.6293886303901672</data>
+</edge>
+<edge source="снег" target="лифтовый">
+  <data key="d1">0.5147634744644165</data>
+</edge>
+<edge source="снег" target="февраль">
+  <data key="d1">0.6504359841346741</data>
+</edge>
+<edge source="снег" target="туалет">
+  <data key="d1">0.6345397233963013</data>
+</edge>
+<edge source="снег" target="мусорщик">
+  <data key="d1">0.6178146600723267</data>
+</edge>
+<edge source="снег" target="ждать">
+  <data key="d1">0.5965303182601929</data>
+</edge>
+<edge source="снег" target="отопление">
+  <data key="d1">0.6417809724807739</data>
+</edge>
+<edge source="снег" target="проживать">
+  <data key="d1">0.586580216884613</data>
+</edge>
+<edge source="Яковлевский переулок" target="песочек">
+  <data key="d1">0.6861</data>
+</edge>
+<edge source="песочек" target="крыса">
+  <data key="d1">0.5146610736846924</data>
+</edge>
+<edge source="мост Ветеранов" target="мусорщик">
+  <data key="d1">0.6206</data>
+</edge>
+<edge source="мусорщик" target="авиагородок">
+  <data key="d1">0.5307799577713013</data>
+</edge>
+<edge source="мусорщик" target="улица">
+  <data key="d1">0.500210702419281</data>
+</edge>
+<edge source="мусорщик" target="лифтовый">
+  <data key="d1">0.5526953339576721</data>
+</edge>
+<edge source="мусорщик" target="владимирский">
+  <data key="d1">0.5094983577728271</data>
+</edge>
+<edge source="мусорщик" target="туалет">
+  <data key="d1">0.6024248600006104</data>
+</edge>
+<edge source="мусорщик" target="ждать">
+  <data key="d1">0.5542885661125183</data>
+</edge>
+<edge source="мусорщик" target="отопление">
+  <data key="d1">0.5001509189605713</data>
+</edge>
+<edge source="мост Подвойского" target="убрать">
+  <data key="d1">0.6481</data>
+</edge>
+<edge source="убрать" target="улица Подвойского">
+  <data key="d1">0.6481</data>
+</edge>
+<edge source="убрать" target="улица">
+  <data key="d1">0.5213187336921692</data>
+</edge>
+<edge source="убрать" target="крыса">
+  <data key="d1">0.5236638188362122</data>
+</edge>
+<edge source="убрать" target="лифтовый">
+  <data key="d1">0.5379911661148071</data>
+</edge>
+<edge source="убрать" target="владимирский">
+  <data key="d1">0.5104901194572449</data>
+</edge>
+<edge source="убрать" target="февраль">
+  <data key="d1">0.5517534017562866</data>
+</edge>
+<edge source="убрать" target="туалет">
+  <data key="d1">0.6984590291976929</data>
+</edge>
+<edge source="убрать" target="ждать">
+  <data key="d1">0.5769718885421753</data>
+</edge>
+<edge source="улица Евдокима Огнева" target="улица">
+  <data key="d1">0.665</data>
+</edge>
+<edge source="улица" target="крыса">
+  <data key="d1">0.5363335013389587</data>
+</edge>
+<edge source="улица" target="собственник">
+  <data key="d1">0.6092067360877991</data>
+</edge>
+<edge source="улица" target="лифтовый">
+  <data key="d1">0.5248432159423828</data>
+</edge>
+<edge source="улица" target="владимирский">
+  <data key="d1">0.5119674801826477</data>
+</edge>
+<edge source="улица" target="февраль">
+  <data key="d1">0.556185781955719</data>
+</edge>
+<edge source="улица" target="александрович">
+  <data key="d1">0.5286267399787903</data>
+</edge>
+<edge source="улица" target="туалет">
+  <data key="d1">0.5213513970375061</data>
+</edge>
+<edge source="улица" target="ждать">
+  <data key="d1">0.5373541116714478</data>
+</edge>
+<edge source="улица" target="отопление">
+  <data key="d1">0.5428732633590698</data>
+</edge>
+<edge source="улица" target="корп">
+  <data key="d1">0.5975788831710815</data>
+</edge>
+<edge source="улица" target="проживать">
+  <data key="d1">0.6213582158088684</data>
+</edge>
+<edge source="улица Пилотов" target="авиагородок">
+  <data key="d1">0.6276</data>
+</edge>
+<edge source="авиагородок" target="корп">
+  <data key="d1">0.5164916515350342</data>
+</edge>
+<edge source="улица Ивана Фомина" target="дмитриевич">
+  <data key="d1">0.6491</data>
+</edge>
+<edge source="улица Ивана Фомина" target="александрович">
+  <data key="d1">0.6399</data>
+</edge>
+<edge source="дмитриевич" target="Витебская улица">
+  <data key="d1">0.6046</data>
+</edge>
+<edge source="дмитриевич" target="Суворовский проспект">
+  <data key="d1">0.627</data>
+</edge>
+<edge source="александрович" target="собственник">
+  <data key="d1">0.5519145131111145</data>
+</edge>
+<edge source="александрович" target="владимирский">
+  <data key="d1">0.5977156162261963</data>
+</edge>
+<edge source="проспект Художников" target="туалет">
+  <data key="d1">0.6473</data>
+</edge>
+<edge source="туалет" target="крыса">
+  <data key="d1">0.6303764581680298</data>
+</edge>
+<edge source="туалет" target="лифтовый">
+  <data key="d1">0.5368245244026184</data>
+</edge>
+<edge source="туалет" target="февраль">
+  <data key="d1">0.5883480906486511</data>
+</edge>
+<edge source="туалет" target="ждать">
+  <data key="d1">0.5549406409263611</data>
+</edge>
+<edge source="туалет" target="отопление">
+  <data key="d1">0.5300682783126831</data>
+</edge>
+<edge source="улица Маршала Казакова" target="собственник">
+  <data key="d1">0.6783</data>
+</edge>
+<edge source="собственник" target="крыса">
+  <data key="d1">0.6095632314682007</data>
+</edge>
+<edge source="собственник" target="лифтовый">
+  <data key="d1">0.518619954586029</data>
+</edge>
+<edge source="собственник" target="владимирский">
+  <data key="d1">0.5291025638580322</data>
+</edge>
+<edge source="собственник" target="февраль">
+  <data key="d1">0.5951579213142395</data>
+</edge>
+<edge source="собственник" target="отопление">
+  <data key="d1">0.5943146347999573</data>
+</edge>
+<edge source="собственник" target="корп">
+  <data key="d1">0.5454173684120178</data>
+</edge>
+<edge source="собственник" target="проживать">
+  <data key="d1">0.6683427095413208</data>
+</edge>
+<edge source="Среднеохтинский проспект" target="отопление">
+  <data key="d1">0.7667</data>
+</edge>
+<edge source="отопление" target="крыса">
+  <data key="d1">0.5219342112541199</data>
+</edge>
+<edge source="отопление" target="лифтовый">
+  <data key="d1">0.5969656705856323</data>
+</edge>
+<edge source="отопление" target="февраль">
+  <data key="d1">0.6450265645980835</data>
+</edge>
+<edge source="отопление" target="ждать">
+  <data key="d1">0.5181119441986084</data>
+</edge>
+<edge source="Рабфаковская улица" target="ждать">
+  <data key="d1">0.8045</data>
+</edge>
+<edge source="Рабфаковская улица" target="корп">
+  <data key="d1">0.6548</data>
+</edge>
+<edge source="ждать" target="февраль">
+  <data key="d1">0.5743784308433533</data>
+</edge>
+<edge source="корп" target="крыса">
+  <data key="d1">0.5628195405006409</data>
+</edge>
+<edge source="корп" target="владимирский">
+  <data key="d1">0.545483410358429</data>
+</edge>
+<edge source="корп" target="февраль">
+  <data key="d1">0.5017211437225342</data>
+</edge>
+<edge source="корп" target="проживать">
+  <data key="d1">0.6067030429840088</data>
+</edge>
+<edge source="Садовая улица" target="крыса">
+  <data key="d1">0.6747</data>
+</edge>
+<edge source="крыса" target="февраль">
+  <data key="d1">0.5751408338546753</data>
+</edge>
+<edge source="крыса" target="проживать">
+  <data key="d1">0.5958172082901001</data>
+</edge>
+<edge source="Суворовский проспект" target="проживать">
+  <data key="d1">0.6131</data>
+</edge>
+<edge source="проживать" target="февраль">
+  <data key="d1">0.558273434638977</data>
+</edge>
+<edge source="Комендантский проспект" target="лифтовый">
+  <data key="d1">0.6238</data>
+</edge>
+<edge source="Загородный проспект" target="владимирский">
+  <data key="d1">0.7491</data>
+</edge>
+<edge source="Загородный проспект" target="февраль">
+  <data key="d1">0.6724</data>
+</edge>
+</graph></graphml>

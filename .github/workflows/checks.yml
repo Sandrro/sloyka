@@ -28,9 +28,9 @@
 #       run: black . --check --diff
 #     - name: flake8
 #       run: |
-#         flake8 factfinder
+#         flake8 sloyka
 #         flake8 tests
 #     - name: isort
 #       run: |
-#         isort factfinder --check --diff
+#         isort sloyka --check --diff
 #         isort tests --check --diff
