@@ -16,7 +16,8 @@ nltk.download('stopwords')
 
 class Semgraph:
     """
-    This is the main class of semantic graph module. It is aimed to build a semantic graph based on the provided data and parameters.
+    This is the main class of semantic graph module. 
+    It is aimed to build a semantic graph based on the provided data and parameters.
     More convinient to use after extracting data from geocoder.
 
     Param:

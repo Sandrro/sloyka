@@ -1,0 +1,4534 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d1" for="edge" attr.name="SIMILARITY_SCORE" attr.type="double"/>
+<key id="d0" for="node" attr.name="tag" attr.type="string"/>
+<graph edgedefault="undirected"><node id="улица Мартынова">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="дорожный">
+  <data key="d0">ADJF</data>
+</node>
+<node id="улица Ленина">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="вокзал">
+  <data key="d0">NOUN</data>
+</node>
+<node id="площадь Беллинсгаузена">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="русский">
+  <data key="d0">ADJF</data>
+</node>
+<node id="россия">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Екатерининский проспект">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="парка">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Иоанновский переулок">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="монастырь">
+  <data key="d0">NOUN</data>
+</node>
+<node id="ретрофото">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Садовая улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="парад">
+  <data key="d0">NOUN</data>
+</node>
+<node id="парадное">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Кронштадтская площадь">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="океанаспециалист">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Выборгское шоссе">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="грибник">
+  <data key="d0">NOUN</data>
+</node>
+<node id="грибной">
+  <data key="d0">ADJF</data>
+</node>
+<node id="гриб">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Зосимова">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="юрьевский">
+  <data key="d0">ADJF</data>
+</node>
+<node id="советский">
+  <data key="d0">ADJF</data>
+</node>
+<node id="Приморское шоссе">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="пробка">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Якорная площадь">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="фестиваль">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Манежный переулок">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="светодиодный">
+  <data key="d0">ADJF</data>
+</node>
+<node id="светильник">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Белорусская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="россиянин">
+  <data key="d0">NOUN</data>
+</node>
+<node id="мошенник">
+  <data key="d0">NOUN</data>
+</node>
+<node id="злоумышленник">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Бугры">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="фейерверк">
+  <data key="d0">NOUN</data>
+</node>
+<node id="взрыв">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Флотская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="жилищный">
+  <data key="d0">ADJF</data>
+</node>
+<node id="жильё">
+  <data key="d0">NOUN</data>
+</node>
+<node id="жилец">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Демьяна Бедного">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="хоккей">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Коммунистическая улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="гимназиякронштадтский">
+  <data key="d0">ADJF</data>
+</node>
+<node id="алексеевич">
+  <data key="d0">NOUN</data>
+</node>
+<node id="владимир">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Владимирская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="казарма">
+  <data key="d0">NOUN</data>
+</node>
+<node id="проспект Динамо">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="выстрел">
+  <data key="d0">NOUN</data>
+</node>
+<node id="стрельбище">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Гороховая улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="улица Сургина">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="Гусева улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="пожар">
+  <data key="d0">NOUN</data>
+</node>
+<node id="огонь">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Лиговский проспект">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="онкологический">
+  <data key="d0">ADJF</data>
+</node>
+<node id="Октябрьская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="моряк">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Кременчугская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="православный">
+  <data key="d0">ADJF</data>
+</node>
+<node id="Пушкинская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="петербург">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Трефолева">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="монумент">
+  <data key="d0">NOUN</data>
+</node>
+<node id="памятник">
+  <data key="d0">NOUN</data>
+</node>
+<node id="могила">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Приморский путепровод">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="Комендантская площадь">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="площадь">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Николаевский проспект">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="Офицерская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="улица">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Мануильского">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="автобусный">
+  <data key="d0">ADJF</data>
+</node>
+<node id="Краснофлотский переулок">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="дорога">
+  <data key="d0">NOUN</data>
+</node>
+<node id="проспект Стачек">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="форт">
+  <data key="d0">NOUN</data>
+</node>
+<node id="фортов">
+  <data key="d0">NOUN</data>
+</node>
+<node id="крепость">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Большевистская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="поджечь">
+  <data key="d0">INFN</data>
+</node>
+<node id="пламенипредположительный">
+  <data key="d0">ADJF</data>
+</node>
+<node id="Якорная улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="концерт">
+  <data key="d0">NOUN</data>
+</node>
+<node id="победа">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Красная улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="замёрзнуть">
+  <data key="d0">INFN</data>
+</node>
+<node id="ледяной">
+  <data key="d0">ADJF</data>
+</node>
+<node id="ледовый">
+  <data key="d0">ADJF</data>
+</node>
+<node id="лёд">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Синий мост">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="сад">
+  <data key="d0">NOUN</data>
+</node>
+<node id="улица Руднева">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="собака">
+  <data key="d0">NOUN</data>
+</node>
+<node id="догхантеры">
+  <data key="d0">NOUN</data>
+</node>
+<node id="питомец">
+  <data key="d0">NOUN</data>
+</node>
+<node id="путепровод Нева">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="циклон">
+  <data key="d0">NOUN</data>
+</node>
+<node id="штормовой">
+  <data key="d0">ADJF</data>
+</node>
+<node id="шторм">
+  <data key="d0">NOUN</data>
+</node>
+<node id="циклонтино">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Парашютная улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="улица Фейгина">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="улица Володарского">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="супермаркет">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Посадская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="располагаться">
+  <data key="d0">INFN</data>
+</node>
+<node id="Ленинградская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="фашистский">
+  <data key="d0">ADJF</data>
+</node>
+<node id="Беговая улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="метро">
+  <data key="d0">NOUN</data>
+</node>
+<node id="станция">
+  <data key="d0">NOUN</data>
+</node>
+<node id="Пролетарская улица">
+  <data key="d0">TOPONIM</data>
+</node>
+<node id="уголовный">
+  <data key="d0">ADJF</data>
+</node>
+<node id="обвиняться">
+  <data key="d0">INFN</data>
+</node>
+<edge source="улица Мартынова" target="дорожный">
+  <data key="d1">0.6048</data>
+</edge>
+<edge source="дорожный" target="Приморский путепровод">
+  <data key="d1">0.6031</data>
+</edge>
+<edge source="дорожный" target="Краснофлотский переулок">
+  <data key="d1">0.6522</data>
+</edge>
+<edge source="дорожный" target="Парашютная улица">
+  <data key="d1">0.6231</data>
+</edge>
+<edge source="дорожный" target="пожар">
+  <data key="d1">0.5993500351905823</data>
+</edge>
+<edge source="дорожный" target="юрьевский">
+  <data key="d1">0.5033444762229919</data>
+</edge>
+<edge source="дорожный" target="лёд">
+  <data key="d1">0.5605692863464355</data>
+</edge>
+<edge source="дорожный" target="концерт">
+  <data key="d1">0.5244198441505432</data>
+</edge>
+<edge source="дорожный" target="православный">
+  <data key="d1">0.6261656880378723</data>
+</edge>
+<edge source="дорожный" target="гриб">
+  <data key="d1">0.5523122549057007</data>
+</edge>
+<edge source="дорожный" target="злоумышленник">
+  <data key="d1">0.6097322702407837</data>
+</edge>
+<edge source="дорожный" target="площадь">
+  <data key="d1">0.5108686685562134</data>
+</edge>
+<edge source="дорожный" target="монастырь">
+  <data key="d1">0.5138412117958069</data>
+</edge>
+<edge source="дорожный" target="владимир">
+  <data key="d1">0.6271435022354126</data>
+</edge>
+<edge source="дорожный" target="собака">
+  <data key="d1">0.5241516828536987</data>
+</edge>
+<edge source="дорожный" target="памятник">
+  <data key="d1">0.5884770154953003</data>
+</edge>
+<edge source="дорожный" target="циклон">
+  <data key="d1">0.5910627841949463</data>
+</edge>
+<edge source="дорожный" target="форт">
+  <data key="d1">0.5128887295722961</data>
+</edge>
+<edge source="дорожный" target="улица">
+  <data key="d1">0.6061990261077881</data>
+</edge>
+<edge source="дорожный" target="располагаться">
+  <data key="d1">0.5419692993164062</data>
+</edge>
+<edge source="дорожный" target="ледяной">
+  <data key="d1">0.53111332654953</data>
+</edge>
+<edge source="дорожный" target="моряк">
+  <data key="d1">0.5162687301635742</data>
+</edge>
+<edge source="дорожный" target="циклонтино">
+  <data key="d1">0.5497515201568604</data>
+</edge>
+<edge source="дорожный" target="уголовный">
+  <data key="d1">0.6484129428863525</data>
+</edge>
+<edge source="дорожный" target="россия">
+  <data key="d1">0.5552794933319092</data>
+</edge>
+<edge source="дорожный" target="автобусный">
+  <data key="d1">0.632736325263977</data>
+</edge>
+<edge source="дорожный" target="дорога">
+  <data key="d1">0.589568018913269</data>
+</edge>
+<edge source="дорожный" target="станция">
+  <data key="d1">0.5847505927085876</data>
+</edge>
+<edge source="дорожный" target="светильник">
+  <data key="d1">0.5102356672286987</data>
+</edge>
+<edge source="дорожный" target="супермаркет">
+  <data key="d1">0.5694963932037354</data>
+</edge>
+<edge source="дорожный" target="русский">
+  <data key="d1">0.5014677047729492</data>
+</edge>
+<edge source="дорожный" target="монумент">
+  <data key="d1">0.5865709781646729</data>
+</edge>
+<edge source="дорожный" target="сад">
+  <data key="d1">0.5101495981216431</data>
+</edge>
+<edge source="дорожный" target="петербург">
+  <data key="d1">0.6256147623062134</data>
+</edge>
+<edge source="дорожный" target="хоккей">
+  <data key="d1">0.6841006278991699</data>
+</edge>
+<edge source="дорожный" target="ледовый">
+  <data key="d1">0.6594259738922119</data>
+</edge>
+<edge source="дорожный" target="могила">
+  <data key="d1">0.5633220076560974</data>
+</edge>
+<edge source="дорожный" target="стрельбище">
+  <data key="d1">0.547113299369812</data>
+</edge>
+<edge source="улица Ленина" target="вокзал">
+  <data key="d1">0.6111</data>
+</edge>
+<edge source="вокзал" target="россиянин">
+  <data key="d1">0.5797715783119202</data>
+</edge>
+<edge source="вокзал" target="фортов">
+  <data key="d1">0.5770228505134583</data>
+</edge>
+<edge source="вокзал" target="питомец">
+  <data key="d1">0.5079533457756042</data>
+</edge>
+<edge source="вокзал" target="юрьевский">
+  <data key="d1">0.5123255252838135</data>
+</edge>
+<edge source="вокзал" target="жильё">
+  <data key="d1">0.535356342792511</data>
+</edge>
+<edge source="вокзал" target="лёд">
+  <data key="d1">0.5422512292861938</data>
+</edge>
+<edge source="вокзал" target="концерт">
+  <data key="d1">0.6036558747291565</data>
+</edge>
+<edge source="вокзал" target="православный">
+  <data key="d1">0.6513357758522034</data>
+</edge>
+<edge source="вокзал" target="злоумышленник">
+  <data key="d1">0.6011739373207092</data>
+</edge>
+<edge source="вокзал" target="онкологический">
+  <data key="d1">0.5208579301834106</data>
+</edge>
+<edge source="вокзал" target="площадь">
+  <data key="d1">0.6384862065315247</data>
+</edge>
+<edge source="вокзал" target="казарма">
+  <data key="d1">0.5050702691078186</data>
+</edge>
+<edge source="вокзал" target="монастырь">
+  <data key="d1">0.5675468444824219</data>
+</edge>
+<edge source="вокзал" target="владимир">
+  <data key="d1">0.5493030548095703</data>
+</edge>
+<edge source="вокзал" target="замёрзнуть">
+  <data key="d1">0.5547808408737183</data>
+</edge>
+<edge source="вокзал" target="пробка">
+  <data key="d1">0.6661027669906616</data>
+</edge>
+<edge source="вокзал" target="памятник">
+  <data key="d1">0.6515926718711853</data>
+</edge>
+<edge source="вокзал" target="циклон">
+  <data key="d1">0.5204610824584961</data>
+</edge>
+<edge source="вокзал" target="фестиваль">
+  <data key="d1">0.5540188550949097</data>
+</edge>
+<edge source="вокзал" target="парад">
+  <data key="d1">0.569966197013855</data>
+</edge>
+<edge source="вокзал" target="форт">
+  <data key="d1">0.5474382638931274</data>
+</edge>
+<edge source="вокзал" target="огонь">
+  <data key="d1">0.5150616765022278</data>
+</edge>
+<edge source="вокзал" target="метро">
+  <data key="d1">0.6780561208724976</data>
+</edge>
+<edge source="вокзал" target="улица">
+  <data key="d1">0.6652740836143494</data>
+</edge>
+<edge source="вокзал" target="взрыв">
+  <data key="d1">0.5041059255599976</data>
+</edge>
+<edge source="вокзал" target="располагаться">
+  <data key="d1">0.5660830736160278</data>
+</edge>
+<edge source="вокзал" target="моряк">
+  <data key="d1">0.6850473880767822</data>
+</edge>
+<edge source="вокзал" target="циклонтино">
+  <data key="d1">0.5599088072776794</data>
+</edge>
+<edge source="вокзал" target="уголовный">
+  <data key="d1">0.560802698135376</data>
+</edge>
+<edge source="вокзал" target="россия">
+  <data key="d1">0.5884442329406738</data>
+</edge>
+<edge source="вокзал" target="автобусный">
+  <data key="d1">0.6590021848678589</data>
+</edge>
+<edge source="вокзал" target="дорога">
+  <data key="d1">0.6057155132293701</data>
+</edge>
+<edge source="вокзал" target="советский">
+  <data key="d1">0.5432219505310059</data>
+</edge>
+<edge source="вокзал" target="супермаркет">
+  <data key="d1">0.6461930274963379</data>
+</edge>
+<edge source="вокзал" target="парка">
+  <data key="d1">0.5827799439430237</data>
+</edge>
+<edge source="вокзал" target="русский">
+  <data key="d1">0.6766657829284668</data>
+</edge>
+<edge source="вокзал" target="монумент">
+  <data key="d1">0.5635547041893005</data>
+</edge>
+<edge source="вокзал" target="сад">
+  <data key="d1">0.6100360155105591</data>
+</edge>
+<edge source="вокзал" target="петербург">
+  <data key="d1">0.6161161661148071</data>
+</edge>
+<edge source="вокзал" target="хоккей">
+  <data key="d1">0.5067284107208252</data>
+</edge>
+<edge source="вокзал" target="светодиодный">
+  <data key="d1">0.5207409858703613</data>
+</edge>
+<edge source="площадь Беллинсгаузена" target="русский">
+  <data key="d1">0.6137</data>
+</edge>
+<edge source="площадь Беллинсгаузена" target="россия">
+  <data key="d1">0.6118</data>
+</edge>
+<edge source="русский" target="россиянин">
+  <data key="d1">0.6613471508026123</data>
+</edge>
+<edge source="русский" target="жилищный">
+  <data key="d1">0.5306927561759949</data>
+</edge>
+<edge source="русский" target="пожар">
+  <data key="d1">0.5466011762619019</data>
+</edge>
+<edge source="русский" target="фортов">
+  <data key="d1">0.5486447811126709</data>
+</edge>
+<edge source="русский" target="юрьевский">
+  <data key="d1">0.611148476600647</data>
+</edge>
+<edge source="русский" target="победа">
+  <data key="d1">0.5147181749343872</data>
+</edge>
+<edge source="русский" target="жильё">
+  <data key="d1">0.6352201700210571</data>
+</edge>
+<edge source="русский" target="лёд">
+  <data key="d1">0.674724817276001</data>
+</edge>
+<edge source="русский" target="концерт">
+  <data key="d1">0.6437680125236511</data>
+</edge>
+<edge source="русский" target="православный">
+  <data key="d1">0.7086740732192993</data>
+</edge>
+<edge source="русский" target="злоумышленник">
+  <data key="d1">0.6456215381622314</data>
+</edge>
+<edge source="русский" target="площадь">
+  <data key="d1">0.6960232257843018</data>
+</edge>
+<edge source="русский" target="казарма">
+  <data key="d1">0.5355489253997803</data>
+</edge>
+<edge source="русский" target="монастырь">
+  <data key="d1">0.5476968288421631</data>
+</edge>
+<edge source="русский" target="владимир">
+  <data key="d1">0.603341817855835</data>
+</edge>
+<edge source="русский" target="собака">
+  <data key="d1">0.558956503868103</data>
+</edge>
+<edge source="русский" target="замёрзнуть">
+  <data key="d1">0.5945010185241699</data>
+</edge>
+<edge source="русский" target="пробка">
+  <data key="d1">0.5962997674942017</data>
+</edge>
+<edge source="русский" target="памятник">
+  <data key="d1">0.661854088306427</data>
+</edge>
+<edge source="русский" target="циклон">
+  <data key="d1">0.5058389902114868</data>
+</edge>
+<edge source="русский" target="фестиваль">
+  <data key="d1">0.5747374296188354</data>
+</edge>
+<edge source="русский" target="парад">
+  <data key="d1">0.6163749098777771</data>
+</edge>
+<edge source="русский" target="форт">
+  <data key="d1">0.6107379198074341</data>
+</edge>
+<edge source="русский" target="огонь">
+  <data key="d1">0.5893210768699646</data>
+</edge>
+<edge source="русский" target="метро">
+  <data key="d1">0.7335292100906372</data>
+</edge>
+<edge source="русский" target="улица">
+  <data key="d1">0.6613508462905884</data>
+</edge>
+<edge source="русский" target="взрыв">
+  <data key="d1">0.5782712697982788</data>
+</edge>
+<edge source="русский" target="поджечь">
+  <data key="d1">0.5777991414070129</data>
+</edge>
+<edge source="русский" target="выстрел">
+  <data key="d1">0.5421342849731445</data>
+</edge>
+<edge source="русский" target="располагаться">
+  <data key="d1">0.6370541453361511</data>
+</edge>
+<edge source="русский" target="ледяной">
+  <data key="d1">0.54936283826828</data>
+</edge>
+<edge source="русский" target="моряк">
+  <data key="d1">0.7393074035644531</data>
+</edge>
+<edge source="русский" target="циклонтино">
+  <data key="d1">0.5279721021652222</data>
+</edge>
+<edge source="русский" target="уголовный">
+  <data key="d1">0.645012378692627</data>
+</edge>
+<edge source="русский" target="россия">
+  <data key="d1">0.685765266418457</data>
+</edge>
+<edge source="русский" target="автобусный">
+  <data key="d1">0.6007250547409058</data>
+</edge>
+<edge source="русский" target="парадное">
+  <data key="d1">0.5598348379135132</data>
+</edge>
+<edge source="русский" target="фашистский">
+  <data key="d1">0.5442516803741455</data>
+</edge>
+<edge source="русский" target="дорога">
+  <data key="d1">0.6119771003723145</data>
+</edge>
+<edge source="русский" target="станция">
+  <data key="d1">0.5667411088943481</data>
+</edge>
+<edge source="русский" target="шторм">
+  <data key="d1">0.5135384798049927</data>
+</edge>
+<edge source="русский" target="советский">
+  <data key="d1">0.6360510587692261</data>
+</edge>
+<edge source="русский" target="светильник">
+  <data key="d1">0.5571012496948242</data>
+</edge>
+<edge source="русский" target="супермаркет">
+  <data key="d1">0.5563689470291138</data>
+</edge>
+<edge source="русский" target="парка">
+  <data key="d1">0.5688238143920898</data>
+</edge>
+<edge source="русский" target="монумент">
+  <data key="d1">0.591533362865448</data>
+</edge>
+<edge source="русский" target="сад">
+  <data key="d1">0.6613679528236389</data>
+</edge>
+<edge source="русский" target="петербург">
+  <data key="d1">0.6860689520835876</data>
+</edge>
+<edge source="русский" target="хоккей">
+  <data key="d1">0.5158869028091431</data>
+</edge>
+<edge source="русский" target="ледовый">
+  <data key="d1">0.5591917634010315</data>
+</edge>
+<edge source="русский" target="могила">
+  <data key="d1">0.5467821359634399</data>
+</edge>
+<edge source="русский" target="стрельбище">
+  <data key="d1">0.5570676326751709</data>
+</edge>
+<edge source="русский" target="светодиодный">
+  <data key="d1">0.5479967594146729</data>
+</edge>
+<edge source="россия" target="улица Зосимова">
+  <data key="d1">0.6067</data>
+</edge>
+<edge source="россия" target="улица Демьяна Бедного">
+  <data key="d1">0.6221</data>
+</edge>
+<edge source="россия" target="россиянин">
+  <data key="d1">0.7589609622955322</data>
+</edge>
+<edge source="россия" target="фейерверк">
+  <data key="d1">0.5048918724060059</data>
+</edge>
+<edge source="россия" target="пожар">
+  <data key="d1">0.699631929397583</data>
+</edge>
+<edge source="россия" target="фортов">
+  <data key="d1">0.5522336959838867</data>
+</edge>
+<edge source="россия" target="питомец">
+  <data key="d1">0.5143383741378784</data>
+</edge>
+<edge source="россия" target="юрьевский">
+  <data key="d1">0.6241075992584229</data>
+</edge>
+<edge source="россия" target="победа">
+  <data key="d1">0.609592080116272</data>
+</edge>
+<edge source="россия" target="жильё">
+  <data key="d1">0.5165658593177795</data>
+</edge>
+<edge source="россия" target="лёд">
+  <data key="d1">0.5849311351776123</data>
+</edge>
+<edge source="россия" target="концерт">
+  <data key="d1">0.6772948503494263</data>
+</edge>
+<edge source="россия" target="православный">
+  <data key="d1">0.675957202911377</data>
+</edge>
+<edge source="россия" target="злоумышленник">
+  <data key="d1">0.6554563045501709</data>
+</edge>
+<edge source="россия" target="площадь">
+  <data key="d1">0.6387145519256592</data>
+</edge>
+<edge source="россия" target="монастырь">
+  <data key="d1">0.5971609354019165</data>
+</edge>
+<edge source="россия" target="владимир">
+  <data key="d1">0.6916046142578125</data>
+</edge>
+<edge source="россия" target="собака">
+  <data key="d1">0.5975387096405029</data>
+</edge>
+<edge source="россия" target="замёрзнуть">
+  <data key="d1">0.5688220262527466</data>
+</edge>
+<edge source="россия" target="памятник">
+  <data key="d1">0.626266598701477</data>
+</edge>
+<edge source="россия" target="циклон">
+  <data key="d1">0.5081411600112915</data>
+</edge>
+<edge source="россия" target="фестиваль">
+  <data key="d1">0.5890102386474609</data>
+</edge>
+<edge source="россия" target="парад">
+  <data key="d1">0.6455440521240234</data>
+</edge>
+<edge source="россия" target="форт">
+  <data key="d1">0.549702525138855</data>
+</edge>
+<edge source="россия" target="огонь">
+  <data key="d1">0.5477776527404785</data>
+</edge>
+<edge source="россия" target="метро">
+  <data key="d1">0.567462146282196</data>
+</edge>
+<edge source="россия" target="улица">
+  <data key="d1">0.6223906874656677</data>
+</edge>
+<edge source="россия" target="взрыв">
+  <data key="d1">0.6535215377807617</data>
+</edge>
+<edge source="россия" target="поджечь">
+  <data key="d1">0.6825127601623535</data>
+</edge>
+<edge source="россия" target="выстрел">
+  <data key="d1">0.5364789962768555</data>
+</edge>
+<edge source="россия" target="располагаться">
+  <data key="d1">0.5403141975402832</data>
+</edge>
+<edge source="россия" target="ледяной">
+  <data key="d1">0.6690983772277832</data>
+</edge>
+<edge source="россия" target="моряк">
+  <data key="d1">0.678973913192749</data>
+</edge>
+<edge source="россия" target="циклонтино">
+  <data key="d1">0.5784759521484375</data>
+</edge>
+<edge source="россия" target="уголовный">
+  <data key="d1">0.6234481334686279</data>
+</edge>
+<edge source="россия" target="автобусный">
+  <data key="d1">0.6102727055549622</data>
+</edge>
+<edge source="россия" target="крепость">
+  <data key="d1">0.5577542781829834</data>
+</edge>
+<edge source="россия" target="фашистский">
+  <data key="d1">0.5290253162384033</data>
+</edge>
+<edge source="россия" target="дорога">
+  <data key="d1">0.5788623690605164</data>
+</edge>
+<edge source="россия" target="станция">
+  <data key="d1">0.5859920382499695</data>
+</edge>
+<edge source="россия" target="шторм">
+  <data key="d1">0.5133230686187744</data>
+</edge>
+<edge source="россия" target="советский">
+  <data key="d1">0.6061486005783081</data>
+</edge>
+<edge source="россия" target="светильник">
+  <data key="d1">0.5209360122680664</data>
+</edge>
+<edge source="россия" target="супермаркет">
+  <data key="d1">0.5635714530944824</data>
+</edge>
+<edge source="россия" target="парка">
+  <data key="d1">0.6372042894363403</data>
+</edge>
+<edge source="россия" target="монумент">
+  <data key="d1">0.5898858308792114</data>
+</edge>
+<edge source="россия" target="сад">
+  <data key="d1">0.7181432247161865</data>
+</edge>
+<edge source="россия" target="петербург">
+  <data key="d1">0.737869143486023</data>
+</edge>
+<edge source="россия" target="хоккей">
+  <data key="d1">0.6437525749206543</data>
+</edge>
+<edge source="россия" target="ледовый">
+  <data key="d1">0.5840264558792114</data>
+</edge>
+<edge source="россия" target="могила">
+  <data key="d1">0.5531563758850098</data>
+</edge>
+<edge source="россия" target="стрельбище">
+  <data key="d1">0.5502777695655823</data>
+</edge>
+<edge source="россия" target="светодиодный">
+  <data key="d1">0.5291887521743774</data>
+</edge>
+<edge source="Екатерининский проспект" target="парка">
+  <data key="d1">0.6076</data>
+</edge>
+<edge source="парка" target="россиянин">
+  <data key="d1">0.5608119964599609</data>
+</edge>
+<edge source="парка" target="жилищный">
+  <data key="d1">0.5386186838150024</data>
+</edge>
+<edge source="парка" target="пожар">
+  <data key="d1">0.5626301765441895</data>
+</edge>
+<edge source="парка" target="фортов">
+  <data key="d1">0.6134762763977051</data>
+</edge>
+<edge source="парка" target="победа">
+  <data key="d1">0.5703181028366089</data>
+</edge>
+<edge source="парка" target="жильё">
+  <data key="d1">0.5005162954330444</data>
+</edge>
+<edge source="парка" target="концерт">
+  <data key="d1">0.6290094256401062</data>
+</edge>
+<edge source="парка" target="православный">
+  <data key="d1">0.5657269954681396</data>
+</edge>
+<edge source="парка" target="гриб">
+  <data key="d1">0.5503426790237427</data>
+</edge>
+<edge source="парка" target="злоумышленник">
+  <data key="d1">0.5241065621376038</data>
+</edge>
+<edge source="парка" target="площадь">
+  <data key="d1">0.5736615657806396</data>
+</edge>
+<edge source="парка" target="монастырь">
+  <data key="d1">0.5855300426483154</data>
+</edge>
+<edge source="парка" target="владимир">
+  <data key="d1">0.535277247428894</data>
+</edge>
+<edge source="парка" target="собака">
+  <data key="d1">0.547609806060791</data>
+</edge>
+<edge source="парка" target="замёрзнуть">
+  <data key="d1">0.5059018135070801</data>
+</edge>
+<edge source="парка" target="памятник">
+  <data key="d1">0.6461371183395386</data>
+</edge>
+<edge source="парка" target="циклон">
+  <data key="d1">0.5462692379951477</data>
+</edge>
+<edge source="парка" target="фестиваль">
+  <data key="d1">0.6346372365951538</data>
+</edge>
+<edge source="парка" target="парад">
+  <data key="d1">0.6267915368080139</data>
+</edge>
+<edge source="парка" target="форт">
+  <data key="d1">0.5582522749900818</data>
+</edge>
+<edge source="парка" target="огонь">
+  <data key="d1">0.5521202087402344</data>
+</edge>
+<edge source="парка" target="улица">
+  <data key="d1">0.5601115822792053</data>
+</edge>
+<edge source="парка" target="взрыв">
+  <data key="d1">0.5147991180419922</data>
+</edge>
+<edge source="парка" target="поджечь">
+  <data key="d1">0.5940088033676147</data>
+</edge>
+<edge source="парка" target="выстрел">
+  <data key="d1">0.5647522211074829</data>
+</edge>
+<edge source="парка" target="моряк">
+  <data key="d1">0.595931887626648</data>
+</edge>
+<edge source="парка" target="циклонтино">
+  <data key="d1">0.5113644599914551</data>
+</edge>
+<edge source="парка" target="автобусный">
+  <data key="d1">0.5767932534217834</data>
+</edge>
+<edge source="парка" target="парадное">
+  <data key="d1">0.5281964540481567</data>
+</edge>
+<edge source="парка" target="станция">
+  <data key="d1">0.5776515603065491</data>
+</edge>
+<edge source="парка" target="шторм">
+  <data key="d1">0.5706503987312317</data>
+</edge>
+<edge source="парка" target="советский">
+  <data key="d1">0.5261108875274658</data>
+</edge>
+<edge source="парка" target="супермаркет">
+  <data key="d1">0.6080752611160278</data>
+</edge>
+<edge source="парка" target="монумент">
+  <data key="d1">0.6011631488800049</data>
+</edge>
+<edge source="парка" target="сад">
+  <data key="d1">0.6404399871826172</data>
+</edge>
+<edge source="парка" target="петербург">
+  <data key="d1">0.6358332633972168</data>
+</edge>
+<edge source="парка" target="хоккей">
+  <data key="d1">0.5293658971786499</data>
+</edge>
+<edge source="парка" target="могила">
+  <data key="d1">0.5450363159179688</data>
+</edge>
+<edge source="парка" target="светодиодный">
+  <data key="d1">0.5612269639968872</data>
+</edge>
+<edge source="Иоанновский переулок" target="монастырь">
+  <data key="d1">0.6619</data>
+</edge>
+<edge source="Иоанновский переулок" target="ретрофото">
+  <data key="d1">0.6546</data>
+</edge>
+<edge source="монастырь" target="россиянин">
+  <data key="d1">0.5520304441452026</data>
+</edge>
+<edge source="монастырь" target="пожар">
+  <data key="d1">0.545464277267456</data>
+</edge>
+<edge source="монастырь" target="фортов">
+  <data key="d1">0.5981947183609009</data>
+</edge>
+<edge source="монастырь" target="лёд">
+  <data key="d1">0.5202745199203491</data>
+</edge>
+<edge source="монастырь" target="концерт">
+  <data key="d1">0.6128050088882446</data>
+</edge>
+<edge source="монастырь" target="православный">
+  <data key="d1">0.6405673027038574</data>
+</edge>
+<edge source="монастырь" target="площадь">
+  <data key="d1">0.5097471475601196</data>
+</edge>
+<edge source="монастырь" target="владимир">
+  <data key="d1">0.5079061985015869</data>
+</edge>
+<edge source="монастырь" target="собака">
+  <data key="d1">0.5349751710891724</data>
+</edge>
+<edge source="монастырь" target="замёрзнуть">
+  <data key="d1">0.5466687083244324</data>
+</edge>
+<edge source="монастырь" target="памятник">
+  <data key="d1">0.5282449126243591</data>
+</edge>
+<edge source="монастырь" target="форт">
+  <data key="d1">0.6299920082092285</data>
+</edge>
+<edge source="монастырь" target="огонь">
+  <data key="d1">0.591863214969635</data>
+</edge>
+<edge source="монастырь" target="улица">
+  <data key="d1">0.6108163595199585</data>
+</edge>
+<edge source="монастырь" target="взрыв">
+  <data key="d1">0.508013129234314</data>
+</edge>
+<edge source="монастырь" target="поджечь">
+  <data key="d1">0.5560434460639954</data>
+</edge>
+<edge source="монастырь" target="выстрел">
+  <data key="d1">0.5040069818496704</data>
+</edge>
+<edge source="монастырь" target="ледяной">
+  <data key="d1">0.5147544145584106</data>
+</edge>
+<edge source="монастырь" target="моряк">
+  <data key="d1">0.5711492896080017</data>
+</edge>
+<edge source="монастырь" target="уголовный">
+  <data key="d1">0.5803884863853455</data>
+</edge>
+<edge source="монастырь" target="автобусный">
+  <data key="d1">0.6167269945144653</data>
+</edge>
+<edge source="монастырь" target="крепость">
+  <data key="d1">0.6326310038566589</data>
+</edge>
+<edge source="монастырь" target="дорога">
+  <data key="d1">0.5547834634780884</data>
+</edge>
+<edge source="монастырь" target="станция">
+  <data key="d1">0.5435936450958252</data>
+</edge>
+<edge source="монастырь" target="шторм">
+  <data key="d1">0.5693535208702087</data>
+</edge>
+<edge source="монастырь" target="советский">
+  <data key="d1">0.6862679719924927</data>
+</edge>
+<edge source="монастырь" target="супермаркет">
+  <data key="d1">0.6140964031219482</data>
+</edge>
+<edge source="монастырь" target="монумент">
+  <data key="d1">0.5090245008468628</data>
+</edge>
+<edge source="монастырь" target="сад">
+  <data key="d1">0.5403022766113281</data>
+</edge>
+<edge source="монастырь" target="петербург">
+  <data key="d1">0.6247004270553589</data>
+</edge>
+<edge source="монастырь" target="хоккей">
+  <data key="d1">0.5764142274856567</data>
+</edge>
+<edge source="монастырь" target="ледовый">
+  <data key="d1">0.5334962010383606</data>
+</edge>
+<edge source="монастырь" target="могила">
+  <data key="d1">0.6741194725036621</data>
+</edge>
+<edge source="ретрофото" target="Комендантская площадь">
+  <data key="d1">0.6248</data>
+</edge>
+<edge source="Садовая улица" target="парад">
+  <data key="d1">0.6759</data>
+</edge>
+<edge source="Садовая улица" target="парадное">
+  <data key="d1">0.6361</data>
+</edge>
+<edge source="парад" target="россиянин">
+  <data key="d1">0.6415592432022095</data>
+</edge>
+<edge source="парад" target="пожар">
+  <data key="d1">0.543664813041687</data>
+</edge>
+<edge source="парад" target="фортов">
+  <data key="d1">0.5984619855880737</data>
+</edge>
+<edge source="парад" target="юрьевский">
+  <data key="d1">0.5005884170532227</data>
+</edge>
+<edge source="парад" target="победа">
+  <data key="d1">0.6569552421569824</data>
+</edge>
+<edge source="парад" target="жильё">
+  <data key="d1">0.6343609094619751</data>
+</edge>
+<edge source="парад" target="лёд">
+  <data key="d1">0.566659688949585</data>
+</edge>
+<edge source="парад" target="концерт">
+  <data key="d1">0.6672903299331665</data>
+</edge>
+<edge source="парад" target="православный">
+  <data key="d1">0.5946192741394043</data>
+</edge>
+<edge source="парад" target="гриб">
+  <data key="d1">0.5005958080291748</data>
+</edge>
+<edge source="парад" target="злоумышленник">
+  <data key="d1">0.574794352054596</data>
+</edge>
+<edge source="парад" target="площадь">
+  <data key="d1">0.5189607739448547</data>
+</edge>
+<edge source="парад" target="владимир">
+  <data key="d1">0.5833656787872314</data>
+</edge>
+<edge source="парад" target="собака">
+  <data key="d1">0.6209828853607178</data>
+</edge>
+<edge source="парад" target="замёрзнуть">
+  <data key="d1">0.5898318290710449</data>
+</edge>
+<edge source="парад" target="памятник">
+  <data key="d1">0.5680950880050659</data>
+</edge>
+<edge source="парад" target="фестиваль">
+  <data key="d1">0.6918426156044006</data>
+</edge>
+<edge source="парад" target="форт">
+  <data key="d1">0.5724594593048096</data>
+</edge>
+<edge source="парад" target="огонь">
+  <data key="d1">0.5728088021278381</data>
+</edge>
+<edge source="парад" target="улица">
+  <data key="d1">0.5129929184913635</data>
+</edge>
+<edge source="парад" target="взрыв">
+  <data key="d1">0.6283383369445801</data>
+</edge>
+<edge source="парад" target="поджечь">
+  <data key="d1">0.670860767364502</data>
+</edge>
+<edge source="парад" target="выстрел">
+  <data key="d1">0.6275628805160522</data>
+</edge>
+<edge source="парад" target="ледяной">
+  <data key="d1">0.637029230594635</data>
+</edge>
+<edge source="парад" target="моряк">
+  <data key="d1">0.6765978336334229</data>
+</edge>
+<edge source="парад" target="циклонтино">
+  <data key="d1">0.543720543384552</data>
+</edge>
+<edge source="парад" target="уголовный">
+  <data key="d1">0.5406192541122437</data>
+</edge>
+<edge source="парад" target="автобусный">
+  <data key="d1">0.5601370334625244</data>
+</edge>
+<edge source="парад" target="парадное">
+  <data key="d1">0.6134101152420044</data>
+</edge>
+<edge source="парад" target="шторм">
+  <data key="d1">0.5561391115188599</data>
+</edge>
+<edge source="парад" target="супермаркет">
+  <data key="d1">0.5786851644515991</data>
+</edge>
+<edge source="парад" target="монумент">
+  <data key="d1">0.5470229983329773</data>
+</edge>
+<edge source="парад" target="сад">
+  <data key="d1">0.6415800452232361</data>
+</edge>
+<edge source="парад" target="петербург">
+  <data key="d1">0.6542934775352478</data>
+</edge>
+<edge source="парад" target="хоккей">
+  <data key="d1">0.5300865173339844</data>
+</edge>
+<edge source="парад" target="могила">
+  <data key="d1">0.5543073415756226</data>
+</edge>
+<edge source="парад" target="стрельбище">
+  <data key="d1">0.5537897348403931</data>
+</edge>
+<edge source="парад" target="светодиодный">
+  <data key="d1">0.5167303085327148</data>
+</edge>
+<edge source="парадное" target="жилищный">
+  <data key="d1">0.5616307258605957</data>
+</edge>
+<edge source="парадное" target="фейерверк">
+  <data key="d1">0.5148134231567383</data>
+</edge>
+<edge source="парадное" target="фортов">
+  <data key="d1">0.5112024545669556</data>
+</edge>
+<edge source="парадное" target="питомец">
+  <data key="d1">0.5737076997756958</data>
+</edge>
+<edge source="парадное" target="юрьевский">
+  <data key="d1">0.506229043006897</data>
+</edge>
+<edge source="парадное" target="победа">
+  <data key="d1">0.513530969619751</data>
+</edge>
+<edge source="парадное" target="грибник">
+  <data key="d1">0.5605254173278809</data>
+</edge>
+<edge source="парадное" target="гимназиякронштадтский">
+  <data key="d1">0.5058877468109131</data>
+</edge>
+<edge source="парадное" target="концерт">
+  <data key="d1">0.513640284538269</data>
+</edge>
+<edge source="парадное" target="православный">
+  <data key="d1">0.5211743116378784</data>
+</edge>
+<edge source="парадное" target="гриб">
+  <data key="d1">0.5297349691390991</data>
+</edge>
+<edge source="парадное" target="злоумышленник">
+  <data key="d1">0.5615172982215881</data>
+</edge>
+<edge source="парадное" target="грибной">
+  <data key="d1">0.5773811340332031</data>
+</edge>
+<edge source="парадное" target="собака">
+  <data key="d1">0.5555679798126221</data>
+</edge>
+<edge source="парадное" target="замёрзнуть">
+  <data key="d1">0.5489003658294678</data>
+</edge>
+<edge source="парадное" target="фестиваль">
+  <data key="d1">0.5863708257675171</data>
+</edge>
+<edge source="парадное" target="форт">
+  <data key="d1">0.503028929233551</data>
+</edge>
+<edge source="парадное" target="огонь">
+  <data key="d1">0.5201517343521118</data>
+</edge>
+<edge source="парадное" target="выстрел">
+  <data key="d1">0.5002031326293945</data>
+</edge>
+<edge source="парадное" target="моряк">
+  <data key="d1">0.5221228003501892</data>
+</edge>
+<edge source="парадное" target="циклонтино">
+  <data key="d1">0.5317155122756958</data>
+</edge>
+<edge source="парадное" target="уголовный">
+  <data key="d1">0.5084160566329956</data>
+</edge>
+<edge source="парадное" target="мошенник">
+  <data key="d1">0.5215116739273071</data>
+</edge>
+<edge source="парадное" target="фашистский">
+  <data key="d1">0.5492918491363525</data>
+</edge>
+<edge source="парадное" target="догхантеры">
+  <data key="d1">0.5022860169410706</data>
+</edge>
+<edge source="парадное" target="пламенипредположительный">
+  <data key="d1">0.5002804398536682</data>
+</edge>
+<edge source="парадное" target="жилец">
+  <data key="d1">0.5557973384857178</data>
+</edge>
+<edge source="парадное" target="светильник">
+  <data key="d1">0.5957869291305542</data>
+</edge>
+<edge source="парадное" target="петербург">
+  <data key="d1">0.5426954627037048</data>
+</edge>
+<edge source="парадное" target="стрельбище">
+  <data key="d1">0.5925302505493164</data>
+</edge>
+<edge source="парадное" target="светодиодный">
+  <data key="d1">0.5774044990539551</data>
+</edge>
+<edge source="Кронштадтская площадь" target="океанаспециалист">
+  <data key="d1">0.6374</data>
+</edge>
+<edge source="океанаспециалист" target="юрьевский">
+  <data key="d1">0.5085843801498413</data>
+</edge>
+<edge source="океанаспециалист" target="православный">
+  <data key="d1">0.5055735111236572</data>
+</edge>
+<edge source="океанаспециалист" target="площадь">
+  <data key="d1">0.5095094442367554</data>
+</edge>
+<edge source="океанаспециалист" target="замёрзнуть">
+  <data key="d1">0.500088632106781</data>
+</edge>
+<edge source="океанаспециалист" target="метро">
+  <data key="d1">0.506714940071106</data>
+</edge>
+<edge source="океанаспециалист" target="циклонтино">
+  <data key="d1">0.5300300121307373</data>
+</edge>
+<edge source="океанаспециалист" target="петербург">
+  <data key="d1">0.5061460137367249</data>
+</edge>
+<edge source="Выборгское шоссе" target="грибник">
+  <data key="d1">0.772</data>
+</edge>
+<edge source="Выборгское шоссе" target="грибной">
+  <data key="d1">0.7199</data>
+</edge>
+<edge source="Выборгское шоссе" target="гриб">
+  <data key="d1">0.7388</data>
+</edge>
+<edge source="грибник" target="питомец">
+  <data key="d1">0.5306010842323303</data>
+</edge>
+<edge source="грибник" target="гриб">
+  <data key="d1">0.7152563333511353</data>
+</edge>
+<edge source="грибник" target="владимир">
+  <data key="d1">0.5102895498275757</data>
+</edge>
+<edge source="грибник" target="грибной">
+  <data key="d1">0.670452356338501</data>
+</edge>
+<edge source="грибник" target="циклон">
+  <data key="d1">0.5727903842926025</data>
+</edge>
+<edge source="грибник" target="циклонтино">
+  <data key="d1">0.542798638343811</data>
+</edge>
+<edge source="грибник" target="жилец">
+  <data key="d1">0.5498623847961426</data>
+</edge>
+<edge source="грибник" target="светильник">
+  <data key="d1">0.6134833097457886</data>
+</edge>
+<edge source="грибник" target="петербург">
+  <data key="d1">0.5020642280578613</data>
+</edge>
+<edge source="грибник" target="могила">
+  <data key="d1">0.506583034992218</data>
+</edge>
+<edge source="грибник" target="стрельбище">
+  <data key="d1">0.5554494857788086</data>
+</edge>
+<edge source="грибной" target="жилищный">
+  <data key="d1">0.5032438039779663</data>
+</edge>
+<edge source="грибной" target="питомец">
+  <data key="d1">0.5161113142967224</data>
+</edge>
+<edge source="грибной" target="гриб">
+  <data key="d1">0.597655177116394</data>
+</edge>
+<edge source="грибной" target="жилец">
+  <data key="d1">0.5034860968589783</data>
+</edge>
+<edge source="грибной" target="светодиодный">
+  <data key="d1">0.50772625207901</data>
+</edge>
+<edge source="гриб" target="пожар">
+  <data key="d1">0.5784332752227783</data>
+</edge>
+<edge source="гриб" target="питомец">
+  <data key="d1">0.544499933719635</data>
+</edge>
+<edge source="гриб" target="концерт">
+  <data key="d1">0.5467593669891357</data>
+</edge>
+<edge source="гриб" target="православный">
+  <data key="d1">0.6383155584335327</data>
+</edge>
+<edge source="гриб" target="злоумышленник">
+  <data key="d1">0.6028256416320801</data>
+</edge>
+<edge source="гриб" target="онкологический">
+  <data key="d1">0.5146818161010742</data>
+</edge>
+<edge source="гриб" target="площадь">
+  <data key="d1">0.5419864058494568</data>
+</edge>
+<edge source="гриб" target="владимир">
+  <data key="d1">0.5975874662399292</data>
+</edge>
+<edge source="гриб" target="собака">
+  <data key="d1">0.5785638093948364</data>
+</edge>
+<edge source="гриб" target="памятник">
+  <data key="d1">0.5260321497917175</data>
+</edge>
+<edge source="гриб" target="циклон">
+  <data key="d1">0.7064720392227173</data>
+</edge>
+<edge source="гриб" target="фестиваль">
+  <data key="d1">0.5047071576118469</data>
+</edge>
+<edge source="гриб" target="огонь">
+  <data key="d1">0.5085604786872864</data>
+</edge>
+<edge source="гриб" target="улица">
+  <data key="d1">0.5669263005256653</data>
+</edge>
+<edge source="гриб" target="располагаться">
+  <data key="d1">0.6349833011627197</data>
+</edge>
+<edge source="гриб" target="моряк">
+  <data key="d1">0.5247102975845337</data>
+</edge>
+<edge source="гриб" target="циклонтино">
+  <data key="d1">0.5898950695991516</data>
+</edge>
+<edge source="гриб" target="уголовный">
+  <data key="d1">0.5840672254562378</data>
+</edge>
+<edge source="гриб" target="автобусный">
+  <data key="d1">0.5498731136322021</data>
+</edge>
+<edge source="гриб" target="станция">
+  <data key="d1">0.5330755710601807</data>
+</edge>
+<edge source="гриб" target="шторм">
+  <data key="d1">0.5435436367988586</data>
+</edge>
+<edge source="гриб" target="советский">
+  <data key="d1">0.5361050963401794</data>
+</edge>
+<edge source="гриб" target="жилец">
+  <data key="d1">0.5239970684051514</data>
+</edge>
+<edge source="гриб" target="супермаркет">
+  <data key="d1">0.613305926322937</data>
+</edge>
+<edge source="гриб" target="монумент">
+  <data key="d1">0.5044028162956238</data>
+</edge>
+<edge source="гриб" target="петербург">
+  <data key="d1">0.5989714860916138</data>
+</edge>
+<edge source="гриб" target="хоккей">
+  <data key="d1">0.6190733313560486</data>
+</edge>
+<edge source="гриб" target="ледовый">
+  <data key="d1">0.5510791540145874</data>
+</edge>
+<edge source="гриб" target="могила">
+  <data key="d1">0.6134860515594482</data>
+</edge>
+<edge source="гриб" target="стрельбище">
+  <data key="d1">0.5205866098403931</data>
+</edge>
+<edge source="улица Зосимова" target="юрьевский">
+  <data key="d1">0.6362</data>
+</edge>
+<edge source="улица Зосимова" target="советский">
+  <data key="d1">0.6169</data>
+</edge>
+<edge source="юрьевский" target="россиянин">
+  <data key="d1">0.6086784601211548</data>
+</edge>
+<edge source="юрьевский" target="жилищный">
+  <data key="d1">0.5112040042877197</data>
+</edge>
+<edge source="юрьевский" target="пожар">
+  <data key="d1">0.5331846475601196</data>
+</edge>
+<edge source="юрьевский" target="питомец">
+  <data key="d1">0.571675181388855</data>
+</edge>
+<edge source="юрьевский" target="гимназиякронштадтский">
+  <data key="d1">0.6197283267974854</data>
+</edge>
+<edge source="юрьевский" target="лёд">
+  <data key="d1">0.5021371245384216</data>
+</edge>
+<edge source="юрьевский" target="концерт">
+  <data key="d1">0.5896008014678955</data>
+</edge>
+<edge source="юрьевский" target="православный">
+  <data key="d1">0.6296004056930542</data>
+</edge>
+<edge source="юрьевский" target="злоумышленник">
+  <data key="d1">0.5307468175888062</data>
+</edge>
+<edge source="юрьевский" target="площадь">
+  <data key="d1">0.5974744558334351</data>
+</edge>
+<edge source="юрьевский" target="владимир">
+  <data key="d1">0.6198867559432983</data>
+</edge>
+<edge source="юрьевский" target="замёрзнуть">
+  <data key="d1">0.5653674602508545</data>
+</edge>
+<edge source="юрьевский" target="памятник">
+  <data key="d1">0.5584993958473206</data>
+</edge>
+<edge source="юрьевский" target="фестиваль">
+  <data key="d1">0.553674042224884</data>
+</edge>
+<edge source="юрьевский" target="форт">
+  <data key="d1">0.5121316313743591</data>
+</edge>
+<edge source="юрьевский" target="улица">
+  <data key="d1">0.5758781433105469</data>
+</edge>
+<edge source="юрьевский" target="взрыв">
+  <data key="d1">0.5131080150604248</data>
+</edge>
+<edge source="юрьевский" target="поджечь">
+  <data key="d1">0.5007894039154053</data>
+</edge>
+<edge source="юрьевский" target="располагаться">
+  <data key="d1">0.5634665489196777</data>
+</edge>
+<edge source="юрьевский" target="ледяной">
+  <data key="d1">0.5274877548217773</data>
+</edge>
+<edge source="юрьевский" target="моряк">
+  <data key="d1">0.5348669290542603</data>
+</edge>
+<edge source="юрьевский" target="циклонтино">
+  <data key="d1">0.6143959760665894</data>
+</edge>
+<edge source="юрьевский" target="уголовный">
+  <data key="d1">0.5113615989685059</data>
+</edge>
+<edge source="юрьевский" target="алексеевич">
+  <data key="d1">0.5089305639266968</data>
+</edge>
+<edge source="юрьевский" target="автобусный">
+  <data key="d1">0.5144830942153931</data>
+</edge>
+<edge source="юрьевский" target="фашистский">
+  <data key="d1">0.5809320211410522</data>
+</edge>
+<edge source="юрьевский" target="дорога">
+  <data key="d1">0.5199643969535828</data>
+</edge>
+<edge source="юрьевский" target="советский">
+  <data key="d1">0.5303559899330139</data>
+</edge>
+<edge source="юрьевский" target="жилец">
+  <data key="d1">0.5270146131515503</data>
+</edge>
+<edge source="юрьевский" target="светильник">
+  <data key="d1">0.6061218976974487</data>
+</edge>
+<edge source="юрьевский" target="супермаркет">
+  <data key="d1">0.5128351449966431</data>
+</edge>
+<edge source="юрьевский" target="монумент">
+  <data key="d1">0.5573692917823792</data>
+</edge>
+<edge source="юрьевский" target="сад">
+  <data key="d1">0.5417783856391907</data>
+</edge>
+<edge source="юрьевский" target="петербург">
+  <data key="d1">0.6552772521972656</data>
+</edge>
+<edge source="юрьевский" target="хоккей">
+  <data key="d1">0.6110539436340332</data>
+</edge>
+<edge source="юрьевский" target="могила">
+  <data key="d1">0.521092414855957</data>
+</edge>
+<edge source="юрьевский" target="стрельбище">
+  <data key="d1">0.5666089653968811</data>
+</edge>
+<edge source="советский" target="Николаевский проспект">
+  <data key="d1">0.6718</data>
+</edge>
+<edge source="советский" target="россиянин">
+  <data key="d1">0.5396420359611511</data>
+</edge>
+<edge source="советский" target="пожар">
+  <data key="d1">0.5447126626968384</data>
+</edge>
+<edge source="советский" target="концерт">
+  <data key="d1">0.5414477586746216</data>
+</edge>
+<edge source="советский" target="православный">
+  <data key="d1">0.6822985410690308</data>
+</edge>
+<edge source="советский" target="злоумышленник">
+  <data key="d1">0.5071555376052856</data>
+</edge>
+<edge source="советский" target="площадь">
+  <data key="d1">0.5843116641044617</data>
+</edge>
+<edge source="советский" target="владимир">
+  <data key="d1">0.5675292611122131</data>
+</edge>
+<edge source="советский" target="собака">
+  <data key="d1">0.5397065877914429</data>
+</edge>
+<edge source="советский" target="памятник">
+  <data key="d1">0.5129218101501465</data>
+</edge>
+<edge source="советский" target="циклон">
+  <data key="d1">0.5063596367835999</data>
+</edge>
+<edge source="советский" target="форт">
+  <data key="d1">0.5764159560203552</data>
+</edge>
+<edge source="советский" target="огонь">
+  <data key="d1">0.5759269595146179</data>
+</edge>
+<edge source="советский" target="метро">
+  <data key="d1">0.540645182132721</data>
+</edge>
+<edge source="советский" target="улица">
+  <data key="d1">0.5835657119750977</data>
+</edge>
+<edge source="советский" target="располагаться">
+  <data key="d1">0.5749368667602539</data>
+</edge>
+<edge source="советский" target="моряк">
+  <data key="d1">0.5547915697097778</data>
+</edge>
+<edge source="советский" target="уголовный">
+  <data key="d1">0.5414861440658569</data>
+</edge>
+<edge source="советский" target="автобусный">
+  <data key="d1">0.5682876110076904</data>
+</edge>
+<edge source="советский" target="дорога">
+  <data key="d1">0.5434240102767944</data>
+</edge>
+<edge source="советский" target="станция">
+  <data key="d1">0.5394170880317688</data>
+</edge>
+<edge source="советский" target="шторм">
+  <data key="d1">0.5012587308883667</data>
+</edge>
+<edge source="советский" target="светильник">
+  <data key="d1">0.5087180733680725</data>
+</edge>
+<edge source="советский" target="супермаркет">
+  <data key="d1">0.5612353682518005</data>
+</edge>
+<edge source="советский" target="монумент">
+  <data key="d1">0.52057945728302</data>
+</edge>
+<edge source="советский" target="сад">
+  <data key="d1">0.5066462755203247</data>
+</edge>
+<edge source="советский" target="петербург">
+  <data key="d1">0.6168092489242554</data>
+</edge>
+<edge source="советский" target="хоккей">
+  <data key="d1">0.6190500259399414</data>
+</edge>
+<edge source="советский" target="ледовый">
+  <data key="d1">0.5363082885742188</data>
+</edge>
+<edge source="советский" target="могила">
+  <data key="d1">0.6170738935470581</data>
+</edge>
+<edge source="Приморское шоссе" target="пробка">
+  <data key="d1">0.6237</data>
+</edge>
+<edge source="пробка" target="Приморский путепровод">
+  <data key="d1">0.6038</data>
+</edge>
+<edge source="пробка" target="жильё">
+  <data key="d1">0.5417039394378662</data>
+</edge>
+<edge source="пробка" target="лёд">
+  <data key="d1">0.6419352293014526</data>
+</edge>
+<edge source="пробка" target="концерт">
+  <data key="d1">0.509824275970459</data>
+</edge>
+<edge source="пробка" target="православный">
+  <data key="d1">0.7225003242492676</data>
+</edge>
+<edge source="пробка" target="злоумышленник">
+  <data key="d1">0.5881397724151611</data>
+</edge>
+<edge source="пробка" target="площадь">
+  <data key="d1">0.6874890327453613</data>
+</edge>
+<edge source="пробка" target="памятник">
+  <data key="d1">0.5636720061302185</data>
+</edge>
+<edge source="пробка" target="метро">
+  <data key="d1">0.7428455352783203</data>
+</edge>
+<edge source="пробка" target="улица">
+  <data key="d1">0.6452685594558716</data>
+</edge>
+<edge source="пробка" target="располагаться">
+  <data key="d1">0.6445620059967041</data>
+</edge>
+<edge source="пробка" target="моряк">
+  <data key="d1">0.5950919985771179</data>
+</edge>
+<edge source="пробка" target="уголовный">
+  <data key="d1">0.5177384614944458</data>
+</edge>
+<edge source="пробка" target="автобусный">
+  <data key="d1">0.5645073652267456</data>
+</edge>
+<edge source="пробка" target="дорога">
+  <data key="d1">0.5788345336914062</data>
+</edge>
+<edge source="пробка" target="супермаркет">
+  <data key="d1">0.5877544283866882</data>
+</edge>
+<edge source="пробка" target="монумент">
+  <data key="d1">0.5156024098396301</data>
+</edge>
+<edge source="пробка" target="петербург">
+  <data key="d1">0.592455267906189</data>
+</edge>
+<edge source="пробка" target="хоккей">
+  <data key="d1">0.5305564999580383</data>
+</edge>
+<edge source="Якорная площадь" target="фестиваль">
+  <data key="d1">0.694</data>
+</edge>
+<edge source="фестиваль" target="Гороховая улица">
+  <data key="d1">0.6307</data>
+</edge>
+<edge source="фестиваль" target="улица Сургина">
+  <data key="d1">0.6102</data>
+</edge>
+<edge source="фестиваль" target="россиянин">
+  <data key="d1">0.6181650161743164</data>
+</edge>
+<edge source="фестиваль" target="фейерверк">
+  <data key="d1">0.5359669327735901</data>
+</edge>
+<edge source="фестиваль" target="фортов">
+  <data key="d1">0.6147594451904297</data>
+</edge>
+<edge source="фестиваль" target="питомец">
+  <data key="d1">0.5618302822113037</data>
+</edge>
+<edge source="фестиваль" target="победа">
+  <data key="d1">0.542426586151123</data>
+</edge>
+<edge source="фестиваль" target="жильё">
+  <data key="d1">0.5205389261245728</data>
+</edge>
+<edge source="фестиваль" target="лёд">
+  <data key="d1">0.5118039846420288</data>
+</edge>
+<edge source="фестиваль" target="концерт">
+  <data key="d1">0.6817896366119385</data>
+</edge>
+<edge source="фестиваль" target="православный">
+  <data key="d1">0.5700754523277283</data>
+</edge>
+<edge source="фестиваль" target="злоумышленник">
+  <data key="d1">0.5176779627799988</data>
+</edge>
+<edge source="фестиваль" target="площадь">
+  <data key="d1">0.5290583968162537</data>
+</edge>
+<edge source="фестиваль" target="владимир">
+  <data key="d1">0.5547378063201904</data>
+</edge>
+<edge source="фестиваль" target="собака">
+  <data key="d1">0.555607795715332</data>
+</edge>
+<edge source="фестиваль" target="замёрзнуть">
+  <data key="d1">0.5718561410903931</data>
+</edge>
+<edge source="фестиваль" target="памятник">
+  <data key="d1">0.6111411452293396</data>
+</edge>
+<edge source="фестиваль" target="циклон">
+  <data key="d1">0.5211696028709412</data>
+</edge>
+<edge source="фестиваль" target="форт">
+  <data key="d1">0.5780978202819824</data>
+</edge>
+<edge source="фестиваль" target="огонь">
+  <data key="d1">0.5544849634170532</data>
+</edge>
+<edge source="фестиваль" target="улица">
+  <data key="d1">0.5500531196594238</data>
+</edge>
+<edge source="фестиваль" target="взрыв">
+  <data key="d1">0.5331423878669739</data>
+</edge>
+<edge source="фестиваль" target="поджечь">
+  <data key="d1">0.6449291706085205</data>
+</edge>
+<edge source="фестиваль" target="выстрел">
+  <data key="d1">0.5462683439254761</data>
+</edge>
+<edge source="фестиваль" target="располагаться">
+  <data key="d1">0.5056616067886353</data>
+</edge>
+<edge source="фестиваль" target="ледяной">
+  <data key="d1">0.5449107885360718</data>
+</edge>
+<edge source="фестиваль" target="моряк">
+  <data key="d1">0.602864146232605</data>
+</edge>
+<edge source="фестиваль" target="циклонтино">
+  <data key="d1">0.5512202382087708</data>
+</edge>
+<edge source="фестиваль" target="уголовный">
+  <data key="d1">0.5484912991523743</data>
+</edge>
+<edge source="фестиваль" target="автобусный">
+  <data key="d1">0.5419224500656128</data>
+</edge>
+<edge source="фестиваль" target="станция">
+  <data key="d1">0.5179598331451416</data>
+</edge>
+<edge source="фестиваль" target="шторм">
+  <data key="d1">0.5860685110092163</data>
+</edge>
+<edge source="фестиваль" target="жилец">
+  <data key="d1">0.5008918046951294</data>
+</edge>
+<edge source="фестиваль" target="супермаркет">
+  <data key="d1">0.5401837825775146</data>
+</edge>
+<edge source="фестиваль" target="монумент">
+  <data key="d1">0.6389411091804504</data>
+</edge>
+<edge source="фестиваль" target="сад">
+  <data key="d1">0.6253246665000916</data>
+</edge>
+<edge source="фестиваль" target="петербург">
+  <data key="d1">0.6514562368392944</data>
+</edge>
+<edge source="фестиваль" target="хоккей">
+  <data key="d1">0.5637064576148987</data>
+</edge>
+<edge source="фестиваль" target="могила">
+  <data key="d1">0.5146389603614807</data>
+</edge>
+<edge source="фестиваль" target="стрельбище">
+  <data key="d1">0.5865137577056885</data>
+</edge>
+<edge source="Манежный переулок" target="светодиодный">
+  <data key="d1">0.6766</data>
+</edge>
+<edge source="Манежный переулок" target="светильник">
+  <data key="d1">0.6187</data>
+</edge>
+<edge source="светодиодный" target="россиянин">
+  <data key="d1">0.5088006258010864</data>
+</edge>
+<edge source="светодиодный" target="жилищный">
+  <data key="d1">0.7085217237472534</data>
+</edge>
+<edge source="светодиодный" target="фортов">
+  <data key="d1">0.5083661675453186</data>
+</edge>
+<edge source="светодиодный" target="концерт">
+  <data key="d1">0.5487321615219116</data>
+</edge>
+<edge source="светодиодный" target="православный">
+  <data key="d1">0.5241246223449707</data>
+</edge>
+<edge source="светодиодный" target="казарма">
+  <data key="d1">0.5214992761611938</data>
+</edge>
+<edge source="светодиодный" target="собака">
+  <data key="d1">0.5036518573760986</data>
+</edge>
+<edge source="светодиодный" target="памятник">
+  <data key="d1">0.5508328676223755</data>
+</edge>
+<edge source="светодиодный" target="огонь">
+  <data key="d1">0.5027889013290405</data>
+</edge>
+<edge source="светодиодный" target="взрыв">
+  <data key="d1">0.5367739796638489</data>
+</edge>
+<edge source="светодиодный" target="поджечь">
+  <data key="d1">0.5228845477104187</data>
+</edge>
+<edge source="светодиодный" target="циклонтино">
+  <data key="d1">0.5381784439086914</data>
+</edge>
+<edge source="светодиодный" target="пламенипредположительный">
+  <data key="d1">0.5128571391105652</data>
+</edge>
+<edge source="светодиодный" target="светильник">
+  <data key="d1">0.5842516422271729</data>
+</edge>
+<edge source="светодиодный" target="сад">
+  <data key="d1">0.5327677726745605</data>
+</edge>
+<edge source="светодиодный" target="петербург">
+  <data key="d1">0.5672708749771118</data>
+</edge>
+<edge source="светильник" target="россиянин">
+  <data key="d1">0.5099624395370483</data>
+</edge>
+<edge source="светильник" target="жилищный">
+  <data key="d1">0.5933759212493896</data>
+</edge>
+<edge source="светильник" target="фейерверк">
+  <data key="d1">0.5275341868400574</data>
+</edge>
+<edge source="светильник" target="питомец">
+  <data key="d1">0.54935622215271</data>
+</edge>
+<edge source="светильник" target="жильё">
+  <data key="d1">0.529491126537323</data>
+</edge>
+<edge source="светильник" target="гимназиякронштадтский">
+  <data key="d1">0.5500525832176208</data>
+</edge>
+<edge source="светильник" target="лёд">
+  <data key="d1">0.5345464944839478</data>
+</edge>
+<edge source="светильник" target="концерт">
+  <data key="d1">0.5086983442306519</data>
+</edge>
+<edge source="светильник" target="православный">
+  <data key="d1">0.589293360710144</data>
+</edge>
+<edge source="светильник" target="злоумышленник">
+  <data key="d1">0.6007814407348633</data>
+</edge>
+<edge source="светильник" target="площадь">
+  <data key="d1">0.5369510650634766</data>
+</edge>
+<edge source="светильник" target="казарма">
+  <data key="d1">0.5023231506347656</data>
+</edge>
+<edge source="светильник" target="владимир">
+  <data key="d1">0.5411992073059082</data>
+</edge>
+<edge source="светильник" target="замёрзнуть">
+  <data key="d1">0.5146985054016113</data>
+</edge>
+<edge source="светильник" target="метро">
+  <data key="d1">0.5467272996902466</data>
+</edge>
+<edge source="светильник" target="располагаться">
+  <data key="d1">0.5573686361312866</data>
+</edge>
+<edge source="светильник" target="моряк">
+  <data key="d1">0.5233798623085022</data>
+</edge>
+<edge source="светильник" target="циклонтино">
+  <data key="d1">0.59446120262146</data>
+</edge>
+<edge source="светильник" target="уголовный">
+  <data key="d1">0.5071390271186829</data>
+</edge>
+<edge source="светильник" target="автобусный">
+  <data key="d1">0.5699885487556458</data>
+</edge>
+<edge source="светильник" target="мошенник">
+  <data key="d1">0.5641264319419861</data>
+</edge>
+<edge source="светильник" target="фашистский">
+  <data key="d1">0.5846831798553467</data>
+</edge>
+<edge source="светильник" target="дорога">
+  <data key="d1">0.5007370114326477</data>
+</edge>
+<edge source="светильник" target="жилец">
+  <data key="d1">0.5847984552383423</data>
+</edge>
+<edge source="светильник" target="петербург">
+  <data key="d1">0.5939278602600098</data>
+</edge>
+<edge source="светильник" target="хоккей">
+  <data key="d1">0.5196172595024109</data>
+</edge>
+<edge source="светильник" target="стрельбище">
+  <data key="d1">0.5926562547683716</data>
+</edge>
+<edge source="Белорусская улица" target="россиянин">
+  <data key="d1">0.636</data>
+</edge>
+<edge source="Белорусская улица" target="мошенник">
+  <data key="d1">0.6041</data>
+</edge>
+<edge source="Белорусская улица" target="злоумышленник">
+  <data key="d1">0.6024</data>
+</edge>
+<edge source="россиянин" target="фейерверк">
+  <data key="d1">0.5182272791862488</data>
+</edge>
+<edge source="россиянин" target="пожар">
+  <data key="d1">0.5197620987892151</data>
+</edge>
+<edge source="россиянин" target="фортов">
+  <data key="d1">0.5805683732032776</data>
+</edge>
+<edge source="россиянин" target="победа">
+  <data key="d1">0.6155636310577393</data>
+</edge>
+<edge source="россиянин" target="жильё">
+  <data key="d1">0.5342101454734802</data>
+</edge>
+<edge source="россиянин" target="лёд">
+  <data key="d1">0.5570675134658813</data>
+</edge>
+<edge source="россиянин" target="концерт">
+  <data key="d1">0.6986281871795654</data>
+</edge>
+<edge source="россиянин" target="православный">
+  <data key="d1">0.5913960933685303</data>
+</edge>
+<edge source="россиянин" target="злоумышленник">
+  <data key="d1">0.5409824848175049</data>
+</edge>
+<edge source="россиянин" target="площадь">
+  <data key="d1">0.5570448637008667</data>
+</edge>
+<edge source="россиянин" target="владимир">
+  <data key="d1">0.5655468106269836</data>
+</edge>
+<edge source="россиянин" target="собака">
+  <data key="d1">0.5433739423751831</data>
+</edge>
+<edge source="россиянин" target="замёрзнуть">
+  <data key="d1">0.6138098239898682</data>
+</edge>
+<edge source="россиянин" target="памятник">
+  <data key="d1">0.5918105840682983</data>
+</edge>
+<edge source="россиянин" target="форт">
+  <data key="d1">0.5563258528709412</data>
+</edge>
+<edge source="россиянин" target="метро">
+  <data key="d1">0.513984739780426</data>
+</edge>
+<edge source="россиянин" target="улица">
+  <data key="d1">0.5601145029067993</data>
+</edge>
+<edge source="россиянин" target="взрыв">
+  <data key="d1">0.6993394494056702</data>
+</edge>
+<edge source="россиянин" target="поджечь">
+  <data key="d1">0.7146730422973633</data>
+</edge>
+<edge source="россиянин" target="выстрел">
+  <data key="d1">0.5070484280586243</data>
+</edge>
+<edge source="россиянин" target="ледяной">
+  <data key="d1">0.6843501329421997</data>
+</edge>
+<edge source="россиянин" target="моряк">
+  <data key="d1">0.5855919122695923</data>
+</edge>
+<edge source="россиянин" target="циклонтино">
+  <data key="d1">0.5222330689430237</data>
+</edge>
+<edge source="россиянин" target="уголовный">
+  <data key="d1">0.5889391899108887</data>
+</edge>
+<edge source="россиянин" target="автобусный">
+  <data key="d1">0.5473297238349915</data>
+</edge>
+<edge source="россиянин" target="фашистский">
+  <data key="d1">0.5622867345809937</data>
+</edge>
+<edge source="россиянин" target="супермаркет">
+  <data key="d1">0.5411631464958191</data>
+</edge>
+<edge source="россиянин" target="монумент">
+  <data key="d1">0.576392412185669</data>
+</edge>
+<edge source="россиянин" target="сад">
+  <data key="d1">0.6439321041107178</data>
+</edge>
+<edge source="россиянин" target="петербург">
+  <data key="d1">0.6809419393539429</data>
+</edge>
+<edge source="россиянин" target="хоккей">
+  <data key="d1">0.5229155421257019</data>
+</edge>
+<edge source="россиянин" target="стрельбище">
+  <data key="d1">0.5322486758232117</data>
+</edge>
+<edge source="мошенник" target="фейерверк">
+  <data key="d1">0.6262746453285217</data>
+</edge>
+<edge source="мошенник" target="питомец">
+  <data key="d1">0.5850046873092651</data>
+</edge>
+<edge source="мошенник" target="гимназиякронштадтский">
+  <data key="d1">0.5152876377105713</data>
+</edge>
+<edge source="мошенник" target="злоумышленник">
+  <data key="d1">0.5763730406761169</data>
+</edge>
+<edge source="мошенник" target="казарма">
+  <data key="d1">0.5215749740600586</data>
+</edge>
+<edge source="мошенник" target="собака">
+  <data key="d1">0.5135359764099121</data>
+</edge>
+<edge source="мошенник" target="замёрзнуть">
+  <data key="d1">0.5112943053245544</data>
+</edge>
+<edge source="мошенник" target="метро">
+  <data key="d1">0.507042646408081</data>
+</edge>
+<edge source="мошенник" target="моряк">
+  <data key="d1">0.5574028491973877</data>
+</edge>
+<edge source="мошенник" target="циклонтино">
+  <data key="d1">0.557550847530365</data>
+</edge>
+<edge source="мошенник" target="обвиняться">
+  <data key="d1">0.5439136028289795</data>
+</edge>
+<edge source="мошенник" target="фашистский">
+  <data key="d1">0.527825653553009</data>
+</edge>
+<edge source="мошенник" target="жилец">
+  <data key="d1">0.5787273645401001</data>
+</edge>
+<edge source="мошенник" target="монумент">
+  <data key="d1">0.5001307725906372</data>
+</edge>
+<edge source="мошенник" target="штормовой">
+  <data key="d1">0.5001437067985535</data>
+</edge>
+<edge source="мошенник" target="петербург">
+  <data key="d1">0.5159745216369629</data>
+</edge>
+<edge source="мошенник" target="стрельбище">
+  <data key="d1">0.5769060850143433</data>
+</edge>
+<edge source="злоумышленник" target="жилищный">
+  <data key="d1">0.5240256190299988</data>
+</edge>
+<edge source="злоумышленник" target="фейерверк">
+  <data key="d1">0.5521589517593384</data>
+</edge>
+<edge source="злоумышленник" target="пожар">
+  <data key="d1">0.6516222357749939</data>
+</edge>
+<edge source="злоумышленник" target="питомец">
+  <data key="d1">0.5544835329055786</data>
+</edge>
+<edge source="злоумышленник" target="победа">
+  <data key="d1">0.5038036704063416</data>
+</edge>
+<edge source="злоумышленник" target="жильё">
+  <data key="d1">0.5568768978118896</data>
+</edge>
+<edge source="злоумышленник" target="лёд">
+  <data key="d1">0.6364307403564453</data>
+</edge>
+<edge source="злоумышленник" target="концерт">
+  <data key="d1">0.5886515974998474</data>
+</edge>
+<edge source="злоумышленник" target="православный">
+  <data key="d1">0.7159607410430908</data>
+</edge>
+<edge source="злоумышленник" target="онкологический">
+  <data key="d1">0.5257880687713623</data>
+</edge>
+<edge source="злоумышленник" target="площадь">
+  <data key="d1">0.6159193515777588</data>
+</edge>
+<edge source="злоумышленник" target="казарма">
+  <data key="d1">0.5210848450660706</data>
+</edge>
+<edge source="злоумышленник" target="владимир">
+  <data key="d1">0.7084715366363525</data>
+</edge>
+<edge source="злоумышленник" target="собака">
+  <data key="d1">0.5424357652664185</data>
+</edge>
+<edge source="злоумышленник" target="замёрзнуть">
+  <data key="d1">0.5573243498802185</data>
+</edge>
+<edge source="злоумышленник" target="памятник">
+  <data key="d1">0.6100587248802185</data>
+</edge>
+<edge source="злоумышленник" target="циклон">
+  <data key="d1">0.614175021648407</data>
+</edge>
+<edge source="злоумышленник" target="огонь">
+  <data key="d1">0.5609822273254395</data>
+</edge>
+<edge source="злоумышленник" target="метро">
+  <data key="d1">0.6436792016029358</data>
+</edge>
+<edge source="злоумышленник" target="улица">
+  <data key="d1">0.6208212971687317</data>
+</edge>
+<edge source="злоумышленник" target="взрыв">
+  <data key="d1">0.6241849064826965</data>
+</edge>
+<edge source="злоумышленник" target="поджечь">
+  <data key="d1">0.5456317663192749</data>
+</edge>
+<edge source="злоумышленник" target="выстрел">
+  <data key="d1">0.5265583395957947</data>
+</edge>
+<edge source="злоумышленник" target="располагаться">
+  <data key="d1">0.6745193004608154</data>
+</edge>
+<edge source="злоумышленник" target="ледяной">
+  <data key="d1">0.5351216793060303</data>
+</edge>
+<edge source="злоумышленник" target="моряк">
+  <data key="d1">0.7316510081291199</data>
+</edge>
+<edge source="злоумышленник" target="циклонтино">
+  <data key="d1">0.6203739047050476</data>
+</edge>
+<edge source="злоумышленник" target="уголовный">
+  <data key="d1">0.7112641334533691</data>
+</edge>
+<edge source="злоумышленник" target="автобусный">
+  <data key="d1">0.646871030330658</data>
+</edge>
+<edge source="злоумышленник" target="фашистский">
+  <data key="d1">0.5815261602401733</data>
+</edge>
+<edge source="злоумышленник" target="дорога">
+  <data key="d1">0.5913938283920288</data>
+</edge>
+<edge source="злоумышленник" target="жилец">
+  <data key="d1">0.5717777013778687</data>
+</edge>
+<edge source="злоумышленник" target="супермаркет">
+  <data key="d1">0.6029711365699768</data>
+</edge>
+<edge source="злоумышленник" target="монумент">
+  <data key="d1">0.6018944978713989</data>
+</edge>
+<edge source="злоумышленник" target="сад">
+  <data key="d1">0.5957579016685486</data>
+</edge>
+<edge source="злоумышленник" target="петербург">
+  <data key="d1">0.6904485821723938</data>
+</edge>
+<edge source="злоумышленник" target="хоккей">
+  <data key="d1">0.6373096704483032</data>
+</edge>
+<edge source="злоумышленник" target="ледовый">
+  <data key="d1">0.5866314768791199</data>
+</edge>
+<edge source="злоумышленник" target="могила">
+  <data key="d1">0.5330007076263428</data>
+</edge>
+<edge source="злоумышленник" target="стрельбище">
+  <data key="d1">0.6570618152618408</data>
+</edge>
+<edge source="улица Бугры" target="фейерверк">
+  <data key="d1">0.7111</data>
+</edge>
+<edge source="улица Бугры" target="взрыв">
+  <data key="d1">0.6436</data>
+</edge>
+<edge source="фейерверк" target="пожар">
+  <data key="d1">0.50980144739151</data>
+</edge>
+<edge source="фейерверк" target="питомец">
+  <data key="d1">0.5262640118598938</data>
+</edge>
+<edge source="фейерверк" target="победа">
+  <data key="d1">0.5191117525100708</data>
+</edge>
+<edge source="фейерверк" target="концерт">
+  <data key="d1">0.571954607963562</data>
+</edge>
+<edge source="фейерверк" target="православный">
+  <data key="d1">0.5020122528076172</data>
+</edge>
+<edge source="фейерверк" target="собака">
+  <data key="d1">0.575440526008606</data>
+</edge>
+<edge source="фейерверк" target="замёрзнуть">
+  <data key="d1">0.5452591180801392</data>
+</edge>
+<edge source="фейерверк" target="улица">
+  <data key="d1">0.5221810340881348</data>
+</edge>
+<edge source="фейерверк" target="взрыв">
+  <data key="d1">0.5150279998779297</data>
+</edge>
+<edge source="фейерверк" target="поджечь">
+  <data key="d1">0.5575805902481079</data>
+</edge>
+<edge source="фейерверк" target="моряк">
+  <data key="d1">0.5238754153251648</data>
+</edge>
+<edge source="фейерверк" target="циклонтино">
+  <data key="d1">0.5083601474761963</data>
+</edge>
+<edge source="фейерверк" target="уголовный">
+  <data key="d1">0.5203825235366821</data>
+</edge>
+<edge source="фейерверк" target="алексеевич">
+  <data key="d1">0.5092353820800781</data>
+</edge>
+<edge source="фейерверк" target="автобусный">
+  <data key="d1">0.5248512029647827</data>
+</edge>
+<edge source="фейерверк" target="жилец">
+  <data key="d1">0.5672801733016968</data>
+</edge>
+<edge source="фейерверк" target="монумент">
+  <data key="d1">0.5002129673957825</data>
+</edge>
+<edge source="фейерверк" target="сад">
+  <data key="d1">0.5544371604919434</data>
+</edge>
+<edge source="фейерверк" target="петербург">
+  <data key="d1">0.5839260816574097</data>
+</edge>
+<edge source="взрыв" target="пожар">
+  <data key="d1">0.6028053164482117</data>
+</edge>
+<edge source="взрыв" target="фортов">
+  <data key="d1">0.5838327407836914</data>
+</edge>
+<edge source="взрыв" target="питомец">
+  <data key="d1">0.5395798087120056</data>
+</edge>
+<edge source="взрыв" target="победа">
+  <data key="d1">0.5984092354774475</data>
+</edge>
+<edge source="взрыв" target="жильё">
+  <data key="d1">0.5284125208854675</data>
+</edge>
+<edge source="взрыв" target="лёд">
+  <data key="d1">0.5978399515151978</data>
+</edge>
+<edge source="взрыв" target="концерт">
+  <data key="d1">0.6153293251991272</data>
+</edge>
+<edge source="взрыв" target="православный">
+  <data key="d1">0.5749934911727905</data>
+</edge>
+<edge source="взрыв" target="площадь">
+  <data key="d1">0.5085365176200867</data>
+</edge>
+<edge source="взрыв" target="владимир">
+  <data key="d1">0.5642069578170776</data>
+</edge>
+<edge source="взрыв" target="собака">
+  <data key="d1">0.5945709943771362</data>
+</edge>
+<edge source="взрыв" target="замёрзнуть">
+  <data key="d1">0.56670081615448</data>
+</edge>
+<edge source="взрыв" target="памятник">
+  <data key="d1">0.618882417678833</data>
+</edge>
+<edge source="взрыв" target="форт">
+  <data key="d1">0.5747034549713135</data>
+</edge>
+<edge source="взрыв" target="огонь">
+  <data key="d1">0.5187545418739319</data>
+</edge>
+<edge source="взрыв" target="улица">
+  <data key="d1">0.5175251364707947</data>
+</edge>
+<edge source="взрыв" target="поджечь">
+  <data key="d1">0.697464108467102</data>
+</edge>
+<edge source="взрыв" target="выстрел">
+  <data key="d1">0.5810993909835815</data>
+</edge>
+<edge source="взрыв" target="ледяной">
+  <data key="d1">0.7282863855361938</data>
+</edge>
+<edge source="взрыв" target="моряк">
+  <data key="d1">0.6173884868621826</data>
+</edge>
+<edge source="взрыв" target="циклонтино">
+  <data key="d1">0.565239429473877</data>
+</edge>
+<edge source="взрыв" target="уголовный">
+  <data key="d1">0.5775368213653564</data>
+</edge>
+<edge source="взрыв" target="автобусный">
+  <data key="d1">0.5681300759315491</data>
+</edge>
+<edge source="взрыв" target="станция">
+  <data key="d1">0.5110442638397217</data>
+</edge>
+<edge source="взрыв" target="шторм">
+  <data key="d1">0.5211338996887207</data>
+</edge>
+<edge source="взрыв" target="жилец">
+  <data key="d1">0.5111416578292847</data>
+</edge>
+<edge source="взрыв" target="супермаркет">
+  <data key="d1">0.5415256023406982</data>
+</edge>
+<edge source="взрыв" target="монумент">
+  <data key="d1">0.6028323173522949</data>
+</edge>
+<edge source="взрыв" target="сад">
+  <data key="d1">0.6717543601989746</data>
+</edge>
+<edge source="взрыв" target="петербург">
+  <data key="d1">0.6185545325279236</data>
+</edge>
+<edge source="Флотская улица" target="жилищный">
+  <data key="d1">0.6387</data>
+</edge>
+<edge source="Флотская улица" target="жильё">
+  <data key="d1">0.6153</data>
+</edge>
+<edge source="Флотская улица" target="жилец">
+  <data key="d1">0.6079</data>
+</edge>
+<edge source="жилищный" target="пожар">
+  <data key="d1">0.5140617489814758</data>
+</edge>
+<edge source="жилищный" target="концерт">
+  <data key="d1">0.5488662123680115</data>
+</edge>
+<edge source="жилищный" target="православный">
+  <data key="d1">0.5220506191253662</data>
+</edge>
+<edge source="жилищный" target="владимир">
+  <data key="d1">0.5091562271118164</data>
+</edge>
+<edge source="жилищный" target="собака">
+  <data key="d1">0.5555894374847412</data>
+</edge>
+<edge source="жилищный" target="памятник">
+  <data key="d1">0.5699275732040405</data>
+</edge>
+<edge source="жилищный" target="располагаться">
+  <data key="d1">0.5090391039848328</data>
+</edge>
+<edge source="жилищный" target="уголовный">
+  <data key="d1">0.5449244976043701</data>
+</edge>
+<edge source="жилищный" target="фашистский">
+  <data key="d1">0.5111334323883057</data>
+</edge>
+<edge source="жилищный" target="пламенипредположительный">
+  <data key="d1">0.5326361656188965</data>
+</edge>
+<edge source="жилищный" target="жилец">
+  <data key="d1">0.5022462010383606</data>
+</edge>
+<edge source="жилищный" target="монумент">
+  <data key="d1">0.5468358993530273</data>
+</edge>
+<edge source="жилищный" target="сад">
+  <data key="d1">0.521876335144043</data>
+</edge>
+<edge source="жилищный" target="петербург">
+  <data key="d1">0.6056766510009766</data>
+</edge>
+<edge source="жилищный" target="хоккей">
+  <data key="d1">0.519000768661499</data>
+</edge>
+<edge source="жилищный" target="ледовый">
+  <data key="d1">0.5537164211273193</data>
+</edge>
+<edge source="жильё" target="фортов">
+  <data key="d1">0.5455471277236938</data>
+</edge>
+<edge source="жильё" target="лёд">
+  <data key="d1">0.6810406446456909</data>
+</edge>
+<edge source="жильё" target="концерт">
+  <data key="d1">0.5687589645385742</data>
+</edge>
+<edge source="жильё" target="православный">
+  <data key="d1">0.5913310050964355</data>
+</edge>
+<edge source="жильё" target="замёрзнуть">
+  <data key="d1">0.5575263500213623</data>
+</edge>
+<edge source="жильё" target="памятник">
+  <data key="d1">0.5025674104690552</data>
+</edge>
+<edge source="жильё" target="форт">
+  <data key="d1">0.5207037925720215</data>
+</edge>
+<edge source="жильё" target="огонь">
+  <data key="d1">0.5930674076080322</data>
+</edge>
+<edge source="жильё" target="метро">
+  <data key="d1">0.6081575751304626</data>
+</edge>
+<edge source="жильё" target="улица">
+  <data key="d1">0.5300000905990601</data>
+</edge>
+<edge source="жильё" target="поджечь">
+  <data key="d1">0.5365806221961975</data>
+</edge>
+<edge source="жильё" target="ледяной">
+  <data key="d1">0.5316970944404602</data>
+</edge>
+<edge source="жильё" target="моряк">
+  <data key="d1">0.589518666267395</data>
+</edge>
+<edge source="жильё" target="уголовный">
+  <data key="d1">0.5366458892822266</data>
+</edge>
+<edge source="жильё" target="автобусный">
+  <data key="d1">0.6116419434547424</data>
+</edge>
+<edge source="жильё" target="супермаркет">
+  <data key="d1">0.5169126987457275</data>
+</edge>
+<edge source="жильё" target="сад">
+  <data key="d1">0.5246216058731079</data>
+</edge>
+<edge source="жильё" target="петербург">
+  <data key="d1">0.6146376132965088</data>
+</edge>
+<edge source="жилец" target="питомец">
+  <data key="d1">0.7067002654075623</data>
+</edge>
+<edge source="жилец" target="концерт">
+  <data key="d1">0.5343177318572998</data>
+</edge>
+<edge source="жилец" target="православный">
+  <data key="d1">0.5626786947250366</data>
+</edge>
+<edge source="жилец" target="площадь">
+  <data key="d1">0.5160588622093201</data>
+</edge>
+<edge source="жилец" target="казарма">
+  <data key="d1">0.5123410820960999</data>
+</edge>
+<edge source="жилец" target="владимир">
+  <data key="d1">0.5120710134506226</data>
+</edge>
+<edge source="жилец" target="собака">
+  <data key="d1">0.5337190628051758</data>
+</edge>
+<edge source="жилец" target="замёрзнуть">
+  <data key="d1">0.5556619167327881</data>
+</edge>
+<edge source="жилец" target="памятник">
+  <data key="d1">0.5207598209381104</data>
+</edge>
+<edge source="жилец" target="огонь">
+  <data key="d1">0.5485223531723022</data>
+</edge>
+<edge source="жилец" target="улица">
+  <data key="d1">0.5302184224128723</data>
+</edge>
+<edge source="жилец" target="выстрел">
+  <data key="d1">0.5068754553794861</data>
+</edge>
+<edge source="жилец" target="располагаться">
+  <data key="d1">0.5230544209480286</data>
+</edge>
+<edge source="жилец" target="моряк">
+  <data key="d1">0.5696978569030762</data>
+</edge>
+<edge source="жилец" target="циклонтино">
+  <data key="d1">0.607185423374176</data>
+</edge>
+<edge source="жилец" target="уголовный">
+  <data key="d1">0.5455304384231567</data>
+</edge>
+<edge source="жилец" target="алексеевич">
+  <data key="d1">0.518060564994812</data>
+</edge>
+<edge source="жилец" target="автобусный">
+  <data key="d1">0.5525035262107849</data>
+</edge>
+<edge source="жилец" target="обвиняться">
+  <data key="d1">0.5224310755729675</data>
+</edge>
+<edge source="жилец" target="монумент">
+  <data key="d1">0.5181925892829895</data>
+</edge>
+<edge source="жилец" target="штормовой">
+  <data key="d1">0.5333325862884521</data>
+</edge>
+<edge source="жилец" target="петербург">
+  <data key="d1">0.544519305229187</data>
+</edge>
+<edge source="жилец" target="хоккей">
+  <data key="d1">0.5202851295471191</data>
+</edge>
+<edge source="жилец" target="могила">
+  <data key="d1">0.5665023326873779</data>
+</edge>
+<edge source="жилец" target="стрельбище">
+  <data key="d1">0.578875720500946</data>
+</edge>
+<edge source="улица Демьяна Бедного" target="хоккей">
+  <data key="d1">0.6341</data>
+</edge>
+<edge source="хоккей" target="пожар">
+  <data key="d1">0.6215085983276367</data>
+</edge>
+<edge source="хоккей" target="питомец">
+  <data key="d1">0.5386983752250671</data>
+</edge>
+<edge source="хоккей" target="победа">
+  <data key="d1">0.5243231058120728</data>
+</edge>
+<edge source="хоккей" target="лёд">
+  <data key="d1">0.5702434778213501</data>
+</edge>
+<edge source="хоккей" target="концерт">
+  <data key="d1">0.6381555199623108</data>
+</edge>
+<edge source="хоккей" target="православный">
+  <data key="d1">0.7165889143943787</data>
+</edge>
+<edge source="хоккей" target="онкологический">
+  <data key="d1">0.5270913243293762</data>
+</edge>
+<edge source="хоккей" target="площадь">
+  <data key="d1">0.5956104397773743</data>
+</edge>
+<edge source="хоккей" target="владимир">
+  <data key="d1">0.7291883230209351</data>
+</edge>
+<edge source="хоккей" target="собака">
+  <data key="d1">0.6106249690055847</data>
+</edge>
+<edge source="хоккей" target="замёрзнуть">
+  <data key="d1">0.5042059421539307</data>
+</edge>
+<edge source="хоккей" target="памятник">
+  <data key="d1">0.6083515882492065</data>
+</edge>
+<edge source="хоккей" target="циклон">
+  <data key="d1">0.6330516338348389</data>
+</edge>
+<edge source="хоккей" target="форт">
+  <data key="d1">0.5655931234359741</data>
+</edge>
+<edge source="хоккей" target="огонь">
+  <data key="d1">0.5932705998420715</data>
+</edge>
+<edge source="хоккей" target="улица">
+  <data key="d1">0.6388448476791382</data>
+</edge>
+<edge source="хоккей" target="поджечь">
+  <data key="d1">0.537783682346344</data>
+</edge>
+<edge source="хоккей" target="выстрел">
+  <data key="d1">0.5156961679458618</data>
+</edge>
+<edge source="хоккей" target="располагаться">
+  <data key="d1">0.6871038675308228</data>
+</edge>
+<edge source="хоккей" target="ледяной">
+  <data key="d1">0.5403236150741577</data>
+</edge>
+<edge source="хоккей" target="моряк">
+  <data key="d1">0.6051364541053772</data>
+</edge>
+<edge source="хоккей" target="циклонтино">
+  <data key="d1">0.6239001750946045</data>
+</edge>
+<edge source="хоккей" target="уголовный">
+  <data key="d1">0.6621984243392944</data>
+</edge>
+<edge source="хоккей" target="алексеевич">
+  <data key="d1">0.556959867477417</data>
+</edge>
+<edge source="хоккей" target="автобусный">
+  <data key="d1">0.568602442741394</data>
+</edge>
+<edge source="хоккей" target="фашистский">
+  <data key="d1">0.5354509353637695</data>
+</edge>
+<edge source="хоккей" target="дорога">
+  <data key="d1">0.5482144355773926</data>
+</edge>
+<edge source="хоккей" target="станция">
+  <data key="d1">0.5955537557601929</data>
+</edge>
+<edge source="хоккей" target="шторм">
+  <data key="d1">0.5566084384918213</data>
+</edge>
+<edge source="хоккей" target="супермаркет">
+  <data key="d1">0.6438223123550415</data>
+</edge>
+<edge source="хоккей" target="монумент">
+  <data key="d1">0.6493173837661743</data>
+</edge>
+<edge source="хоккей" target="сад">
+  <data key="d1">0.5640833973884583</data>
+</edge>
+<edge source="хоккей" target="петербург">
+  <data key="d1">0.7414847016334534</data>
+</edge>
+<edge source="хоккей" target="ледовый">
+  <data key="d1">0.7184709310531616</data>
+</edge>
+<edge source="хоккей" target="могила">
+  <data key="d1">0.6626378297805786</data>
+</edge>
+<edge source="хоккей" target="стрельбище">
+  <data key="d1">0.5853375196456909</data>
+</edge>
+<edge source="Коммунистическая улица" target="гимназиякронштадтский">
+  <data key="d1">0.743</data>
+</edge>
+<edge source="Коммунистическая улица" target="алексеевич">
+  <data key="d1">0.6129</data>
+</edge>
+<edge source="Коммунистическая улица" target="владимир">
+  <data key="d1">0.6111</data>
+</edge>
+<edge source="гимназиякронштадтский" target="питомец">
+  <data key="d1">0.5355277061462402</data>
+</edge>
+<edge source="гимназиякронштадтский" target="площадь">
+  <data key="d1">0.5220674276351929</data>
+</edge>
+<edge source="гимназиякронштадтский" target="казарма">
+  <data key="d1">0.5041366219520569</data>
+</edge>
+<edge source="гимназиякронштадтский" target="фашистский">
+  <data key="d1">0.503671407699585</data>
+</edge>
+<edge source="гимназиякронштадтский" target="стрельбище">
+  <data key="d1">0.507559061050415</data>
+</edge>
+<edge source="алексеевич" target="питомец">
+  <data key="d1">0.5327929258346558</data>
+</edge>
+<edge source="алексеевич" target="уголовный">
+  <data key="d1">0.5025177001953125</data>
+</edge>
+<edge source="алексеевич" target="обвиняться">
+  <data key="d1">0.5119271278381348</data>
+</edge>
+<edge source="алексеевич" target="петербург">
+  <data key="d1">0.5263808965682983</data>
+</edge>
+<edge source="алексеевич" target="стрельбище">
+  <data key="d1">0.5070839524269104</data>
+</edge>
+<edge source="владимир" target="пожар">
+  <data key="d1">0.6767458915710449</data>
+</edge>
+<edge source="владимир" target="победа">
+  <data key="d1">0.5068930387496948</data>
+</edge>
+<edge source="владимир" target="лёд">
+  <data key="d1">0.5985243320465088</data>
+</edge>
+<edge source="владимир" target="концерт">
+  <data key="d1">0.6462054252624512</data>
+</edge>
+<edge source="владимир" target="православный">
+  <data key="d1">0.7446228861808777</data>
+</edge>
+<edge source="владимир" target="онкологический">
+  <data key="d1">0.5036757588386536</data>
+</edge>
+<edge source="владимир" target="площадь">
+  <data key="d1">0.6439908742904663</data>
+</edge>
+<edge source="владимир" target="собака">
+  <data key="d1">0.5361143350601196</data>
+</edge>
+<edge source="владимир" target="замёрзнуть">
+  <data key="d1">0.5193849802017212</data>
+</edge>
+<edge source="владимир" target="памятник">
+  <data key="d1">0.6939136981964111</data>
+</edge>
+<edge source="владимир" target="циклон">
+  <data key="d1">0.6165378093719482</data>
+</edge>
+<edge source="владимир" target="форт">
+  <data key="d1">0.5222220420837402</data>
+</edge>
+<edge source="владимир" target="огонь">
+  <data key="d1">0.5270233154296875</data>
+</edge>
+<edge source="владимир" target="улица">
+  <data key="d1">0.6245214343070984</data>
+</edge>
+<edge source="владимир" target="поджечь">
+  <data key="d1">0.5239865183830261</data>
+</edge>
+<edge source="владимир" target="располагаться">
+  <data key="d1">0.6799837350845337</data>
+</edge>
+<edge source="владимир" target="ледяной">
+  <data key="d1">0.598091721534729</data>
+</edge>
+<edge source="владимир" target="моряк">
+  <data key="d1">0.6041864156723022</data>
+</edge>
+<edge source="владимир" target="циклонтино">
+  <data key="d1">0.6335598230361938</data>
+</edge>
+<edge source="владимир" target="уголовный">
+  <data key="d1">0.6876360774040222</data>
+</edge>
+<edge source="владимир" target="автобусный">
+  <data key="d1">0.5345348715782166</data>
+</edge>
+<edge source="владимир" target="фашистский">
+  <data key="d1">0.5491222739219666</data>
+</edge>
+<edge source="владимир" target="дорога">
+  <data key="d1">0.5737313032150269</data>
+</edge>
+<edge source="владимир" target="станция">
+  <data key="d1">0.510871410369873</data>
+</edge>
+<edge source="владимир" target="догхантеры">
+  <data key="d1">0.5169538259506226</data>
+</edge>
+<edge source="владимир" target="шторм">
+  <data key="d1">0.5241934657096863</data>
+</edge>
+<edge source="владимир" target="супермаркет">
+  <data key="d1">0.5791638493537903</data>
+</edge>
+<edge source="владимир" target="монумент">
+  <data key="d1">0.7445946931838989</data>
+</edge>
+<edge source="владимир" target="сад">
+  <data key="d1">0.6302870512008667</data>
+</edge>
+<edge source="владимир" target="петербург">
+  <data key="d1">0.6927552819252014</data>
+</edge>
+<edge source="владимир" target="ледовый">
+  <data key="d1">0.6828261017799377</data>
+</edge>
+<edge source="владимир" target="могила">
+  <data key="d1">0.5918161273002625</data>
+</edge>
+<edge source="владимир" target="стрельбище">
+  <data key="d1">0.5706232786178589</data>
+</edge>
+<edge source="Владимирская улица" target="казарма">
+  <data key="d1">0.6059</data>
+</edge>
+<edge source="казарма" target="лёд">
+  <data key="d1">0.5295952558517456</data>
+</edge>
+<edge source="казарма" target="концерт">
+  <data key="d1">0.5168531537055969</data>
+</edge>
+<edge source="казарма" target="православный">
+  <data key="d1">0.5548898577690125</data>
+</edge>
+<edge source="казарма" target="площадь">
+  <data key="d1">0.5379337072372437</data>
+</edge>
+<edge source="казарма" target="замёрзнуть">
+  <data key="d1">0.5369324684143066</data>
+</edge>
+<edge source="казарма" target="улица">
+  <data key="d1">0.5337374210357666</data>
+</edge>
+<edge source="казарма" target="поджечь">
+  <data key="d1">0.5124917030334473</data>
+</edge>
+<edge source="казарма" target="располагаться">
+  <data key="d1">0.5087285041809082</data>
+</edge>
+<edge source="казарма" target="моряк">
+  <data key="d1">0.5435633659362793</data>
+</edge>
+<edge source="казарма" target="уголовный">
+  <data key="d1">0.5194101333618164</data>
+</edge>
+<edge source="казарма" target="фашистский">
+  <data key="d1">0.5211792588233948</data>
+</edge>
+<edge source="казарма" target="монумент">
+  <data key="d1">0.5067729949951172</data>
+</edge>
+<edge source="казарма" target="петербург">
+  <data key="d1">0.5489189624786377</data>
+</edge>
+<edge source="казарма" target="стрельбище">
+  <data key="d1">0.5412044525146484</data>
+</edge>
+<edge source="проспект Динамо" target="выстрел">
+  <data key="d1">0.6162</data>
+</edge>
+<edge source="проспект Динамо" target="стрельбище">
+  <data key="d1">0.6066</data>
+</edge>
+<edge source="выстрел" target="фортов">
+  <data key="d1">0.6324158906936646</data>
+</edge>
+<edge source="выстрел" target="питомец">
+  <data key="d1">0.5212903022766113</data>
+</edge>
+<edge source="выстрел" target="победа">
+  <data key="d1">0.634445071220398</data>
+</edge>
+<edge source="выстрел" target="концерт">
+  <data key="d1">0.5533818602561951</data>
+</edge>
+<edge source="выстрел" target="собака">
+  <data key="d1">0.5613088011741638</data>
+</edge>
+<edge source="выстрел" target="замёрзнуть">
+  <data key="d1">0.5947005748748779</data>
+</edge>
+<edge source="выстрел" target="памятник">
+  <data key="d1">0.5037505030632019</data>
+</edge>
+<edge source="выстрел" target="форт">
+  <data key="d1">0.5997185111045837</data>
+</edge>
+<edge source="выстрел" target="огонь">
+  <data key="d1">0.6475553512573242</data>
+</edge>
+<edge source="выстрел" target="поджечь">
+  <data key="d1">0.6536442041397095</data>
+</edge>
+<edge source="выстрел" target="моряк">
+  <data key="d1">0.6174488067626953</data>
+</edge>
+<edge source="выстрел" target="автобусный">
+  <data key="d1">0.5220558643341064</data>
+</edge>
+<edge source="выстрел" target="догхантеры">
+  <data key="d1">0.5245522856712341</data>
+</edge>
+<edge source="выстрел" target="шторм">
+  <data key="d1">0.6417649388313293</data>
+</edge>
+<edge source="выстрел" target="монумент">
+  <data key="d1">0.5081061720848083</data>
+</edge>
+<edge source="выстрел" target="сад">
+  <data key="d1">0.523360550403595</data>
+</edge>
+<edge source="выстрел" target="петербург">
+  <data key="d1">0.588517427444458</data>
+</edge>
+<edge source="выстрел" target="могила">
+  <data key="d1">0.5560551285743713</data>
+</edge>
+<edge source="стрельбище" target="пожар">
+  <data key="d1">0.5032268762588501</data>
+</edge>
+<edge source="стрельбище" target="питомец">
+  <data key="d1">0.5785660147666931</data>
+</edge>
+<edge source="стрельбище" target="концерт">
+  <data key="d1">0.5325186252593994</data>
+</edge>
+<edge source="стрельбище" target="православный">
+  <data key="d1">0.6073507070541382</data>
+</edge>
+<edge source="стрельбище" target="площадь">
+  <data key="d1">0.5908234119415283</data>
+</edge>
+<edge source="стрельбище" target="замёрзнуть">
+  <data key="d1">0.5898243188858032</data>
+</edge>
+<edge source="стрельбище" target="памятник">
+  <data key="d1">0.5252786874771118</data>
+</edge>
+<edge source="стрельбище" target="циклон">
+  <data key="d1">0.5034615397453308</data>
+</edge>
+<edge source="стрельбище" target="метро">
+  <data key="d1">0.5304261445999146</data>
+</edge>
+<edge source="стрельбище" target="улица">
+  <data key="d1">0.5454469323158264</data>
+</edge>
+<edge source="стрельбище" target="располагаться">
+  <data key="d1">0.546845555305481</data>
+</edge>
+<edge source="стрельбище" target="моряк">
+  <data key="d1">0.6002460718154907</data>
+</edge>
+<edge source="стрельбище" target="циклонтино">
+  <data key="d1">0.581526517868042</data>
+</edge>
+<edge source="стрельбище" target="уголовный">
+  <data key="d1">0.6164268255233765</data>
+</edge>
+<edge source="стрельбище" target="фашистский">
+  <data key="d1">0.615447998046875</data>
+</edge>
+<edge source="стрельбище" target="супермаркет">
+  <data key="d1">0.5249758362770081</data>
+</edge>
+<edge source="стрельбище" target="монумент">
+  <data key="d1">0.5708602070808411</data>
+</edge>
+<edge source="стрельбище" target="сад">
+  <data key="d1">0.5435540080070496</data>
+</edge>
+<edge source="стрельбище" target="петербург">
+  <data key="d1">0.5968859195709229</data>
+</edge>
+<edge source="стрельбище" target="могила">
+  <data key="d1">0.534430980682373</data>
+</edge>
+<edge source="Гусева улица" target="пожар">
+  <data key="d1">0.6207</data>
+</edge>
+<edge source="Гусева улица" target="огонь">
+  <data key="d1">0.6066</data>
+</edge>
+<edge source="пожар" target="Большевистская улица">
+  <data key="d1">0.6634</data>
+</edge>
+<edge source="пожар" target="улица Фейгина">
+  <data key="d1">0.6207</data>
+</edge>
+<edge source="пожар" target="победа">
+  <data key="d1">0.6195485591888428</data>
+</edge>
+<edge source="пожар" target="лёд">
+  <data key="d1">0.5133417844772339</data>
+</edge>
+<edge source="пожар" target="концерт">
+  <data key="d1">0.6454128623008728</data>
+</edge>
+<edge source="пожар" target="православный">
+  <data key="d1">0.635230541229248</data>
+</edge>
+<edge source="пожар" target="площадь">
+  <data key="d1">0.5887594223022461</data>
+</edge>
+<edge source="пожар" target="собака">
+  <data key="d1">0.5599839091300964</data>
+</edge>
+<edge source="пожар" target="памятник">
+  <data key="d1">0.6030465364456177</data>
+</edge>
+<edge source="пожар" target="циклон">
+  <data key="d1">0.604870080947876</data>
+</edge>
+<edge source="пожар" target="форт">
+  <data key="d1">0.5408430099487305</data>
+</edge>
+<edge source="пожар" target="огонь">
+  <data key="d1">0.540257453918457</data>
+</edge>
+<edge source="пожар" target="улица">
+  <data key="d1">0.6094228029251099</data>
+</edge>
+<edge source="пожар" target="поджечь">
+  <data key="d1">0.6160804033279419</data>
+</edge>
+<edge source="пожар" target="располагаться">
+  <data key="d1">0.5554895401000977</data>
+</edge>
+<edge source="пожар" target="ледяной">
+  <data key="d1">0.5871906280517578</data>
+</edge>
+<edge source="пожар" target="моряк">
+  <data key="d1">0.5593540668487549</data>
+</edge>
+<edge source="пожар" target="циклонтино">
+  <data key="d1">0.5852493047714233</data>
+</edge>
+<edge source="пожар" target="уголовный">
+  <data key="d1">0.6247777938842773</data>
+</edge>
+<edge source="пожар" target="автобусный">
+  <data key="d1">0.543684720993042</data>
+</edge>
+<edge source="пожар" target="дорога">
+  <data key="d1">0.5193701982498169</data>
+</edge>
+<edge source="пожар" target="станция">
+  <data key="d1">0.660234808921814</data>
+</edge>
+<edge source="пожар" target="шторм">
+  <data key="d1">0.5238586664199829</data>
+</edge>
+<edge source="пожар" target="супермаркет">
+  <data key="d1">0.6074406504631042</data>
+</edge>
+<edge source="пожар" target="монумент">
+  <data key="d1">0.5771971940994263</data>
+</edge>
+<edge source="пожар" target="сад">
+  <data key="d1">0.6182452440261841</data>
+</edge>
+<edge source="пожар" target="петербург">
+  <data key="d1">0.7078889608383179</data>
+</edge>
+<edge source="пожар" target="ледовый">
+  <data key="d1">0.6096870303153992</data>
+</edge>
+<edge source="пожар" target="могила">
+  <data key="d1">0.5917460918426514</data>
+</edge>
+<edge source="огонь" target="улица Фейгина">
+  <data key="d1">0.6026</data>
+</edge>
+<edge source="огонь" target="фортов">
+  <data key="d1">0.5567407608032227</data>
+</edge>
+<edge source="огонь" target="лёд">
+  <data key="d1">0.5605336427688599</data>
+</edge>
+<edge source="огонь" target="концерт">
+  <data key="d1">0.5448759198188782</data>
+</edge>
+<edge source="огонь" target="православный">
+  <data key="d1">0.6182150840759277</data>
+</edge>
+<edge source="огонь" target="площадь">
+  <data key="d1">0.5256890654563904</data>
+</edge>
+<edge source="огонь" target="собака">
+  <data key="d1">0.5147263407707214</data>
+</edge>
+<edge source="огонь" target="замёрзнуть">
+  <data key="d1">0.5692594051361084</data>
+</edge>
+<edge source="огонь" target="памятник">
+  <data key="d1">0.5058770775794983</data>
+</edge>
+<edge source="огонь" target="циклон">
+  <data key="d1">0.5038227438926697</data>
+</edge>
+<edge source="огонь" target="форт">
+  <data key="d1">0.5873552560806274</data>
+</edge>
+<edge source="огонь" target="метро">
+  <data key="d1">0.5508073568344116</data>
+</edge>
+<edge source="огонь" target="поджечь">
+  <data key="d1">0.5886844396591187</data>
+</edge>
+<edge source="огонь" target="располагаться">
+  <data key="d1">0.5379084348678589</data>
+</edge>
+<edge source="огонь" target="моряк">
+  <data key="d1">0.6578933000564575</data>
+</edge>
+<edge source="огонь" target="циклонтино">
+  <data key="d1">0.5614871382713318</data>
+</edge>
+<edge source="огонь" target="уголовный">
+  <data key="d1">0.527977705001831</data>
+</edge>
+<edge source="огонь" target="автобусный">
+  <data key="d1">0.5696010589599609</data>
+</edge>
+<edge source="огонь" target="шторм">
+  <data key="d1">0.5593127012252808</data>
+</edge>
+<edge source="огонь" target="супермаркет">
+  <data key="d1">0.5534600019454956</data>
+</edge>
+<edge source="огонь" target="монумент">
+  <data key="d1">0.5202511548995972</data>
+</edge>
+<edge source="огонь" target="сад">
+  <data key="d1">0.5177298188209534</data>
+</edge>
+<edge source="огонь" target="петербург">
+  <data key="d1">0.6369569897651672</data>
+</edge>
+<edge source="огонь" target="ледовый">
+  <data key="d1">0.5096021890640259</data>
+</edge>
+<edge source="огонь" target="могила">
+  <data key="d1">0.6517499685287476</data>
+</edge>
+<edge source="Лиговский проспект" target="онкологический">
+  <data key="d1">0.6075</data>
+</edge>
+<edge source="онкологический" target="памятник">
+  <data key="d1">0.5343767404556274</data>
+</edge>
+<edge source="онкологический" target="циклон">
+  <data key="d1">0.568479061126709</data>
+</edge>
+<edge source="онкологический" target="циклонтино">
+  <data key="d1">0.5508286952972412</data>
+</edge>
+<edge source="онкологический" target="монумент">
+  <data key="d1">0.5017187595367432</data>
+</edge>
+<edge source="онкологический" target="петербург">
+  <data key="d1">0.5357024669647217</data>
+</edge>
+<edge source="Октябрьская улица" target="моряк">
+  <data key="d1">0.6273</data>
+</edge>
+<edge source="моряк" target="фортов">
+  <data key="d1">0.5846576690673828</data>
+</edge>
+<edge source="моряк" target="питомец">
+  <data key="d1">0.6065259575843811</data>
+</edge>
+<edge source="моряк" target="победа">
+  <data key="d1">0.5417055487632751</data>
+</edge>
+<edge source="моряк" target="лёд">
+  <data key="d1">0.6556262373924255</data>
+</edge>
+<edge source="моряк" target="концерт">
+  <data key="d1">0.6426914930343628</data>
+</edge>
+<edge source="моряк" target="православный">
+  <data key="d1">0.6711090207099915</data>
+</edge>
+<edge source="моряк" target="площадь">
+  <data key="d1">0.6223030686378479</data>
+</edge>
+<edge source="моряк" target="собака">
+  <data key="d1">0.621051013469696</data>
+</edge>
+<edge source="моряк" target="замёрзнуть">
+  <data key="d1">0.6671016216278076</data>
+</edge>
+<edge source="моряк" target="памятник">
+  <data key="d1">0.6142653226852417</data>
+</edge>
+<edge source="моряк" target="циклон">
+  <data key="d1">0.5584015846252441</data>
+</edge>
+<edge source="моряк" target="форт">
+  <data key="d1">0.6178751587867737</data>
+</edge>
+<edge source="моряк" target="метро">
+  <data key="d1">0.6895960569381714</data>
+</edge>
+<edge source="моряк" target="улица">
+  <data key="d1">0.6368584036827087</data>
+</edge>
+<edge source="моряк" target="поджечь">
+  <data key="d1">0.5756268501281738</data>
+</edge>
+<edge source="моряк" target="располагаться">
+  <data key="d1">0.6010300517082214</data>
+</edge>
+<edge source="моряк" target="ледяной">
+  <data key="d1">0.5781720876693726</data>
+</edge>
+<edge source="моряк" target="циклонтино">
+  <data key="d1">0.595465898513794</data>
+</edge>
+<edge source="моряк" target="уголовный">
+  <data key="d1">0.6444803476333618</data>
+</edge>
+<edge source="моряк" target="автобусный">
+  <data key="d1">0.6700383424758911</data>
+</edge>
+<edge source="моряк" target="обвиняться">
+  <data key="d1">0.508101224899292</data>
+</edge>
+<edge source="моряк" target="фашистский">
+  <data key="d1">0.5190651416778564</data>
+</edge>
+<edge source="моряк" target="дорога">
+  <data key="d1">0.6354110836982727</data>
+</edge>
+<edge source="моряк" target="шторм">
+  <data key="d1">0.5861561894416809</data>
+</edge>
+<edge source="моряк" target="супермаркет">
+  <data key="d1">0.5933693051338196</data>
+</edge>
+<edge source="моряк" target="монумент">
+  <data key="d1">0.5825300216674805</data>
+</edge>
+<edge source="моряк" target="сад">
+  <data key="d1">0.6589043736457825</data>
+</edge>
+<edge source="моряк" target="петербург">
+  <data key="d1">0.6504316329956055</data>
+</edge>
+<edge source="моряк" target="ледовый">
+  <data key="d1">0.5342680215835571</data>
+</edge>
+<edge source="моряк" target="могила">
+  <data key="d1">0.6371580362319946</data>
+</edge>
+<edge source="Кременчугская улица" target="православный">
+  <data key="d1">0.6828</data>
+</edge>
+<edge source="православный" target="фортов">
+  <data key="d1">0.5395406484603882</data>
+</edge>
+<edge source="православный" target="лёд">
+  <data key="d1">0.7005918025970459</data>
+</edge>
+<edge source="православный" target="концерт">
+  <data key="d1">0.6872949004173279</data>
+</edge>
+<edge source="православный" target="площадь">
+  <data key="d1">0.7391306757926941</data>
+</edge>
+<edge source="православный" target="собака">
+  <data key="d1">0.5600355863571167</data>
+</edge>
+<edge source="православный" target="замёрзнуть">
+  <data key="d1">0.5598831176757812</data>
+</edge>
+<edge source="православный" target="памятник">
+  <data key="d1">0.6523154973983765</data>
+</edge>
+<edge source="православный" target="циклон">
+  <data key="d1">0.6006807684898376</data>
+</edge>
+<edge source="православный" target="форт">
+  <data key="d1">0.5762438774108887</data>
+</edge>
+<edge source="православный" target="метро">
+  <data key="d1">0.6624276638031006</data>
+</edge>
+<edge source="православный" target="улица">
+  <data key="d1">0.7368460297584534</data>
+</edge>
+<edge source="православный" target="поджечь">
+  <data key="d1">0.5218102931976318</data>
+</edge>
+<edge source="православный" target="располагаться">
+  <data key="d1">0.7620110511779785</data>
+</edge>
+<edge source="православный" target="ледяной">
+  <data key="d1">0.6028149127960205</data>
+</edge>
+<edge source="православный" target="циклонтино">
+  <data key="d1">0.6182908415794373</data>
+</edge>
+<edge source="православный" target="уголовный">
+  <data key="d1">0.7078098654747009</data>
+</edge>
+<edge source="православный" target="автобусный">
+  <data key="d1">0.6290317177772522</data>
+</edge>
+<edge source="православный" target="фашистский">
+  <data key="d1">0.580912709236145</data>
+</edge>
+<edge source="православный" target="дорога">
+  <data key="d1">0.6437255144119263</data>
+</edge>
+<edge source="православный" target="станция">
+  <data key="d1">0.5254791975021362</data>
+</edge>
+<edge source="православный" target="догхантеры">
+  <data key="d1">0.5103828310966492</data>
+</edge>
+<edge source="православный" target="шторм">
+  <data key="d1">0.524596095085144</data>
+</edge>
+<edge source="православный" target="супермаркет">
+  <data key="d1">0.7062230110168457</data>
+</edge>
+<edge source="православный" target="монумент">
+  <data key="d1">0.6614415645599365</data>
+</edge>
+<edge source="православный" target="сад">
+  <data key="d1">0.5986940264701843</data>
+</edge>
+<edge source="православный" target="петербург">
+  <data key="d1">0.7672669291496277</data>
+</edge>
+<edge source="православный" target="ледовый">
+  <data key="d1">0.6114761829376221</data>
+</edge>
+<edge source="православный" target="могила">
+  <data key="d1">0.6556905508041382</data>
+</edge>
+<edge source="Пушкинская улица" target="петербург">
+  <data key="d1">0.6252</data>
+</edge>
+<edge source="петербург" target="фортов">
+  <data key="d1">0.612733781337738</data>
+</edge>
+<edge source="петербург" target="питомец">
+  <data key="d1">0.5694849491119385</data>
+</edge>
+<edge source="петербург" target="победа">
+  <data key="d1">0.6229077577590942</data>
+</edge>
+<edge source="петербург" target="лёд">
+  <data key="d1">0.6706734299659729</data>
+</edge>
+<edge source="петербург" target="концерт">
+  <data key="d1">0.7420780062675476</data>
+</edge>
+<edge source="петербург" target="площадь">
+  <data key="d1">0.6427595615386963</data>
+</edge>
+<edge source="петербург" target="собака">
+  <data key="d1">0.6339259743690491</data>
+</edge>
+<edge source="петербург" target="замёрзнуть">
+  <data key="d1">0.609210729598999</data>
+</edge>
+<edge source="петербург" target="памятник">
+  <data key="d1">0.6474108695983887</data>
+</edge>
+<edge source="петербург" target="циклон">
+  <data key="d1">0.646832287311554</data>
+</edge>
+<edge source="петербург" target="форт">
+  <data key="d1">0.6424946784973145</data>
+</edge>
+<edge source="петербург" target="метро">
+  <data key="d1">0.5798745155334473</data>
+</edge>
+<edge source="петербург" target="улица">
+  <data key="d1">0.6881181001663208</data>
+</edge>
+<edge source="петербург" target="поджечь">
+  <data key="d1">0.7063431739807129</data>
+</edge>
+<edge source="петербург" target="располагаться">
+  <data key="d1">0.660133957862854</data>
+</edge>
+<edge source="петербург" target="ледяной">
+  <data key="d1">0.6315507292747498</data>
+</edge>
+<edge source="петербург" target="циклонтино">
+  <data key="d1">0.6654751300811768</data>
+</edge>
+<edge source="петербург" target="уголовный">
+  <data key="d1">0.68092942237854</data>
+</edge>
+<edge source="петербург" target="автобусный">
+  <data key="d1">0.6701363325119019</data>
+</edge>
+<edge source="петербург" target="фашистский">
+  <data key="d1">0.5839247703552246</data>
+</edge>
+<edge source="петербург" target="дорога">
+  <data key="d1">0.5350583791732788</data>
+</edge>
+<edge source="петербург" target="станция">
+  <data key="d1">0.6025359630584717</data>
+</edge>
+<edge source="петербург" target="догхантеры">
+  <data key="d1">0.5168229937553406</data>
+</edge>
+<edge source="петербург" target="шторм">
+  <data key="d1">0.5865597724914551</data>
+</edge>
+<edge source="петербург" target="супермаркет">
+  <data key="d1">0.6771752834320068</data>
+</edge>
+<edge source="петербург" target="монумент">
+  <data key="d1">0.6703569889068604</data>
+</edge>
+<edge source="петербург" target="сад">
+  <data key="d1">0.6675379276275635</data>
+</edge>
+<edge source="петербург" target="ледовый">
+  <data key="d1">0.6587526798248291</data>
+</edge>
+<edge source="петербург" target="могила">
+  <data key="d1">0.6245995163917542</data>
+</edge>
+<edge source="улица Трефолева" target="монумент">
+  <data key="d1">0.7124</data>
+</edge>
+<edge source="улица Трефолева" target="памятник">
+  <data key="d1">0.7029</data>
+</edge>
+<edge source="улица Трефолева" target="могила">
+  <data key="d1">0.6349</data>
+</edge>
+<edge source="монумент" target="фортов">
+  <data key="d1">0.5701881647109985</data>
+</edge>
+<edge source="монумент" target="победа">
+  <data key="d1">0.5040534138679504</data>
+</edge>
+<edge source="монумент" target="лёд">
+  <data key="d1">0.5437912344932556</data>
+</edge>
+<edge source="монумент" target="концерт">
+  <data key="d1">0.6343722939491272</data>
+</edge>
+<edge source="монумент" target="площадь">
+  <data key="d1">0.629575252532959</data>
+</edge>
+<edge source="монумент" target="собака">
+  <data key="d1">0.5399664044380188</data>
+</edge>
+<edge source="монумент" target="памятник">
+  <data key="d1">0.8138365149497986</data>
+</edge>
+<edge source="монумент" target="циклон">
+  <data key="d1">0.5102138519287109</data>
+</edge>
+<edge source="монумент" target="форт">
+  <data key="d1">0.5960679054260254</data>
+</edge>
+<edge source="монумент" target="метро">
+  <data key="d1">0.5068573951721191</data>
+</edge>
+<edge source="монумент" target="улица">
+  <data key="d1">0.6243718266487122</data>
+</edge>
+<edge source="монумент" target="поджечь">
+  <data key="d1">0.556993305683136</data>
+</edge>
+<edge source="монумент" target="располагаться">
+  <data key="d1">0.6514574289321899</data>
+</edge>
+<edge source="монумент" target="ледяной">
+  <data key="d1">0.5570138692855835</data>
+</edge>
+<edge source="монумент" target="циклонтино">
+  <data key="d1">0.5340307950973511</data>
+</edge>
+<edge source="монумент" target="уголовный">
+  <data key="d1">0.6525962352752686</data>
+</edge>
+<edge source="монумент" target="автобусный">
+  <data key="d1">0.528478741645813</data>
+</edge>
+<edge source="монумент" target="фашистский">
+  <data key="d1">0.563051700592041</data>
+</edge>
+<edge source="монумент" target="станция">
+  <data key="d1">0.5034220218658447</data>
+</edge>
+<edge source="монумент" target="шторм">
+  <data key="d1">0.5285528898239136</data>
+</edge>
+<edge source="монумент" target="супермаркет">
+  <data key="d1">0.573954164981842</data>
+</edge>
+<edge source="монумент" target="сад">
+  <data key="d1">0.6884173154830933</data>
+</edge>
+<edge source="монумент" target="ледовый">
+  <data key="d1">0.5723658204078674</data>
+</edge>
+<edge source="монумент" target="могила">
+  <data key="d1">0.5624635219573975</data>
+</edge>
+<edge source="памятник" target="фортов">
+  <data key="d1">0.5832488536834717</data>
+</edge>
+<edge source="памятник" target="победа">
+  <data key="d1">0.5175923109054565</data>
+</edge>
+<edge source="памятник" target="лёд">
+  <data key="d1">0.5694619417190552</data>
+</edge>
+<edge source="памятник" target="концерт">
+  <data key="d1">0.6539260149002075</data>
+</edge>
+<edge source="памятник" target="площадь">
+  <data key="d1">0.6723943948745728</data>
+</edge>
+<edge source="памятник" target="собака">
+  <data key="d1">0.5680482387542725</data>
+</edge>
+<edge source="памятник" target="циклон">
+  <data key="d1">0.5410074591636658</data>
+</edge>
+<edge source="памятник" target="форт">
+  <data key="d1">0.6043530702590942</data>
+</edge>
+<edge source="памятник" target="метро">
+  <data key="d1">0.5515247583389282</data>
+</edge>
+<edge source="памятник" target="улица">
+  <data key="d1">0.6873890161514282</data>
+</edge>
+<edge source="памятник" target="поджечь">
+  <data key="d1">0.5344287157058716</data>
+</edge>
+<edge source="памятник" target="располагаться">
+  <data key="d1">0.6002874970436096</data>
+</edge>
+<edge source="памятник" target="ледяной">
+  <data key="d1">0.5817532539367676</data>
+</edge>
+<edge source="памятник" target="циклонтино">
+  <data key="d1">0.5534844994544983</data>
+</edge>
+<edge source="памятник" target="уголовный">
+  <data key="d1">0.6786510348320007</data>
+</edge>
+<edge source="памятник" target="автобусный">
+  <data key="d1">0.5784117579460144</data>
+</edge>
+<edge source="памятник" target="фашистский">
+  <data key="d1">0.5268892645835876</data>
+</edge>
+<edge source="памятник" target="дорога">
+  <data key="d1">0.568020224571228</data>
+</edge>
+<edge source="памятник" target="станция">
+  <data key="d1">0.5808598399162292</data>
+</edge>
+<edge source="памятник" target="догхантеры">
+  <data key="d1">0.5108676552772522</data>
+</edge>
+<edge source="памятник" target="шторм">
+  <data key="d1">0.5302201509475708</data>
+</edge>
+<edge source="памятник" target="супермаркет">
+  <data key="d1">0.6380618810653687</data>
+</edge>
+<edge source="памятник" target="сад">
+  <data key="d1">0.71104496717453</data>
+</edge>
+<edge source="памятник" target="ледовый">
+  <data key="d1">0.5422824621200562</data>
+</edge>
+<edge source="памятник" target="могила">
+  <data key="d1">0.5395437479019165</data>
+</edge>
+<edge source="могила" target="фортов">
+  <data key="d1">0.5169317722320557</data>
+</edge>
+<edge source="могила" target="питомец">
+  <data key="d1">0.5330561399459839</data>
+</edge>
+<edge source="могила" target="победа">
+  <data key="d1">0.5158174633979797</data>
+</edge>
+<edge source="могила" target="лёд">
+  <data key="d1">0.5265998244285583</data>
+</edge>
+<edge source="могила" target="концерт">
+  <data key="d1">0.5371159315109253</data>
+</edge>
+<edge source="могила" target="площадь">
+  <data key="d1">0.5167809724807739</data>
+</edge>
+<edge source="могила" target="собака">
+  <data key="d1">0.5829578042030334</data>
+</edge>
+<edge source="могила" target="замёрзнуть">
+  <data key="d1">0.520622730255127</data>
+</edge>
+<edge source="могила" target="циклон">
+  <data key="d1">0.5356342792510986</data>
+</edge>
+<edge source="могила" target="форт">
+  <data key="d1">0.6070911884307861</data>
+</edge>
+<edge source="могила" target="улица">
+  <data key="d1">0.5640476942062378</data>
+</edge>
+<edge source="могила" target="поджечь">
+  <data key="d1">0.5053002834320068</data>
+</edge>
+<edge source="могила" target="располагаться">
+  <data key="d1">0.5520327091217041</data>
+</edge>
+<edge source="могила" target="ледяной">
+  <data key="d1">0.5589938759803772</data>
+</edge>
+<edge source="могила" target="циклонтино">
+  <data key="d1">0.5355421304702759</data>
+</edge>
+<edge source="могила" target="уголовный">
+  <data key="d1">0.5689367055892944</data>
+</edge>
+<edge source="могила" target="автобусный">
+  <data key="d1">0.6490998268127441</data>
+</edge>
+<edge source="могила" target="дорога">
+  <data key="d1">0.5816075801849365</data>
+</edge>
+<edge source="могила" target="станция">
+  <data key="d1">0.5090748071670532</data>
+</edge>
+<edge source="могила" target="шторм">
+  <data key="d1">0.5904737710952759</data>
+</edge>
+<edge source="могила" target="супермаркет">
+  <data key="d1">0.5716674327850342</data>
+</edge>
+<edge source="могила" target="сад">
+  <data key="d1">0.5699588656425476</data>
+</edge>
+<edge source="могила" target="ледовый">
+  <data key="d1">0.561593770980835</data>
+</edge>
+<edge source="Комендантская площадь" target="площадь">
+  <data key="d1">0.7566</data>
+</edge>
+<edge source="площадь" target="лёд">
+  <data key="d1">0.5771289467811584</data>
+</edge>
+<edge source="площадь" target="концерт">
+  <data key="d1">0.6011040806770325</data>
+</edge>
+<edge source="площадь" target="циклон">
+  <data key="d1">0.5563417077064514</data>
+</edge>
+<edge source="площадь" target="форт">
+  <data key="d1">0.5343745946884155</data>
+</edge>
+<edge source="площадь" target="метро">
+  <data key="d1">0.697223424911499</data>
+</edge>
+<edge source="площадь" target="улица">
+  <data key="d1">0.7402733564376831</data>
+</edge>
+<edge source="площадь" target="располагаться">
+  <data key="d1">0.7414472699165344</data>
+</edge>
+<edge source="площадь" target="ледяной">
+  <data key="d1">0.5524218082427979</data>
+</edge>
+<edge source="площадь" target="циклонтино">
+  <data key="d1">0.5851545333862305</data>
+</edge>
+<edge source="площадь" target="уголовный">
+  <data key="d1">0.596790075302124</data>
+</edge>
+<edge source="площадь" target="автобусный">
+  <data key="d1">0.5222810506820679</data>
+</edge>
+<edge source="площадь" target="фашистский">
+  <data key="d1">0.5463178157806396</data>
+</edge>
+<edge source="площадь" target="дорога">
+  <data key="d1">0.6966800689697266</data>
+</edge>
+<edge source="площадь" target="станция">
+  <data key="d1">0.5175309181213379</data>
+</edge>
+<edge source="площадь" target="супермаркет">
+  <data key="d1">0.6431388258934021</data>
+</edge>
+<edge source="площадь" target="сад">
+  <data key="d1">0.5589131116867065</data>
+</edge>
+<edge source="площадь" target="ледовый">
+  <data key="d1">0.509026288986206</data>
+</edge>
+<edge source="Офицерская улица" target="улица">
+  <data key="d1">0.7304</data>
+</edge>
+<edge source="улица" target="фортов">
+  <data key="d1">0.5174646377563477</data>
+</edge>
+<edge source="улица" target="победа">
+  <data key="d1">0.5015217065811157</data>
+</edge>
+<edge source="улица" target="лёд">
+  <data key="d1">0.5828827619552612</data>
+</edge>
+<edge source="улица" target="концерт">
+  <data key="d1">0.6523056030273438</data>
+</edge>
+<edge source="улица" target="собака">
+  <data key="d1">0.5247725248336792</data>
+</edge>
+<edge source="улица" target="замёрзнуть">
+  <data key="d1">0.5332223176956177</data>
+</edge>
+<edge source="улица" target="циклон">
+  <data key="d1">0.5995782613754272</data>
+</edge>
+<edge source="улица" target="форт">
+  <data key="d1">0.55989670753479</data>
+</edge>
+<edge source="улица" target="метро">
+  <data key="d1">0.6302704215049744</data>
+</edge>
+<edge source="улица" target="поджечь">
+  <data key="d1">0.5050076246261597</data>
+</edge>
+<edge source="улица" target="располагаться">
+  <data key="d1">0.6589891314506531</data>
+</edge>
+<edge source="улица" target="ледяной">
+  <data key="d1">0.5671502351760864</data>
+</edge>
+<edge source="улица" target="циклонтино">
+  <data key="d1">0.5961734056472778</data>
+</edge>
+<edge source="улица" target="уголовный">
+  <data key="d1">0.6798987984657288</data>
+</edge>
+<edge source="улица" target="автобусный">
+  <data key="d1">0.6268987059593201</data>
+</edge>
+<edge source="улица" target="дорога">
+  <data key="d1">0.6708676815032959</data>
+</edge>
+<edge source="улица" target="станция">
+  <data key="d1">0.5791690945625305</data>
+</edge>
+<edge source="улица" target="супермаркет">
+  <data key="d1">0.6823195815086365</data>
+</edge>
+<edge source="улица" target="сад">
+  <data key="d1">0.5600327253341675</data>
+</edge>
+<edge source="улица" target="ледовый">
+  <data key="d1">0.5643504858016968</data>
+</edge>
+<edge source="улица Мануильского" target="автобусный">
+  <data key="d1">0.6129</data>
+</edge>
+<edge source="автобусный" target="фортов">
+  <data key="d1">0.5407129526138306</data>
+</edge>
+<edge source="автобусный" target="питомец">
+  <data key="d1">0.5460195541381836</data>
+</edge>
+<edge source="автобусный" target="лёд">
+  <data key="d1">0.599074125289917</data>
+</edge>
+<edge source="автобусный" target="концерт">
+  <data key="d1">0.5577694177627563</data>
+</edge>
+<edge source="автобусный" target="собака">
+  <data key="d1">0.5447380542755127</data>
+</edge>
+<edge source="автобусный" target="замёрзнуть">
+  <data key="d1">0.5711701512336731</data>
+</edge>
+<edge source="автобусный" target="циклон">
+  <data key="d1">0.5411974787712097</data>
+</edge>
+<edge source="автобусный" target="форт">
+  <data key="d1">0.5425193309783936</data>
+</edge>
+<edge source="автобусный" target="метро">
+  <data key="d1">0.6425983309745789</data>
+</edge>
+<edge source="автобусный" target="поджечь">
+  <data key="d1">0.5434032678604126</data>
+</edge>
+<edge source="автобусный" target="располагаться">
+  <data key="d1">0.5135543346405029</data>
+</edge>
+<edge source="автобусный" target="ледяной">
+  <data key="d1">0.5264394879341125</data>
+</edge>
+<edge source="автобусный" target="циклонтино">
+  <data key="d1">0.5449895858764648</data>
+</edge>
+<edge source="автобусный" target="уголовный">
+  <data key="d1">0.5778800845146179</data>
+</edge>
+<edge source="автобусный" target="дорога">
+  <data key="d1">0.5740678310394287</data>
+</edge>
+<edge source="автобусный" target="станция">
+  <data key="d1">0.532098650932312</data>
+</edge>
+<edge source="автобусный" target="шторм">
+  <data key="d1">0.5138174295425415</data>
+</edge>
+<edge source="автобусный" target="супермаркет">
+  <data key="d1">0.614613950252533</data>
+</edge>
+<edge source="автобусный" target="сад">
+  <data key="d1">0.6395280957221985</data>
+</edge>
+<edge source="автобусный" target="ледовый">
+  <data key="d1">0.5410698056221008</data>
+</edge>
+<edge source="Краснофлотский переулок" target="дорога">
+  <data key="d1">0.6286</data>
+</edge>
+<edge source="дорога" target="лёд">
+  <data key="d1">0.5145159959793091</data>
+</edge>
+<edge source="дорога" target="форт">
+  <data key="d1">0.5229841470718384</data>
+</edge>
+<edge source="дорога" target="метро">
+  <data key="d1">0.6161949634552002</data>
+</edge>
+<edge source="дорога" target="располагаться">
+  <data key="d1">0.5915250778198242</data>
+</edge>
+<edge source="дорога" target="циклонтино">
+  <data key="d1">0.5170897245407104</data>
+</edge>
+<edge source="дорога" target="уголовный">
+  <data key="d1">0.5577455759048462</data>
+</edge>
+<edge source="дорога" target="супермаркет">
+  <data key="d1">0.5530908107757568</data>
+</edge>
+<edge source="проспект Стачек" target="форт">
+  <data key="d1">0.6585</data>
+</edge>
+<edge source="проспект Стачек" target="фортов">
+  <data key="d1">0.653</data>
+</edge>
+<edge source="проспект Стачек" target="крепость">
+  <data key="d1">0.6378</data>
+</edge>
+<edge source="форт" target="фортов">
+  <data key="d1">0.769402801990509</data>
+</edge>
+<edge source="форт" target="победа">
+  <data key="d1">0.586189866065979</data>
+</edge>
+<edge source="форт" target="лёд">
+  <data key="d1">0.5435881018638611</data>
+</edge>
+<edge source="форт" target="концерт">
+  <data key="d1">0.6279197335243225</data>
+</edge>
+<edge source="форт" target="собака">
+  <data key="d1">0.5803636312484741</data>
+</edge>
+<edge source="форт" target="замёрзнуть">
+  <data key="d1">0.5075777769088745</data>
+</edge>
+<edge source="форт" target="циклон">
+  <data key="d1">0.5616632699966431</data>
+</edge>
+<edge source="форт" target="поджечь">
+  <data key="d1">0.5579032897949219</data>
+</edge>
+<edge source="форт" target="циклонтино">
+  <data key="d1">0.5232271552085876</data>
+</edge>
+<edge source="форт" target="уголовный">
+  <data key="d1">0.5883565545082092</data>
+</edge>
+<edge source="форт" target="крепость">
+  <data key="d1">0.5451924204826355</data>
+</edge>
+<edge source="форт" target="шторм">
+  <data key="d1">0.6663684844970703</data>
+</edge>
+<edge source="форт" target="супермаркет">
+  <data key="d1">0.6401435732841492</data>
+</edge>
+<edge source="форт" target="сад">
+  <data key="d1">0.5814672708511353</data>
+</edge>
+<edge source="фортов" target="победа">
+  <data key="d1">0.6186392307281494</data>
+</edge>
+<edge source="фортов" target="концерт">
+  <data key="d1">0.6361891031265259</data>
+</edge>
+<edge source="фортов" target="собака">
+  <data key="d1">0.5812596082687378</data>
+</edge>
+<edge source="фортов" target="замёрзнуть">
+  <data key="d1">0.5543550252914429</data>
+</edge>
+<edge source="фортов" target="циклон">
+  <data key="d1">0.5559477806091309</data>
+</edge>
+<edge source="фортов" target="поджечь">
+  <data key="d1">0.6417341232299805</data>
+</edge>
+<edge source="фортов" target="ледяной">
+  <data key="d1">0.5061942338943481</data>
+</edge>
+<edge source="фортов" target="уголовный">
+  <data key="d1">0.5640710592269897</data>
+</edge>
+<edge source="фортов" target="крепость">
+  <data key="d1">0.5739578008651733</data>
+</edge>
+<edge source="фортов" target="шторм">
+  <data key="d1">0.6623796224594116</data>
+</edge>
+<edge source="фортов" target="супермаркет">
+  <data key="d1">0.5956257581710815</data>
+</edge>
+<edge source="фортов" target="сад">
+  <data key="d1">0.5469454526901245</data>
+</edge>
+<edge source="Большевистская улица" target="поджечь">
+  <data key="d1">0.637</data>
+</edge>
+<edge source="Большевистская улица" target="пламенипредположительный">
+  <data key="d1">0.6065</data>
+</edge>
+<edge source="поджечь" target="питомец">
+  <data key="d1">0.5183320045471191</data>
+</edge>
+<edge source="поджечь" target="победа">
+  <data key="d1">0.7207401394844055</data>
+</edge>
+<edge source="поджечь" target="лёд">
+  <data key="d1">0.5562044382095337</data>
+</edge>
+<edge source="поджечь" target="концерт">
+  <data key="d1">0.6583079695701599</data>
+</edge>
+<edge source="поджечь" target="собака">
+  <data key="d1">0.6184411644935608</data>
+</edge>
+<edge source="поджечь" target="замёрзнуть">
+  <data key="d1">0.6350986957550049</data>
+</edge>
+<edge source="поджечь" target="ледяной">
+  <data key="d1">0.6819667816162109</data>
+</edge>
+<edge source="поджечь" target="циклонтино">
+  <data key="d1">0.5190671682357788</data>
+</edge>
+<edge source="поджечь" target="уголовный">
+  <data key="d1">0.5446082353591919</data>
+</edge>
+<edge source="поджечь" target="фашистский">
+  <data key="d1">0.5062989592552185</data>
+</edge>
+<edge source="поджечь" target="станция">
+  <data key="d1">0.5194982290267944</data>
+</edge>
+<edge source="поджечь" target="догхантеры">
+  <data key="d1">0.5643587112426758</data>
+</edge>
+<edge source="поджечь" target="шторм">
+  <data key="d1">0.5960966348648071</data>
+</edge>
+<edge source="поджечь" target="супермаркет">
+  <data key="d1">0.5463339686393738</data>
+</edge>
+<edge source="поджечь" target="сад">
+  <data key="d1">0.6216139793395996</data>
+</edge>
+<edge source="поджечь" target="ледовый">
+  <data key="d1">0.5137401819229126</data>
+</edge>
+<edge source="пламенипредположительный" target="циклонтино">
+  <data key="d1">0.503291130065918</data>
+</edge>
+<edge source="Якорная улица" target="концерт">
+  <data key="d1">0.8255</data>
+</edge>
+<edge source="Якорная улица" target="победа">
+  <data key="d1">0.6207</data>
+</edge>
+<edge source="концерт" target="питомец">
+  <data key="d1">0.5400623679161072</data>
+</edge>
+<edge source="концерт" target="победа">
+  <data key="d1">0.6242578029632568</data>
+</edge>
+<edge source="концерт" target="лёд">
+  <data key="d1">0.6126787662506104</data>
+</edge>
+<edge source="концерт" target="собака">
+  <data key="d1">0.6110649704933167</data>
+</edge>
+<edge source="концерт" target="замёрзнуть">
+  <data key="d1">0.5758727788925171</data>
+</edge>
+<edge source="концерт" target="циклон">
+  <data key="d1">0.5501757264137268</data>
+</edge>
+<edge source="концерт" target="располагаться">
+  <data key="d1">0.5645545721054077</data>
+</edge>
+<edge source="концерт" target="ледяной">
+  <data key="d1">0.6382274031639099</data>
+</edge>
+<edge source="концерт" target="циклонтино">
+  <data key="d1">0.590131402015686</data>
+</edge>
+<edge source="концерт" target="уголовный">
+  <data key="d1">0.6751465201377869</data>
+</edge>
+<edge source="концерт" target="станция">
+  <data key="d1">0.556926965713501</data>
+</edge>
+<edge source="концерт" target="шторм">
+  <data key="d1">0.5236588716506958</data>
+</edge>
+<edge source="концерт" target="супермаркет">
+  <data key="d1">0.5888700485229492</data>
+</edge>
+<edge source="концерт" target="сад">
+  <data key="d1">0.669395923614502</data>
+</edge>
+<edge source="концерт" target="ледовый">
+  <data key="d1">0.5425215363502502</data>
+</edge>
+<edge source="победа" target="собака">
+  <data key="d1">0.5878645181655884</data>
+</edge>
+<edge source="победа" target="замёрзнуть">
+  <data key="d1">0.534309983253479</data>
+</edge>
+<edge source="победа" target="ледяной">
+  <data key="d1">0.6053715944290161</data>
+</edge>
+<edge source="победа" target="уголовный">
+  <data key="d1">0.5388274192810059</data>
+</edge>
+<edge source="победа" target="станция">
+  <data key="d1">0.5337421894073486</data>
+</edge>
+<edge source="победа" target="догхантеры">
+  <data key="d1">0.5176498889923096</data>
+</edge>
+<edge source="победа" target="шторм">
+  <data key="d1">0.557019829750061</data>
+</edge>
+<edge source="победа" target="супермаркет">
+  <data key="d1">0.5338339805603027</data>
+</edge>
+<edge source="победа" target="сад">
+  <data key="d1">0.6102668046951294</data>
+</edge>
+<edge source="Красная улица" target="замёрзнуть">
+  <data key="d1">0.6584</data>
+</edge>
+<edge source="Красная улица" target="ледяной">
+  <data key="d1">0.6576</data>
+</edge>
+<edge source="Красная улица" target="ледовый">
+  <data key="d1">0.6456</data>
+</edge>
+<edge source="Красная улица" target="лёд">
+  <data key="d1">0.6357</data>
+</edge>
+<edge source="замёрзнуть" target="питомец">
+  <data key="d1">0.6073431968688965</data>
+</edge>
+<edge source="замёрзнуть" target="лёд">
+  <data key="d1">0.5561233758926392</data>
+</edge>
+<edge source="замёрзнуть" target="собака">
+  <data key="d1">0.5307376980781555</data>
+</edge>
+<edge source="замёрзнуть" target="циклон">
+  <data key="d1">0.5337651968002319</data>
+</edge>
+<edge source="замёрзнуть" target="метро">
+  <data key="d1">0.5495899319648743</data>
+</edge>
+<edge source="замёрзнуть" target="ледяной">
+  <data key="d1">0.5639650821685791</data>
+</edge>
+<edge source="замёрзнуть" target="циклонтино">
+  <data key="d1">0.6229174137115479</data>
+</edge>
+<edge source="замёрзнуть" target="уголовный">
+  <data key="d1">0.5063591003417969</data>
+</edge>
+<edge source="замёрзнуть" target="шторм">
+  <data key="d1">0.5947448015213013</data>
+</edge>
+<edge source="замёрзнуть" target="штормовой">
+  <data key="d1">0.5699538588523865</data>
+</edge>
+<edge source="замёрзнуть" target="сад">
+  <data key="d1">0.5100291967391968</data>
+</edge>
+<edge source="ледяной" target="питомец">
+  <data key="d1">0.556777834892273</data>
+</edge>
+<edge source="ледяной" target="лёд">
+  <data key="d1">0.6572210788726807</data>
+</edge>
+<edge source="ледяной" target="собака">
+  <data key="d1">0.5500206351280212</data>
+</edge>
+<edge source="ледяной" target="циклон">
+  <data key="d1">0.5156921148300171</data>
+</edge>
+<edge source="ледяной" target="циклонтино">
+  <data key="d1">0.5644173622131348</data>
+</edge>
+<edge source="ледяной" target="уголовный">
+  <data key="d1">0.5512862205505371</data>
+</edge>
+<edge source="ледяной" target="шторм">
+  <data key="d1">0.5263364911079407</data>
+</edge>
+<edge source="ледяной" target="супермаркет">
+  <data key="d1">0.5440332293510437</data>
+</edge>
+<edge source="ледяной" target="сад">
+  <data key="d1">0.6564413905143738</data>
+</edge>
+<edge source="ледяной" target="ледовый">
+  <data key="d1">0.5318250060081482</data>
+</edge>
+<edge source="ледовый" target="лёд">
+  <data key="d1">0.5741485357284546</data>
+</edge>
+<edge source="ледовый" target="собака">
+  <data key="d1">0.5502209663391113</data>
+</edge>
+<edge source="ледовый" target="циклон">
+  <data key="d1">0.5956851243972778</data>
+</edge>
+<edge source="ледовый" target="располагаться">
+  <data key="d1">0.6050933003425598</data>
+</edge>
+<edge source="ледовый" target="циклонтино">
+  <data key="d1">0.5195261836051941</data>
+</edge>
+<edge source="ледовый" target="уголовный">
+  <data key="d1">0.627662181854248</data>
+</edge>
+<edge source="ледовый" target="станция">
+  <data key="d1">0.6162919998168945</data>
+</edge>
+<edge source="ледовый" target="шторм">
+  <data key="d1">0.5529046058654785</data>
+</edge>
+<edge source="ледовый" target="супермаркет">
+  <data key="d1">0.5174370408058167</data>
+</edge>
+<edge source="ледовый" target="сад">
+  <data key="d1">0.5597109198570251</data>
+</edge>
+<edge source="лёд" target="собака">
+  <data key="d1">0.5104893445968628</data>
+</edge>
+<edge source="лёд" target="циклон">
+  <data key="d1">0.5445369482040405</data>
+</edge>
+<edge source="лёд" target="метро">
+  <data key="d1">0.597615659236908</data>
+</edge>
+<edge source="лёд" target="располагаться">
+  <data key="d1">0.616306722164154</data>
+</edge>
+<edge source="лёд" target="циклонтино">
+  <data key="d1">0.5160177946090698</data>
+</edge>
+<edge source="лёд" target="уголовный">
+  <data key="d1">0.62818843126297</data>
+</edge>
+<edge source="лёд" target="фашистский">
+  <data key="d1">0.5534108877182007</data>
+</edge>
+<edge source="лёд" target="супермаркет">
+  <data key="d1">0.5841367840766907</data>
+</edge>
+<edge source="лёд" target="сад">
+  <data key="d1">0.6054457426071167</data>
+</edge>
+<edge source="Синий мост" target="сад">
+  <data key="d1">0.638</data>
+</edge>
+<edge source="сад" target="питомец">
+  <data key="d1">0.5245839953422546</data>
+</edge>
+<edge source="сад" target="собака">
+  <data key="d1">0.6349496841430664</data>
+</edge>
+<edge source="сад" target="метро">
+  <data key="d1">0.5362393856048584</data>
+</edge>
+<edge source="сад" target="располагаться">
+  <data key="d1">0.5430852174758911</data>
+</edge>
+<edge source="сад" target="уголовный">
+  <data key="d1">0.6379474401473999</data>
+</edge>
+<edge source="сад" target="станция">
+  <data key="d1">0.5651736259460449</data>
+</edge>
+<edge source="сад" target="шторм">
+  <data key="d1">0.5697847008705139</data>
+</edge>
+<edge source="сад" target="супермаркет">
+  <data key="d1">0.5915248394012451</data>
+</edge>
+<edge source="улица Руднева" target="собака">
+  <data key="d1">0.6968</data>
+</edge>
+<edge source="улица Руднева" target="догхантеры">
+  <data key="d1">0.6825</data>
+</edge>
+<edge source="улица Руднева" target="питомец">
+  <data key="d1">0.6118</data>
+</edge>
+<edge source="собака" target="питомец">
+  <data key="d1">0.5956271886825562</data>
+</edge>
+<edge source="собака" target="циклон">
+  <data key="d1">0.538597822189331</data>
+</edge>
+<edge source="собака" target="располагаться">
+  <data key="d1">0.5014917850494385</data>
+</edge>
+<edge source="собака" target="циклонтино">
+  <data key="d1">0.5169796943664551</data>
+</edge>
+<edge source="собака" target="уголовный">
+  <data key="d1">0.61750727891922</data>
+</edge>
+<edge source="собака" target="станция">
+  <data key="d1">0.5857539176940918</data>
+</edge>
+<edge source="собака" target="догхантеры">
+  <data key="d1">0.522000789642334</data>
+</edge>
+<edge source="собака" target="шторм">
+  <data key="d1">0.6686505675315857</data>
+</edge>
+<edge source="собака" target="супермаркет">
+  <data key="d1">0.5558063387870789</data>
+</edge>
+<edge source="догхантеры" target="циклонтино">
+  <data key="d1">0.557465672492981</data>
+</edge>
+<edge source="догхантеры" target="супермаркет">
+  <data key="d1">0.5183901786804199</data>
+</edge>
+<edge source="питомец" target="циклон">
+  <data key="d1">0.5424498319625854</data>
+</edge>
+<edge source="питомец" target="циклонтино">
+  <data key="d1">0.6414265632629395</data>
+</edge>
+<edge source="питомец" target="уголовный">
+  <data key="d1">0.523390531539917</data>
+</edge>
+<edge source="питомец" target="обвиняться">
+  <data key="d1">0.5173531174659729</data>
+</edge>
+<edge source="питомец" target="шторм">
+  <data key="d1">0.5226988196372986</data>
+</edge>
+<edge source="путепровод Нева" target="циклон">
+  <data key="d1">0.6881</data>
+</edge>
+<edge source="путепровод Нева" target="штормовой">
+  <data key="d1">0.6051</data>
+</edge>
+<edge source="путепровод Нева" target="шторм">
+  <data key="d1">0.6332</data>
+</edge>
+<edge source="путепровод Нева" target="циклонтино">
+  <data key="d1">0.6242</data>
+</edge>
+<edge source="циклон" target="располагаться">
+  <data key="d1">0.5914643406867981</data>
+</edge>
+<edge source="циклон" target="циклонтино">
+  <data key="d1">0.7498250007629395</data>
+</edge>
+<edge source="циклон" target="уголовный">
+  <data key="d1">0.5845717191696167</data>
+</edge>
+<edge source="циклон" target="станция">
+  <data key="d1">0.5781067609786987</data>
+</edge>
+<edge source="циклон" target="шторм">
+  <data key="d1">0.6415383815765381</data>
+</edge>
+<edge source="циклон" target="супермаркет">
+  <data key="d1">0.5577523112297058</data>
+</edge>
+<edge source="циклон" target="штормовой">
+  <data key="d1">0.5504100322723389</data>
+</edge>
+<edge source="штормовой" target="циклонтино">
+  <data key="d1">0.5739312767982483</data>
+</edge>
+<edge source="шторм" target="циклонтино">
+  <data key="d1">0.5688360929489136</data>
+</edge>
+<edge source="шторм" target="уголовный">
+  <data key="d1">0.5037374496459961</data>
+</edge>
+<edge source="шторм" target="станция">
+  <data key="d1">0.5060362815856934</data>
+</edge>
+<edge source="шторм" target="супермаркет">
+  <data key="d1">0.5538924932479858</data>
+</edge>
+<edge source="циклонтино" target="располагаться">
+  <data key="d1">0.5663702487945557</data>
+</edge>
+<edge source="циклонтино" target="уголовный">
+  <data key="d1">0.5211543440818787</data>
+</edge>
+<edge source="циклонтино" target="фашистский">
+  <data key="d1">0.5271214246749878</data>
+</edge>
+<edge source="циклонтино" target="станция">
+  <data key="d1">0.5022698044776917</data>
+</edge>
+<edge source="циклонтино" target="супермаркет">
+  <data key="d1">0.552276611328125</data>
+</edge>
+<edge source="улица Володарского" target="супермаркет">
+  <data key="d1">0.6171</data>
+</edge>
+<edge source="супермаркет" target="метро">
+  <data key="d1">0.5338295698165894</data>
+</edge>
+<edge source="супермаркет" target="располагаться">
+  <data key="d1">0.5933693647384644</data>
+</edge>
+<edge source="супермаркет" target="уголовный">
+  <data key="d1">0.5975750684738159</data>
+</edge>
+<edge source="супермаркет" target="фашистский">
+  <data key="d1">0.5084217190742493</data>
+</edge>
+<edge source="супермаркет" target="станция">
+  <data key="d1">0.5207241773605347</data>
+</edge>
+<edge source="Посадская улица" target="располагаться">
+  <data key="d1">0.6083</data>
+</edge>
+<edge source="располагаться" target="метро">
+  <data key="d1">0.5966900587081909</data>
+</edge>
+<edge source="располагаться" target="уголовный">
+  <data key="d1">0.6643193960189819</data>
+</edge>
+<edge source="располагаться" target="фашистский">
+  <data key="d1">0.561639666557312</data>
+</edge>
+<edge source="Ленинградская улица" target="фашистский">
+  <data key="d1">0.6021</data>
+</edge>
+<edge source="фашистский" target="уголовный">
+  <data key="d1">0.573175311088562</data>
+</edge>
+<edge source="Беговая улица" target="метро">
+  <data key="d1">0.6752</data>
+</edge>
+<edge source="Беговая улица" target="станция">
+  <data key="d1">0.6199</data>
+</edge>
+<edge source="метро" target="уголовный">
+  <data key="d1">0.5116995573043823</data>
+</edge>
+<edge source="станция" target="уголовный">
+  <data key="d1">0.5423399806022644</data>
+</edge>
+<edge source="Пролетарская улица" target="уголовный">
+  <data key="d1">0.6016</data>
+</edge>
+<edge source="Пролетарская улица" target="обвиняться">
+  <data key="d1">0.6049</data>
+</edge>
+</graph></graphml>
