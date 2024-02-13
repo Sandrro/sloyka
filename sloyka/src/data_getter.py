@@ -1,3 +1,18 @@
+"""
+This module contains classes for retrieving and working with various types of data.
+
+@class:GeoDataGetter:
+This class is used to retrieve geospatial data from OpenStreetMap (OSM) based on given OSM ID and tags.
+
+@class:VkCommentsParser:
+A class for parsing and working with VK comments.
+
+@class:Streets:
+A class for working with street data.
+
+@class:PostGetter:
+A class used to retrieve post and comment data from the VK API.
+"""
 import osmnx as ox
 import geopandas as gpd
 import pandas as pd
@@ -18,20 +33,35 @@ from typing import List
 
 
 class GeoDataGetter:
+    """
+    This class is used to retrieve geospatial data from OpenStreetMap (OSM) based on given OSM ID and tags.
+
+    Methods:
+    - get_features_from_id: Retrieves features from the given OSM ID using the provided tags and OSM type, and returns the results as a GeoDataFrame.
+    - _get_place_from_id: Retrieves the place from the given OSM ID and OSM type.
+    - _process_tags: Processes the provided tags and returns a list of GeoDataFrames.
+    - _get_features_from_place: Retrieves features from a specific place based on category and tag.
+    - _handle_error: Handles any errors that occur during the process and prints an error message.
+    """
     def get_features_from_id(
-        self,
-        osm_id: int,
-        tags: dict,
-        osm_type="R",
-        selected_columns=[
-            "tag",
-            "element_type",
-            "osmid",
-            "name",
-            "geometry",
-            "centroid",
-        ],
-    ) -> gpd.GeoDataFrame:
+            self,
+            osm_id: int,
+            tags: dict,
+            osm_type="R",
+            selected_columns=['tag', 'element_type', 'osmid', 'name', 'geometry', 'centroid']
+            ) -> gpd.GeoDataFrame:
+        """
+        Get features from the given OSM ID using the provided tags and OSM type, and return the results as a GeoDataFrame.
+        
+        Args:
+            osm_id (int): The OpenStreetMap ID.
+            tags (dict): The tags to filter by.
+            osm_type (str, optional): The OpenStreetMap type. Defaults to "R".
+            selected_columns (list, optional): The selected columns to include in the result GeoDataFrame. Defaults to ['tag', 'element_type', 'osmid', 'name', 'geometry', 'centroid'].
+        
+        Returns:
+            gpd.GeoDataFrame: The GeoDataFrame containing the features.
+        """
         place = self._get_place_from_id(osm_id, osm_type)
         gdf_list = self._process_tags(tags, place, selected_columns)
 
@@ -90,10 +120,38 @@ class GeoDataGetter:
 
 
 class VkCommentsParser:
+    """
+    A class for parsing and working with VK comments.
+
+    Methods:
+        - unix_to_date(ts): Convert a Unix timestamp to a date string.
+        - nes_params(post_id, all_comments): Generate a dictionary of comments for a given post.
+        - get_Comments(post_id, owner_id, token, nes_dict): Get comments from a VK post and parse them into a nested dictionary.
+        - to_df(nes_dict): Create a pandas DataFrame from the given nested dictionary.
+    """  
     def unix_to_date(ts):
-        return datetime.datetime.utcfromtimestamp(ts).strftime("%Y-%m-%d")
+        """
+        Convert a Unix timestamp to a date string.
+
+        Parameters:
+            ts (int): The Unix timestamp to convert to a date string.
+
+        Returns:
+            str: The date string in the format 'YYYY-MM-DD'.
+        """
+        return datetime.datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d')
 
     def nes_params(post_id, all_comments):
+        """
+        Generates a dictionary of comments for a given post, using the post ID and all comments.
+        
+        Parameters:
+            post_id (int): The ID of the post for which comments are to be retrieved.
+            all_comments (dict): A dictionary containing all comments, including profiles and items.
+        
+        Returns:
+            dict: A dictionary containing the comments mapped to their IDs, along with associated profile information.
+        """
         nes_dict = {}
         profiles = all_comments["profiles"]
         comments = all_comments["items"]
@@ -168,12 +226,17 @@ class VkCommentsParser:
         return VkCommentsParser.to_df(nes_dict)
 
     def to_df(nes_dict):
-        print(nes_dict)
-        df = pd.DataFrame.from_dict(
-            nes_dict,
-            orient="index",
-            columns=["name", "last_name", "date", "likes", "text", 'post_id'],
-        )
+        """
+        Create a pandas DataFrame from the given nested dictionary.
+
+        Parameters:
+            nes_dict (dict): The nested dictionary to be converted into a DataFrame.
+
+        Returns:
+            pandas.DataFrame: The DataFrame created from the nested dictionary.
+        """
+        df = pd.DataFrame.from_dict(nes_dict, orient='index',
+                                    columns=['name', 'last_name', 'date', 'likes', 'text', 'post_id'])
         return df
 
 
@@ -216,6 +279,19 @@ class Streets:
 
 
 class VkPostGetter:
+    
+class PostGetter:
+    """
+    A class used to retrieve post and comment data from the VK API.
+
+    Methods:
+    - get_group_post_ids(owner_id, your_token) -> List[int]: Retrieves a list of post IDs from a VK group.
+    - unix_to_date(ts): Converts a Unix timestamp to a human-readable date format.
+    - nes_params(post_id, all_comments): Processes necessary parameters from comments data.
+    - get_Comments(post_id, owner_id, token): Retrieves comments for a specific post.
+    - _to_df(nes_dict): Converts the processed dictionary data into a DataFrame.
+    - run(your_owner_id, your_token, limit_posts=None): Runs the entire process to retrieve and process post and comment data.
+    """
     def __init__():
         pass
 
@@ -227,6 +303,17 @@ class VkPostGetter:
     TIMEOUT_LIMIT = 15
 
     def get_group_post_ids(owner_id, your_token, post_num_limit, step) -> List[int]:
+    def get_group_post_ids(owner_id, your_token) -> List[int]:
+        """
+        Get a list of post IDs for a given owner ID using the VK API.
+
+        Args:
+            owner_id (int): The ID of the owner whose posts are being retrieved.
+            your_token (str): The access token for making the API request.
+
+        Returns:
+            List[int]: A list of post IDs belonging to the specified owner ID.
+        """
         offset = 0
         post_ids = []
 

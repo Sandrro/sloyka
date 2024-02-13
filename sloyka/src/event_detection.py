@@ -1,3 +1,21 @@
+"""
+This module contains the EventDetection class, which is aimed to generate events and their connections based
+on the application of semantic clustering method (BERTopic) on the texts in the context of an urban spatial model.
+
+The EventDetection class has the following methods:
+
+@method:_get_roads:
+Get the road network of a city as road links and roads.
+
+@method:_get_buildings:
+Get the buildings of a city as a GeoDataFrame.
+
+@method:_collect_population:
+Collect population data for each object (building, street, link).
+
+@method:_preprocess:
+Preprocess the data.
+"""
 import re
 from itertools import chain, combinations
 
