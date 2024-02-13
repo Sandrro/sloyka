@@ -5285,5 +5285,5 @@ pymorphy2 = "*"
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.10.13"
+python-versions = "^3.10.12"
 content-hash = "e3a0bfaaf10b4ddcb1caaf4350ef57bf58941f9b04a0d220b9ddb9bd659d3180"
