@@ -8,7 +8,7 @@
 [![sloyka_community_chat](https://img.shields.io/badge/-community-blue?logo=telegram)](https://t.me/sloyka_community)
 
 <div align="center">
-  <img src="data\placeholder.png" alt="Your Banner" width="100%">
+  <img src="images\placeholder.png" alt="Your Banner" width="100%">
 </div>
 
 **SLOYKA** - это библиотека, нацеленная на обогащение цифровых моделей городов данными, получаемыми из текстовых данных цифрового следа горожан, 
