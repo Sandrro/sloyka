@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Data Getter Module &#8212; документация sloyka 0.1.1</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e9f732b9"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/translations.js?v=29b1f277"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="next" title="Event Detection Module" href="event_detection.html" />
+    <link rel="prev" title="Welcome to sloyka’s documentation!" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <span class="target" id="module-data_getter"></span><section id="data-getter-module">
+<h1>Data Getter Module<a class="headerlink" href="#data-getter-module" title="Permalink to this heading">¶</a></h1>
+<section id="osm-data-getter">
+<h2>Osm data getter<a class="headerlink" href="#osm-data-getter" title="Permalink to this heading">¶</a></h2>
+<p>The module is designed to retrieve data from OSM.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">current_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+<span class="n">project_root</span> <span class="o">=</span> <span class="n">current_dir</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">examples&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">project_root</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">factfinder.src.data_getter</span> <span class="kn">import</span> <span class="n">GeoDataGetter</span>
+<span class="kn">from</span> <span class="nn">factfinder.src.constants</span> <span class="kn">import</span> <span class="n">OSM_TAGS</span>
+
+<span class="n">geo_data_getter</span> <span class="o">=</span> <span class="n">GeoDataGetter</span><span class="p">()</span>
+
+<span class="n">tdict</span> <span class="o">=</span> <span class="p">[(</span><span class="n">category</span><span class="p">,</span> <span class="n">category_tags</span><span class="p">)</span> <span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">category_tags</span> <span class="ow">in</span> <span class="n">OSM_TAGS</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="n">test_gdf</span> <span class="o">=</span> <span class="n">geo_data_getter</span><span class="o">.</span><span class="n">get_features_from_id</span><span class="p">(</span><span class="n">osm_id</span><span class="o">=</span><span class="mi">421007</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="n">tdict</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span> <span class="n">tdict</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]})</span>
+<span class="n">test_gdf</span>
+</pre></div>
+</div>
+</section>
+<section id="vk-comments-parser">
+<h2>Vk comments parser<a class="headerlink" href="#vk-comments-parser" title="Permalink to this heading">¶</a></h2>
+<p>The module is designed to retrieve data from Vk</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">current_dir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+
+<span class="n">project_root</span> <span class="o">=</span> <span class="n">current_dir</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">examples&quot;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">project_root</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">factfinder.src.data_getter</span> <span class="kn">import</span> <span class="n">GeoDataGetter</span>
+<span class="kn">from</span> <span class="nn">factfinder.src.constants</span> <span class="kn">import</span> <span class="n">OSM_TAGS</span>
+
+<span class="n">geo_data_getter</span> <span class="o">=</span> <span class="n">GeoDataGetter</span><span class="p">()</span>
+
+<span class="n">tdict</span> <span class="o">=</span> <span class="p">[(</span><span class="n">category</span><span class="p">,</span> <span class="n">category_tags</span><span class="p">)</span> <span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">category_tags</span> <span class="ow">in</span> <span class="n">OSM_TAGS</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+<span class="n">test_gdf</span> <span class="o">=</span> <span class="n">geo_data_getter</span><span class="o">.</span><span class="n">get_features_from_id</span><span class="p">(</span><span class="n">osm_id</span><span class="o">=</span><span class="mi">421007</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="n">tdict</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span> <span class="n">tdict</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]})</span>
+<span class="n">test_gdf</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">sloyka</a></h1>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Data Getter Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#osm-data-getter">Osm data getter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#vk-comments-parser">Vk comments parser</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="event_detection.html">Event Detection Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geocoder.html">Geocoder Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="semantic_graph.html">Semantic Graph Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="text_classifiers.html">Text Classifiers Module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="index.html" title="предыдущая глава">Welcome to sloyka’s documentation!</a></li>
+      <li>Next: <a href="event_detection.html" title="следующая глава">Event Detection Module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Aleksandr Antonov, George Kontsevik.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/data_getter.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
