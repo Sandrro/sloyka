@@ -6,7 +6,8 @@ from .src import (
     Semgraph,
     PostGetter,
     Streets, 
-    VkCommentsParser
+    VkCommentsParser,
+    NER_parklike
 )
 
 __all__ = [
@@ -17,5 +18,6 @@ __all__ = [
     "Semgraph",
     "PostGetter", 
     "Streets", 
-    "VkCommentsParser"
+    "VkCommentsParser",
+    "NER_parklike"
 ]
