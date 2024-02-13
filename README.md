@@ -6,7 +6,7 @@
 [![Tests](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/tests.yml/badge.svg?branch=dev)](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/tests.yml)
 [![sloyka_community_chat](https://img.shields.io/badge/-community-blue?logo=telegram)](https://t.me/sloyka_community)
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wCUJAqlq9GMKw1wpTsWrzYwr10pWDeHv?usp=sharing)
+<!-- [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wCUJAqlq9GMKw1wpTsWrzYwr10pWDeHv?usp=sharing) -->
 
 <img align="right" src="logo/logo.png" alt="Your Banner" width="30%">
 
