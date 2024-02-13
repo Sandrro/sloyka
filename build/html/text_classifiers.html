@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Text Classifiers Module &#8212; документация sloyka 0.1.1</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=4f649999" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=039e1c02" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js?v=e9f732b9"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="_static/translations.js?v=29b1f277"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+    <link rel="prev" title="Semantic Graph Module" href="semantic_graph.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <span class="target" id="module-text_classifiers"></span><section id="text-classifiers-module">
+<h1>Text Classifiers Module<a class="headerlink" href="#text-classifiers-module" title="Permalink to this heading">¶</a></h1>
+<section id="module-overview">
+<h2>Module Overview<a class="headerlink" href="#module-overview" title="Permalink to this heading">¶</a></h2>
+<p>Module is aimed to classify input texts into themes, or structured types of events.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">device_type</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:0&quot;</span><span class="p">)</span>
+<span class="n">path_to_file</span> <span class="o">=</span> <span class="s2">&quot;SOIKA/data/raw/Адмиралтейский.csv&quot;</span>
+<span class="c1">#Step 1. Enter path to file with texts and number of categories to return</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">TextClassifier</span><span class="p">(</span>
+<span class="n">repository_id</span><span class="o">=</span><span class="s2">&quot;Sandrro/text_to_function_v2&quot;</span><span class="p">,</span>
+<span class="n">number_of_categories</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="n">device_type</span><span class="o">=</span><span class="n">device_type</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="c1">#Step 2. Create DataFrame and make sure that the name of the column with texts is &#39;Текст&#39; and there are no empty rows</span>
+<span class="n">df_predict</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_to_file</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">)</span>
+<span class="n">df_predict</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;Текст комментария&quot;</span><span class="p">:</span> <span class="s2">&quot;Текст&quot;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">df_predict</span> <span class="o">=</span> <span class="n">df_predict</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Текст&quot;</span><span class="p">])</span>
+<span class="n">df_predict</span> <span class="o">=</span> <span class="n">df_predict</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1">#Step 3. Start the script and wait! It will return two columns: one with categories (&#39;ЖКХ; Транспорт; Энергетика&#39; or &#39;ЖКХ&#39;, depending on the number of categories) and one with probabilities of these categories</span>
+<span class="n">df_predict</span><span class="p">[[</span><span class="s2">&quot;cats&quot;</span><span class="p">,</span> <span class="s2">&quot;probs&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+<span class="n">df_predict</span><span class="p">[</span><span class="s2">&quot;Текст&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">progress_map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">model</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">sloyka</a></h1>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="data_getter.html">Data Getter Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event_detection.html">Event Detection Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="geocoder.html">Geocoder Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="semantic_graph.html">Semantic Graph Module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Text Classifiers Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-overview">Module Overview</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="semantic_graph.html" title="предыдущая глава">Semantic Graph Module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2024, Aleksandr Antonov, George Kontsevik.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 7.1.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+      |
+      <a href="_sources/text_classifiers.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
