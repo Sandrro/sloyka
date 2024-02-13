@@ -1,3 +1,21 @@
+[build-system]
+requires = ["setuptools>=64.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sloyka"
+version = "0.0.1"
+authors = [
+    # { name = "", email = "" }, # TODO add authors
+]
+description = ""
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENCE.md" }
+
+[tool.setuptools.packages.find]
+include = ["sloyka*"]
+
 [tool.poetry]
 name = "sloyka"
 version = "0.0.1"
