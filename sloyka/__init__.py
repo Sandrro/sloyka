@@ -3,7 +3,10 @@ from .src import (
     Geocoder,
     TextClassifiers,
     GeoDataGetter,
-    Semgraph
+    Semgraph,
+    PostGetter,
+    Streets, 
+    VkCommentsParser
 )
 
 __all__ = [
@@ -12,4 +15,7 @@ __all__ = [
     "Geocoder",
     "GeoDataGetter",
     "Semgraph",
+    "PostGetter", 
+    "Streets", 
+    "VkCommentsParser"
 ]
