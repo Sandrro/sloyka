@@ -20,7 +20,11 @@ SLOYKA включает в себя две группы методов: мето
 социальных процессов с его помощью.
 
 Схематичное описание работы библиотеки:
-![block](https://github.com/GeorgeKontsevik/sloyka/blob/dev/images/Схема_Слойки.png)
+<!-- ![block](https://github.com/GeorgeKontsevik/sloyka/blob/dev/images/Схема_Слойки.png) -->
+
+<div align="center">
+  <img src="images/Схема_Слойки.png" alt="scheme" width="100%">
+</div>
 
 **Модуль генерации пространственного-семантического графа**
 
