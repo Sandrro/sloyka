@@ -734,11 +734,11 @@ class Geocoder:
         df = self.get_street(df, text_column)
         street_names = self.get_stem(street_names)
         df = self.find_word_form(df, street_names)
-        # gdf = self.create_gdf(df)
-        # gdf = self.merge_to_initial_df(gdf, initial_df)
+        gdf = self.create_gdf(df)
+        gdf = self.merge_to_initial_df(gdf, initial_df)
 
-        # Add a new 'level' column using the get_level function
-        # gdf["level"] = gdf.progress_apply(self.get_level, axis=1)
-        # gdf = self.set_global_repr_point(gdf)
+        Add a new 'level' column using the get_level function
+        gdf["level"] = gdf.progress_apply(self.get_level, axis=1)
+        gdf = self.set_global_repr_point(gdf)
 
         return df
