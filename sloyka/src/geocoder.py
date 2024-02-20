@@ -737,7 +737,7 @@ class Geocoder:
         gdf = self.create_gdf(df)
         gdf = self.merge_to_initial_df(gdf, initial_df)
 
-        Add a new 'level' column using the get_level function
+        # Add a new 'level' column using the get_level function
         gdf["level"] = gdf.progress_apply(self.get_level, axis=1)
         gdf = self.set_global_repr_point(gdf)
 
