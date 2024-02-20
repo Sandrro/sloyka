@@ -29,7 +29,7 @@ import requests
 import torch
 import string
 import math
-from .constants import (
+from sloyka.src.constants import (
     START_INDEX_POSITION,
     REPLACEMENT_DICT,
     TARGET_TOPONYMS,
@@ -55,7 +55,7 @@ from natasha import (
 from loguru import logger
 
 from pandarallel import pandarallel
-pandarallel.initialize(progress_bar=True, nb_workers=6)
+pandarallel.initialize(progress_bar=True, nb_workers=-1)
 
 segmenter = Segmenter()
 morph_vocab = MorphVocab()
@@ -689,12 +689,10 @@ class Geocoder:
         all original attributes.
         """
 
-        initial_df.reset_index(drop=False, inplace=True)
         # initial_df.drop(columns=['key_0'], inplace=True)
-        gdf = initial_df.merge(
+        gdf = initial_df.join(
             gdf[
                 [
-                    "key_0",
                     "Street",
                     "initial_street",
                     "only_full_street_name",
@@ -705,12 +703,8 @@ class Geocoder:
                     "geometry",
                 ]
             ],
-            left_on="index",
-            right_on="key_0",
             how="outer",
         )
-
-        gdf.drop(columns=["key_0"], inplace=True)
         gdf = gpd.GeoDataFrame(
             gdf, geometry="geometry", crs=Geocoder.global_crs
         )
@@ -734,11 +728,15 @@ class Geocoder:
         df = self.get_street(df, text_column)
         street_names = self.get_stem(street_names)
         df = self.find_word_form(df, street_names)
-        # gdf = self.create_gdf(df)
-        # gdf = self.merge_to_initial_df(gdf, initial_df)
+        gdf = self.create_gdf(df)
+        gdf = self.merge_to_initial_df(gdf, initial_df)
 
         # Add a new 'level' column using the get_level function
-        # gdf["level"] = gdf.progress_apply(self.get_level, axis=1)
-        # gdf = self.set_global_repr_point(gdf)
+        gdf["level"] = gdf.progress_apply(self.get_level, axis=1)
+        gdf = self.set_global_repr_point(gdf)
 
         return df
+
+if __name__ == '__main__':
+    df = pd.DataFrame(data={'text': 'На биржевой 14 что-то произошло'}, index=[0])
+    Geocoder().run(df=df, text_column='text')

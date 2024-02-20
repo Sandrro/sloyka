@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sloyka"
-version = "0.0.1"
+version = "0.0.3"
 description = "Library for city identity analysis from social media posts and comments"
 authors = ["sandrro, georgekontsevik"]
 readme = "README.md"
@@ -16,7 +16,7 @@ scikit-learn = "1.2.1"
 spacy = "3.5.0"
 fuzzywuzzy = "0.18.0"
 geopandas = "0.12.2"
-numpy = "1.26.4"
+numpy = "1.25.2"
 flair = "0.12.2"
 networkx = "3.1"
 osm2geojson = "0.2.3"
