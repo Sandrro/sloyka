@@ -312,7 +312,7 @@ class Semgraph:
                                    key_score_filter,
                                    top_n)
         
-        words_df = self.get_semantic_closeness(df, 'TO')
+        words_df = self.get_semantic_closeness(df, 'TO', semantic_score_filter)
 
         graph_df = pd.concat([df, words_df], ignore_index=True)
 
