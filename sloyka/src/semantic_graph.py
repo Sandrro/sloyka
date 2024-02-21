@@ -151,7 +151,7 @@ class Semgraph:
                          toponim_column: str,
                          toponim_name_column: str,
                          toponim_type_column: str,
-                         semantic_score_filter: float=0.4,
+                         semantic_key_filter: float=0.4,
                          top_n: int=5) -> pd.DataFrame:
         """
         Extracts keywords from the given data using KeyBERT, cleans the data from digits and toponims, aggregates the data, and extracts keywords for each toponim with a semantic score filter. Returns a DataFrame containing the extracted keywords, their associated toponim, and their semantic score.
@@ -200,7 +200,7 @@ class Semgraph:
                                                            stop_words=stopwords.words(self.language))
 
             for j in (keywords_list):
-                if j[1] >= semantic_score_filter:
+                if j[1] >= semantic_key_filter:
                     p = morph.parse(j[0])[0]
                     if p.tag.POS in ['NOUN', 'ADJF', 'ADJS', 'VERB', 'INFN']:
                         nodes.append([toponim, p.normal_form, j[1]])
@@ -215,7 +215,7 @@ class Semgraph:
     
     def get_semantic_closeness(self, data: pd.DataFrame,
                                column: str,
-                               similaryty_filter: float = 0.5) -> pd.DataFrame:
+                               similaryty_filter: float = 0.6) -> pd.DataFrame:
         """
     	Calculate the semantic closeness between unique words in the specified column of the input DataFrame.
     	
@@ -283,6 +283,7 @@ class Semgraph:
                              toponim_column: str,
                              toponim_name_column: str,
                              toponim_type_column: str,
+                             key_score_filter: float = 0.6,
                              semantic_score_filter: float = 0.5,
                              top_n: int=5) -> nx.classes.graph.Graph:
         
@@ -295,6 +296,7 @@ class Semgraph:
             toponim_column (str): The name of the column containing the toponim data.
             toponim_name_column (str): The name of the column containing the toponim name data in text.
             toponim_type_column (str): The name of the column containing the toponim type data.
+            key_score_filter (float): The threshold for key-extracting score filtering.
             semantic_score_filter (float): The threshold for semantic score filtering.
             top_n (int, optional): The number of top results to return. Defaults to 5.
 
@@ -307,16 +309,16 @@ class Semgraph:
                                    toponim_column,
                                    toponim_name_column,
                                    toponim_type_column,
-                                   semantic_score_filter,
+                                   key_score_filter,
                                    top_n)
         
         words_df = self.get_semantic_closeness(df, 'TO')
 
         graph_df = pd.concat([df, words_df], ignore_index=True)
 
-        G = nx.from_pandas_edgelist(graph_df, 
-                                    source='FROM', 
-                                    target='TO', 
+        G = nx.from_pandas_edgelist(graph_df,
+                                    source='FROM',
+                                    target='TO',
                                     edge_attr='SIMILARITY_SCORE')
         
         nodes = list(G.nodes())
