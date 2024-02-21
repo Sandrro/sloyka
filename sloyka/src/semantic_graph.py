@@ -181,7 +181,7 @@ class Semgraph:
             toponim_column (str): The name of the column containing the toponim data.
             toponim_name_column (str): The name of the column containing the toponim names.
             toponim_type_column (str): The name of the column containing the toponim types.
-            semantic_score_filter (float): The minimum semantic score required for a keyword to be included.
+            semantic_key_filter (float): The minimum semantic score required for a keyword to be included.
             top_n (int, optional): The number of top keywords to extract for each toponim. Defaults to 5.
 
         Returns:
