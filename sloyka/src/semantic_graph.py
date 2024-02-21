@@ -284,7 +284,7 @@ class Semgraph:
                              toponim_name_column: str,
                              toponim_type_column: str,
                              key_score_filter: float = 0.6,
-                             semantic_score_filter: float = 0.5,
+                             semantic_score_filter: float = 0.4,
                              top_n: int=5) -> nx.classes.graph.Graph:
         
         """
