@@ -1,8 +1,17 @@
 """
 This module is aimed to provide necessary tools to find mentioned
 location in the text. 
-In this scenario texts are comments in social networks (e.g. Vkontakte).
-Thus the model was trained on the corpus of comments on Russian language.
+
+@class:Location:
+A class aimed to efficiently geocode addresses using Nominatim. Geocoded addresses are stored in the 'book' dictionary argument. 
+Thus, if the address repeats, it would be taken from the book.
+
+@class:Streets: 
+A class encapsulating functionality for retrieving street data
+ for a specified city from OSM and processing it to extract useful information for geocoding purposes.
+
+@class:Geocoder:
+A class providing functionality for simple geocoding and address extraction.
 """
 import numpy as np
 import re
@@ -20,7 +29,7 @@ import requests
 import torch
 import string
 import math
-from .constants import (
+from sloyka.src.constants import (
     START_INDEX_POSITION,
     REPLACEMENT_DICT,
     TARGET_TOPONYMS,
@@ -46,7 +55,7 @@ from natasha import (
 from loguru import logger
 
 from pandarallel import pandarallel
-pandarallel.initialize(progress_bar=True, nb_workers=6)
+pandarallel.initialize(progress_bar=True, nb_workers=-1)
 
 segmenter = Segmenter()
 morph_vocab = MorphVocab()
@@ -93,6 +102,12 @@ class Location:
         return None
 
     def query(self, address: str) -> Optional[List[float]]:
+        """
+        A function to query the address and return its geocode if available.
+        
+        :param address: A string representing the address to be queried.
+        :return: An optional list of floats representing the geocode of the address, or None if not found.
+        """
         if address not in self.book:
             query = f"{address}"
             res = self.geocode_with_retry(query)
@@ -183,6 +198,15 @@ class Streets:
 
     @staticmethod
     def find_toponim_words_from_name(x: str) -> str:
+        """
+        A method to find toponim words from the given name string.
+
+        Args:
+            x (str): The input name string.
+
+        Returns:
+            str: The found toponim word from the input name string, or None if not found.
+        """
         pattern = re.compile(
             r"путепровод|улица|набережная реки|проспект"
             r"|бульвар|мост|переулок|площадь|переулок"
@@ -240,6 +264,10 @@ class Streets:
 
     @staticmethod
     def run(osm_city_name: str, osm_city_level: int) -> pd.DataFrame:
+        """
+        A static method to run the process of getting street data based on the given
+        OSM city name and level, returning a pandas DataFrame.
+        """
         city_bounds = Streets.get_city_bounds(osm_city_name, osm_city_level)
         streets_graph = Streets.get_drive_graph(city_bounds)
         streets_gdf = Streets.graph_to_gdf(streets_graph)
@@ -661,12 +689,10 @@ class Geocoder:
         all original attributes.
         """
 
-        initial_df.reset_index(drop=False, inplace=True)
         # initial_df.drop(columns=['key_0'], inplace=True)
-        gdf = initial_df.merge(
+        gdf = initial_df.join(
             gdf[
                 [
-                    "key_0",
                     "Street",
                     "initial_street",
                     "only_full_street_name",
@@ -677,12 +703,8 @@ class Geocoder:
                     "geometry",
                 ]
             ],
-            left_on="index",
-            right_on="key_0",
             how="outer",
         )
-
-        gdf.drop(columns=["key_0"], inplace=True)
         gdf = gpd.GeoDataFrame(
             gdf, geometry="geometry", crs=Geocoder.global_crs
         )
@@ -690,17 +712,31 @@ class Geocoder:
         return gdf
 
     def run(self, df: pd.DataFrame, text_column: str = "Текст комментария"):
+        """
+        Runs the data processing pipeline on the input DataFrame.
+
+        Args:
+            df (pd.DataFrame): The input DataFrame.
+            text_column (str): The name of the text column in the DataFrame. Defaults to "Текст комментария".
+
+        Returns:
+            pd.DataFrame: The processed DataFrame after running the data processing pipeline.
+        """
         initial_df = df.copy()
         street_names = Streets.run(self.osm_city_name, self.osm_city_level)
 
         df = self.get_street(df, text_column)
         street_names = self.get_stem(street_names)
         df = self.find_word_form(df, street_names)
-        # gdf = self.create_gdf(df)
-        # gdf = self.merge_to_initial_df(gdf, initial_df)
+        gdf = self.create_gdf(df)
+        gdf = self.merge_to_initial_df(gdf, initial_df)
 
         # Add a new 'level' column using the get_level function
-        # gdf["level"] = gdf.progress_apply(self.get_level, axis=1)
-        # gdf = self.set_global_repr_point(gdf)
+        gdf["level"] = gdf.progress_apply(self.get_level, axis=1)
+        gdf = self.set_global_repr_point(gdf)
 
         return df
+
+if __name__ == '__main__':
+    df = pd.DataFrame(data={'text': 'На биржевой 14 что-то произошло'}, index=[0])
+    Geocoder().run(df=df, text_column='text')

@@ -7,16 +7,16 @@ from sloyka.src.constants import OSM_TAGS
 
 tdict = [(category, category_tags) for category, category_tags in OSM_TAGS.items()]
 
-@pytest.mark.parametrize(
-        "post_id, owner_id, token, result_len",
-        [
-            ("10796", -51988192, '96cbbc1496cbbc1496cbbc14b795dfa8b8996cb96cbbc14f2a8294fa4c4c6fc7e753a93', 2)
-        ],
-)
+# @pytest.mark.parametrize(
+#         "post_id, owner_id, token, result_len",
+#         [
+#             ("10796", "-51988192", 'need_to_provide_token', 2)
+#         ],
+# )
 
-def test_get_comments(post_id, owner_id, token, result_len):
-    test_df = VkCommentsParser.get_Comments(post_id, owner_id, token)
-    assert len(test_df) == result_len
+# def test_get_comments(post_id, owner_id, token, result_len):
+#     test_df = VkCommentsParser.get_Comments(post_id, owner_id, token)
+#     assert len(test_df) == result_len
 
 def test_get_city_bounds():
     result = Streets.get_city_bounds("Санкт-Петербург", 8)

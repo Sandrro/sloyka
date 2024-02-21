@@ -1,3 +1,24 @@
+"""
+This module contains the TextClassifiers class, which is aimed to classify input texts into themes or structured types of events.
+It uses a Huggingface transformer model trained on rubert-tiny.
+In many cases, the count of messages per theme was too low to efficiently train, so synthetic themes based
+on the categories as the upper level were used (for example, 'unknown_ЖКХ').
+
+Attributes:
+- repository_id (str): The repository ID.
+- number_of_categories (int): The number of categories.
+- device_type (str): The type of device.
+
+The TextClassifiers class has the following methods:
+
+@method:initialize_classifier: Initializes the text classification pipeline with the specified model, tokenizer, and device type.
+
+@method:run_text_classifier_topics:
+ Takes a text as input and returns the predicted themes and probabilities.
+
+@method:run_text_classifier: 
+ Takes a text as input and returns the predicted categories and probabilities.
+"""
 import pandas as pd
 from transformers import pipeline
 

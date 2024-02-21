@@ -1,12 +1,9 @@
 import pytest
-import torch
 import geopandas as gpd
-import pandas as pd
-from shapely import Point
 from sloyka import EventDetection
 
-path_to_population = "data/raw/population.geojson"
-path_to_data = "data/processed/messages.geojson"
+path_to_population = "sloyka/sample_data/raw/population.geojson"
+path_to_data = "sloyka/sample_data/processed/messages.geojson"
 
 
 @pytest.fixture

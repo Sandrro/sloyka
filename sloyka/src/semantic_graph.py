@@ -1,3 +1,22 @@
+"""
+@class:Semgraph:
+The main class of the semantic graph module. It is aimed to build a semantic graph based on the provided data and parameters.
+More convenient to use after extracting data from geocoder.
+
+The Semgraph class has the following methods:
+
+@method:clean_from_dublicates:
+A function to clean a DataFrame from duplicates based on specified columns.
+
+@method:clean_from_digits:
+Removes digits from the text in the specified column of the input DataFrame.
+
+@method:clean_from_toponims:
+Clean the text in the specified text column by removing any words that match the toponims in the name and toponim columns.
+
+@method:aggregte_data:
+Creates a new DataFrame by aggregating the data based on the provided text and toponims columns.
+"""
 import time
 import itertools
 from tqdm import tqdm

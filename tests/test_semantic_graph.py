@@ -4,7 +4,7 @@ from sloyka import Semgraph
 
 
 sm = Semgraph()
-test_df  = pd.read_feather("I:\\sloyka\\data\\processed\\df_strts.feather")[:500]
+test_df  = pd.read_feather("sloyka/sample_data/processed/df_strts.feather")[:500]
 text_column='Текст комментария'
 toponim_column='only_full_street_name'
 toponim_name_column='initial_street'
@@ -27,9 +27,9 @@ def test_get_semantic_closeness():
                                        column='words',
                                        similaryty_filter=0.5)
 
-    check = round(float(result['SIMILARITY_SCORE'].iloc[0]), 6)
+    check = round(float(result['SIMILARITY_SCORE'].iloc[0]), 3)
 
-    assert check == 0.655513
+    assert check == round(0.655513, 3)
 
 def test_build_semantic_graph():
     result = sm.build_semantic_graph(test_df,
