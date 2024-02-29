@@ -729,13 +729,13 @@ class Geocoder:
         street_names = self.get_stem(street_names)
         df = self.find_word_form(df, street_names)
         gdf = self.create_gdf(df)
-        gdf = self.merge_to_initial_df(gdf, initial_df)
+        # gdf2 = self.merge_to_initial_df(gdf, initial_df)
 
-        # Add a new 'level' column using the get_level function
-        gdf["level"] = gdf.progress_apply(self.get_level, axis=1)
-        gdf = self.set_global_repr_point(gdf)
+        # # Add a new 'level' column using the get_level function
+        # gdf2["level"] = gdf2.progress_apply(self.get_level, axis=1)
+        # gdf2 = self.set_global_repr_point(gdf2)
 
-        return df
+        return df, gdf
 
 if __name__ == '__main__':
     df = pd.DataFrame(data={'text': 'На биржевой 14 что-то произошло'}, index=[0])
