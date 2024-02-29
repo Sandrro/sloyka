@@ -254,11 +254,11 @@ class Streets:
         and the geocoding address.
         """
         logger.info('clear_names started')
-        streets_df["toponim_name"] = streets_df["street"].progress_apply(
-            lambda x: Streets.find_toponim_words_from_name(x)
+        streets_df["toponim_name"] = streets_df["street"].map(
+            Streets.find_toponim_words_from_name
         )
-        streets_df["street_name"] = streets_df["street"].progress_apply(
-            lambda x: Streets.drop_words_from_name(x)
+        streets_df["street_name"] = streets_df["street"].map(
+            Streets.drop_words_from_name
         )
         return streets_df
 
@@ -478,7 +478,7 @@ class Geocoder:
         for case in cases:
             street_names_df[case] = street_names_df[
                 "street_name"
-            ].progress_apply(
+            ].apply(
                 lambda x: morph.parse(x)[0].inflect({case}).word
                 if morph.parse(x)[0].inflect({case})
                 else None
@@ -504,7 +504,7 @@ class Geocoder:
 
         df["full_street_name"] = None
 
-        for idx, row in tqdm(df.iterrows(), total=df.shape[0]):
+        for idx, row in df.iterrows():
             search_val = row["Street"]
             search_top = row["Toponims"]
             val_num = row["Numbers"]
@@ -545,20 +545,28 @@ class Geocoder:
                         df.loc[idx, "only_full_street_name"] = ",".join(only_streets_full)
 
 
-        df.dropna(subset="full_street_name", inplace=True)
+        df.dropna(subset=["full_street_name", 'only_full_street_name'], inplace=True)
         df["location_options"] = df["full_street_name"].str.split(",")
-
-        new_df = df["location_options"].explode()
-        new_df.name = "addr_to_geocode"
-        df = df.merge(new_df, left_on=df.index, right_on=new_df.index)
-
         df["only_full_street_name"] = df["only_full_street_name"].str.split(",")
-        new_df = df["only_full_street_name"].explode()
-        new_df.name = "only_full_street_name"
-        df.drop(columns=['key_0', 'only_full_street_name'], inplace=True)
-        df = pd.concat([df, new_df], axis=1)
+
+        tmp_df_1 = df["location_options"].explode()
+        tmp_df_1.name = "addr_to_geocode"
+        tmp_df_2 = df["only_full_street_name"].explode()
+        tmp_df_2.name = "only_full_street_name"
+        new_df = tmp_df_1.to_frame().join(tmp_df_2.to_frame()) 
+
+        df.drop(columns=['only_full_street_name'], inplace=True)
+        df = df.merge(new_df, left_on=df.index, right_on=new_df.index)
+        df.drop(columns=['key_0'], inplace=True)
+
+        # new_df = df["only_full_street_name"].explode()
+        # new_df.name = "only_full_street_name"
+        # df.drop(columns=['key_0', 'only_full_street_name'], inplace=True)
+        # df = df.merge(new_df, left_on=df.index, right_on=new_df.index)
+
         # print(df.head())
         df["only_full_street_name"] = df["only_full_street_name"].astype(str)
+        df["location_options"] = df["location_options"].astype(str)
 
         return df
 
@@ -657,10 +665,10 @@ class Geocoder:
 
         df["Location"] = df["addr_to_geocode"].progress_apply(Location().query)
         df = df.dropna(subset=["Location"])
-        df["geometry"] = df.Location.progress_apply(
+        df["geometry"] = df.Location.apply(
             lambda x: Point(x.longitude, x.latitude)
         )
-        df["Location"] = df.Location.progress_apply(lambda x: x.address)
+        df["Location"] = df.Location.apply(lambda x: x.address)
         gdf = gpd.GeoDataFrame(df, geometry="geometry", crs=Geocoder.global_crs)
 
         return gdf
@@ -722,7 +730,7 @@ class Geocoder:
         Returns:
             pd.DataFrame: The processed DataFrame after running the data processing pipeline.
         """
-        initial_df = df.copy()
+        # initial_df = df.copy()
         street_names = Streets.run(self.osm_city_name, self.osm_city_level)
 
         df = self.get_street(df, text_column)
@@ -735,8 +743,8 @@ class Geocoder:
         # gdf2["level"] = gdf2.progress_apply(self.get_level, axis=1)
         # gdf2 = self.set_global_repr_point(gdf2)
 
-        return df, gdf
+        return gdf
 
 if __name__ == '__main__':
     df = pd.DataFrame(data={'text': 'На биржевой 14 что-то произошло'}, index=[0])
-    Geocoder().run(df=df, text_column='text')
+    print(Geocoder().run(df=df, text_column='text'))
