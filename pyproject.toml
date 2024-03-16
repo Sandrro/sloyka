@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sloyka"
-version = "0.0.9"
+version = "0.1.0"
 description = "Library for city identity analysis from social media posts and comments"
 authors = ["sandrro, georgekontsevik"]
 readme = "README.md"
@@ -58,8 +58,8 @@ requires = ["poetry-core", "setuptools", "wheel", "distutils"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
-line-length = 80
+line-length = 120
 
 [tool.isort]
 profile = 'black'
-line_length = 80
+line_length = 120

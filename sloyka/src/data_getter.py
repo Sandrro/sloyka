@@ -330,3 +330,38 @@ class VkPostGetter:
             offset += step
 
         return post_ids
+
+    def run(owner_id:str, your_token:str,  step:int, cutoff_date:str, number_of_messages:int = float('inf')):
+        token = your_token
+        domain = owner_id
+        version = 5.131
+        offset = 0
+        all_posts = []
+        if step > number_of_messages:
+            step = number_of_messages
+        while offset < number_of_messages:
+            response = requests.get('https://api.vk.com/method/wall.get',
+                                    params={
+                                        'access_token': token,
+                                        'v': version,
+                                        'domain': domain,
+                                        'count': step,
+                                        'offset': offset
+                                    }
+                                    )
+            data = response.json()['response']['items']
+            offset += step
+            current_posts = pd.json_normalize(data)
+            current_posts = current_posts[['date', 'id', 'text', 'views.count', 'likes.count', 'reposts.count']]
+            current_posts['date'] = [datetime.datetime.fromtimestamp(current_posts['date'][i]) for i in range(len(current_posts['date']))]
+            all_posts.append(current_posts)
+            print(current_posts.date.min())
+            if any(current_posts['date'] < datetime.datetime.strptime(cutoff_date, '%Y-%m-%d')):
+                print('finished')
+                break
+            time.sleep(0.5)
+        df_posts = pd.concat(all_posts).reset_index(drop=True)
+        df_posts = df_posts[df_posts.text.map(lambda x: len(x)) > 0]
+        df_posts['text'] = df_posts['text'].str.replace(r'\n', '', regex=True)
+        df_posts['link'] = df_posts['text'].str.extract(r'(https://\S+)')
+        return df_posts
