@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "sloyka"
-version = "0.0.8"
+version = "0.0.9"
 description = "Library for city identity analysis from social media posts and comments"
 authors = ["sandrro, georgekontsevik"]
 readme = "README.md"
