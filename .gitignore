@@ -135,3 +135,6 @@ cache/
 /.model
 .model
 /semantic_models
+
+#idea
+.idea/
