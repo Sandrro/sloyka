@@ -138,3 +138,7 @@ cache/
 
 #idea
 .idea/
+
+#notebooks
+graph_with_cluster.ipynb
+new_graph_extraction.ipynb
