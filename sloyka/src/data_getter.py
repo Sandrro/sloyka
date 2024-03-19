@@ -366,60 +366,62 @@ class VkPostGetter:
         df_posts['link'] = df_posts['text'].str.extract(r'(https://\S+)')
         return df_posts
     
-    class CommentsReply:
-        def get_comments(self,owner_id, post_id, access_token):
-            params = {
-                'owner_id': owner_id,
-                'post_id': post_id,
-                'access_token': access_token,
-                'v': '5.131',
-                'extended': 1,
-                'count': 100,
-                'need_likes': 1
-            }
+class CommentsReply:
 
-            comments = []
+    @staticmethod
+    def get_subcomments(owner_id, post_id, access_token, params):
+        subcomments = []
 
-            response = requests.get('https://api.vk.com/method/wall.getComments', params=params)
-            data = response.json()
+        response = requests.get('https://api.vk.com/method/wall.getComments', params=params)
+        data = response.json()
 
-            if 'response' in data:
-                for item in data['response']['items']:
-                    item['date'] = datetime.utcfromtimestamp(item['date']).strftime('%Y-%m-%d %H:%M:%S')
-                    if 'likes' in item:
-                        item['likes_count'] = item['likes']['count']
-                    comments.append(item)
-                    if item['thread']['count'] > 0:
-                        params['comment_id'] = item['id']
-                        subcomments = self.get_subcomments(owner_id, post_id, access_token, params)
-                        comments.extend(subcomments)
+        if 'response' in data:
+            for item in data['response']['items']:
+                item['date'] = datetime.datetime.utcfromtimestamp(item['date']).strftime('%Y-%m-%d %H:%M:%S')
+                if 'likes' in item:
+                    item['likes_count'] = item['likes']['count']
+                subcomments.append(item)
 
-            return comments
+        return subcomments
 
-        def get_subcomments(self, owner_id, post_id, access_token, params):
-            subcomments = []
+    def get_comments(self, owner_id, post_id, access_token):
+        params = {
+            'owner_id': owner_id,
+            'post_id': post_id,
+            'access_token': access_token,
+            'v': '5.131',
+            'extended': 1,
+            'count': 100,
+            'need_likes': 1
+        }
 
-            response = requests.get('https://api.vk.com/method/wall.getComments', params=params)
-            data = response.json()
+        comments = []
 
-            if 'response' in data:
-                for item in data['response']['items']:
-                    item['date'] = datetime.utcfromtimestamp(item['date']).strftime('%Y-%m-%d %H:%M:%S')
-                    if 'likes' in item:
-                        item['likes_count'] = item['likes']['count']
-                    subcomments.append(item)
+        response = requests.get('https://api.vk.com/method/wall.getComments', params=params)
+        data = response.json()
 
-            return subcomments
+        if 'response' in data:
+            for item in data['response']['items']:
+                item['date'] = datetime.datetime.utcfromtimestamp(item['date']).strftime('%Y-%m-%d %H:%M:%S')
+                if 'likes' in item:
+                    item['likes_count'] = item['likes']['count']
+                comments.append(item)
+                if item['thread']['count'] > 0:
+                    params['comment_id'] = item['id']
+                    subcomments = self.get_subcomments(owner_id, post_id, access_token, params)
+                    comments.extend(subcomments)
+        return comments
 
-        def comments_to_dataframe(self, comments):
-            df = pd.DataFrame(comments)
-            df = df[['id', 'date', 'text', 'post_id', 'parents_stack', 'likes_count']]
-            return df
-        
-        def run(self, owner_id, post_ids, access_token):
-            all_comments = []
-            for post_id in post_ids:
-                comments = self.get_comments(owner_id, post_id, access_token)
-                all_comments.extend(comments)
-            df = self.comments_to_dataframe(all_comments)
-            return df
+    @staticmethod
+    def comments_to_dataframe(comments):
+        df = pd.DataFrame(comments)
+        df = df[['id', 'date', 'text', 'post_id', 'parents_stack', 'likes_count']]
+        return df
+    
+    def run(self, owner_id, post_ids, access_token):
+        all_comments = []
+        for post_id in post_ids:
+            comments = self.get_comments(owner_id, post_id, access_token)
+            all_comments.extend(comments)
+        df = self.comments_to_dataframe(all_comments)
+        return df
