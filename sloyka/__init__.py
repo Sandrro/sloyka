@@ -7,7 +7,8 @@ from .src import (
     VkPostGetter,
     Streets, 
     VkCommentsParser,
-    NER_parklike
+    NER_parklike,
+    CommentsReply
 )
 
 __all__ = [
@@ -19,5 +20,6 @@ __all__ = [
     "VkPostGetter", 
     "Streets", 
     "VkCommentsParser",
-    "NER_parklike"
+    "NER_parklike",
+    "CommentsReply"
 ]

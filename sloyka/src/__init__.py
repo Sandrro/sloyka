@@ -1,7 +1,7 @@
 from .event_detection import EventDetection
 from .geocoder import Geocoder
 from .text_classifiers import TextClassifiers
-from .data_getter import GeoDataGetter, VkPostGetter, Streets, VkCommentsParser
+from .data_getter import GeoDataGetter, VkPostGetter, Streets, VkCommentsParser, CommentsReply
 from .semantic_graph import Semgraph
 from .ner_parklike import NER_parklike
 
@@ -11,8 +11,9 @@ __all__ = [
     "Geocoder",
     "GeoDataGetter",
     "Semgraph",
-    "VkPostGetter", 
+    "VkPostGetter",
     "Streets", 
     "VkCommentsParser",
-    "NER_parklike"
+    "NER_parklike",
+    "CommentsReply"
 ]
