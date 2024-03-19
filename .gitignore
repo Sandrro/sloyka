@@ -138,6 +138,7 @@ cache/
 
 #idea
 .idea/
+.iml
 
 #notebooks
 graph_with_cluster.ipynb
