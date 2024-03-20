@@ -545,9 +545,11 @@ class Geocoder:
                         df.loc[idx, "only_full_street_name"] = ",".join(only_streets_full)
 
 
-        df.dropna(subset=["full_street_name", 'only_full_street_name'], inplace=True)
+        # df.dropna(subset=["full_street_name", 'only_full_street_name'], inplace=True)
+        
         df["location_options"] = df["full_street_name"].str.split(",")
         df["only_full_street_name"] = df["only_full_street_name"].str.split(",")
+        
 
         tmp_df_1 = df["location_options"].explode()
         tmp_df_1.name = "addr_to_geocode"
@@ -567,7 +569,7 @@ class Geocoder:
         # print(df.head())
         df["only_full_street_name"] = df["only_full_street_name"].astype(str)
         df["location_options"] = df["location_options"].astype(str)
-
+        df['only_full_street_name'] = df['only_full_street_name'].map(lambda x: None if x == 'nan' else x)
         return df
 
     @staticmethod
@@ -663,12 +665,12 @@ class Geocoder:
         logger.info('create_gdf started')
 
 
-        df["Location"] = df["addr_to_geocode"].progress_apply(Location().query)
-        df = df.dropna(subset=["Location"])
+        df["Location"] = df["addr_to_geocode"].progress_apply(lambda x: Location().query(x) if x else x)
+        # df = df.dropna(subset=["Location"])
         df["geometry"] = df.Location.apply(
-            lambda x: Point(x.longitude, x.latitude)
+            lambda x: Point(x.longitude, x.latitude) if x else None
         )
-        df["Location"] = df.Location.apply(lambda x: x.address)
+        df["Location"] = df.Location.apply(lambda x: x.address if x else None)
         gdf = gpd.GeoDataFrame(df, geometry="geometry", crs=Geocoder.global_crs)
 
         return gdf
@@ -728,7 +730,7 @@ class Geocoder:
             text_column (str): The name of the text column in the DataFrame. Defaults to "Текст комментария".
 
         Returns:
-            pd.DataFrame: The processed DataFrame after running the data processing pipeline.
+            gpd.GeoDataFrame: The processed DataFrame after running the data processing pipeline.
         """
         # initial_df = df.copy()
         street_names = Streets.run(self.osm_city_name, self.osm_city_level)
