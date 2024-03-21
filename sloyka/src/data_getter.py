@@ -244,6 +244,8 @@ class VKParser:
 
         if 'response' in data:
             for item in data['response']['items']:
+                if item['text'] == '':
+                    continue
                 item['date'] = datetime.datetime.utcfromtimestamp(item['date']).strftime('%Y-%m-%d %H:%M:%S')
                 if 'likes' in item:
                     item['likes.count'] = item['likes']['count']
@@ -308,7 +310,7 @@ class VKParser:
             all_posts.append(current_posts)
             print(current_posts.date.min())
             if any(current_posts['date'] < datetime.datetime.strptime(cutoff_date, '%Y-%m-%d')):
-                print('finished')
+                print('posts downloaded')
                 break
             time.sleep(0.5)
         df_posts = pd.concat(all_posts).reset_index(drop=True)
@@ -325,6 +327,7 @@ class VKParser:
         df = self.comments_to_dataframe(all_comments)
         df['type'] = 'comment'
         df = df.reset_index(drop=True)
+        print('comments downloaded')
         return df
     
     def run_parser(self, owner_id, your_token, step, cutoff_date, number_of_messages=float('inf')):
