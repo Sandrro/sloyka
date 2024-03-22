@@ -4,14 +4,12 @@ This module contains classes for retrieving and working with various types of da
 @class:GeoDataGetter:
 This class is used to retrieve geospatial data from OpenStreetMap (OSM) based on given OSM ID and tags.
 
-@class:VkCommentsParser:
-A class for parsing and working with VK comments.
+@class:VKParser:
+A class for parsing and working with VK comments and posts. Combines posts and comments into one dataframe.
 
 @class:Streets:
 A class for working with street data.
 
-@class:PostGetter:
-A class used to retrieve post and comment data from the VK API.
 """
 import osmnx as ox
 import geopandas as gpd
@@ -118,128 +116,6 @@ class GeoDataGetter:
             f"\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}"
         )
 
-
-class VkCommentsParser:
-    """
-    A class for parsing and working with VK comments.
-
-    Methods:
-        - unix_to_date(ts): Convert a Unix timestamp to a date string.
-        - nes_params(post_id, all_comments): Generate a dictionary of comments for a given post.
-        - get_Comments(post_id, owner_id, token, nes_dict): Get comments from a VK post and parse them into a nested dictionary.
-        - to_df(nes_dict): Create a pandas DataFrame from the given nested dictionary.
-    """  
-    def unix_to_date(ts):
-        """
-        Convert a Unix timestamp to a date string.
-
-        Parameters:
-            ts (int): The Unix timestamp to convert to a date string.
-
-        Returns:
-            str: The date string in the format 'YYYY-MM-DD'.
-        """
-        return datetime.datetime.utcfromtimestamp(ts).strftime('%Y-%m-%d')
-
-    def nes_params(post_id, all_comments):
-        """
-        Generates a dictionary of comments for a given post, using the post ID and all comments.
-        
-        Parameters:
-            post_id (int): The ID of the post for which comments are to be retrieved.
-            all_comments (dict): A dictionary containing all comments, including profiles and items.
-        
-        Returns:
-            dict: A dictionary containing the comments mapped to their IDs, along with associated profile information.
-        """
-        nes_dict = {}
-        profiles = all_comments["profiles"]
-        comments = all_comments["items"]
-        first_string = ["NONE", "NONE"]
-        for comment in comments:
-            if len(comment["text"]) > 3:
-                second_string = [
-                    VkCommentsParser.unix_to_date(comment["date"]),
-                    comment["likes"]["count"],
-                    comment["text"],
-                ]
-                for profile in profiles:
-                    if comment["from_id"] == profile["id"]:
-                        first_string = [
-                            profile["first_name"],
-                            profile["last_name"],
-                        ]
-                nes_dict[comment["id"]] = first_string + second_string
-                nes_dict[comment["id"]] += [post_id]
-        # print(nes_dict)
-        return nes_dict
-
-    def get_Comments(
-        post_ids: list,
-        owner_id: str,
-        token: str,
-        comments_num=1000,
-        offset_limit=500,
-        offset_step=100,
-    ):
-        version = 5.131
-        nes_dict={}
-        
-        
-        for post_id in tqdm(post_ids):
-            offset = 0
-            while offset < offset_limit:
-                response = requests.get(
-                    "https://api.vk.com/method/wall.getComments",
-                    params={
-                        "access_token": token,
-                        "v": version,
-                        "owner_id": owner_id,
-                        "post_id": post_id,
-                        "need_likes": 1,
-                        "count": offset_step,
-                        "offset": offset,
-                        "extended": 1,
-                    },
-                )
-                if response.ok:
-                    data_comments = response.json()["response"]
-                    # print(data_comments)
-                    tempDict = VkCommentsParser.nes_params(
-                        post_id, data_comments
-                    )
-                    
-                    # print(len(nes_dict), tempDict)
-                    if len(tempDict) > 0:
-                        nes_dict.update(tempDict)
-                else:
-                    print(response.status_code)
-
-                if len(nes_dict) >= comments_num:
-                    # print(len(nes_dict))
-                    return VkCommentsParser.to_df(nes_dict)
-
-                offset += offset_step
-                # print(offset)
-                time.sleep(0.5)
-            
-        return VkCommentsParser.to_df(nes_dict)
-
-    def to_df(nes_dict):
-        """
-        Create a pandas DataFrame from the given nested dictionary.
-
-        Parameters:
-            nes_dict (dict): The nested dictionary to be converted into a DataFrame.
-
-        Returns:
-            pandas.DataFrame: The DataFrame created from the nested dictionary.
-        """
-        df = pd.DataFrame.from_dict(nes_dict, orient='index',
-                                    columns=['name', 'last_name', 'date', 'likes', 'text', 'post_id'])
-        return df
-
-
 class Streets:
     """
     This class encapsulates functionality for retrieving street data
@@ -277,38 +153,18 @@ class Streets:
         )
         return city_bounds
 
+class VKParser:
 
-class VkPostGetter:
-
-    """
-    A class used to retrieve post and comment data from the VK API.
-
-    Methods:
-    - get_group_post_ids(owner_id, your_token) -> List[int]: Retrieves a list of post IDs from a VK group.
-    - unix_to_date(ts): Converts a Unix timestamp to a human-readable date format.
-    - nes_params(post_id, all_comments): Processes necessary parameters from comments data.
-    - get_Comments(post_id, owner_id, token): Retrieves comments for a specific post.
-    - _to_df(nes_dict): Converts the processed dictionary data into a DataFrame.
-    - run(your_owner_id, your_token, limit_posts=None): Runs the entire process to retrieve and process post and comment data.
-    """
-
-    API_VERISON = 5.131
-    # OFFSET_STEP = 100
-    # OFFSET_LIMIT = 700
+    API_VERISON = '5.131'
     COUNT_ITEMS = 100
     SLEEP_TIME = 0.5
     TIMEOUT_LIMIT = 15
 
-    def get_group_post_ids(owner_id, your_token, post_num_limit, step) -> List[int]:
+    @staticmethod
+    def get_group_post_ids(owner_id, your_token, post_num_limit, step) -> list:
         """
-        Get a list of post IDs for a given owner ID using the VK API.
-
-        Args:
-            owner_id (int): The ID of the owner whose posts are being retrieved.
-            your_token (str): The access token for making the API request.
-
-        Returns:
-            List[int]: A list of post IDs belonging to the specified owner ID.
+        A static method to retrieve a list of post IDs for a given group, based on the owner ID,
+        access token, post number limit, and step size. Returns a list of post IDs.
         """
         offset = 0
         post_ids = []
@@ -318,7 +174,7 @@ class VkPostGetter:
                 "https://api.vk.com/method/wall.get",
                 params={
                     "access_token": your_token,
-                    "v": VkPostGetter.API_VERISON,
+                    "v": VKParser.API_VERISON,
                     "owner_id": owner_id,
                     "count": step,
                     "offset": offset,
@@ -331,45 +187,20 @@ class VkPostGetter:
 
         return post_ids
 
-    def run(owner_id:str, your_token:str,  step:int, cutoff_date:str, number_of_messages:int = float('inf')):
-        token = your_token
-        domain = owner_id
-        version = 5.131
-        offset = 0
-        all_posts = []
-        if step > number_of_messages:
-            step = number_of_messages
-        while offset < number_of_messages:
-            response = requests.get('https://api.vk.com/method/wall.get',
-                                    params={
-                                        'access_token': token,
-                                        'v': version,
-                                        'domain': domain,
-                                        'count': step,
-                                        'offset': offset
-                                    }
-                                    )
-            data = response.json()['response']['items']
-            offset += step
-            current_posts = pd.json_normalize(data)
-            current_posts = current_posts[['date', 'id', 'text', 'views.count', 'likes.count', 'reposts.count']]
-            current_posts['date'] = [datetime.datetime.fromtimestamp(current_posts['date'][i]) for i in range(len(current_posts['date']))]
-            all_posts.append(current_posts)
-            print(current_posts.date.min())
-            if any(current_posts['date'] < datetime.datetime.strptime(cutoff_date, '%Y-%m-%d')):
-                print('finished')
-                break
-            time.sleep(0.5)
-        df_posts = pd.concat(all_posts).reset_index(drop=True)
-        df_posts = df_posts[df_posts.text.map(lambda x: len(x)) > 0]
-        df_posts['text'] = df_posts['text'].str.replace(r'\n', '', regex=True)
-        df_posts['link'] = df_posts['text'].str.extract(r'(https://\S+)')
-        return df_posts
-    
-class CommentsReply:
-
     @staticmethod
     def get_subcomments(owner_id, post_id, access_token, params):
+        """
+        Retrieves subcomments from the VK API.
+
+        Args:
+            owner_id (int): The ID of the owner of the comments.
+            post_id (int): The ID of the post.
+            access_token (str): The access token for authentication.
+            params (dict): Additional parameters for the API request.
+
+        Returns:
+            list: A list of subcomments retrieved from the API.
+        """
         subcomments = []
 
         response = requests.get('https://api.vk.com/method/wall.getComments', params=params)
@@ -379,12 +210,23 @@ class CommentsReply:
             for item in data['response']['items']:
                 item['date'] = datetime.datetime.utcfromtimestamp(item['date']).strftime('%Y-%m-%d %H:%M:%S')
                 if 'likes' in item:
-                    item['likes_count'] = item['likes']['count']
+                    item['likes.count'] = item['likes']['count']
                 subcomments.append(item)
 
         return subcomments
 
     def get_comments(self, owner_id, post_id, access_token):
+        """
+        Get comments for a post on VK using the specified owner ID, post ID, and access token.
+        
+        Parameters:
+            owner_id (int): The ID of the post owner.
+            post_id (int): The ID of the post.
+            access_token (str): The access token for authentication.
+        
+        Returns:
+            list: A list of dictionaries containing comment information.
+        """
         params = {
             'owner_id': owner_id,
             'post_id': post_id,
@@ -402,9 +244,11 @@ class CommentsReply:
 
         if 'response' in data:
             for item in data['response']['items']:
+                if item['text'] == '':
+                    continue
                 item['date'] = datetime.datetime.utcfromtimestamp(item['date']).strftime('%Y-%m-%d %H:%M:%S')
                 if 'likes' in item:
-                    item['likes_count'] = item['likes']['count']
+                    item['likes.count'] = item['likes']['count']
                 comments.append(item)
                 if item['thread']['count'] > 0:
                     params['comment_id'] = item['id']
@@ -414,14 +258,97 @@ class CommentsReply:
 
     @staticmethod
     def comments_to_dataframe(comments):
+        """
+        Convert comments to a DataFrame.
+
+        Args:
+            comments: List of comments to be converted.
+
+        Returns:
+            DataFrame: A DataFrame containing specific columns from the input comments.
+        """
         df = pd.DataFrame(comments)
-        df = df[['id', 'date', 'text', 'post_id', 'parents_stack', 'likes_count']]
+        df = df[['id', 'date', 'text', 'post_id', 'parents_stack', 'likes.count']]
         return df
     
-    def run(self, owner_id, post_ids, access_token):
+    def run_posts(self, owner_id, your_token, step, cutoff_date, number_of_messages=float('inf')):
+        """
+        A function to retrieve posts from a social media API based on specified parameters.
+
+        Parameters:
+            owner_id (int): The ID of the owner whose posts are being retrieved.
+            your_token (str): The authentication token for accessing the API.
+            step (int): The number of posts to retrieve in each API call.
+            cutoff_date (str): The date to stop retrieving posts (format: '%Y-%m-%d').
+            number_of_messages (float): The maximum number of messages to retrieve (default is infinity).
+
+        Returns:
+            pandas.DataFrame: A DataFrame containing the retrieved posts.
+        """
+        token = your_token
+        domain = owner_id
+        offset = 0
+        all_posts = []
+        if step > number_of_messages:
+            step = number_of_messages
+        while offset < number_of_messages:
+            response = requests.get('https://api.vk.com/method/wall.get',
+                                    params={
+                                        'access_token': token,
+                                        'v': VKParser.API_VERISON,
+                                        'domain': domain,
+                                        'count': step,
+                                        'offset': offset
+                                    }
+                                    )
+            data = response.json()['response']['items']
+            offset += step
+            current_posts = pd.json_normalize(data)
+            current_posts = current_posts[['date', 'id', 'text', 'views.count', 'likes.count', 'reposts.count']]
+            current_posts['date'] = [datetime.datetime.fromtimestamp(current_posts['date'][i]) for i in range(len(current_posts['date']))]
+            current_posts['type'] = 'post'
+            all_posts.append(current_posts)
+            print(current_posts.date.min())
+            if any(current_posts['date'] < datetime.datetime.strptime(cutoff_date, '%Y-%m-%d')):
+                print('posts downloaded')
+                break
+            time.sleep(0.5)
+        df_posts = pd.concat(all_posts).reset_index(drop=True)
+        df_posts = df_posts[df_posts.text.map(lambda x: len(x)) > 0]
+        df_posts['text'] = df_posts['text'].str.replace(r'\n', '', regex=True)
+        df_posts['link'] = df_posts['text'].str.extract(r'(https://\S+)')
+        return df_posts
+
+    def run_comments(self, owner_id, post_ids, access_token):
         all_comments = []
         for post_id in post_ids:
             comments = self.get_comments(owner_id, post_id, access_token)
             all_comments.extend(comments)
         df = self.comments_to_dataframe(all_comments)
+        df['type'] = 'comment'
+        df = df.reset_index(drop=True)
+        print('comments downloaded')
         return df
+    
+    def run_parser(self, owner_id, your_token, step, cutoff_date, number_of_messages=float('inf')):
+        """
+        Runs the parser with the given parameters and returns a combined DataFrame of posts and comments.
+        
+        :param owner_id: The owner ID for the parser.
+        :param your_token: The user token for authentication.
+        :param step: The step size for fetching data.
+        :param cutoff_date: The cutoff date for fetching data.
+        :param number_of_messages: The maximum number of messages to fetch. Defaults to positive infinity.
+        :return: A combined DataFrame of posts and comments.
+        """
+        df_posts = self.run_posts(owner_id, your_token, step, cutoff_date, number_of_messages)
+        post_ids = df_posts['id'].tolist()
+        
+        df_comments = self.run_comments(owner_id, post_ids, your_token)
+        df_comments.loc[df_comments['parents_stack'].apply(lambda x: len(x) > 0), 'type'] = 'reply'
+
+        df_combined = df_comments.join(df_posts, on='post_id', rsuffix='_post')
+        df_combined = pd.concat([df_posts, df_comments], ignore_index=True)
+        
+        return df_combined
+    
