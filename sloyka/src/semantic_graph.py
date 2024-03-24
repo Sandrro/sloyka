@@ -22,6 +22,7 @@ Creates a new DataFrame by aggregating the data based on the provided text and t
 import time
 import itertools
 from tqdm import tqdm
+import re
 import torch
 import nltk
 import pymorphy3
@@ -135,6 +136,7 @@ class Semgraph:
         """
 
         for i in range(len(data)):
+
             text = str(data[text_column].iloc[i]).lower()
             word_list = text.split()
             toponims = [str(data[name_column].iloc[i]).lower(), str(data[toponim_type_column].iloc[i]).lower()]
@@ -145,139 +147,192 @@ class Semgraph:
 
         return data
 
-    def aggregate_data(self,
-                       data: pd.DataFrame or gpd.GeoDataFrame,
-                       text_column: str,
-                       toponim_column: str
-                       ) -> pd.DataFrame or gpd.GeoDataFrame:
-        """
-        Aggregate data based on toponims and cluster it using BERTopic model.
-        
-        Args:
-            data (pd.DataFrame or gpd.GeoDataFrame): the input data
-            text_column (str): the name of the column containing the text data
-            toponim_column: (str): the name of the column containing the toponims
-        
-        Returns:
-            pd.DataFrame or gpd.GeoDataFrame: The aggregated and clustered data
-        """
+    @staticmethod
+    def clean_from_links(data: pd.DataFrame or gpd.GeoDataFrame,
+                         text_column: str
+                         ) -> pd.DataFrame or gpd.GeoDataFrame:
 
-        toponims = list(set(data[toponim_column]))
-        new_df_rows = []
+        for i in range(len(data)):
+            text = str(data[text_column].iloc[i])
+            if '[' in text:
+                start = text.index('[')
+                stop = text.index(']')
 
-        model = BERTopic(embedding_model=self.model_name)
+                text = text[:start] + text[stop:]
 
-        print('Clustering data...')
-        for i in tqdm(toponims):
+            text = re.sub(r'^https?:\/\/.*[\r\n]*', '', text, flags=re.MULTILINE)
 
-            if i is not None:
-                tmp_df = data.loc[data[toponim_column] == i].reset_index(drop=True)
-                if len(tmp_df) >= 10:
-                    topics, _ = model.fit_transform(tmp_df[text_column])
-                    tmp_df['topic'] = topics
+            data.at[i, text_column] = text
 
-                    topic_names = list(set(topics))
+        return data
 
-                    for j in topic_names:
+    @staticmethod
+    def fill_empty_toponim(data: pd.DataFrame or gpd.GeoDataFrame,
+                           toponim_column: str):
 
-                        clustered_df = tmp_df.loc[tmp_df['topic'] == j].reset_index(drop=True)
-                        if len(clustered_df) > 0:
-                            text = clustered_df[text_column].iloc[0]
+        for i in range(len(data)):
+            check = data[toponim_column].iloc[i]
+            if check == '':
+                data.at[i, toponim_column] = None
 
-                            for k in range(1, len(clustered_df)):
-                                text = text + ' ' + str(clustered_df[text_column].iloc[k])
+        return data
 
-                            new_df_rows.append([text, i, j])
+    @staticmethod
+    def fill_parents_stack(data: pd.DataFrame or gpd.GeoDataFrame,
+                           parents_stack_column: str):
 
-                else:
+        for i in range(len(data)):
+            tmp = data[parents_stack_column].iloc[i]
+            if tmp is not None and len(tmp) > 3:
+                data.at[i, parents_stack_column] = int(tmp.split()[1])
+            else:
+                data.at[i, parents_stack_column] = None
 
-                    text = tmp_df[text_column].iloc[0]
-                    for j in range(1, len(tmp_df)):
-                        text = text + ' ' + str(tmp_df[text_column].iloc[j])
-
-                    new_df_rows.append([text, i, None])
-
-                new_data = pd.DataFrame(new_df_rows, columns=[text_column, toponim_column, 'cluster'])
-
-            time.sleep(0.01)
-
-        return new_data
+        return data
 
     def extract_keywords(self,
                          data: pd.DataFrame or gpd.GeoDataFrame,
                          text_column: str,
+                         text_type_column: str,
                          toponim_column: str,
-                         toponim_name_column: str,
-                         toponim_type_column: str,
+                         id_column: str,
+                         post_id_column: str,
+                         parents_stack_column: str,
                          semantic_key_filter: float = 0.6,
-                         top_n: int = 5
+                         top_n: int = 1
                          ) -> pd.DataFrame or gpd.GeoDataFrame:
-        """
-        Extracts keywords from the given data using KeyBERT, cleans the data from digits and toponims,
-        aggregates the data, and extracts keywords for each toponim with a semantic score filter.
-        Returns a DataFrame containing the extracted keywords, their associated toponim, and their semantic score.
-        
-        Args:
-            data (pd.DataFrame or gpd.GeoDataFrame): The input DataFrame containing the text and toponim data.
-            text_column (str): The name of the column containing the text data.
-            toponim_column (str): The name of the column containing the toponim data.
-            toponim_name_column (str): The name of the column containing the toponim names.
-            toponim_type_column (str): The name of the column containing the toponim types.
-            semantic_key_filter (float): The minimum semantic score required for a keyword to be included.
-            top_n (int, optional): The number of top keywords to extract for each toponim. Defaults to 5.
 
-        Returns:
-            pd.DataFrame or gpd.GeoDataFrame: A DataFrame or GeoDataFrame containing the extracted keywords,
-            their associated toponim, and their semantic similarity score.
-        """
+        model = KeyBERT(model=self.model)
 
-        keybert_model = KeyBERT(model=self.model)
+        data['words_score'] = None
+        data['texts_ids'] = None
+
+        post_top_gdf = data.loc[data[text_type_column] == 'post']
+        post_top_gdf = post_top_gdf.dropna(subset=toponim_column)
+        post_toponim_list = list(post_top_gdf[id_column])
+
+        comment_top_gdf = data.loc[data[text_type_column] == 'comment']
+        comment_top_gdf = comment_top_gdf.dropna(subset=toponim_column)
+        comment_toponim_list = list(comment_top_gdf[id_column])
+
+        reply_top_gdf = data.loc[data[text_type_column] == 'reply']
+        reply_top_gdf = reply_top_gdf.dropna(subset=toponim_column)
+        reply_toponim_list = list(reply_top_gdf[id_column])
+
+        exclude_list = reply_toponim_list + comment_toponim_list
+
+        for i in tqdm(post_toponim_list):
+
+            ids_text_to_extract = list((data[id_column].loc[(data[post_id_column] == i)
+                                                           & (~data[id_column].isin(exclude_list))
+                                                           & (~data[parents_stack_column].isin(comment_toponim_list))]))
+
+            texts_to_extract = list((data[text_column].loc[(data[post_id_column] == i)
+                                                          & (~data[id_column].isin(exclude_list))
+                                                          & (~data[parents_stack_column].isin(comment_toponim_list))]))
+            ids_text_to_extract.extend(list(data[id_column].loc[data[id_column] == i]))
+            texts_to_extract.extend(list(data[text_column].loc[data[id_column] == i]))
+            words_to_add = []
+            id_to_add = []
+            texts_to_add = []
+
+            for j in texts_to_extract:
+
+                extraction = model.extract_keywords(j, top_n=top_n, stop_words=RUS_STOPWORDS)
+                if extraction:
+                    if extraction[0][1] > semantic_key_filter:
+                        word_score = extraction[0]
+                        words_to_add.append(word_score)
+                        index = texts_to_extract.index(j)
+                        id_to_add.append(ids_text_to_extract[index])
+                        texts_to_add.append(j)
+
+            if words_to_add:
+                index = data.index[data.id == i][0]
+                data.at[index, 'words_score'] = words_to_add
+                data.at[index, 'texts_ids'] = id_to_add
+
+        for i in tqdm(comment_toponim_list):
+
+            ids_text_to_extract = list(data[id_column].loc[data[parents_stack_column] == i])
+
+            texts_to_extract = list(data[text_column].loc[data[parents_stack_column] == i])
+
+            ids_text_to_extract.extend(list(data[id_column].loc[data[id_column] == i]))
+            texts_to_extract.extend(data[text_column].loc[data[id_column] == i])
+            words_to_add = []
+            id_to_add = []
+            texts_to_add = []
+
+            for j in texts_to_extract:
+
+                extraction = model.extract_keywords(j, top_n=top_n, stop_words=RUS_STOPWORDS)
+                if extraction:
+                    if extraction[0][1] > semantic_key_filter:
+                        word_score = extraction[0]
+                        words_to_add.append(word_score)
+                        index = texts_to_extract.index(j)
+                        id_to_add.append(ids_text_to_extract[index])
+                        texts_to_add.append(j)
+
+            if words_to_add:
+                index = data.index[data.id == i][0]
+                data.at[index, 'words_score'] = words_to_add
+                data.at[index, 'texts_ids'] = id_to_add
+
+        for i in tqdm(reply_toponim_list):
+
+            id_text_to_extract = data[id_column].loc[data[id_column] == i]
+
+            text_to_extract = data[text_column].loc[data[id_column] == i]
+
+            words_to_add = []
+            id_to_add = []
+            texts_to_add = []
+
+            for j in text_to_extract:
+
+                extraction = model.extract_keywords(j, top_n=top_n, stop_words=RUS_STOPWORDS)
+                if extraction:
+                    if extraction[0][1] > semantic_key_filter:
+                        word_score = extraction[0]
+                        words_to_add.append(word_score)
+                        texts_to_add.append(j)
+
+            if words_to_add:
+                index = data.index[data.id == i][0]
+                data.at[index, 'words_score'] = words_to_add
+                data.at[index, 'texts_ids'] = id_text_to_extract
+
+        df_to_graph = data.dropna(subset='words_score')
+
+        return df_to_graph
+
+
+    def convert_df_to_edge_df(self,
+                              data: pd.DataFrame or gpd.GeoDataFrame,
+                              toponim_column: str,
+                              word_and_score_column: str = 'words_score'
+                              ) -> pd.DataFrame or gpd.GeoDataFrame:
+
         morph = pymorphy3.MorphAnalyzer()
-        nodes = []
 
-        data = Semgraph.clean_from_dublicates(data,
-                                              text_column=text_column,
-                                              toponim_column=toponim_column)
+        edge_list = []
 
-        data = Semgraph.clean_from_digits(data,
-                                          text_column=text_column)
+        for i in data[toponim_column]:
+            current_df = data.loc[data[toponim_column] == i]
+            for j in range(len(current_df)):
+                toponim = current_df[toponim_column].iloc[j]
+                word_nodes = current_df[word_and_score_column].iloc[j]
 
-        data = Semgraph.clean_from_toponims(data,
-                                            text_column=text_column,
-                                            name_column=toponim_name_column,
-                                            toponim_type_column=toponim_type_column)
-
-        consolidated_df = self.aggregate_data(data,
-                                              text_column=text_column,
-                                              toponim_column=toponim_column)
-
-        print('Extracting keywords')
-        for i in tqdm(range(len(consolidated_df))):
-
-            toponim = consolidated_df[toponim_column].iloc[i]
-            text = consolidated_df[text_column].iloc[i]
-
-            if self.language == 'russian':
-                full_stopwords = RUS_STOPWORDS
-
-            else:
-                full_stopwords = stopwords.words(self.language)
-
-            keywords_list = keybert_model.extract_keywords(text,
-                                                           top_n=top_n,
-                                                           stop_words=full_stopwords)
-
-            for j in (keywords_list):
-                if j[1] >= semantic_key_filter:
-                    p = morph.parse(j[0])[0]
+                for k in word_nodes:
+                    p = morph.parse(k[0])[0]
                     if p.tag.POS in ['NOUN', 'ADJF', 'ADJS', 'VERB', 'INFN']:
-                        nodes.append([toponim, p.normal_form, j[1]])
+                        edge_list.append([toponim, p.normal_form, k[1]])
 
-            time.sleep(0.01)
+        edge_df = pd.DataFrame(edge_list, columns=['FROM', 'TO', 'SCORE'])
 
-        new_df = pd.DataFrame(nodes, columns=['FROM', 'TO', 'SIMILARITY_SCORE'])
-
-        return new_df
+        return edge_df
 
     def get_semantic_closeness(self,
                                data: pd.DataFrame or gpd.GeoDataFrame,
@@ -324,7 +379,7 @@ class Semgraph:
         return result_df
 
     @staticmethod
-    def get_attributes(nodes: list,
+    def get_tag(nodes: list,
                        toponims: list
                        ) -> dict:
         """
@@ -386,17 +441,42 @@ class Semgraph:
 
         return G
 
-    def build_semantic_graph(self,
+    @staticmethod
+    def get_text_ids(G: nx.classes.graph.Graph,
+                     filtered_data: pd.DataFrame or gpd.GeoDataFrame,
+                     toponim_column: str,
+                     text_id_column: str = 'texts_ids'
+                     ) -> pd.DataFrame or gpd.GeoDataFrame:
+
+        toponims_list = [i for i in G.nodes if G.nodes[i]['tag'] != 'TOPONIM']
+
+        for i in toponims_list:
+            df_id_text = filtered_data.loc[filtered_data[toponim_column] == i]
+
+            ids = []
+            for j in range(len(df_id_text)):
+                ids.extend(filtered_data[text_id_column].iloc[j])
+
+            ids = [str(int(j)) for j in ids]
+            G.nodes[i][text_id_column] = ','.join(ids)
+
+        return G
+
+    def run(self,
                              data: pd.DataFrame or gpd.GeoDataFrame,
+                             id_column: str,
                              text_column: str,
+                             text_type_column: str,
                              toponim_column: str,
                              toponim_name_column: str,
                              toponim_type_column: str,
+                             post_id_column: str,
+                             parents_stack_column: str,
                              location_column: str or None = None,
                              geometry_column: str or None = None,
                              key_score_filter: float = 0.6,
-                             semantic_score_filter: float = 0.4,
-                             top_n: int = 5
+                             semantic_score_filter: float = 0.75,
+                             top_n: int = 1
                              ) -> nx.classes.graph.Graph:
 
         """
@@ -420,17 +500,46 @@ class Semgraph:
             nx.classes.graph.Graph: The semantic graph constructed from the input data.
         """
 
+        data = self.clean_from_dublicates(data,
+                                          text_column,
+                                          toponim_column)
+
+        data = self.clean_from_digits(data,
+                                      text_column)
+
+        data = self.clean_from_toponims(data,
+                                        text_column,
+                                        toponim_name_column,
+                                        toponim_type_column)
+
+        data = self.clean_from_links(data,
+                                     text_column)
+
+        data = self.fill_empty_toponim(data,
+                                       toponim_column)
+
+        data = self.fill_parents_stack(data,
+                                       parents_stack_column)
+
         df = self.extract_keywords(data,
                                    text_column,
+                                   text_type_column,
                                    toponim_column,
-                                   toponim_name_column,
-                                   toponim_type_column,
+                                   id_column,
+                                   post_id_column,
+                                   parents_stack_column,
                                    key_score_filter,
                                    top_n)
 
-        words_df = self.get_semantic_closeness(df, 'TO', semantic_score_filter)
+        preprocessed_df = self.convert_df_to_edge_df(df,
+                                                     toponim_column)
 
-        graph_df = pd.concat([df, words_df], ignore_index=True)
+        words_df = self.get_semantic_closeness(preprocessed_df,
+                                               'TO',
+                                               semantic_score_filter)
+
+        graph_df = pd.concat([preprocessed_df, words_df],
+                             ignore_index=True)
 
         G = nx.from_pandas_edgelist(graph_df,
                                     source='FROM',
@@ -438,7 +547,7 @@ class Semgraph:
                                     edge_attr='SIMILARITY_SCORE')
 
         nodes = list(G.nodes())
-        attributes = self.get_attributes(nodes, set(data[toponim_column]))
+        attributes = self.get_tag(nodes, set(data[toponim_column]))
 
         nx.set_node_attributes(G, attributes, 'tag')
 
@@ -449,4 +558,31 @@ class Semgraph:
                                      location_column=location_column,
                                      geometry_column=geometry_column)
 
+        G = self.get_text_ids(G=G,
+                              filtered_data=df,
+                              toponim_column=toponim_column)
+
         return G
+
+# debugging
+
+# if __name__ == '__main__':
+#
+#     file = open("C:\\Users\\thebe\\Downloads\\Telegram Desktop\\ruina.geojson", encoding='utf-8')
+#     test_gdf = gpd.read_file(file)
+#
+#     sm = Semgraph(device='cuda')
+#
+#     G = sm.run(test_gdf,
+#                id_column='id',
+#                text_column='text',
+#                text_type_column='type',
+#                toponim_column='only_full_street_name',
+#                toponim_name_column='initial_street',
+#                toponim_type_column='Toponims',
+#                post_id_column='post_id',
+#                parents_stack_column='parents_stack',
+#                location_column='Location',
+#                geometry_column='geometry')
+#
+#     print(G.nodes)
