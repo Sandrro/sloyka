@@ -436,8 +436,9 @@ class Semgraph:
         for i in toponims_list:
             if i in all_toponims_list:
                 cord = geocoded_data[geometry_column].iloc[all_toponims_list.index(i)]
-                G.nodes[i]['Lat'] = cord.x
-                G.nodes[i]['Lon'] = cord.y
+                if cord is not None:
+                    G.nodes[i]['Lat'] = cord.x
+                    G.nodes[i]['Lon'] = cord.y
 
         return G
 
@@ -461,6 +462,9 @@ class Semgraph:
             G.nodes[i][text_id_column] = ','.join(ids)
 
         return G
+
+    # @staticmethod
+    # def graph_to_key_words_
 
     def run(self,
                              data: pd.DataFrame or gpd.GeoDataFrame,
@@ -566,23 +570,24 @@ class Semgraph:
 
 # debugging
 
-# if __name__ == '__main__':
-#
-#     file = open("C:\\Users\\thebe\\Downloads\\Telegram Desktop\\ruina.geojson", encoding='utf-8')
-#     test_gdf = gpd.read_file(file)
-#
-#     sm = Semgraph(device='cuda')
-#
-#     G = sm.run(test_gdf,
-#                id_column='id',
-#                text_column='text',
-#                text_type_column='type',
-#                toponim_column='only_full_street_name',
-#                toponim_name_column='initial_street',
-#                toponim_type_column='Toponims',
-#                post_id_column='post_id',
-#                parents_stack_column='parents_stack',
-#                location_column='Location',
-#                geometry_column='geometry')
-#
-#     print(G.nodes)
+if __name__ == '__main__':
+
+    file = open("C:\\Users\\thebe\\Downloads\\Telegram Desktop\\df_vyborg_geocoded.geojson", encoding='utf-8')
+    test_gdf = gpd.read_file(file)
+
+    sm = Semgraph(device='cuda')
+
+    G = sm.run(test_gdf,
+               id_column='id',
+               text_column='text',
+               text_type_column='type',
+               toponim_column='only_full_street_name',
+               toponim_name_column='initial_street',
+               toponim_type_column='Toponims',
+               post_id_column='post_id',
+               parents_stack_column='parents_stack',
+               location_column='Location',
+               geometry_column='geometry')
+
+    nx.write_graphml(G, 'vyborg_graph.graphml', encoding='utf-8')
+
