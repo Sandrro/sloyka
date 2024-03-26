@@ -177,19 +177,6 @@ class Semgraph:
 
         return data
 
-    @staticmethod
-    def fill_parents_stack(data: pd.DataFrame or gpd.GeoDataFrame,
-                           parents_stack_column: str):
-
-        for i in range(len(data)):
-            tmp = data[parents_stack_column].iloc[i]
-            if tmp is not None and len(tmp) > 3:
-                data.at[i, parents_stack_column] = int(tmp.split()[1])
-            else:
-                data.at[i, parents_stack_column] = None
-
-        return data
-
     def extract_keywords(self,
                          data: pd.DataFrame or gpd.GeoDataFrame,
                          text_column: str,
@@ -522,9 +509,6 @@ class Semgraph:
         data = self.fill_empty_toponim(data,
                                        toponim_column)
 
-        data = self.fill_parents_stack(data,
-                                       parents_stack_column)
-
         df = self.extract_keywords(data,
                                    text_column,
                                    text_type_column,
@@ -589,5 +573,5 @@ if __name__ == '__main__':
                location_column='Location',
                geometry_column='geometry')
 
-    nx.write_graphml(G, 'vyborg_graph.graphml', encoding='utf-8')
+    nx.write_graphml(G, 'name.graphml', encoding='utf-8')
 
