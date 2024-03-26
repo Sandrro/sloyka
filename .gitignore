@@ -131,7 +131,10 @@ dmypy.json
 # /poetry.lock
 cache/
 
-#semantic_models
+# semantic_models
 /.model
 .model
 /semantic_models
+
+# idea
+.idea/
