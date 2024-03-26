@@ -28,6 +28,7 @@ import pymorphy2
 import requests
 import torch
 import string
+import difflib
 import math
 from sloyka.src.constants import (
     START_INDEX_POSITION,
@@ -198,29 +199,23 @@ class Streets:
 
     @staticmethod
     def find_toponim_words_from_name(x: str) -> str:
-        """
-        A method to find toponim words from the given name string.
+        pattern = [
+            "путепровод", "улица", "набережная реки", "проспект",
+            "бульвар", "мост", "переулок", "площадь", "переулок",
+            "набережная", "канала", "канал", "дорога на", "дорога в",
+            "шоссе", "аллея", "проезд", "линия"
+        ]
+        
+        best_match_ratio = 0
+        best_match = None
 
-        Args:
-            x (str): The input name string.
-
-        Returns:
-            str: The found toponim word from the input name string, or None if not found.
-        """
-        pattern = re.compile(
-            r"путепровод|улица|набережная реки|проспект"
-            r"|бульвар|мост|переулок|площадь|переулок"
-            r"|набережная|канала|канал|дорога на|дорога в"
-            r"|шоссе|аллея|проезд|линия",
-            re.IGNORECASE,
-        )
-
-        match = pattern.search(x)
-
-        if match:
-            return match.group().strip().lower()
-        else:
-            return None
+        for word in pattern:
+            ratio = difflib.SequenceMatcher(None, word, x).ratio()
+            if ratio >= 0.4 and ratio > best_match_ratio:
+                best_match_ratio = ratio
+                best_match = word
+        
+        return best_match.lower() if best_match else None
 
     @staticmethod
     def drop_words_from_name(x: str) -> str:
