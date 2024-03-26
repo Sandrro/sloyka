@@ -27,6 +27,7 @@ import sys
 import datetime
 import time
 import osm2geojson
+import random
 from typing import List
 
 
@@ -147,6 +148,7 @@ class Streets:
         result = requests.get(
             overpass_url, params={"data": overpass_query}
         ).json()
+        # time.sleep(random.random())
         resp = osm2geojson.json2geojson(result)
         city_bounds = gpd.GeoDataFrame.from_features(resp["features"]).set_crs(
             Streets.global_crs
@@ -157,7 +159,7 @@ class VKParser:
 
     API_VERISON = '5.131'
     COUNT_ITEMS = 100
-    SLEEP_TIME = 0.5
+    # SLEEP_TIME = 0.5
     TIMEOUT_LIMIT = 15
 
     @staticmethod
@@ -170,6 +172,7 @@ class VKParser:
         post_ids = []
 
         while offset < post_num_limit:
+            print(offset, ' | ', post_num_limit, end="\r")
             res = requests.get(
                 "https://api.vk.com/method/wall.get",
                 params={
@@ -178,8 +181,10 @@ class VKParser:
                     "owner_id": owner_id,
                     "count": step,
                     "offset": offset,
-                }, timeout=90
+                }, timeout=10
             ).json()["response"]
+            # print(res.json().keys())
+            time.sleep(random.random())
 
             post_ids_new = [k["id"] for k in res["items"]]
             post_ids += post_ids_new
@@ -204,6 +209,8 @@ class VKParser:
         subcomments = []
 
         response = requests.get('https://api.vk.com/method/wall.getComments', params=params)
+        # print(response.json().keys())
+        time.sleep(random.random())
         data = response.json()
 
         if 'response' in data:
@@ -240,6 +247,8 @@ class VKParser:
         comments = []
 
         response = requests.get('https://api.vk.com/method/wall.getComments', params=params)
+        # print(response.json().keys())
+        time.sleep(random.random())
         data = response.json()
 
         if 'response' in data:
@@ -292,6 +301,8 @@ class VKParser:
         if step > number_of_messages:
             step = number_of_messages
         while offset < number_of_messages:
+            print(offset, ' | ', number_of_messages, end="\r")
+
             response = requests.get('https://api.vk.com/method/wall.get',
                                     params={
                                         'access_token': token,
@@ -301,18 +312,22 @@ class VKParser:
                                         'offset': offset
                                     }
                                     )
-            data = response.json()['response']['items']
-            offset += step
-            current_posts = pd.json_normalize(data)
-            current_posts = current_posts[['date', 'id', 'text', 'views.count', 'likes.count', 'reposts.count']]
-            current_posts['date'] = [datetime.datetime.fromtimestamp(current_posts['date'][i]) for i in range(len(current_posts['date']))]
-            current_posts['type'] = 'post'
-            all_posts.append(current_posts)
-            print(current_posts.date.min())
-            if any(current_posts['date'] < datetime.datetime.strptime(cutoff_date, '%Y-%m-%d')):
-                print('posts downloaded')
-                break
-            time.sleep(0.5)
+            if response.ok:
+                # print(response.json().keys())
+                data = response.json()['response']['items']
+                offset += step
+                current_posts = pd.json_normalize(data)
+                current_posts = current_posts[['date', 'id', 'text', 'views.count', 'likes.count', 'reposts.count']]
+                current_posts['date'] = [datetime.datetime.fromtimestamp(current_posts['date'][i]) for i in range(len(current_posts['date']))]
+                current_posts['type'] = 'post'
+                all_posts.append(current_posts)
+                print(current_posts.date.min())
+                if any(current_posts['date'] < datetime.datetime.strptime(cutoff_date, '%Y-%m-%d')):
+                    print('posts downloaded')
+                    break
+            else:
+                continue
+            time.sleep(random.random())
         df_posts = pd.concat(all_posts).reset_index(drop=True)
         df_posts = df_posts[df_posts.text.map(lambda x: len(x)) > 0]
         df_posts['text'] = df_posts['text'].str.replace(r'\n', '', regex=True)
@@ -321,7 +336,7 @@ class VKParser:
 
     def run_comments(self, owner_id, post_ids, access_token):
         all_comments = []
-        for post_id in post_ids:
+        for post_id in tqdm(post_ids):
             comments = self.get_comments(owner_id, post_id, access_token)
             all_comments.extend(comments)
         df = self.comments_to_dataframe(all_comments)
