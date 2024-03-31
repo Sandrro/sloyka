@@ -32,7 +32,6 @@ import networkx as nx
 from nltk.corpus import stopwords
 from transformers import BertTokenizer, BertModel
 from keybert import KeyBERT
-from bertopic import BERTopic
 
 nltk.download('stopwords')
 
@@ -41,6 +40,12 @@ RUS_STOPWORDS = stopwords.words('russian') + ['фото', 'улица', 'дом'
                                               'здравствуйте', 'ул', 'пр', 'здание',
                                               'город', 'аноним', 'утро', 'день',
                                               'вечер']
+
+TAG_ROUTER = {'NOUN': 'содержит',
+          'ADJF': 'описание',
+          'ADJS': 'описание',
+          'VERB': 'активность',
+          'INFN': 'активность'}
 
 
 class Semgraph:
@@ -69,24 +74,20 @@ class Semgraph:
 
     @staticmethod
     def clean_from_dublicates(data: pd.DataFrame or gpd.GeoDataFrame,
-                              text_column: str,
-                              toponim_column: str
+                              id_column: str
                               ) -> pd.DataFrame or gpd.GeoDataFrame:
         """
         A function to clean a DataFrame from duplicates based on specified columns.
         
         Args:
             data (pd.DataFrame): The input DataFrame to be cleaned.
-            text_column (str): The name of the text column to check for duplicates.
-            toponim_column (str): The name of the toponims column.
         
         Returns:
             pd.DataFrame or gpd.GeoDataFrame: A cleaned DataFrame or GeoDataFrame without duplicates based on the
             specified text column.
         """
 
-        uniq_df = data.drop_duplicates(subset=[text_column], keep='first')
-        uniq_df = uniq_df.dropna(subset=[text_column, toponim_column])
+        uniq_df = data.drop_duplicates(subset=[id_column], keep='first')
         uniq_df = uniq_df.reset_index(drop=True)
 
         return uniq_df
@@ -154,13 +155,13 @@ class Semgraph:
 
         for i in range(len(data)):
             text = str(data[text_column].iloc[i])
-            if '[' in text:
+            if '[' in text and ']' in text:
                 start = text.index('[')
                 stop = text.index(']')
 
                 text = text[:start] + text[stop:]
 
-            text = re.sub(r'^https?:\/\/.*[\r\n]*', '', text, flags=re.MULTILINE)
+            text = re.sub(r'^https?://.*[\r\n]*', '', text, flags=re.MULTILINE)
 
             data.at[i, text_column] = text
 
@@ -208,6 +209,9 @@ class Semgraph:
 
         exclude_list = reply_toponim_list + comment_toponim_list
 
+        print('Extracting keywords from post chains...')
+        time.sleep(1)
+
         for i in tqdm(post_toponim_list):
 
             ids_text_to_extract = list((data[id_column].loc[(data[post_id_column] == i)
@@ -239,6 +243,9 @@ class Semgraph:
                 data.at[index, 'words_score'] = words_to_add
                 data.at[index, 'texts_ids'] = id_to_add
 
+        print('Extracting keywords from comment chains...')
+        time.sleep(1)
+
         for i in tqdm(comment_toponim_list):
 
             ids_text_to_extract = list(data[id_column].loc[data[parents_stack_column] == i])
@@ -267,14 +274,16 @@ class Semgraph:
                 data.at[index, 'words_score'] = words_to_add
                 data.at[index, 'texts_ids'] = id_to_add
 
+        print('Extracting keywords from replies...')
+        time.sleep(1)
+
         for i in tqdm(reply_toponim_list):
 
-            id_text_to_extract = data[id_column].loc[data[id_column] == i]
+            id_text_to_extract = list(data[id_column].loc[data[id_column] == i])
 
-            text_to_extract = data[text_column].loc[data[id_column] == i]
+            text_to_extract = list(data[text_column].loc[data[id_column] == i])
 
             words_to_add = []
-            id_to_add = []
             texts_to_add = []
 
             for j in text_to_extract:
@@ -295,9 +304,8 @@ class Semgraph:
 
         return df_to_graph
 
-
-    def convert_df_to_edge_df(self,
-                              data: pd.DataFrame or gpd.GeoDataFrame,
+    @staticmethod
+    def convert_df_to_edge_df(data: pd.DataFrame or gpd.GeoDataFrame,
                               toponim_column: str,
                               word_and_score_column: str = 'words_score'
                               ) -> pd.DataFrame or gpd.GeoDataFrame:
@@ -314,10 +322,10 @@ class Semgraph:
 
                 for k in word_nodes:
                     p = morph.parse(k[0])[0]
-                    if p.tag.POS in ['NOUN', 'ADJF', 'ADJS', 'VERB', 'INFN']:
-                        edge_list.append([toponim, p.normal_form, k[1]])
+                    if p.tag.POS in TAG_ROUTER.keys():
+                        edge_list.append([toponim, p.normal_form, k[1], TAG_ROUTER[p.tag.POS]])
 
-        edge_df = pd.DataFrame(edge_list, columns=['FROM', 'TO', 'SCORE'])
+        edge_df = pd.DataFrame(edge_list, columns=['FROM', 'TO', 'SCORE', 'EDGE_TYPE'])
 
         return edge_df
 
@@ -344,37 +352,38 @@ class Semgraph:
         words_tokens = tuple(
             [self.tokenizer.encode(i, add_special_tokens=False, return_tensors='pt').to(self.device) for i in
              unic_words])
-        potential_new_nodes_embendings = tuple(
+        potential_new_nodes_embeddings = tuple(
             [[unic_words[i], self.model(words_tokens[i]).last_hidden_state.mean(dim=1)] for i in
              range(len(unic_words))])
         new_nodes = []
 
-        combinations = list(itertools.combinations(potential_new_nodes_embendings, 2))
+        combinations = list(itertools.combinations(potential_new_nodes_embeddings, 2))
 
-        print('Calculating semantic closeness')
+        print('Calculating semantic closeness...')
         for word1, word2 in tqdm(combinations):
 
             similarity = float(torch.nn.functional.cosine_similarity(word1[1], word2[1]))
 
             if similarity >= similarity_filter:
-                new_nodes.append([word1[0], word2[0], similarity])
+                new_nodes.append([word1[0], word2[0], similarity, 'сходство'])
+                new_nodes.append([word2[0], word1[0], similarity, 'сходство'])
 
             time.sleep(0.001)
 
-        result_df = pd.DataFrame(new_nodes, columns=['FROM', 'TO', 'SIMILARITY_SCORE'])
+        result_df = pd.DataFrame(new_nodes, columns=['FROM', 'TO', 'SCORE', 'EDGE_TYPE'])
 
         return result_df
 
     @staticmethod
     def get_tag(nodes: list,
-                       toponims: list
-                       ) -> dict:
+                toponyms: list
+                ) -> dict:
         """
-        Get attributes of part of speech for the given nodes, with the option to specify toponims.
+        Get attributes of part of speech for the given nodes, with the option to specify toponyms.
         
         Args:
             nodes (list): list of strings representing the nodes
-            toponims (list): list of strings representing the toponims
+            toponyms (list): list of strings representing the toponyms
 
         Returns: 
             dict: dictionary containing attributes for the nodes
@@ -384,10 +393,10 @@ class Semgraph:
         attrs = {}
 
         for i in nodes:
-            if i not in toponims:
+            if i not in toponyms:
                 attrs[i] = str(morph.parse(i)[0].tag.POS)
             else:
-                attrs[i] = 'TOPONIM'
+                attrs[i] = 'TOPONYM'
 
         return attrs
 
@@ -412,7 +421,7 @@ class Semgraph:
             nx.classes.graph.Graph: Graph with toponim nodes ('tag'=='TOPONIM') containing information
             about address and geometry ('Location','Lon','Lat' as node attributes)
         """
-        toponims_list = [i for i in G.nodes if G.nodes[i].get('tag') == 'TOPONIM']
+        toponims_list = [i for i in G.nodes if G.nodes[i].get('tag') == 'TOPONYM']
         all_toponims_list = list(geocoded_data[toponim_column])
 
         for i in toponims_list:
@@ -436,7 +445,7 @@ class Semgraph:
                      text_id_column: str = 'texts_ids'
                      ) -> pd.DataFrame or gpd.GeoDataFrame:
 
-        toponims_list = [i for i in G.nodes if G.nodes[i]['tag'] != 'TOPONIM']
+        toponims_list = [i for i in G.nodes if G.nodes[i]['tag'] != 'TOPONYM']
 
         for i in toponims_list:
             df_id_text = filtered_data.loc[filtered_data[toponim_column] == i]
@@ -454,21 +463,21 @@ class Semgraph:
     # def graph_to_key_words_
 
     def run(self,
-                             data: pd.DataFrame or gpd.GeoDataFrame,
-                             id_column: str,
-                             text_column: str,
-                             text_type_column: str,
-                             toponim_column: str,
-                             toponim_name_column: str,
-                             toponim_type_column: str,
-                             post_id_column: str,
-                             parents_stack_column: str,
-                             location_column: str or None = None,
-                             geometry_column: str or None = None,
-                             key_score_filter: float = 0.6,
-                             semantic_score_filter: float = 0.75,
-                             top_n: int = 1
-                             ) -> nx.classes.graph.Graph:
+            data: pd.DataFrame or gpd.GeoDataFrame,
+            id_column: str,
+            text_column: str,
+            text_type_column: str,
+            toponim_column: str,
+            toponim_name_column: str,
+            toponim_type_column: str,
+            post_id_column: str,
+            parents_stack_column: str,
+            location_column: str or None = None,
+            geometry_column: str or None = None,
+            key_score_filter: float = 0.6,
+            semantic_score_filter: float = 0.75,
+            top_n: int = 1
+            ) -> nx.classes.graph.Graph:
 
         """
         Builds a semantic graph based on the provided data and parameters.
@@ -492,8 +501,7 @@ class Semgraph:
         """
 
         data = self.clean_from_dublicates(data,
-                                          text_column,
-                                          toponim_column)
+                                          id_column)
 
         data = self.clean_from_digits(data,
                                       text_column)
@@ -532,10 +540,10 @@ class Semgraph:
         G = nx.from_pandas_edgelist(graph_df,
                                     source='FROM',
                                     target='TO',
-                                    edge_attr='SIMILARITY_SCORE')
+                                    edge_attr=['SCORE', 'EDGE_TYPE'])
 
         nodes = list(G.nodes())
-        attributes = self.get_tag(nodes, set(data[toponim_column]))
+        attributes = self.get_tag(nodes, list(set(data[toponim_column])))
 
         nx.set_node_attributes(G, attributes, 'tag')
 
@@ -552,14 +560,14 @@ class Semgraph:
 
         return G
 
-# debugging
 
+# debugging
 if __name__ == '__main__':
 
     file = open("C:\\Users\\thebe\\Downloads\\Telegram Desktop\\df_vyborg_geocoded.geojson", encoding='utf-8')
     test_gdf = gpd.read_file(file)
 
-    sm = Semgraph(device='cuda')
+    sm = Semgraph(device='cpu')
 
     G = sm.run(test_gdf,
                id_column='id',
