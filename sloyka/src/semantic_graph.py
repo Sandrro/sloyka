@@ -33,7 +33,7 @@ from nltk.corpus import stopwords
 from transformers import BertTokenizer, BertModel
 from keybert import KeyBERT
 
-from constants import STOPWORDS
+from sloyka.src.constants import STOPWORDS
 
 nltk.download('stopwords')
 
