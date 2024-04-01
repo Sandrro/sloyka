@@ -155,7 +155,7 @@ class Semgraph:
 
         for i in range(len(data)):
             text = str(data[text_column].iloc[i])
-            if '[' in text and ']' in text:
+            if '[id' in text and ']' in text:
                 start = text.index('[')
                 stop = text.index(']')
 
