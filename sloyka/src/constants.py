@@ -342,6 +342,12 @@ OSM_TAGS = {
     "railway": ["tram_stop", "station"],
 }
 
+TAG_ROUTER = {'NOUN': 'содержит',
+              'ADJF': 'описание',
+              'ADJS': 'описание',
+              'VERB': 'активность',
+              'INFN': 'активность'}
+
 STOPWORDS = [
     'фото',
     'улица',

@@ -33,17 +33,11 @@ from nltk.corpus import stopwords
 from transformers import BertTokenizer, BertModel
 from keybert import KeyBERT
 
-from sloyka.src.constants import STOPWORDS
+from sloyka.src.constants import STOPWORDS, TAG_ROUTER
 
 nltk.download('stopwords')
 
 RUS_STOPWORDS = stopwords.words('russian') + STOPWORDS
-
-TAG_ROUTER = {'NOUN': 'содержит',
-              'ADJF': 'описание',
-              'ADJS': 'описание',
-              'VERB': 'активность',
-              'INFN': 'активность'}
 
 
 class Semgraph:
