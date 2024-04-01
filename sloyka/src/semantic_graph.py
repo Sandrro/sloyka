@@ -33,13 +33,11 @@ from nltk.corpus import stopwords
 from transformers import BertTokenizer, BertModel
 from keybert import KeyBERT
 
+from sloyka.src.constants import STOPWORDS
+
 nltk.download('stopwords')
 
-RUS_STOPWORDS = stopwords.words('russian') + ['фото', 'улица', 'дом', 'проспект',
-                                              'дорога', 'час', 'год', 'утро',
-                                              'здравствуйте', 'ул', 'пр', 'здание',
-                                              'город', 'аноним', 'утро', 'день',
-                                              'вечер']
+RUS_STOPWORDS = stopwords.words('russian') + STOPWORDS
 
 TAG_ROUTER = {'NOUN': 'содержит',
           'ADJF': 'описание',
