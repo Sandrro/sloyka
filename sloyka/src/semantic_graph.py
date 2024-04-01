@@ -135,6 +135,7 @@ class Semgraph:
         """
 
         for i in range(len(data)):
+
             text = str(data[text_column].iloc[i]).lower()
             word_list = text.split()
             toponims = [str(data[name_column].iloc[i]).lower(), str(data[toponim_type_column].iloc[i]).lower()]
@@ -547,9 +548,9 @@ class Semgraph:
                     id_column: str,
                     text_column: str,
                     text_type_column: str,
-                    toponim_column: str,
-                    toponim_name_column: str,
-                    toponim_type_column: str,
+                    toponym_column: str,
+                    toponym_name_column: str,
+                    toponym_type_column: str,
                     post_id_column: str,
                     parents_stack_column: str,
                     directed: bool = True,
@@ -589,19 +590,19 @@ class Semgraph:
 
         data = self.clean_from_toponims(data,
                                         text_column,
-                                        toponim_name_column,
-                                        toponim_type_column)
+                                        toponym_name_column,
+                                        toponym_type_column)
 
         data = self.clean_from_links(data,
                                      text_column)
 
         data = self.fill_empty_toponim(data,
-                                       toponim_column)
+                                       toponym_column)
 
         extracted = self.extract_keywords(data,
                                           text_column,
                                           text_type_column,
-                                          toponim_column,
+                                          toponym_column,
                                           id_column,
                                           post_id_column,
                                           parents_stack_column,
@@ -613,7 +614,7 @@ class Semgraph:
         words_attributes = extracted[2]
 
         preprocessed_df = self.convert_df_to_edge_df(data=df,
-                                                     toponym_column=toponim_column)
+                                                     toponym_column=toponym_column)
 
         words_df = self.get_semantic_closeness(preprocessed_df,
                                                'TO',
@@ -635,7 +636,7 @@ class Semgraph:
                                         edge_attr=['SCORE', 'EDGE_TYPE'])
 
         nodes = list(G.nodes())
-        attributes = self.get_tag(nodes, list(set(data[toponim_column])))
+        attributes = self.get_tag(nodes, list(set(data[toponym_column])))
 
         nx.set_node_attributes(G, attributes, 'tag')
         G = self.add_attributes(G=G,
@@ -651,13 +652,13 @@ class Semgraph:
         if type(data) is gpd.GeoDataFrame:
             G = self.get_coordinates(G=G,
                                      geocoded_data=data,
-                                     toponim_column=toponim_column,
+                                     toponim_column=toponym_column,
                                      location_column=location_column,
                                      geometry_column=geometry_column)
 
         G = self.get_text_ids(G=G,
                               filtered_data=df,
-                              toponim_column=toponim_column)
+                              toponim_column=toponym_column)
 
         return G
 
@@ -709,6 +710,7 @@ class Semgraph:
 
 # debugging
 if __name__ == '__main__':
+
     file = open("C:\\Users\\thebe\\Downloads\\Telegram Desktop\\df_vyborg_geocoded.geojson", encoding='utf-8')
     test_gdf = gpd.read_file(file)
 
@@ -718,9 +720,9 @@ if __name__ == '__main__':
                        id_column='id',
                        text_column='text',
                        text_type_column='type',
-                       toponim_column='only_full_street_name',
-                       toponim_name_column='initial_street',
-                       toponim_type_column='Toponims',
+                       toponym_column='only_full_street_name',
+                       toponym_name_column='initial_street',
+                       toponym_type_column='Toponims',
                        post_id_column='post_id',
                        parents_stack_column='parents_stack',
                        location_column='Location',
