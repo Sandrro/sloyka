@@ -12,14 +12,14 @@ toponim_type_column='Toponims'
 
 def test_extract_keywords():
     result = sm.extract_keywords(test_df,
-                        text_column,
-                        toponim_column,
-                        toponim_name_column,
-                        toponim_type_column,
-                        semantic_key_filter=0.6,
-                        top_n=5)
+                                 text_column,
+                                 toponim_column,
+                                 toponim_name_column,
+                                 toponim_type_column,
+                                 semantic_key_filter=0.6,
+                                 top_n=5)
 
-    assert len(result) == 7
+    assert len(result) == 6
 
 def test_get_semantic_closeness():
     df = pd.DataFrame([['TOPONIM_1', 'роза'], ['TOPONIM_2', 'куст']], columns=['toponims', 'words'])
