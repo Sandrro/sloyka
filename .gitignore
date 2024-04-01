@@ -131,19 +131,10 @@ dmypy.json
 # /poetry.lock
 cache/
 
-#semantic_models
+# semantic_models
 /.model
 .model
 /semantic_models
 
-#idea
-.idea/
-.idea/sloyka.iml
-.iml
-
-#notebooks
-graph_with_cluster.ipynb
-new_graph_extraction.ipynb
-sloyka/src/new_graph_extraction.ipynb
-#IDEA
+# idea
 .idea/
