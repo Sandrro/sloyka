@@ -361,6 +361,13 @@ class VKParser:
         
         df_comments = self.run_comments(owner_id, post_ids, your_token)
         df_comments.loc[df_comments['parents_stack'].apply(lambda x: len(x) > 0), 'type'] = 'reply'
+        for i in range(len(df_comments)):
+            tmp = df_comments['parents_stack'].iloc[i]
+            if tmp is not None:
+                if len(tmp) > 0:
+                    df_comments['parents_stack'].iloc[i] = tmp[0]
+                else:
+                    df_comments['parents_stack'].iloc[i] = None
 
         df_combined = df_comments.join(df_posts, on='post_id', rsuffix='_post')
         df_combined = pd.concat([df_posts, df_comments], ignore_index=True)
