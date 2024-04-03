@@ -560,9 +560,9 @@ class Semgraph:
 
             for j in range(len(municipals)):
                 mo_name = municipals[name_column].iloc[j]
-                edge_list.append([district_name, mo_name])
+                edge_list.append([district_name, mo_name, 'содержит'])
 
-        edges = pd.DataFrame(edge_list, columns=['SOURCE', 'TARGET'])
+        edges = pd.DataFrame(edge_list, columns=['SOURCE', 'TARGET', 'EDGE_TYPE'])
 
         admin_graph = nx.from_pandas_edgelist(edges, source='SOURCE', target='TARGET', create_using=nx.DiGraph())
 
@@ -580,7 +580,22 @@ class Semgraph:
 
         G = nx.compose(G, admin_graph)
 
+        G = Semgraph.connect_city_toponym(G)
+
         return G
+
+    @staticmethod
+    def connect_city_toponym(G: nx.classes.graph.Graph):
+
+        city = [i for i in G.nodes if G.nodes[i].get('tag') == 'CITY'][0]
+
+        for i in G.nodes:
+            if G.nodes[i].get('tag') == 'TOPONYM':
+                G.add_edge(city, i, EDGE_TYPE='содержит')
+
+        return G
+
+
 
     def build_graph(self,
                     data: pd.DataFrame or gpd.GeoDataFrame,
