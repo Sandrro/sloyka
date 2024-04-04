@@ -50,7 +50,7 @@ class Pipeline:
         self.G = None
 
     def get_posts(self):
-        self.posts = VKParser().run_posts(self.owner_id, self.token, self.count, self.date)
+        self.posts = VKParser().run_parser(self.owner_id, self.token, self.count, self.date)
 
     def geocoding(self, text_column='text'):
         geocoder = Geocoder(osm_city_name=self.osm_city_name, osm_city_level=self.osm_city_level)
@@ -58,13 +58,19 @@ class Pipeline:
 
     def build_semantic_graph(self, device='cpu', key_score_filter=0.6, semantic_score_filter=0.75):
         sm = Semgraph(device=device)
-        self.G = sm.build_semantic_graph(self.res,
+        self.G = sm.build_graph(self.res,
+                                        'id',
                                         'text',
+                                        'type',
                                         'only_full_street_name', 
                                         'initial_street',
                                         'Toponims',
-                                        key_score_filter=key_score_filter,
-                                        semantic_score_filter=semantic_score_filter)
+                                        'post_id',
+                                        'parents_stack',
+                                        'Location',
+                                        'geometry')
+                                        # key_score_filter=key_score_filter,
+                                        # semantic_score_filter=semantic_score_filter)
 
     def save_graphml(self, filename='sem_graph.graphml'):
         if self.G:
