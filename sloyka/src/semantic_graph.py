@@ -20,6 +20,7 @@ toponim columns.
 Creates a new DataFrame by aggregating the data based on the provided text and toponims columns.
 """
 import time
+import numpy as np
 import itertools
 from tqdm import tqdm
 import re
@@ -33,7 +34,7 @@ from nltk.corpus import stopwords
 from transformers import BertTokenizer, BertModel
 from keybert import KeyBERT
 
-from sloyka.src.constants import STOPWORDS, TAG_ROUTER
+from sloyka.src.constants import STOPWORDS, TAG_ROUTER, SPB_DISTRICTS
 
 nltk.download('stopwords')
 
@@ -535,7 +536,66 @@ class Semgraph:
                 G.nodes[i][attribute_tag] = new_attributes[i]
         return G
 
-    # def graph_to_key_words_
+    @staticmethod
+    def add_city_distr_to_graph(G: nx.classes.graph.Graph,
+                                data: pd.DataFrame or gpd.GeoDataFrame,
+                                name_column: str,
+                                parents_column: str,
+                                level_column: str,
+                                directed: bool = True
+                                ) -> nx.classes.graph.Graph:
+
+        edge_list = []
+
+        city = data.loc[data[parents_column].isnull()]
+        city_name = city[name_column].iloc[0]
+
+        districts = data.loc[data[parents_column] == city_name]
+
+        for i in range(len(districts)):
+            district_name = districts[name_column].iloc[i]
+            edge_list.append([city_name, district_name])
+
+            municipals = data.loc[data[parents_column] == district_name]
+
+            for j in range(len(municipals)):
+                mo_name = municipals[name_column].iloc[j]
+                edge_list.append([district_name, mo_name, 'содержит'])
+
+        edges = pd.DataFrame(edge_list, columns=['SOURCE', 'TARGET', 'EDGE_TYPE'])
+
+        admin_graph = nx.from_pandas_edgelist(edges, source='SOURCE', target='TARGET', create_using=nx.DiGraph())
+
+        router = {4: 'CITY',
+                  5: 'DISTRICT',
+                  6: 'MUNICIPALITY'}
+
+        for i in admin_graph.nodes:
+
+            level = data[level_column].loc[data[name_column] == i].iloc[0]
+            try:
+                admin_graph.nodes[i]['tag'] = router.get(int(level))
+            except:
+                continue
+
+        G = nx.compose(G, admin_graph)
+
+        G = Semgraph.connect_city_toponym(G)
+
+        return G
+
+    @staticmethod
+    def connect_city_toponym(G: nx.classes.graph.Graph):
+
+        city = [i for i in G.nodes if G.nodes[i].get('tag') == 'CITY'][0]
+
+        for i in G.nodes:
+            if G.nodes[i].get('tag') == 'TOPONYM':
+                G.add_edge(city, i, EDGE_TYPE='содержит')
+
+        return G
+
+
 
     def build_graph(self,
                     data: pd.DataFrame or gpd.GeoDataFrame,
@@ -553,7 +613,7 @@ class Semgraph:
                     key_score_filter: float = 0.6,
                     semantic_score_filter: float = 0.75,
                     top_n: int = 1
-            ) -> nx.classes.graph.Graph:
+                    ) -> nx.classes.graph.Graph:
 
         """
         Builds a semantic graph based on the provided data and parameters.
