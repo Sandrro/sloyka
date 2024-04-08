@@ -163,7 +163,33 @@ class VKParser:
     TIMEOUT_LIMIT = 15
 
     @staticmethod
-    def get_group_post_ids(owner_id, your_token, post_num_limit, step) -> list:
+    def get_owner_id_by_domain(domain, access_token):
+        """
+    Get the owner ID of a VK group by its domain.
+
+    Args:
+        domain (str): The domain of the VK group.
+        access_token (str): The access token for the VK API.
+
+    Returns:
+        int: The owner ID of the VK group, or None if the request was not successful.
+    """    
+        url = "https://api.vk.com/method/wall.get"
+        params = {
+        "domain": domain,
+        "access_token": access_token,
+        "v": VKParser.API_VERISON,
+        }
+        response = requests.get(url, params=params)
+        if response.ok:
+            owner_id = response.json()['response']['items'][0]['owner_id']
+        else:
+            owner_id = None
+        return owner_id
+
+    
+    @staticmethod
+    def get_group_post_ids(domain, access_token, post_num_limit, step) -> list:
         """
         A static method to retrieve a list of post IDs for a given group, based on the owner ID,
         access token, post number limit, and step size. Returns a list of post IDs.
@@ -176,9 +202,9 @@ class VKParser:
             res = requests.get(
                 "https://api.vk.com/method/wall.get",
                 params={
-                    "access_token": your_token,
+                    "access_token": access_token,
                     "v": VKParser.API_VERISON,
-                    "owner_id": owner_id,
+                    "domain": domain,
                     "count": step,
                     "offset": offset,
                 }, timeout=10
@@ -280,13 +306,13 @@ class VKParser:
         df = df[['id', 'date', 'text', 'post_id', 'parents_stack', 'likes.count']]
         return df
     
-    def run_posts(self, owner_id, your_token, step, cutoff_date, number_of_messages=float('inf')):
+    def run_posts(self, domain, access_token, step, cutoff_date, number_of_messages=float('inf')):
         """
         A function to retrieve posts from a social media API based on specified parameters.
 
         Parameters:
             owner_id (int): The ID of the owner whose posts are being retrieved.
-            your_token (str): The authentication token for accessing the API.
+            access_token (str): The authentication token for accessing the API.
             step (int): The number of posts to retrieve in each API call.
             cutoff_date (str): The date to stop retrieving posts (format: '%Y-%m-%d').
             number_of_messages (float): The maximum number of messages to retrieve (default is infinity).
@@ -294,8 +320,8 @@ class VKParser:
         Returns:
             pandas.DataFrame: A DataFrame containing the retrieved posts.
         """
-        token = your_token
-        domain = owner_id
+        token = access_token
+        domain = domain
         offset = 0
         all_posts = []
         if step > number_of_messages:
@@ -305,7 +331,7 @@ class VKParser:
 
             response = requests.get('https://api.vk.com/method/wall.get',
                                     params={
-                                        'access_token': token,
+                                        'access_token': access_token,
                                         'v': VKParser.API_VERISON,
                                         'domain': domain,
                                         'count': step,
@@ -334,7 +360,10 @@ class VKParser:
         df_posts['link'] = df_posts['text'].str.extract(r'(https://\S+)')
         return df_posts
 
-    def run_comments(self, owner_id, post_ids, access_token):
+
+    def run_comments(self, domain, post_ids, access_token):
+
+        owner_id = self.get_owner_id_by_domain(domain, access_token)
         all_comments = []
         for post_id in tqdm(post_ids):
             comments = self.get_comments(owner_id, post_id, access_token)
@@ -345,21 +374,22 @@ class VKParser:
         print('comments downloaded')
         return df
     
-    def run_parser(self, owner_id, your_token, step, cutoff_date, number_of_messages=float('inf')):
+    def run_parser(self, domain, access_token, step, cutoff_date, number_of_messages=float('inf')):
         """
         Runs the parser with the given parameters and returns a combined DataFrame of posts and comments.
         
         :param owner_id: The owner ID for the parser.
-        :param your_token: The user token for authentication.
+        :param access_token: The user token for authentication.
         :param step: The step size for fetching data.
         :param cutoff_date: The cutoff date for fetching data.
         :param number_of_messages: The maximum number of messages to fetch. Defaults to positive infinity.
         :return: A combined DataFrame of posts and comments.
         """
-        df_posts = self.run_posts(owner_id, your_token, step, cutoff_date, number_of_messages)
+        owner_id = self.get_owner_id_by_domain(domain, access_token)
+        df_posts = self.run_posts(owner_id, access_token, step, cutoff_date, number_of_messages)
         post_ids = df_posts['id'].tolist()
         
-        df_comments = self.run_comments(owner_id, post_ids, your_token)
+        df_comments = self.run_comments(owner_id, post_ids, access_token)
         df_comments.loc[df_comments['parents_stack'].apply(lambda x: len(x) > 0), 'type'] = 'reply'
         for i in range(len(df_comments)):
             tmp = df_comments['parents_stack'].iloc[i]
