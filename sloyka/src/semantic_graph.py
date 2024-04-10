@@ -12,12 +12,12 @@ A function to clean a DataFrame from duplicates based on specified columns.
 @method:clean_from_digits:
 Removes digits from the text in the specified column of the input DataFrame.
 
-@method:clean_from_toponims:
-Clean the text in the specified text column by removing any words that match the toponims in the name and
-toponim columns.
+@method:clean_from_toponyms:
+Clean the text in the specified text column by removing any words that match the toponyms in the name and
+toponym columns.
 
-@method:aggregte_data:
-Creates a new DataFrame by aggregating the data based on the provided text and toponims columns.
+@method:aggregate_data:
+Creates a new DataFrame by aggregating the data based on the provided text and toponyms columns.
 """
 import time
 import numpy as np
@@ -33,6 +33,9 @@ import networkx as nx
 from nltk.corpus import stopwords
 from transformers import BertTokenizer, BertModel
 from keybert import KeyBERT
+import geopy.distance
+from shapely.geometry import Point
+from shapely.geometry.polygon import Polygon
 
 from sloyka.src.constants import STOPWORDS, TAG_ROUTER, SPB_DISTRICTS
 
@@ -74,6 +77,7 @@ class Semgraph:
         
         Args:
             data (pd.DataFrame): The input DataFrame to be cleaned.
+            id_column (str): The name of the column to use as the unique identifier.
         
         Returns:
             pd.DataFrame or gpd.GeoDataFrame: A cleaned DataFrame or GeoDataFrame without duplicates based on the
@@ -112,17 +116,17 @@ class Semgraph:
     def clean_from_toponims(data: pd.DataFrame or gpd.GeoDataFrame,
                             text_column: str,
                             name_column: str,
-                            toponim_type_column: str
+                            toponym_type_column: str
                             ) -> pd.DataFrame or gpd.GeoDataFrame:
         """
-        Clean the text in the specified text column by removing any words that match the toponims in the name
-        and toponim columns.
+        Clean the text in the specified text column by removing any words that match the toponyms in the name
+        and toponym columns.
 
         Args:
             data (pd.DataFrame or gpd.GeoDataFrame): The input DataFrame.
             text_column (str): The name of the column containing the text to be cleaned.
-            name_column (str): The name of the column containing the toponim name (e.g. Nevski, Moika etc).
-            toponim_type_column (str): The name of the column containing the toponim type
+            name_column (str): The name of the column containing the toponym name (e.g. Nevski, Moika etc).
+            toponym_type_column (str): The name of the column containing the toponym type
             (e.g. street, alley, avenue etc).
 
         Returns:
@@ -130,12 +134,11 @@ class Semgraph:
         """
 
         for i in range(len(data)):
-
             text = str(data[text_column].iloc[i]).lower()
             word_list = text.split()
-            toponims = [str(data[name_column].iloc[i]).lower(), str(data[toponim_type_column].iloc[i]).lower()]
+            toponyms = [str(data[name_column].iloc[i]).lower(), str(data[toponym_type_column].iloc[i]).lower()]
 
-            text = ' '.join([j for j in word_list if j not in toponims])
+            text = ' '.join([j for j in word_list if j not in toponyms])
 
             data.at[i, text_column] = text
 
@@ -161,13 +164,13 @@ class Semgraph:
         return data
 
     @staticmethod
-    def fill_empty_toponim(data: pd.DataFrame or gpd.GeoDataFrame,
-                           toponim_column: str):
+    def fill_empty_toponym(data: pd.DataFrame or gpd.GeoDataFrame,
+                           toponym_column: str):
 
         for i in range(len(data)):
-            check = data[toponim_column].iloc[i]
+            check = data[toponym_column].iloc[i]
             if check == '':
-                data.at[i, toponim_column] = None
+                data.at[i, toponym_column] = None
 
         return data
 
@@ -175,7 +178,7 @@ class Semgraph:
                          data: pd.DataFrame or gpd.GeoDataFrame,
                          text_column: str,
                          text_type_column: str,
-                         toponim_column: str,
+                         toponym_column: str,
                          id_column: str,
                          post_id_column: str,
                          parents_stack_column: str,
@@ -190,31 +193,32 @@ class Semgraph:
         data['texts_ids'] = None
 
         post_top_gdf = data.loc[data[text_type_column] == 'post']
-        post_top_gdf = post_top_gdf.dropna(subset=toponim_column)
+        post_top_gdf = post_top_gdf.dropna(subset=toponym_column)
         post_toponym_list = list(post_top_gdf[id_column])
         toponym_dict = {}
         word_dict = {}
 
         comment_top_gdf = data.loc[data[text_type_column] == 'comment']
-        comment_top_gdf = comment_top_gdf.dropna(subset=toponim_column)
+        comment_top_gdf = comment_top_gdf.dropna(subset=toponym_column)
         comment_toponym_list = list(comment_top_gdf[id_column])
 
         reply_top_gdf = data.loc[data[text_type_column] == 'reply']
-        reply_top_gdf = reply_top_gdf.dropna(subset=toponim_column)
-        reply_toponim_list = list(reply_top_gdf[id_column])
+        reply_top_gdf = reply_top_gdf.dropna(subset=toponym_column)
+        reply_toponym_list = list(reply_top_gdf[id_column])
 
-        exclude_list = reply_toponim_list + comment_toponym_list
+        exclude_list = reply_toponym_list + comment_toponym_list
 
         print('Extracting keywords from post chains...')
         time.sleep(1)
 
         for i in tqdm(post_toponym_list):
-            toponym = data[toponim_column].loc[data[id_column] == i].iloc[0]
+            toponym = data[toponym_column].loc[data[id_column] == i].iloc[0]
 
-            ids_text_to_extract = list((data[id_column].loc[(data[post_id_column] == i)
-                                                            & (~data[id_column].isin(exclude_list))
-                                                            & (~data[parents_stack_column].isin(
-                comment_toponym_list))]))
+            ids_text_to_extract = list((data[id_column].loc[
+                (data[post_id_column] == i)
+                & (~data[id_column].isin(exclude_list))
+                & (~data[parents_stack_column].isin(comment_toponym_list))
+                ]))
 
             texts_to_extract = list((data[text_column].loc[(data[post_id_column] == i)
                                                            & (~data[id_column].isin(exclude_list))
@@ -265,7 +269,7 @@ class Semgraph:
         time.sleep(1)
 
         for i in tqdm(comment_toponym_list):
-            toponym = data[toponim_column].loc[data[id_column] == i].iloc[0]
+            toponym = data[toponym_column].loc[data[id_column] == i].iloc[0]
 
             ids_text_to_extract = list(data[id_column].loc[data[parents_stack_column] == i])
 
@@ -317,8 +321,8 @@ class Semgraph:
         print('Extracting keywords from replies...')
         time.sleep(1)
 
-        for i in tqdm(reply_toponim_list):
-            toponym = data[toponim_column].loc[data[id_column] == i].iloc[0]
+        for i in tqdm(reply_toponym_list):
+            toponym = data[toponym_column].loc[data[id_column] == i].iloc[0]
 
             id_text_to_extract = list(data[id_column].loc[data[id_column] == i])
 
@@ -463,7 +467,7 @@ class Semgraph:
     @staticmethod
     def get_coordinates(G: nx.classes.graph.Graph,
                         geocoded_data: gpd.GeoDataFrame,
-                        toponim_column: str,
+                        toponym_column: str,
                         location_column: str,
                         geometry_column: str
                         ) -> nx.classes.graph.Graph:
@@ -473,7 +477,7 @@ class Semgraph:
         Args:
             G (nx.classes.graph.Graph): Prebuild input graph.
             geocoded_data (gpd.GeoDataFrame): Data containing toponim, location and geometry of toponim.
-            toponim_column (str): The name of the column containing the toponim data.
+            toponym_column (str): The name of the column containing the toponim data.
             location_column (str): The name of the column containing the location data.
             geometry_column (str): The name of the column containing the geometry data.
 
@@ -481,17 +485,17 @@ class Semgraph:
             nx.classes.graph.Graph: Graph with toponim nodes ('tag'=='TOPONIM') containing information
             about address and geometry ('Location','Lon','Lat' as node attributes)
         """
-        toponims_list = [i for i in G.nodes if G.nodes[i].get('tag') == 'TOPONYM']
-        all_toponims_list = list(geocoded_data[toponim_column])
+        toponyms_list = [i for i in G.nodes if G.nodes[i].get('tag') == 'TOPONYM']
+        all_toponyms_list = list(geocoded_data[toponym_column])
 
-        for i in toponims_list:
-            if i in all_toponims_list:
-                index = all_toponims_list.index(i)
-                G.nodes[i]['Location'] = str(geocoded_data[location_column].iloc[all_toponims_list.index(i)])
+        for i in toponyms_list:
+            if i in all_toponyms_list:
+                index = all_toponyms_list.index(i)
+                G.nodes[i]['Location'] = str(geocoded_data[location_column].iloc[all_toponyms_list.index(i)])
 
-        for i in toponims_list:
-            if i in all_toponims_list:
-                cord = geocoded_data[geometry_column].iloc[all_toponims_list.index(i)]
+        for i in toponyms_list:
+            if i in all_toponyms_list:
+                cord = geocoded_data[geometry_column].iloc[all_toponyms_list.index(i)]
                 if cord is not None:
                     G.nodes[i]['Lat'] = cord.x
                     G.nodes[i]['Lon'] = cord.y
@@ -501,21 +505,41 @@ class Semgraph:
     @staticmethod
     def get_text_ids(G: nx.classes.graph.Graph,
                      filtered_data: pd.DataFrame or gpd.GeoDataFrame,
-                     toponim_column: str,
-                     text_id_column: str = 'texts_ids'
-                     ) -> pd.DataFrame or gpd.GeoDataFrame:
+                     toponym_column: str,
+                     text_id_column: str
+                     ) -> nx.classes.graph.Graph:
 
-        toponims_list = [i for i in G.nodes if G.nodes[i]['tag'] != 'TOPONYM']
+        toponyms_list = [i for i in G.nodes if G.nodes[i]['tag'] == 'TOPONYM']
 
-        for i in toponims_list:
-            df_id_text = filtered_data.loc[filtered_data[toponim_column] == i]
+        for i in range(len(filtered_data)):
+            name = filtered_data[toponym_column].iloc[i]
+            if name in toponyms_list:
+                ids = [filtered_data[text_id_column].iloc[i]]
 
-            ids = []
-            for j in range(len(df_id_text)):
-                ids.extend(filtered_data[text_id_column].iloc[j])
+                ids = [str(k) for k in ids]
 
-            ids = [str(int(j)) for j in ids]
-            G.nodes[i][text_id_column] = ','.join(ids)
+                if 'text_ids' in G.nodes[name].keys():
+                    G.nodes[name]['text_ids'] = G.nodes[name]['text_ids'] + ',' + ','.join(ids)
+                else:
+                    G.nodes[name]['text_ids'] = ','.join(ids)
+
+        return G
+
+    @staticmethod
+    def get_house_text_id(G: nx.classes.graph.Graph,
+                          geocoded_data: gpd.GeoDataFrame,
+                          text_id_column: str,
+                          text_column: str
+                          ) -> nx.classes.graph.Graph:
+
+        for i in G.nodes:
+            if G.nodes[i]['tag'] == 'TOPONYM':
+                if re.search('\d+', i):
+                    id_list = G.nodes[i]['text_ids'].split(',')
+                    id_list = [int(j) for j in id_list]
+                    text_id = geocoded_data[text_column].loc[geocoded_data[text_id_column] == id_list[0]]
+
+                    G.nodes[i]['extracted_from'] = text_id.iloc[0]
 
         return G
 
@@ -525,6 +549,7 @@ class Semgraph:
                        attribute_tag: str,
                        toponym_attributes: bool
                        ) -> nx.classes.graph.Graph:
+
         if toponym_attributes:
             toponyms_list = [i for i in G.nodes if G.nodes[i].get('tag') == 'TOPONYM']
             for i in toponyms_list:
@@ -537,65 +562,106 @@ class Semgraph:
         return G
 
     @staticmethod
-    def add_city_distr_to_graph(G: nx.classes.graph.Graph,
-                                data: pd.DataFrame or gpd.GeoDataFrame,
-                                name_column: str,
-                                parents_column: str,
-                                level_column: str,
-                                directed: bool = True
-                                ) -> nx.classes.graph.Graph:
+    def add_city_graph(G: nx.classes.graph.Graph,
+                       districts: pd.DataFrame or gpd.GeoDataFrame,
+                       municipals: pd.DataFrame or gpd.GeoDataFrame,
+                       city_column: str,
+                       district_column: str,
+                       name_column: str,
+                       geometry_column: str,
+                       directed: bool = True
+                       ) -> nx.classes.graph.Graph:
 
-        edge_list = []
-
-        city = data.loc[data[parents_column].isnull()]
-        city_name = city[name_column].iloc[0]
-
-        districts = data.loc[data[parents_column] == city_name]
+        edges = []
+        toponyms = [i for i in G.nodes if G.nodes[i]['tag'] == 'TOPONYM']
+        city = districts[city_column].iloc[0]
 
         for i in range(len(districts)):
-            district_name = districts[name_column].iloc[i]
-            edge_list.append([city_name, district_name])
+            name = districts[name_column].iloc[i]
 
-            municipals = data.loc[data[parents_column] == district_name]
+            edges.append([city, name, 'включает'])
 
-            for j in range(len(municipals)):
-                mo_name = municipals[name_column].iloc[j]
-                edge_list.append([district_name, mo_name, 'содержит'])
+        for i in range(len(municipals)):
+            name = municipals[name_column].iloc[i]
+            district = municipals[district_column].iloc[i]
 
-        edges = pd.DataFrame(edge_list, columns=['SOURCE', 'TARGET', 'EDGE_TYPE'])
+            polygon = municipals[geometry_column].iloc[i]
+            for j in toponyms:
+                point = Point(G.nodes[j]['Lat'], G.nodes[j]['Lon'])
 
-        admin_graph = nx.from_pandas_edgelist(edges, source='SOURCE', target='TARGET', create_using=nx.DiGraph())
+                if polygon.contains(point) or polygon.touches(point):
+                    edges.append([name, j, 'включает'])
 
-        router = {4: 'CITY',
-                  5: 'DISTRICT',
-                  6: 'MUNICIPALITY'}
+            edges.append([district, name, 'включает'])
 
-        for i in admin_graph.nodes:
+        df = pd.DataFrame(edges, columns=['source', 'target', 'type'])
 
-            level = data[level_column].loc[data[name_column] == i].iloc[0]
-            try:
-                admin_graph.nodes[i]['tag'] = router.get(int(level))
-            except:
-                continue
+        if directed:
+            city_graph = nx.from_pandas_edgelist(df, 'source', 'target', 'type', create_using=nx.DiGraph)
+        else:
+            city_graph = nx.from_pandas_edgelist(df, 'source', 'target', 'type')
 
-        G = nx.compose(G, admin_graph)
+        for i in range(len(districts)):
+            if 'population' in districts.columns:
+                city_graph.nodes[districts[name_column].iloc[i]]['tag'] = 'DISTRICT'
+                city_graph.nodes[districts[name_column].iloc[i]]['population'] = districts[name_column].iloc[i]
+            city_graph.nodes[districts[name_column].iloc[i]][geometry_column] = str(districts[geometry_column].iloc[i])
 
-        G = Semgraph.connect_city_toponym(G)
+        for i in range(len(municipals)):
+            if 'population' in municipals.columns:
+                city_graph.nodes[municipals[name_column].iloc[i]]['tag'] = 'MUNICIPALITY'
+                city_graph.nodes[municipals[name_column].iloc[i]]['population'] = municipals[name_column].iloc[i]
+            city_graph.nodes[municipals[name_column].iloc[i]][geometry_column] = str(
+                municipals[geometry_column].iloc[i])
+
+        city_graph.nodes[city]['tag'] = 'CITY'
+
+        G = nx.compose(G, city_graph)
 
         return G
 
     @staticmethod
-    def connect_city_toponym(G: nx.classes.graph.Graph):
+    def calculate_distances(G: nx.classes.graph.Graph,
+                            directed: bool = True
+                            ) -> nx.classes.graph.Graph or nx.classes.digraph.DiGraph:
 
-        city = [i for i in G.nodes if G.nodes[i].get('tag') == 'CITY'][0]
+        toponyms = [i for i in G.nodes if G.nodes[i]['tag'] == 'TOPONYM']
 
-        for i in G.nodes:
-            if G.nodes[i].get('tag') == 'TOPONYM':
-                G.add_edge(city, i, EDGE_TYPE='содержит')
+        combinations = list(itertools.combinations(toponyms, 2))
+
+        distance_edges = []
+
+        for i in tqdm(combinations):
+            if 'Lat' in G.nodes[i[0]] and 'Lat' in G.nodes[i[1]]:
+                first_point = (G.nodes[i[0]]['Lat'], G.nodes[i[0]]['Lon'])
+                second_point = (G.nodes[i[1]]['Lat'], G.nodes[i[1]]['Lon'])
+
+                distance = geopy.distance.distance(first_point, second_point).km
+
+                distance_edges.append([i[0], i[1], 'удаленность', distance])
+                distance_edges.append([i[1], i[0], 'удаленность', distance])
+
+        dist_edge_df = pd.DataFrame(distance_edges, columns=['source', 'target', 'type', 'distance'])
+
+        max_dist = dist_edge_df['distance'].max()
+        for i in range(len(dist_edge_df)):
+            dist_edge_df.at[i, 'distance'] = dist_edge_df['distance'].iloc[i] / max_dist
+
+        if directed:
+            distance_graph = nx.from_pandas_edgelist(dist_edge_df,
+                                                     'source',
+                                                     'target',
+                                                     ['type', 'distance'],
+                                                     create_using=nx.DiGraph)
+        else:
+            distance_graph = nx.from_pandas_edgelist(dist_edge_df,
+                                                     'source',
+                                                     'target',
+                                                     ['type', 'distance'])
+
+        G = nx.compose(G, distance_graph)
 
         return G
-
-
 
     def build_graph(self,
                     data: pd.DataFrame or gpd.GeoDataFrame,
@@ -621,12 +687,12 @@ class Semgraph:
         Args::
             data (pd.DataFrame or gpd.GeoDataFrame): The input DataFrame or GeoDataFrame containing the data.
             text_column (str): The name of the column containing the text data.
-            toponim_column (str): The name of the column containing the toponim data.
-            toponim_name_column (str): The name of the column containing the toponim name data in text.
-            toponim_type_column (str): The name of the column containing the toponim type data.
-            location_column (str): The name of the column containing the toponims address str.
+            toponym_column (str): The name of the column containing the toponym data.
+            toponym_name_column (str): The name of the column containing the toponym name data in text.
+            toponym_type_column (str): The name of the column containing the toponym type data.
+            location_column (str): The name of the column containing the toponyms address str.
             Use only with GeoDataFrame
-            geometry_column (str): The name of the column containing the toponims geometry as a point.
+            geometry_column (str): The name of the column containing the toponyms geometry as a point.
             Use only with GeoDataFrame
             key_score_filter (float): The threshold for key-extracting score filtering.
             semantic_score_filter (float, optional): The threshold for semantic score filtering.
@@ -649,9 +715,6 @@ class Semgraph:
 
         data = self.clean_from_links(data,
                                      text_column)
-
-        data = self.fill_empty_toponim(data,
-                                       toponym_column)
 
         extracted = self.extract_keywords(data,
                                           text_column,
@@ -706,13 +769,14 @@ class Semgraph:
         if type(data) is gpd.GeoDataFrame:
             G = self.get_coordinates(G=G,
                                      geocoded_data=data,
-                                     toponim_column=toponym_column,
+                                     toponym_column=toponym_column,
                                      location_column=location_column,
                                      geometry_column=geometry_column)
 
         G = self.get_text_ids(G=G,
                               filtered_data=df,
-                              toponim_column=toponym_column)
+                              toponym_column=toponym_column,
+                              text_id_column=id_column)
 
         return G
 
@@ -758,14 +822,12 @@ class Semgraph:
             for i in nodes:
                 joined_G.nodes[i]['total_counts'] = G.nodes[i][counts_attribute] + new_G.nodes[i]['counts']
 
-
         return joined_G
 
 
 # debugging
 if __name__ == '__main__':
-
-    file = open("C:\\Users\\thebe\\Downloads\\Telegram Desktop\\df_vyborg_geocoded.geojson", encoding='utf-8')
+    file = open("C:\\Users\\thebe\\Downloads\\test.geojson", encoding='utf-8')
     test_gdf = gpd.read_file(file)
 
     sm = Semgraph(device='cpu')
@@ -782,22 +844,22 @@ if __name__ == '__main__':
                        location_column='Location',
                        geometry_column='geometry')
 
-    print(len(G.nodes))
-
-    G = sm.update_graph(G,
-                        test_gdf[3000:],
-                        id_column='id',
-                        text_column='text',
-                        text_type_column='type',
-                        toponym_column='only_full_street_name',
-                        toponym_name_column='initial_street',
-                        toponym_type_column='Toponims',
-                        post_id_column='post_id',
-                        parents_stack_column='parents_stack',
-                        counts_attribute='counts',
-                        location_column='Location',
-                        geometry_column='geometry')
-
-    print(len(G.nodes))
-
-    nx.write_graphml(G, 'name.graphml', encoding='utf-8')
+    # print(len(G.nodes))
+    #
+    # G = sm.update_graph(G,
+    #                     test_gdf[3000:],
+    #                     id_column='id',
+    #                     text_column='text',
+    #                     text_type_column='type',
+    #                     toponym_column='only_full_street_name',
+    #                     toponym_name_column='initial_street',
+    #                     toponym_type_column='Toponims',
+    #                     post_id_column='post_id',
+    #                     parents_stack_column='parents_stack',
+    #                     counts_attribute='counts',
+    #                     location_column='Location',
+    #                     geometry_column='geometry')
+    #
+    # print(len(G.nodes))
+    #
+    # nx.write_graphml(G, 'name.graphml', encoding='utf-8')
