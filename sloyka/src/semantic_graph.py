@@ -35,7 +35,6 @@ from transformers import BertTokenizer, BertModel
 from keybert import KeyBERT
 import geopy.distance
 from shapely.geometry import Point
-from shapely.geometry.polygon import Polygon
 
 from sloyka.src.constants import STOPWORDS, TAG_ROUTER, SPB_DISTRICTS
 
@@ -388,7 +387,7 @@ class Semgraph:
                     if k[2] in TAG_ROUTER.keys():
                         edge_list.append([toponym, k[0], k[1], TAG_ROUTER[k[2]]])
 
-        edge_df = pd.DataFrame(edge_list, columns=['FROM', 'TO', 'SCORE', 'EDGE_TYPE'])
+        edge_df = pd.DataFrame(edge_list, columns=['FROM', 'TO', 'distance', 'type'])
 
         return edge_df
 
@@ -434,7 +433,7 @@ class Semgraph:
 
             time.sleep(0.001)
 
-        result_df = pd.DataFrame(new_nodes, columns=['FROM', 'TO', 'SCORE', 'EDGE_TYPE'])
+        result_df = pd.DataFrame(new_nodes, columns=['FROM', 'TO', 'distance', 'type'])
 
         return result_df
 
@@ -537,9 +536,9 @@ class Semgraph:
                 if re.search('\d+', i):
                     id_list = G.nodes[i]['text_ids'].split(',')
                     id_list = [int(j) for j in id_list]
-                    text_id = geocoded_data[text_column].loc[geocoded_data[text_id_column] == id_list[0]]
+                    text = geocoded_data[text_column].loc[geocoded_data[text_id_column] == id_list[0]]
 
-                    G.nodes[i]['extracted_from'] = text_id.iloc[0]
+                    G.nodes[i]['extracted_from'] = text.iloc[0]
 
         return G
 
@@ -587,10 +586,11 @@ class Semgraph:
 
             polygon = municipals[geometry_column].iloc[i]
             for j in toponyms:
-                point = Point(G.nodes[j]['Lat'], G.nodes[j]['Lon'])
+                if 'Lat' in G.nodes[j]:
+                    point = Point(G.nodes[j]['Lat'], G.nodes[j]['Lon'])
 
-                if polygon.contains(point) or polygon.touches(point):
-                    edges.append([name, j, 'включает'])
+                    if polygon.contains(point) or polygon.touches(point):
+                        edges.append([name, j, 'включает'])
 
             edges.append([district, name, 'включает'])
 
@@ -743,14 +743,14 @@ class Semgraph:
             G = nx.from_pandas_edgelist(graph_df,
                                         source='FROM',
                                         target='TO',
-                                        edge_attr=['SCORE', 'EDGE_TYPE'],
+                                        edge_attr=['distance', 'type'],
                                         create_using=nx.DiGraph())
 
         else:
             G = nx.from_pandas_edgelist(graph_df,
                                         source='FROM',
                                         target='TO',
-                                        edge_attr=['SCORE', 'EDGE_TYPE'])
+                                        edge_attr=['distance', 'type'])
 
         nodes = list(G.nodes())
         attributes = self.get_tag(nodes, list(set(data[toponym_column])))
@@ -830,13 +830,13 @@ if __name__ == '__main__':
     file = open("C:\\Users\\thebe\\Downloads\\test.geojson", encoding='utf-8')
     test_gdf = gpd.read_file(file)
 
-    sm = Semgraph(device='cpu')
+    sm = Semgraph()
 
     G = sm.build_graph(test_gdf[:3000],
                        id_column='id',
                        text_column='text',
                        text_type_column='type',
-                       toponym_column='only_full_street_name',
+                       toponym_column='only_full_street_name_numbers',
                        toponym_name_column='initial_street',
                        toponym_type_column='Toponims',
                        post_id_column='post_id',
