@@ -9,7 +9,8 @@ from .src import (
     Semgraph,
     Streets, 
     NER_parklike,
-    VKParser
+    VKParser,
+    City_services
 )
 
 __all__ = [
@@ -20,7 +21,8 @@ __all__ = [
     "Semgraph",
     "Streets", 
     "NER_parklike",
-    "VKParser"
+    "VKParser",
+    "City_services"
 ]
 
 logger.remove()
