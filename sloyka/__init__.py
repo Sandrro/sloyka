@@ -10,6 +10,7 @@ from .src import (
     Streets, 
     NER_parklike,
     VKParser,
+    City_services,
     AreaMatcher
 )
 
@@ -22,6 +23,7 @@ __all__ = [
     "Streets", 
     "NER_parklike",
     "VKParser",
+    "City_services",
     "AreaMatcher"
 ]
 
