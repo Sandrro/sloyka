@@ -28,8 +28,8 @@ import datetime
 import time
 import osm2geojson
 import random
-from typing import List
-
+from typing import List, Optional
+from osmapi import OsmApi
 
 class GeoDataGetter:
     """
@@ -116,6 +116,124 @@ class GeoDataGetter:
         print(
             f"\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}"
         )
+
+class HistGeoDataGetter:
+    def get_features_from_id(
+        self,
+        osm_id: int,
+        tags: dict,
+        osm_type="R",
+        selected_columns=['tag', 'key', 'element_type', 'osmid', 'name', 'geometry', 'centroid'],
+        date: Optional[str] = None
+    ) -> gpd.GeoDataFrame:
+        
+        place = self._get_place_from_id(osm_id, osm_type)
+    
+        if date is not None:
+            ox.settings.overpass_endpoint = "https://overpass-api.de/api"
+            ox.settings.overpass_settings = f'[out:json][timeout:600][date:"{date}"]'
+        
+        gdf_list = self._process_tags(tags, place, selected_columns, date)
+
+        if len(gdf_list) > 0:
+            merged_gdf = (
+                pd.concat(gdf_list).reset_index().loc[:, selected_columns]
+            )
+        else:
+            merged_gdf = pd.DataFrame(columns=selected_columns)
+
+        if not merged_gdf.empty:
+            merged_gdf = self._add_creation_timestamps(merged_gdf)
+
+        merged_gdf = merged_gdf.dropna(subset=['name'])
+        merged_gdf.reset_index(drop=True, inplace=True)
+        return merged_gdf
+    
+    def _add_creation_timestamps(self, gdf):
+        MyApi = OsmApi()
+        timestamps = []
+
+        for osmid in gdf['osmid']:
+            try:
+                object_history = MyApi.NodeHistory(osmid)
+                if object_history:
+                    first_version = list(object_history.values())[0]
+                    timestamp = int(first_version['timestamp'].timestamp())
+                    creation_timestamp = datetime.datetime.utcfromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+                    timestamps.append(creation_timestamp)
+                else:
+                    timestamps.append(None)
+            except Exception as e:
+                print(f"Error fetching timestamp for osmid {osmid}: {e}")
+                timestamps.append(None)
+
+        gdf['creation_timestamp'] = timestamps
+
+        return gdf
+
+    def _get_place_from_id(self, osm_id, osm_type):
+        place = ox.project_gdf(
+            ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True)
+        )
+        return place
+
+    def _process_tags(self, tags, place, selected_columns, date):
+        gdf_list = []
+        place_name = place.name.iloc[0]
+        for category, category_tags in tags.items():
+            for tag in tqdm(
+                category_tags, desc=f"Processing category {category}"
+            ):
+                try:
+                    gdf = self._get_features_from_place(
+                        place_name, category, tag, date
+                    )
+                    if len(gdf) > 0:
+                        gdf_list.append(gdf)
+                except Exception as e:
+                    print(f"Error processing {category}-{tag}: {e}")
+        return gdf_list
+
+    def _get_features_from_place(self, place_name, category, tag, date):
+        gdf = ox.features_from_place(place_name, tags={category: tag})
+        gdf.geometry.dropna(inplace=True)
+        gdf["tag"] = category
+        gdf["centroid"] = gdf["geometry"]
+        gdf["key"] = tag
+
+        tmpgdf = ox.projection.project_gdf(
+            gdf, to_crs=GLOBAL_METRIC_CRS, to_latlong=False
+        )
+        tmpgdf["centroid"] = tmpgdf["geometry"].centroid
+        tmpgdf = tmpgdf.to_crs(GLOBAL_CRS)
+        gdf["centroid"] = tmpgdf["centroid"]
+        tmpgdf = None
+
+        return gdf
+
+    def _handle_error(self, category, tag):
+        print(f"\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}")
+    
+    def get_place_name_from_osm_id(osm_id, osm_type="R"):
+        place = ox.project_gdf(
+            ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True)
+        )
+        if not place.empty:
+            place_name = place.iloc[0]['display_name']
+            return place_name
+        else:
+            return None
+
+    def query_year_from_osm_id(osm_id, date, network_type):
+        place_name = HistGeoDataGetter.get_place_name_from_osm_id(osm_id)
+        if place_name:
+            ox.settings.overpass_endpoint = "https://overpass-api.de/api"
+            ox.settings.overpass_settings = f'[out:json][timeout:180][date:"{date}"]'
+            G = ox.graph.graph_from_place(place_name, network_type)
+            return G
+        else:
+            print("Place name not found.")
+            return None
 
 class Streets:
     """
