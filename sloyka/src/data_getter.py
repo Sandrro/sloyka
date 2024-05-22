@@ -264,7 +264,7 @@ class VKParser:
             'owner_id': owner_id,
             'post_id': post_id,
             'access_token': access_token,
-            'v': '5.131',
+            'v': VKParser.API_VERISON,
             'extended': 1,
             'count': 100,
             'need_likes': 1
