@@ -303,7 +303,7 @@ class Other_geo_objects:
     @staticmethod
     def get_OSM_green_obj(osm_city_name) -> pd.DataFrame:
         """
-        This function this function sets spatial data from OSM about green_obj.
+        This function sets spatial data from OSM about green_obj.
         """
         tags = {'leisure': ['park', 'garden', 'recreation_ground']}
         green_obj = ox.geometries_from_place(osm_city_name, tags)
@@ -315,7 +315,7 @@ class Other_geo_objects:
     @staticmethod
     def get_OSM_num_obj(osm_city_name) -> pd.DataFrame:
         """
-        This function this function sets spatial data from OSM about amenity.
+        This function sets spatial data from OSM about amenity.
         """
         tags = {'amenity': ['hospital', 'clinic', 'school', 'kindergarten']}
         osm_num_obj = ox.geometries_from_place(osm_city_name, tags)
@@ -327,7 +327,7 @@ class Other_geo_objects:
     @staticmethod
     def get_OSM_cemetery(osm_city_name) -> pd.DataFrame:
         """
-        This function this function sets spatial data from OSM about cemetery.
+        This function sets spatial data from OSM about cemetery.
         """
         tags = {'landuse': ['cemetery']}
         osm_cemetery = ox.geometries_from_place(osm_city_name, tags)
@@ -339,7 +339,7 @@ class Other_geo_objects:
     @staticmethod
     def get_OSM_natural(osm_city_name) -> pd.DataFrame:
         """
-        This function this function sets spatial data from OSM about natural obj.
+        This function sets spatial data from OSM about natural obj.
         """
         tags = {'natural': ['beach', 'water']}
         osm_natural = ox.geometries_from_place(osm_city_name, tags)
@@ -351,7 +351,7 @@ class Other_geo_objects:
     @staticmethod
     def get_OSM_railway(osm_city_name) -> pd.DataFrame:
         """
-        This function this function sets spatial data from OSM about railway obj.
+        This function sets spatial data from OSM about railway obj.
         """
         tags = {'railway': ['station', 'subway']}
         osm_railway = ox.geometries_from_place(osm_city_name, tags)
@@ -363,7 +363,7 @@ class Other_geo_objects:
     @staticmethod
     def get_OSM_tourism(osm_city_name) -> pd.DataFrame:
         """
-        This function this function sets spatial data from OSM about tourism obj.
+        This function sets spatial data from OSM about tourism obj.
         """
         tags = {'tourism': ['attraction', 'museum']}
         osm_tourism = ox.geometries_from_place(osm_city_name, tags)
@@ -375,7 +375,7 @@ class Other_geo_objects:
     @staticmethod
     def get_OSM_historic(osm_city_name) -> pd.DataFrame:
         """
-        This function this function sets spatial data from OSM about historical obj.
+        This function sets spatial data from OSM about historical obj.
         """
         tags = {'historic': ['monument', 'memorial']}
         osm_historic = ox.geometries_from_place(osm_city_name, tags)
@@ -387,7 +387,7 @@ class Other_geo_objects:
     @staticmethod    
     def get_OSM_square(osm_city_name) -> pd.DataFrame:
         """
-        This function this function sets spatial data from OSM about square obj.
+        This function sets spatial data from OSM about square obj.
         """
         tags = {'place': ['square']}
         osm_square = ox.geometries_from_place(osm_city_name, tags)
@@ -407,38 +407,39 @@ class Other_geo_objects:
             return geometry
         else:
             return None
+    
+    def get_and_process_osm_data(osm_city_name, get_data_function) -> pd.DataFrame:
+        """
+        This function allows you to build an OSM array for different urban objects.
+        """
+        df = get_data_function(osm_city_name)
+        df['geometry'] = df['geometry'].apply(Other_geo_objects.calculate_centroid)
+        df.rename(columns={df.columns[2]: 'geo_obj_tag'}, inplace=True)
+        return df
         
     def run_OSM_dfs(osm_city_name) -> pd.DataFrame:
         """
         This function collects dataframes with OSM spatial data, finds centroids and combines files into one.
         """
         logger.info('run_OSM_dfs started')
-        osm_green_obj_df = Other_geo_objects.get_OSM_green_obj(osm_city_name)
-        osm_num_obj_df = Other_geo_objects.get_OSM_num_obj(osm_city_name)
-        osm_cemetery_df = Other_geo_objects.get_OSM_cemetery(osm_city_name)
-        osm_natural_df = Other_geo_objects.get_OSM_natural(osm_city_name)
-        osm_railway_df = Other_geo_objects.get_OSM_railway(osm_city_name)
-        osm_tourism_df = Other_geo_objects.get_OSM_tourism(osm_city_name)
-        osm_historic_df = Other_geo_objects.get_OSM_historic(osm_city_name)
-        osm_green_obj_df['geometry'] = osm_green_obj_df['geometry'].apply(Other_geo_objects.calculate_centroid)
-        osm_cemetery_df['geometry'] = osm_cemetery_df['geometry'].apply(Other_geo_objects.calculate_centroid)
-        osm_natural_df['geometry'] = osm_natural_df['geometry'].apply(Other_geo_objects.calculate_centroid)
-        osm_railway_df['geometry'] = osm_railway_df['geometry'].apply(Other_geo_objects.calculate_centroid)
-        osm_tourism_df['geometry'] = osm_tourism_df['geometry'].apply(Other_geo_objects.calculate_centroid)
-        osm_historic_df['geometry'] = osm_historic_df['geometry'].apply(Other_geo_objects.calculate_centroid)
-        osm_num_obj_df['geometry'] = osm_num_obj_df['geometry'].apply(Other_geo_objects.calculate_centroid)
-        osm_green_obj_df.rename(columns={osm_green_obj_df.columns[2]: 'geo_obj_tag'}, inplace=True)
-        osm_cemetery_df.rename(columns={osm_cemetery_df.columns[2]: 'geo_obj_tag'}, inplace=True)
-        osm_natural_df.rename(columns={osm_natural_df.columns[2]: 'geo_obj_tag'}, inplace=True)
-        osm_railway_df.rename(columns={osm_railway_df.columns[2]: 'geo_obj_tag'}, inplace=True)
-        osm_tourism_df.rename(columns={osm_tourism_df.columns[2]: 'geo_obj_tag'}, inplace=True)
-        osm_historic_df.rename(columns={osm_historic_df.columns[2]: 'geo_obj_tag'}, inplace=True)
-        osm_num_obj_df.rename(columns={osm_num_obj_df.columns[2]: 'geo_obj_tag'}, inplace=True)
-        osm_combined_df = pd.concat([osm_green_obj_df, osm_num_obj_df, osm_cemetery_df, osm_natural_df, osm_railway_df, osm_tourism_df, osm_historic_df], axis=0)
+
+        osm_functions = [
+            Other_geo_objects.get_OSM_green_obj,
+            Other_geo_objects.get_OSM_num_obj,
+            Other_geo_objects.get_OSM_cemetery,
+            Other_geo_objects.get_OSM_natural,
+            Other_geo_objects.get_OSM_railway,
+            Other_geo_objects.get_OSM_tourism,
+            Other_geo_objects.get_OSM_historic
+        ]
+
+        osm_dfs = [Other_geo_objects.get_and_process_osm_data(osm_city_name, func) for func in osm_functions]
+        osm_combined_df = pd.concat(osm_dfs, axis=0)
+
         return osm_combined_df
         
     @staticmethod
-    def extract_other_obj(text) -> List[str]:
+    def extract_geo_obj(text) -> List[str]:
         """
         The function extracts location entities from the text, using the Natasha library.
         """
@@ -460,22 +461,6 @@ class Other_geo_objects:
 
         return other_geo_obj
 
-    @staticmethod
-    # def restoration_of_normal_form(other_geo_obj, osm_combined_df, threshold=0.7)-> List[str]:
-    #     osm_name_obj = osm_combined_df['name'].tolist()
-    #     similarity_matrix = np.zeros((len(other_geo_obj), len(osm_name_obj)))
-    #     for i, word1 in enumerate(other_geo_obj):
-    #         for j, word2 in enumerate(osm_name_obj):
-    #             similarity = fuzz.ratio(word1, word2) / 100.0  
-    #             similarity_matrix[i, j] = similarity
-    #     restoration_list = other_geo_obj.copy()
-    #     for i in range(len(other_geo_obj)):
-    #         max_index = np.argmax(similarity_matrix[i])
-    #         if similarity_matrix[i, max_index] > threshold:
-    #             restoration_list[i] = osm_name_obj[max_index]
-    #         else:
-    #             restoration_list[i] = ""
-    #     return restoration_list
     def restoration_of_normal_form(other_geo_obj, osm_combined_df, threshold=0.7) -> List[str]:
         """
         This function compares the extracted location entity with an OSM array and returns a normalized form if the percentage of similarity is at least 70%.
@@ -487,10 +472,10 @@ class Other_geo_objects:
             return re.findall(r'\d+', s)
 
         for i, word1 in enumerate(other_geo_obj):
-            numbers1 = extract_numbers(word1)
+            numbers_from_extraction = extract_numbers(word1)
             for j, word2 in enumerate(osm_name_obj):
-                numbers2 = extract_numbers(word2)
-                if numbers1 == numbers2:
+                numbers_from_OSM_name = extract_numbers(word2)
+                if numbers_from_extraction == numbers_from_OSM_name:
                     similarity = fuzz.ratio(word1, word2) / 100.0
                 else:
                     similarity = 0  
@@ -587,7 +572,7 @@ class Other_geo_objects:
         df_obj = df.copy()
         osm_combined_df = Other_geo_objects.run_OSM_dfs(osm_city_name)
         logger.info('find_other_geo_obj started')
-        df_obj['other_geo_obj'] = df_obj[text_column].apply(Other_geo_objects.extract_other_obj)
+        df_obj['other_geo_obj'] = df_obj[text_column].apply(Other_geo_objects.extract_geo_obj)
         df_obj['other_geo_obj_num'] = df_obj[text_column].apply(lambda x: Other_geo_objects.find_num_city_obj(x, NUM_CITY_OBJ))
         df_obj = Other_geo_objects.combine_city_obj(df_obj)
         df_obj['other_geo_obj'] = df_obj['other_geo_obj'].apply(lambda x: Other_geo_objects.restoration_of_normal_form(x, osm_combined_df))
