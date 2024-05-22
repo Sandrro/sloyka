@@ -45,6 +45,7 @@ pymorphy3 = "2.0.1"
 keybert = "0.8.3"
 pyarrow = "15.0.0"
 jupyter = "^1.0.0"
+pyvis = "^0.3.2"
 
 
 [tool.poetry.group.test.dependencies]
