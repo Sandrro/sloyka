@@ -17,6 +17,8 @@ import numpy as np
 import re
 import warnings
 from typing import List, Optional
+from shapely.geometry import Point, Polygon, MultiPolygon
+import pdb
 import os
 import flair
 import geopandas as gpd
@@ -27,14 +29,16 @@ import pandas as pd
 import pymorphy2
 import requests
 import torch
-import difflib
 import string
 import math
+from rapidfuzz import fuzz
 from sloyka.src.constants import (
     START_INDEX_POSITION,
     REPLACEMENT_DICT,
     TARGET_TOPONYMS,
     END_INDEX_POSITION,
+    NUM_CITY_OBJ,
+    EXCEPTIONS_CITY_COUNTRY
 )
 
 from flair.data import Sentence
@@ -52,7 +56,9 @@ from natasha import (
     NewsNERTagger,
     Doc,
 )
-
+from .rule_for_natasha import ADDR_PART
+from natasha.extractors import Match
+from natasha.extractors import Extractor
 from loguru import logger
 
 from pandarallel import pandarallel
@@ -199,23 +205,29 @@ class Streets:
 
     @staticmethod
     def find_toponim_words_from_name(x: str) -> str:
-        pattern = [
-            "путепровод", "улица", "набережная реки", "проспект",
-            "бульвар", "мост", "переулок", "площадь", "переулок",
-            "набережная", "канала", "канал", "дорога на", "дорога в",
-            "шоссе", "аллея", "проезд", "линия"
-        ]
+        """
+        A method to find toponim words from the given name string.
 
-        best_match_ratio = 0
-        best_match = None
+        Args:
+            x (str): The input name string.
 
-        for word in pattern:
-            ratio = difflib.SequenceMatcher(None, word, x).ratio()
-            if ratio >= 0.4 and ratio > best_match_ratio:
-                best_match_ratio = ratio
-                best_match = word
+        Returns:
+            str: The found toponim word from the input name string, or None if not found.
+        """
+        pattern = re.compile(
+            r"путепровод|улица|набережная реки|проспект"
+            r"|бульвар|мост|переулок|площадь|переулок"
+            r"|набережная|канала|канал|дорога на|дорога в"
+            r"|шоссе|аллея|проезд|линия",
+            re.IGNORECASE,
+        )
 
-        return best_match.lower() if best_match else None
+        match = pattern.search(x)
+
+        if match:
+            return match.group().strip().lower()
+        else:
+            return None
 
     @staticmethod
     def drop_words_from_name(x: str) -> str:
@@ -271,6 +283,320 @@ class Streets:
 
         return streets_df
 
+class AddrNEWExtractor(Extractor):
+    def __init__(self, morph):
+        Extractor.__init__(self, ADDR_PART, morph)
+
+    def find(self, text):
+        matches = self(text)
+        if not matches:
+            return
+
+        matches = sorted(matches, key=lambda _: _.start)
+        if not matches:
+            return
+        start = matches[0].start
+        stop = matches[-1].stop
+        parts = [_.fact for _ in matches]
+        return Match(start, stop, obj.Addr(parts))
+class Other_geo_objects:
+    @staticmethod
+    def get_OSM_green_obj(osm_city_name) -> pd.DataFrame:
+        """
+        This function this function sets spatial data from OSM about green_obj.
+        """
+        tags = {'leisure': ['park', 'garden', 'recreation_ground']}
+        green_obj = ox.geometries_from_place(osm_city_name, tags)
+        osm_green_obj_df = pd.DataFrame(green_obj)
+        osm_green_obj_df = osm_green_obj_df.dropna(subset=['name'])
+        osm_green_obj_df = osm_green_obj_df[['name', 'geometry', 'leisure']]
+        return osm_green_obj_df
+    
+    @staticmethod
+    def get_OSM_num_obj(osm_city_name) -> pd.DataFrame:
+        """
+        This function this function sets spatial data from OSM about amenity.
+        """
+        tags = {'amenity': ['hospital', 'clinic', 'school', 'kindergarten']}
+        osm_num_obj = ox.geometries_from_place(osm_city_name, tags)
+        osm_num_obj_df = pd.DataFrame(osm_num_obj)
+        osm_num_obj_df = osm_num_obj_df.dropna(subset=['name'])
+        osm_num_obj_df = osm_num_obj_df[['name', 'geometry', 'amenity']]
+        return osm_num_obj_df
+    
+    @staticmethod
+    def get_OSM_cemetery(osm_city_name) -> pd.DataFrame:
+        """
+        This function this function sets spatial data from OSM about cemetery.
+        """
+        tags = {'landuse': ['cemetery']}
+        osm_cemetery = ox.geometries_from_place(osm_city_name, tags)
+        osm_cemetery_df = pd.DataFrame(osm_cemetery)
+        osm_cemetery_df = osm_cemetery_df.dropna(subset=['name'])
+        osm_cemetery_df = osm_cemetery_df[['name', 'geometry', 'landuse']]
+        return osm_cemetery_df
+    
+    @staticmethod
+    def get_OSM_natural(osm_city_name) -> pd.DataFrame:
+        """
+        This function this function sets spatial data from OSM about natural obj.
+        """
+        tags = {'natural': ['beach', 'water']}
+        osm_natural = ox.geometries_from_place(osm_city_name, tags)
+        osm_natural_df = pd.DataFrame(osm_natural)
+        osm_natural_df = osm_natural_df.dropna(subset=['name'])
+        osm_natural_df = osm_natural_df[['name', 'geometry', 'natural']]
+        return osm_natural_df
+    
+    @staticmethod
+    def get_OSM_railway(osm_city_name) -> pd.DataFrame:
+        """
+        This function this function sets spatial data from OSM about railway obj.
+        """
+        tags = {'railway': ['station', 'subway']}
+        osm_railway = ox.geometries_from_place(osm_city_name, tags)
+        osm_railway_df = pd.DataFrame(osm_railway)
+        osm_railway_df = osm_railway_df.dropna(subset=['name'])
+        osm_railway_df = osm_railway_df[['name', 'geometry', 'railway']]
+        return osm_railway_df
+    
+    @staticmethod
+    def get_OSM_tourism(osm_city_name) -> pd.DataFrame:
+        """
+        This function this function sets spatial data from OSM about tourism obj.
+        """
+        tags = {'tourism': ['attraction', 'museum']}
+        osm_tourism = ox.geometries_from_place(osm_city_name, tags)
+        osm_tourism_df = pd.DataFrame(osm_tourism)
+        osm_tourism_df = osm_tourism_df.dropna(subset=['name'])
+        osm_tourism_df = osm_tourism_df[['name', 'geometry', 'tourism']]
+        return osm_tourism_df
+    
+    @staticmethod
+    def get_OSM_historic(osm_city_name) -> pd.DataFrame:
+        """
+        This function this function sets spatial data from OSM about historical obj.
+        """
+        tags = {'historic': ['monument', 'memorial']}
+        osm_historic = ox.geometries_from_place(osm_city_name, tags)
+        osm_historic_df = pd.DataFrame(osm_historic)
+        osm_historic_df = osm_historic_df.dropna(subset=['name'])
+        osm_historic_df = osm_historic_df[['name', 'geometry', 'historic']]
+        return osm_historic_df
+
+    @staticmethod    
+    def get_OSM_square(osm_city_name) -> pd.DataFrame:
+        """
+        This function this function sets spatial data from OSM about square obj.
+        """
+        tags = {'place': ['square']}
+        osm_square = ox.geometries_from_place(osm_city_name, tags)
+        osm_square_df = pd.DataFrame(osm_square)
+        osm_square_df = osm_square_df.dropna(subset=['name'])
+        osm_square_df = osm_square_df[['name', 'geometry', 'place']]
+        return osm_square_df
+
+    @staticmethod
+    def calculate_centroid(geometry) -> pd.DataFrame:
+        """
+        This function counts the centroid for polygons.
+        """
+        if isinstance(geometry, (Polygon, MultiPolygon)):
+            return geometry.centroid
+        elif isinstance(geometry, Point):
+            return geometry
+        else:
+            return None
+        
+    def run_OSM_dfs(osm_city_name) -> pd.DataFrame:
+        """
+        This function collects dataframes with OSM spatial data, finds centroids and combines files into one.
+        """
+        logger.info('run_OSM_dfs started')
+        osm_green_obj_df = Other_geo_objects.get_OSM_green_obj(osm_city_name)
+        osm_num_obj_df = Other_geo_objects.get_OSM_num_obj(osm_city_name)
+        osm_cemetery_df = Other_geo_objects.get_OSM_cemetery(osm_city_name)
+        osm_natural_df = Other_geo_objects.get_OSM_natural(osm_city_name)
+        osm_railway_df = Other_geo_objects.get_OSM_railway(osm_city_name)
+        osm_tourism_df = Other_geo_objects.get_OSM_tourism(osm_city_name)
+        osm_historic_df = Other_geo_objects.get_OSM_historic(osm_city_name)
+        osm_green_obj_df['geometry'] = osm_green_obj_df['geometry'].apply(Other_geo_objects.calculate_centroid)
+        osm_cemetery_df['geometry'] = osm_cemetery_df['geometry'].apply(Other_geo_objects.calculate_centroid)
+        osm_natural_df['geometry'] = osm_natural_df['geometry'].apply(Other_geo_objects.calculate_centroid)
+        osm_railway_df['geometry'] = osm_railway_df['geometry'].apply(Other_geo_objects.calculate_centroid)
+        osm_tourism_df['geometry'] = osm_tourism_df['geometry'].apply(Other_geo_objects.calculate_centroid)
+        osm_historic_df['geometry'] = osm_historic_df['geometry'].apply(Other_geo_objects.calculate_centroid)
+        osm_num_obj_df['geometry'] = osm_num_obj_df['geometry'].apply(Other_geo_objects.calculate_centroid)
+        osm_green_obj_df.rename(columns={osm_green_obj_df.columns[2]: 'geo_obj_tag'}, inplace=True)
+        osm_cemetery_df.rename(columns={osm_cemetery_df.columns[2]: 'geo_obj_tag'}, inplace=True)
+        osm_natural_df.rename(columns={osm_natural_df.columns[2]: 'geo_obj_tag'}, inplace=True)
+        osm_railway_df.rename(columns={osm_railway_df.columns[2]: 'geo_obj_tag'}, inplace=True)
+        osm_tourism_df.rename(columns={osm_tourism_df.columns[2]: 'geo_obj_tag'}, inplace=True)
+        osm_historic_df.rename(columns={osm_historic_df.columns[2]: 'geo_obj_tag'}, inplace=True)
+        osm_num_obj_df.rename(columns={osm_num_obj_df.columns[2]: 'geo_obj_tag'}, inplace=True)
+        osm_combined_df = pd.concat([osm_green_obj_df, osm_num_obj_df, osm_cemetery_df, osm_natural_df, osm_railway_df, osm_tourism_df, osm_historic_df], axis=0)
+        return osm_combined_df
+        
+    @staticmethod
+    def extract_other_obj(text) -> List[str]:
+        """
+        The function extracts location entities from the text, using the Natasha library.
+        """
+        morph = MorphVocab()
+        extractor = AddrNEWExtractor(morph)
+
+        other_geo_obj = []
+
+        matches = extractor(text)
+        for match in matches:
+            part = match.fact
+            if part.value and part.type:
+                combined_phrase = f"{part.value} {part.type}"
+                other_geo_obj.append(combined_phrase)
+            elif part.value:
+                other_geo_obj.append(part.value)
+            elif part.type:
+                other_geo_obj.append(part.type)
+
+        return other_geo_obj
+
+    @staticmethod
+    # def restoration_of_normal_form(other_geo_obj, osm_combined_df, threshold=0.7)-> List[str]:
+    #     osm_name_obj = osm_combined_df['name'].tolist()
+    #     similarity_matrix = np.zeros((len(other_geo_obj), len(osm_name_obj)))
+    #     for i, word1 in enumerate(other_geo_obj):
+    #         for j, word2 in enumerate(osm_name_obj):
+    #             similarity = fuzz.ratio(word1, word2) / 100.0  
+    #             similarity_matrix[i, j] = similarity
+    #     restoration_list = other_geo_obj.copy()
+    #     for i in range(len(other_geo_obj)):
+    #         max_index = np.argmax(similarity_matrix[i])
+    #         if similarity_matrix[i, max_index] > threshold:
+    #             restoration_list[i] = osm_name_obj[max_index]
+    #         else:
+    #             restoration_list[i] = ""
+    #     return restoration_list
+    def restoration_of_normal_form(other_geo_obj, osm_combined_df, threshold=0.7) -> List[str]:
+        """
+        This function compares the extracted location entity with an OSM array and returns a normalized form if the percentage of similarity is at least 70%.
+        """
+        osm_name_obj = osm_combined_df['name'].tolist()
+        similarity_matrix = np.zeros((len(other_geo_obj), len(osm_name_obj)))
+        
+        def extract_numbers(s):
+            return re.findall(r'\d+', s)
+
+        for i, word1 in enumerate(other_geo_obj):
+            numbers1 = extract_numbers(word1)
+            for j, word2 in enumerate(osm_name_obj):
+                numbers2 = extract_numbers(word2)
+                if numbers1 == numbers2:
+                    similarity = fuzz.ratio(word1, word2) / 100.0
+                else:
+                    similarity = 0  
+                similarity_matrix[i, j] = similarity
+        
+        restoration_list = other_geo_obj.copy()
+        for i in range(len(other_geo_obj)):
+            max_index = np.argmax(similarity_matrix[i])
+            if similarity_matrix[i, max_index] > threshold:
+                restoration_list[i] = osm_name_obj[max_index]
+            else:
+                restoration_list[i] = ""
+        
+        return restoration_list
+    
+    @staticmethod
+    def find_num_city_obj(text, NUM_CITY_OBJ) -> List[str]:
+        """
+        This function searches for urban objects in the text, the names of which are represented as a number. For example, "school No. 6".
+        """
+        text = text.lower()
+        num_obj_list = []
+        for key, forms in NUM_CITY_OBJ.items():
+            for form in forms:
+                pattern = fr'\b{re.escape(form)}\b\s+№?\s*(\d+)'
+                matches = re.findall(pattern, text)
+                for match in matches:
+                    num_obj_list.append(f"{key} № {match}")
+        num_obj_list = list(set(num_obj_list))
+        num_obj_list_clear = {}
+        for obj in num_obj_list:
+            key = obj.split(' № ')[1]
+            if key in num_obj_list_clear:
+                if len(obj.split(' № ')[0]) > len(num_obj_list_clear[key].split(' № ')[0]):
+                    num_obj_list_clear[key] = obj
+            else:
+                num_obj_list_clear[key] = obj
+        
+        return list(num_obj_list_clear.values())
+    
+    @staticmethod
+    def combine_city_obj(df_obj) -> pd.DataFrame:
+        """
+        This function combines the found named urban objects and urban objects whose names are in the form of numbers.
+        """
+        df_obj['other_geo_obj'] = df_obj['other_geo_obj'] + df_obj['other_geo_obj_num']
+        df_obj.drop(columns=['other_geo_obj_num'], inplace=True)
+        return df_obj
+    
+    @staticmethod
+    def expand_toponim(df_obj) -> pd.DataFrame:
+        """
+        This function splits the list of found entities into different rows for further analysis.
+        """
+        expanded_df = df_obj.copy()
+        expanded_df['other_geo_obj'] = expanded_df['other_geo_obj'].apply(lambda x: x if isinstance(x, list) and x else None)
+        expanded_df = expanded_df.explode('other_geo_obj').reset_index(drop=True)
+        return expanded_df
+    
+    @staticmethod
+    def find_geometry(toponim, osm_combined_df) -> List[str]:
+        """
+        This function finds the coordinate in the OSM array by the name of the city object.
+        """
+        if toponim is None:
+            return None
+        match = osm_combined_df[osm_combined_df['name'] == toponim]
+        if not match.empty:
+            geometry = match.iloc[0, 1]
+            return geometry
+        else:
+            return None
+    
+    @staticmethod
+    def find_geo_obj_tag(toponim, osm_combined_df) -> List[str]:
+        """
+        This function finds the geo_obj_tag in the OSM array by the name of the city object.
+        """
+        if toponim is None:
+            return None
+        match = osm_combined_df[osm_combined_df['name'] == toponim]
+        if not match.empty:
+            leisure = match.iloc[0, 2]
+            return leisure
+        else:
+            return None
+
+    
+    @staticmethod
+    def run(osm_city_name, df, text_column) -> pd.DataFrame:
+        """
+        This function launches the module for extracting urban objects from texts that do not relate to streets.
+        """
+        df_obj = df.copy()
+        osm_combined_df = Other_geo_objects.run_OSM_dfs(osm_city_name)
+        logger.info('find_other_geo_obj started')
+        df_obj['other_geo_obj'] = df_obj[text_column].apply(Other_geo_objects.extract_other_obj)
+        df_obj['other_geo_obj_num'] = df_obj[text_column].apply(lambda x: Other_geo_objects.find_num_city_obj(x, NUM_CITY_OBJ))
+        df_obj = Other_geo_objects.combine_city_obj(df_obj)
+        df_obj['other_geo_obj'] = df_obj['other_geo_obj'].apply(lambda x: Other_geo_objects.restoration_of_normal_form(x, osm_combined_df))
+        df_obj = Other_geo_objects.expand_toponim(df_obj)
+        df_obj['geometry'] = df_obj['other_geo_obj'].apply(lambda x: Other_geo_objects.find_geometry(x, osm_combined_df))
+        df_obj['geo_obj_tag'] = df_obj['other_geo_obj'].apply(lambda x: Other_geo_objects.find_geo_obj_tag(x, osm_combined_df))
+        df_obj = df_obj[df_obj['geometry'].notna()]
+        return df_obj
+
 
 class Geocoder:
     """
@@ -280,21 +606,7 @@ class Geocoder:
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
     global_crs: int = 4326
-    exceptions = pd.merge(
-        pd.read_csv(
-            os.path.join(dir_path, "exceptions_countries.csv"),
-            encoding="utf-8",
-            sep=",",
-        ),
-        pd.read_csv(
-            os.path.join(dir_path, "exсeptions_city.csv"),
-            encoding="utf-8",
-            sep=",",
-        ),
-        on="Сокращенное наименование",
-        how="outer",
-    )
-    global_crs: int = 4326
+
 
     def __init__(
         self,
@@ -341,41 +653,32 @@ class Geocoder:
             return pd.Series([None, None])
 
     @staticmethod
-    def get_ner_address_natasha(row, exceptions, text_col) -> string or None:
+    def get_ner_address_natasha(row, EXCEPTIONS_CITY_COUNTRY, text_col) -> string:
         """
         The function extracts street names in the text, using the Natasha library,
         in cases where BERT could not.
         """
-        try:
-            if row["Street"] == None or row["Street"] == np.nan:
-                i = row[text_col]
-                location_final = []
-                i = re.sub(r"\[.*?\]", "", i)
-                doc = Doc(i)
-                doc.segment(segmenter)
-                doc.tag_morph(morph_tagger)
-                doc.parse_syntax(syntax_parser)
-                doc.tag_ner(ner_tagger)
-                for span in doc.spans:
-                    span.normalize(morph_vocab)
-                location = list(filter(lambda x: x.type == "LOC", doc.spans))
-                for span in location:
-                    if (
-                        span.normal.lower()
-                        not in exceptions["Сокращенное наименование"]
-                        .str.lower()
-                        .values
-                    ):
-                        location_final.append(span)
-                location_final = [(span.text) for span in location_final]
-                if not location_final:
-                    return None
-                return location_final[0]
-            else:
-                return row["Street"]
-            
-        except ValueError:
-            return None
+        if row["Street"] == None or row["Street"] == np.nan:
+            i = row[text_col]
+            location_final = []
+            i = re.sub(r"\[.*?\]", "", i)
+            doc = Doc(i)
+            doc.segment(segmenter)
+            doc.tag_morph(morph_tagger)
+            doc.parse_syntax(syntax_parser)
+            doc.tag_ner(ner_tagger)
+            for span in doc.spans:
+                span.normalize(morph_vocab)
+            location = list(filter(lambda x: x.type == "LOC", doc.spans))
+            for span in location:
+                if span.normal.lower() not in [name.lower() for name in EXCEPTIONS_CITY_COUNTRY]:
+                    location_final.append(span)
+            location_final = [(span.text) for span in location_final]
+            if not location_final:
+                return None
+            return location_final[0]
+        else:
+            return row["Street"]
 
     @staticmethod
     def extract_building_num(text, street_name, number) -> string:
@@ -483,19 +786,6 @@ class Geocoder:
                 else None
             )
         return street_names_df
-    
-    @staticmethod
-    def _join_only_full_street_name_numbers(x):
-        street_name = x['only_full_street_name']
-        house_num = x['Numbers']
-        if street_name and house_num:
-            return street_name + ' ' + house_num
-        elif street_name and not house_num:
-            return street_name
-        elif not street_name and house_num:
-            return None
-        else:
-            return None
 
     def find_word_form(
         self, df: pd.DataFrame, strts_df: pd.DataFrame
@@ -536,7 +826,7 @@ class Geocoder:
                         + " Россия"
                         for street in only_streets_full
                     ]
-                
+
                     df.loc[idx, "full_street_name"] = ",".join(streets_full)
                     df.loc[idx, "only_full_street_name"] = ",".join(only_streets_full)
 
@@ -557,11 +847,9 @@ class Geocoder:
                         df.loc[idx, "only_full_street_name"] = ",".join(only_streets_full)
 
 
-        # df.dropna(subset=["full_street_name", 'only_full_street_name'], inplace=True)
-        
+        df.dropna(subset=["full_street_name", 'only_full_street_name'], inplace=True)
         df["location_options"] = df["full_street_name"].str.split(",")
         df["only_full_street_name"] = df["only_full_street_name"].str.split(",")
-        
 
         tmp_df_1 = df["location_options"].explode()
         tmp_df_1.name = "addr_to_geocode"
@@ -570,9 +858,8 @@ class Geocoder:
         new_df = tmp_df_1.to_frame().join(tmp_df_2.to_frame()) 
 
         df.drop(columns=['only_full_street_name'], inplace=True)
-        df = df.merge(new_df, left_index=True, right_index=True)
-        logger.debug(df)
-        # df.drop(columns=['key_0'], inplace=True)
+        df = df.merge(new_df, left_on=df.index, right_on=new_df.index)
+        df.drop(columns=['key_0'], inplace=True)
 
         # new_df = df["only_full_street_name"].explode()
         # new_df.name = "only_full_street_name"
@@ -582,8 +869,7 @@ class Geocoder:
         # print(df.head())
         df["only_full_street_name"] = df["only_full_street_name"].astype(str)
         df["location_options"] = df["location_options"].astype(str)
-        df['only_full_street_name'] = df['only_full_street_name'].map(lambda x: None if x == 'nan' or x == '' else x)
-        df['only_full_street_name_numbers'] = df.apply(Geocoder._join_only_full_street_name_numbers, axis=1)
+
         return df
 
     @staticmethod
@@ -612,7 +898,7 @@ class Geocoder:
         """
         logger.info('get_street started')
 
-        # df[text_column].dropna(inplace=True)
+        df[text_column].dropna(inplace=True)
         df[text_column] = df[text_column].astype(str)
         
         logger.info('extract_ner_street started')
@@ -622,31 +908,31 @@ class Geocoder:
         )
         df["Street"] = df[[text_column, "Street"]].progress_apply(
             lambda row: Geocoder.get_ner_address_natasha(
-                row, self.exceptions, text_column
-            ) if ["Street"] else None,
+                row, EXCEPTIONS_CITY_COUNTRY, text_column
+            ),
             axis=1,
         )
 
-        # df = df[df.Street.notna()]
-        # df = df[df["Street"].str.contains("[а-яА-Я]")]
+        df = df[df.Street.notna()]
+        df = df[df["Street"].str.contains("[а-яА-Я]")]
 
         logger.info('pattern1.sub started')
 
         pattern1 = re.compile(r"(\D)(\d)(\D)")
-        df["Street"] = df["Street"].progress_apply(lambda x: pattern1.sub(r"\1 \2\3", x) if x else x)
+        df["Street"] = df["Street"].progress_apply(lambda x: pattern1.sub(r"\1 \2\3", x))
 
         logger.info('pattern2.findall started')
 
         pattern2 = re.compile(r"\d+")
         df["Numbers"] = df["Street"].progress_apply(
-            lambda x: " ".join(pattern2.findall(x)) if x else x
+            lambda x: " ".join(pattern2.findall(x))
         )
 
 
         logger.info('pattern2.sub started')
 
 
-        df["Street"] = df["Street"].progress_apply(lambda x: pattern2.sub("", x).strip() if x else x)
+        df["Street"] = df["Street"].progress_apply(lambda x: pattern2.sub("", x).strip())
 
         df['initial_street'] = df['Street'].copy()
 
@@ -679,12 +965,12 @@ class Geocoder:
         logger.info('create_gdf started')
 
 
-        df["Location"] = df["addr_to_geocode"].progress_apply(lambda x: Location().query(x) if x else x)
-        # df = df.dropna(subset=["Location"])
+        df["Location"] = df["addr_to_geocode"].progress_apply(Location().query)
+        df = df.dropna(subset=["Location"])
         df["geometry"] = df.Location.apply(
-            lambda x: Point(x.longitude, x.latitude) if x else None
+            lambda x: Point(x.longitude, x.latitude)
         )
-        df["Location"] = df.Location.apply(lambda x: x.address if x else None)
+        df["Location"] = df.Location.apply(lambda x: x.address)
         gdf = gpd.GeoDataFrame(df, geometry="geometry", crs=Geocoder.global_crs)
 
         return gdf
@@ -733,7 +1019,13 @@ class Geocoder:
             gdf, geometry="geometry", crs=Geocoder.global_crs
         )
 
-        return gdf
+        return 
+    
+    def assign_street(variable):
+        if isinstance(variable, float) and math.isnan(variable):
+            return "street"
+        return variable
+    
 
     def run(self, df: pd.DataFrame, text_column: str = "Текст комментария"):
         """
@@ -744,15 +1036,18 @@ class Geocoder:
             text_column (str): The name of the text column in the DataFrame. Defaults to "Текст комментария".
 
         Returns:
-            gpd.GeoDataFrame: The processed DataFrame after running the data processing pipeline.
+            pd.DataFrame: The processed DataFrame after running the data processing pipeline.
         """
         # initial_df = df.copy()
+        df_obj = Other_geo_objects.run(self.osm_city_name, df, text_column)
         street_names = Streets.run(self.osm_city_name, self.osm_city_level)
 
         df = self.get_street(df, text_column)
         street_names = self.get_stem(street_names)
         df = self.find_word_form(df, street_names)
         gdf = self.create_gdf(df)
+        gdf = pd.merge(gdf, df_obj, how='outer')
+        gdf['geo_obj_tag'] = gdf['geo_obj_tag'].apply(Geocoder.assign_street)
         # gdf2 = self.merge_to_initial_df(gdf, initial_df)
 
         # # Add a new 'level' column using the get_level function
