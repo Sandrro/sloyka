@@ -1,6 +1,6 @@
 """
 This module contains the EmotionClassifiers class, which is designed to categorise input texts into emotion categories.
-It uses a Huggingface transformer model trained on rubert-tiny2 by default.
+It uses a Huggingface transformer model trained on Bert_Large by default.
 
 Attributes:
 - model: This attribute holds the model used for emotion recognition. It defaults to HuggingFaceModel.Text.Bert_Tiny2, 
@@ -24,7 +24,7 @@ from aniemore.models import HuggingFaceModel
 import torch
 
 class EmotionRecognizer:
-    def __init__(self, model=HuggingFaceModel.Text.Bert_Tiny2):
+    def __init__(self, model=HuggingFaceModel.Text.Bert_Large):
         # Инициализация модели Bert_Tiny2
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
         self.model = model
