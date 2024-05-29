@@ -11,7 +11,7 @@ from .src import (
     NER_parklike,
     VKParser,
     City_services,
-    AreaMatcher
+    EmotionRecognizer
 )
 
 __all__ = [
@@ -24,7 +24,7 @@ __all__ = [
     "NER_parklike",
     "VKParser",
     "City_services",
-    "AreaMatcher"
+    "EmotionRecognizer"
 ]
 
 logger.remove()
