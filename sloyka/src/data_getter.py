@@ -285,9 +285,9 @@ class VKParser:
         params = {
         'group_id': domain,
         'access_token': accsess_token,
-        'v': '5.131'
+        'v': VKParser.API_VERISON
     }
-        response = requests.get('https://api.vk.com/method/groups.getById', params=params)
+        response = requests.get('https://api.vk.com/method/groups.getById', params=params) #передвинуть повыше
         data = response.json()
         if 'response' in data and data['response']:
             group_name = data['response'][0]['name']
@@ -398,7 +398,7 @@ class VKParser:
             'owner_id': owner_id,
             'post_id': post_id,
             'access_token': access_token,
-            'v': '5.131',
+            'v': VKParser.API_VERISON,
             'extended': 1,
             'count': 100,
             'need_likes': 1
@@ -437,7 +437,7 @@ class VKParser:
             DataFrame: A DataFrame containing specific columns from the input comments.
         """
         df = pd.DataFrame(comments)
-        df = df[['id', 'date', 'text', 'post_id', 'parents_stack', 'likes.count']]
+        df = df[['id', 'from_id', 'date', 'text', 'post_id', 'parents_stack', 'likes.count']]
         return df
     
     def run_posts(self, domain, access_token, step, cutoff_date, number_of_messages=float('inf')):
