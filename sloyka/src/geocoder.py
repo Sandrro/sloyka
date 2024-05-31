@@ -1112,7 +1112,7 @@ class Geocoder:
         return best_match, admin_level
         
 
-    def run(self, osm_id, tags, date, df: pd.DataFrame, text_column: str = "text", froup_column: str = "group_name"):
+    def run(self, osm_id, tags, date, df: pd.DataFrame, text_column: str = "text", group_column: str = "group_name"):
         """
         Runs the data processing pipeline on the input DataFrame.
 
