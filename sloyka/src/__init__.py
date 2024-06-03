@@ -6,6 +6,7 @@ from .semantic_graph import Semgraph
 from .ner_parklike import NER_parklike
 from .city_services_extract import City_services
 from .emotionclass import EmotionRecognizer
+from .regional_activity import RegionalActivity
 
 __all__ = [
     "EventDetection",
@@ -17,5 +18,6 @@ __all__ = [
     "NER_parklike",
     "VKParser",
     "City_services",
-    "EmotionRecognizer"
+    "EmotionRecognizer",
+    "RegionalActivity"
 ]
