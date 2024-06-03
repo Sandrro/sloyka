@@ -1308,3 +1308,7 @@ GROUP_STOPWORDS = [
 " МО",
 "МО "
 ]
+
+REGEX_PATTERN = r'[\"!?\u2665\u2022()|,.-:]'
+
+REPLACEMENT_STRING = ''

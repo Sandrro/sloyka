@@ -118,6 +118,22 @@ class GeoDataGetter:
         )
 
 class HistGeoDataGetter:
+    @staticmethod
+    def set_overpass_settings(date: Optional[str] = None):
+        """
+        Sets the overpass settings for the OpenStreetMap API.
+
+        Parameters:
+            date (Optional[str]): The date for which to retrieve data. If not provided, the current date is used.
+
+        Returns:
+            None
+        """
+        if date:
+            ox.settings.overpass_settings = f'[out:json][timeout:600][date:"{date}"]'
+        else:
+            ox.settings.overpass_settings = '[out:json][timeout:600]'
+
     def get_features_from_id(
         self,
         osm_id: int,
@@ -126,12 +142,22 @@ class HistGeoDataGetter:
         selected_columns=['tag', 'key', 'element_type', 'osmid', 'name', 'geometry', 'centroid'],
         date: Optional[str] = None
     ) -> gpd.GeoDataFrame:
-        
-        place = self._get_place_from_id(osm_id, osm_type)
+        """
+        Get features from the given OSM ID using the provided tags and OSM type, and return the results as a GeoDataFrame.
+
+        Args:
+            osm_id (int): The OpenStreetMap ID.
+            tags (dict): The tags to filter by.
+            osm_type (str, optional): The OpenStreetMap type. Defaults to "R".
+            selected_columns (list, optional): The selected columns to include in the result GeoDataFrame. Defaults to ['tag', 'key', 'element_type', 'osmid', 'name', 'geometry', 'centroid'].
+            date (Optional[str], optional): The date for which to retrieve data. If not provided, the current date is used. Defaults to None.
+
+        Returns:
+            gpd.GeoDataFrame: The GeoDataFrame containing the features.
+        """
+        place = HistGeoDataGetter._get_place_from_id(osm_id, osm_type)
     
-        if date is not None:
-            ox.settings.overpass_endpoint = "https://overpass-api.de/api"
-            ox.settings.overpass_settings = f'[out:json][timeout:600][date:"{date}"]'
+        HistGeoDataGetter.set_overpass_settings(date)
         
         gdf_list = self._process_tags(tags, place, selected_columns, date)
 
@@ -148,7 +174,7 @@ class HistGeoDataGetter:
         merged_gdf = merged_gdf.dropna(subset=['name'])
         merged_gdf.reset_index(drop=True, inplace=True)
         return merged_gdf
-    
+
     def _add_creation_timestamps(self, gdf):
         MyApi = OsmApi()
         timestamps = []
@@ -164,14 +190,16 @@ class HistGeoDataGetter:
                 else:
                     timestamps.append(None)
             except Exception as e:
-                print(f"Error fetching timestamp for osmid {osmid}: {e}")
+                exception_type = type(e).__name__
+                print(f"Error fetching timestamp for osmid {osmid} [{exception_type}]: {e}")
                 timestamps.append(None)
 
         gdf['creation_timestamp'] = timestamps
 
         return gdf
 
-    def _get_place_from_id(self, osm_id, osm_type):
+    @staticmethod
+    def _get_place_from_id(osm_id, osm_type):
         place = ox.project_gdf(
             ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True)
         )
@@ -213,7 +241,8 @@ class HistGeoDataGetter:
 
     def _handle_error(self, category, tag):
         print(f"\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}")
-    
+
+    @staticmethod
     def get_place_name_from_osm_id(osm_id, osm_type="R"):
         place = ox.project_gdf(
             ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True)
@@ -224,16 +253,32 @@ class HistGeoDataGetter:
         else:
             return None
 
+    @staticmethod
     def query_year_from_osm_id(osm_id, date, network_type):
+        """
+        Retrieves a graph from OpenStreetMap for a given OSM ID, date, and network type.
+
+        Args:
+            osm_id (int): The OpenStreetMap ID.
+            date (str): The date for which to retrieve data.
+            network_type (str): The network type.
+
+        Returns:
+            networkx.Graph or None: The graph from OpenStreetMap, or None if the place name is not found.
+
+        Raises:
+            None
+        """
         place_name = HistGeoDataGetter.get_place_name_from_osm_id(osm_id)
         if place_name:
-            ox.settings.overpass_endpoint = "https://overpass-api.de/api"
-            ox.settings.overpass_settings = f'[out:json][timeout:180][date:"{date}"]'
+            HistGeoDataGetter.set_overpass_settings(date)
             G = ox.graph.graph_from_place(place_name, network_type)
             return G
         else:
             print("Place name not found.")
             return None
+
+
 
 class Streets:
     """

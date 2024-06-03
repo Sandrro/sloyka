@@ -42,7 +42,9 @@ from sloyka.src.constants import (
     NUM_CITY_OBJ,
     EXCEPTIONS_CITY_COUNTRY,
     AREA_STOPWORDS,
-    GROUP_STOPWORDS
+    GROUP_STOPWORDS,
+    REGEX_PATTERN,
+    REPLACEMENT_STRING
 )
 
 from flair.data import Sentence
@@ -77,6 +79,7 @@ morph_tagger = NewsMorphTagger(emb)
 syntax_parser = NewsSyntaxParser(emb)
 ner_tagger = NewsNERTagger(emb)
 warnings.simplefilter(action="ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 stemmer = SnowballStemmer("russian")
 
@@ -592,7 +595,6 @@ class Geocoder:
     """
     This class provides a functionality of simple geocoder
     """
-    area_cache = {}
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
     global_crs: int = 4326
@@ -1018,6 +1020,7 @@ class Geocoder:
         return variable
     
     def get_df_areas(self, osm_id, tags, date):
+        
         """
         Retrieves the GeoDataFrame of areas corresponding to the given OSM ID and tags.
 
@@ -1033,12 +1036,13 @@ class Geocoder:
         If it is, it returns the cached GeoDataFrame. Otherwise, it retrieves the GeoDataFrame from the HistGeoDataGetter,
         filters out the 'way' elements, and adds it to the cache. Finally, it returns the GeoDataFrame from the cache.
         """
-        if osm_id not in self.area_cache:
+        area_cache = {}
+        if osm_id not in area_cache:
             geo_data_getter = HistGeoDataGetter()
             df_areas = geo_data_getter.get_features_from_id(osm_id=osm_id, tags=tags, date=date)
             df_areas = df_areas[df_areas['element_type'] != 'way']
-            self.area_cache[osm_id] = df_areas
-        return self.area_cache[osm_id]
+            area_cache[osm_id] = df_areas
+        return area_cache[osm_id]
 
     def preprocess_group_name(self, group_name):
         """
@@ -1051,7 +1055,7 @@ class Geocoder:
             str: The preprocessed group name.
         """
         group_name = group_name.lower()
-        group_name = re.sub(r'[\"!?\u2665\u2022()|,.-:]', '', group_name)
+        group_name = re.sub(REGEX_PATTERN, REPLACEMENT_STRING, group_name)
         words_to_remove = GROUP_STOPWORDS
         for word in words_to_remove:
             group_name = re.sub(word, '', group_name, flags=re.IGNORECASE)
@@ -1075,7 +1079,7 @@ class Geocoder:
             df_areas['area_name'] = df_areas['name'].str.replace(word, '', regex=True)
 
         df_areas['area_name_processed'] = df_areas['area_name'].str.lower()
-        df_areas['area_name_processed'] = df_areas['area_name_processed'].str.replace(r'[\"!?\u2665\u2022()|,.-:]', '', regex=True)
+        df_areas['area_name_processed'] = df_areas['area_name_processed'].str.replace(REGEX_PATTERN, REPLACEMENT_STRING, regex=True)
         df_areas['area_stems'] = df_areas['area_name_processed'].apply(lambda x: [stemmer.stem(word) for word in x.split()])
         return df_areas
 
@@ -1112,7 +1116,7 @@ class Geocoder:
         return best_match, admin_level
         
 
-    def run(self, osm_id, tags, date, df: pd.DataFrame, text_column: str = "Текст комментария"):
+    def run(self, osm_id, tags, date, df: pd.DataFrame, text_column: str = "text", group_column: str = "group_name"):
         """
         Runs the data processing pipeline on the input DataFrame.
 
@@ -1121,7 +1125,7 @@ class Geocoder:
             tags (dict): The tags to filter by.
             date (str): The date of the data to retrieve.
             df (pd.DataFrame): The input DataFrame.
-            text_column (str, optional): The name of the text column in the DataFrame. Defaults to "Текст комментария".
+            text_column (str, optional): The name of the text column in the DataFrame. Defaults to "text".
 
         Returns:
             gpd.GeoDataFrame: The processed DataFrame after running the data processing pipeline.
@@ -1139,7 +1143,7 @@ class Geocoder:
         df_areas = self.get_df_areas(osm_id, tags, date)
         df_areas = self.preprocess_area_names(df_areas)
 
-        for i, group_name in enumerate(df['group_name']):
+        for i, group_name in enumerate(df[group_column]):
             processed_group_name = self.preprocess_group_name(group_name)
             best_match, admin_level = self.match_group_to_area(processed_group_name, df_areas)
             df.at[i, 'territory'] = best_match
