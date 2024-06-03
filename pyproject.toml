@@ -48,6 +48,8 @@ jupyter = "^1.0.0"
 testresources = "^2.0.1"
 rapidfuzz = "^3.9.0"
 aniemore = "^1.2.3"
+scipy = "1.12"
+osmapi = "^4.1.0"
 
 
 [tool.poetry.group.test.dependencies]
