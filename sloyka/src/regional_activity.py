@@ -13,23 +13,29 @@ from sloyka.src.emotionclass import EmotionRecognizer
 
 
 class RegionalActivity:
-    """This class is aimed to produce a geodataframe with the main information about users activity. It uses other sloyka
-    modules such as Geocoder, TextClassifiers, City_services and EmotionRecognizer to process data. Processed data is saved
-    in class attribute 'processed_geodata' and after class initialization can be called with RegionalActivity.processed_geodata.
+    """This class is aimed to produce a geodataframe with the main information about users activity.
+    It uses other sloyka modules such as Geocoder, TextClassifiers, City_services and EmotionRecognizer to process data.
+    Processed data is saved in class attribute 'processed_geodata' and
+    after class initialization can be called with RegionalActivity.processed_geodata.
     
 
     Args:
-        data (pd.DataFrame): DataFrame with posts, comments and replies in text format with additional information
-        such as date, group_name, text_type, parents_id and so on.
+        data (pd.DataFrame): DataFrame with posts, comments and replies in text format
+        with additional information such as 
+        date, group_name, text_type, parents_id and so on.
         Expected to be formed from sloyka.VKParser.run class function output.
         osm_id (int): OSM ID of the place from which geograhic data should be retrieved.
-        tags (dict): toponyms_dict with tags to be used in the Geocoder (e.g. {'admin_level': [5, 6]}).
+        tags (dict): toponyms_dict with tags to be used in the Geocoder
+        (e.g. {'admin_level': [5, 6]}).
         date (str): Date from wheach data from OSM should be retrieved.
         path_to_save (str, optional): Path to save processed geodata. Defaults to None.
         text_column (str, optional): Name of the column with text in the data. Defaults to 'text'.
-        group_name_column (str, optional): Name of the column with group name in the data. Defaults to 'group_name'.
-        repository_id (str, optional): ID of the repository to be used in TextClassifiers. Defaults to 'Sandrro/text_to_subfunction_v10'.
-        number_of_categories (int, optional): Number of categories to be used in TextClassifiers. Defaults to 1.
+        group_name_column (str, optional): Name of the column with group name in the data.
+        Defaults to 'group_name'.
+        repository_id (str, optional): ID of the repository to be used in TextClassifiers.
+        Defaults to 'Sandrro/text_to_subfunction_v10'.
+        number_of_categories (int, optional): Number of categories to be used in TextClassifiers.
+        Defaults to 1.
         device (str, optional): Device type to be used in models. Defaults to 'cpu'.
     """
 
@@ -53,14 +59,12 @@ class RegionalActivity:
         self.text = text_column
         self.group_name = group_name_column
         self.device = device
+        self.path_to_save = path_to_save
         self.text_classifier = TextClassifiers(repository_id=repository_id,
                                                number_of_categories=number_of_categories,
                                                device_type=device)
         self.processed_geodata = self.run_sloyka_modules()
         self.top_topics = self.processed_geodata.copy()['cats'].value_counts(normalize=True)[:5] * 100
-        
-        if path_to_save:
-            self.path_to_save = path_to_save
         
     def run_sloyka_modules(self) -> gpd.GeoDataFrame:
         """This function runs data with the main functions of the Geocoder, TextClassifiers,City_services and
@@ -95,8 +99,8 @@ class RegionalActivity:
                       data: Union[pd.DataFrame, gpd.GeoDataFrame],
                       id_column: str,
                       name_column: str) -> list:
-        """This function creates a tuple of unique identifiers of chains of posts, comments and replies around
-        specified value in column.
+        """This function creates a tuple of unique identifiers of chains of posts, comments and
+        replies around specified value in column.
 
         Args:
             name (str): value in column to select a post-comment-reply chains
