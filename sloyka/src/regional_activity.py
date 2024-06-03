@@ -2,28 +2,35 @@
 This class is aimed to aggregate data by region and provide some information about it users
 activity
 """
-
+from typing import Union
 import pandas as pd
 import geopandas as gpd
 
 from sloyka.src.geocoder import Geocoder
-from sloyka.src.text_classifiers import TextClassifiers 
-from sloyka.src.city_services_extract import City_services 
+from sloyka.src.text_classifiers import TextClassifiers
+from sloyka.src.city_services_extract import City_services
 from sloyka.src.emotionclass import EmotionRecognizer
 
 
 class RegionalActivity:
-    """_summary_
+    """This class is aimed to produce a geodataframe with the main information about users activity. It uses other sloyka
+    modules such as Geocoder, TextClassifiers, City_services and EmotionRecognizer to process data. Processed data is saved
+    in class attribute 'processed_geodata' and after class initialization can be called with RegionalActivity.processed_geodata.
+    
 
     Args:
-        data (pd.DataFrame): _description_
-        osm_id (int): _description_
-        tags (dict): _description_
-        date (str): _description_
-        text_column (str, optional): _description_. Defaults to 'text'.
-        group_name_column (str, optional): _description_. Defaults to 'group_name'.
-        repository_id (str, optional): _description_. Defaults to 'Sandrro/text_to_subfunction_v10'.
-        number_of_categories (int, optional): _description_. Defaults to 1.
+        data (pd.DataFrame): DataFrame with posts, comments and replies in text format with additional information
+        such as date, group_name, text_type, parents_id and so on.
+        Expected to be formed from sloyka.VKParser.run class function output.
+        osm_id (int): OSM ID of the place from which geograhic data should be retrieved.
+        tags (dict): toponyms_dict with tags to be used in the Geocoder (e.g. {'admin_level': [5, 6]}).
+        date (str): Date from wheach data from OSM should be retrieved.
+        path_to_save (str, optional): Path to save processed geodata. Defaults to None.
+        text_column (str, optional): Name of the column with text in the data. Defaults to 'text'.
+        group_name_column (str, optional): Name of the column with group name in the data. Defaults to 'group_name'.
+        repository_id (str, optional): ID of the repository to be used in TextClassifiers. Defaults to 'Sandrro/text_to_subfunction_v10'.
+        number_of_categories (int, optional): Number of categories to be used in TextClassifiers. Defaults to 1.
+        device (str, optional): Device type to be used in models. Defaults to 'cpu'.
     """
 
     def __init__(self,
@@ -56,10 +63,11 @@ class RegionalActivity:
             self.path_to_save = path_to_save
         
     def run_sloyka_modules(self) -> gpd.GeoDataFrame:
-        """This function 
+        """This function runs data with the main functions of the Geocoder, TextClassifiers,City_services and
+        EmotionRecognizer classes. If path_to_save was provided it also saves data in the path.
 
         Returns:
-            None: No data provided
+            None: Data is saved in RegionalActivity.processed_geodata and written to the path if path_to_save was provided
         """
         
         processed_geodata = Geocoder(device=self.device).run(df=self.data,
@@ -72,24 +80,97 @@ class RegionalActivity:
         processed_geodata[['cats', 'probs']] = (processed_geodata[self.text].progress_map(
                                                                 lambda x: self.text_classifier.run_text_classifier(x)).
                                                                 to_list())
-        
         processed_geodata = City_services().run(df=processed_geodata,
                                                      text_column=self.text)
-        
         processed_geodata = EmotionRecognizer().add_emotion_column(df=processed_geodata,
                                                                    text=self.text)
-        
+
         if self.path_to_save:
             processed_geodata.to_file(self.path_to_save)
-        
-        return processed_geodata
 
-    def get_risks(self,
-                  top_n: int=5) -> dict:
-        """_summary_
+        return processed_geodata
+    
+    @staticmethod
+    def get_chain_ids(name: str,
+                      data: Union[pd.DataFrame, gpd.GeoDataFrame],
+                      id_column: str,
+                      name_column: str) -> list:
+        """This function creates a tuple of unique identifiers of chains of posts, comments and replies around
+        specified value in column.
+
+        Args:
+            name (str): value in column to select a post-comment-reply chains
+            data (Union[pd.DataFrame, gpd.GeoDataFrame]): data with posts, comments and replies
+            id_column (str): column with unique identifiers
+            name_column (str): column to base a selection
 
         Returns:
-            pd.DataFrame: _description_
+            tuple: tuple of unique identifiers of chains
+        """
+        
+        posts_ids = data[id_column].loc[data[name_column] == name].to_list()
+        comments_ids = data[id_column].loc[data['post_id'].isin(posts_ids) & data[name_column].isin([name, None])].to_list()
+        replies_ids = data[id_column].loc[data['parents_stack'].isin(comments_ids) & data[name_column].isin([name, None])].to_list()
+
+        return tuple(sorted(list(set(posts_ids + comments_ids + replies_ids))))
+    
+    @staticmethod
+    def dict_to_df(toponyms_dict: dict) -> pd.DataFrame:
+        """This function converts dictionary created by RegionalActivity.get_risks() function to a DataFrame object.
+
+        Args:
+            toponyms_dict (dict): dictionary with info created in RegionalActivity.get_risks().
+
+        Returns:
+            pd.DataFrame: Table with info about top n most mentioned toponyms.
+        """
+        
+        df_list = []
+        
+        for toponym in toponyms_dict:
+            for service in toponyms_dict[toponym]['services']:
+                for emotion in toponyms_dict[toponym]['services'][service]['emotions']:
+                    df_list.append([toponym,
+                                    toponyms_dict[toponym]['part_users'],
+                                    toponyms_dict[toponym]['part_messages'],
+                                    service,
+                                    toponyms_dict[toponym]['services'][service]['counts'],
+                                    emotion,
+                                    toponyms_dict[toponym]['services'][service]['emotions'][emotion]])
+                    
+        dataframe = pd.DataFrame(df_list, columns=['Toponym', 'Part_users', 'Part_messages', 'Service', 'Counts', 'Emotion', 'Emotion_count'])
+        
+        return dataframe
+
+    def get_risks(self,
+                  top_n: int=5,
+                  to_df: bool=False) -> dict:
+        """This function returns a toponyms_dict with info about top n most mentioned toponyms.
+        toponyms_dict have the following format:
+        {'Toponym': {'part_users' : 0.0,
+                     'part_messages' : 0.0,
+                     'services' : {'service_1' : {counts : 0,
+                                                  emotions: {'emotion' : 0.0}
+                                                  },
+                                   }
+                     }
+         }
+
+        Args:
+            top_n (int, optional): The number of most mentioned toponyms to be calculated. Defaults to 5.
+            to_df (bool, optional): Whether to return a DataFrame or a dictionary. Defaults to False.
+
+        Returns:
+            dict: toponyms_dict with info about top n most mentioned toponyms with the following format.
+            
+            {'Toponym': {'part_users' : 0.0,
+                        'part_messages' : 0.0,
+                        'services' : {'service_1' : {counts : 0,
+                                                    emotions: {'emotion' : 0.0}
+                                                    },
+                                    }
+                        }
+            } 
         """
 
         gdf_final = self.processed_geodata.copy()
@@ -98,13 +179,13 @@ class RegionalActivity:
         
         result = {}
 
-        for i in top_n_toponyms[:5]:
+        for i in top_n_toponyms:
             
-            posts_ids = gdf_final['id'].loc[gdf_final['only_full_street_name'] == i].to_list()
-            comments_ids = gdf_final['id'].loc[gdf_final['post_id'].isin(posts_ids) & gdf_final['only_full_street_name'].isin([i, None])].to_list()
-            replies_ids = gdf_final['id'].loc[gdf_final['parents_stack'].isin(comments_ids) & gdf_final['only_full_street_name'].isin([i, None])].to_list()
             
-            all_ids = tuple(sorted(list(set(posts_ids + comments_ids + replies_ids))))
+            all_ids = self.get_chain_ids(name=i,
+                                         data=gdf_final,
+                                         id_column='id',
+                                         name_column='only_full_street_name')
             
             toponym_gdf_final = gdf_final.loc[gdf_final['id'].isin(all_ids)]
             part_users = len(toponym_gdf_final['from_id'].unique())/len(gdf_final['from_id'].unique())
@@ -137,7 +218,7 @@ class RegionalActivity:
                 service_info = {'counts': 0}
                 
                 if j in services_dict:
-                        service_info['counts'] = service_info['counts'] + 1
+                    service_info['counts'] = service_info['counts'] + 1
                 
                 emotions = service_gdf['emotion'].to_list()
                 
@@ -156,7 +237,10 @@ class RegionalActivity:
                 info['services'] = services_dict
                 result[i] = info
                 
+            if to_df:
+                result = self.dict_to_df(result)
         return result
+
         
 
 if __name__ == "__main__":
