@@ -299,7 +299,7 @@ class AddrNEWExtractor(Extractor):
         stop = matches[-1].stop
         parts = [_.fact for _ in matches]
         return Match(start, stop, obj.Addr(parts))
-class Other_geo_objects:
+class OtherGeoObjects:
     @staticmethod
     def get_OSM_green_obj(osm_city_name) -> pd.DataFrame:
         """
@@ -413,7 +413,7 @@ class Other_geo_objects:
         This function allows you to build an OSM array for different urban objects.
         """
         df = get_data_function(osm_city_name)
-        df['geometry'] = df['geometry'].apply(Other_geo_objects.calculate_centroid)
+        df['geometry'] = df['geometry'].apply(OtherGeoObjects.calculate_centroid)
         df.rename(columns={df.columns[2]: 'geo_obj_tag'}, inplace=True)
         return df
         
@@ -424,16 +424,16 @@ class Other_geo_objects:
         logger.info('run_OSM_dfs started')
 
         osm_functions = [
-            Other_geo_objects.get_OSM_green_obj,
-            Other_geo_objects.get_OSM_num_obj,
-            Other_geo_objects.get_OSM_cemetery,
-            Other_geo_objects.get_OSM_natural,
-            Other_geo_objects.get_OSM_railway,
-            Other_geo_objects.get_OSM_tourism,
-            Other_geo_objects.get_OSM_historic
+            OtherGeoObjects.get_OSM_green_obj,
+            OtherGeoObjects.get_OSM_num_obj,
+            OtherGeoObjects.get_OSM_cemetery,
+            OtherGeoObjects.get_OSM_natural,
+            OtherGeoObjects.get_OSM_railway,
+            OtherGeoObjects.get_OSM_tourism,
+            OtherGeoObjects.get_OSM_historic
         ]
 
-        osm_dfs = [Other_geo_objects.get_and_process_osm_data(osm_city_name, func) for func in osm_functions]
+        osm_dfs = [OtherGeoObjects.get_and_process_osm_data(osm_city_name, func) for func in osm_functions]
         osm_combined_df = pd.concat(osm_dfs, axis=0)
 
         return osm_combined_df
@@ -570,15 +570,16 @@ class Other_geo_objects:
         This function launches the module for extracting urban objects from texts that do not relate to streets.
         """
         df_obj = df.copy()
-        osm_combined_df = Other_geo_objects.run_OSM_dfs(osm_city_name)
+        df_obj['Numbers'] = np.nan
+        osm_combined_df = OtherGeoObjects.run_OSM_dfs(osm_city_name)
         logger.info('find_other_geo_obj started')
-        df_obj['other_geo_obj'] = df_obj[text_column].apply(Other_geo_objects.extract_geo_obj)
-        df_obj['other_geo_obj_num'] = df_obj[text_column].apply(lambda x: Other_geo_objects.find_num_city_obj(x, NUM_CITY_OBJ))
-        df_obj = Other_geo_objects.combine_city_obj(df_obj)
-        df_obj['other_geo_obj'] = df_obj['other_geo_obj'].apply(lambda x: Other_geo_objects.restoration_of_normal_form(x, osm_combined_df))
-        df_obj = Other_geo_objects.expand_toponim(df_obj)
-        df_obj['geometry'] = df_obj['other_geo_obj'].apply(lambda x: Other_geo_objects.find_geometry(x, osm_combined_df))
-        df_obj['geo_obj_tag'] = df_obj['other_geo_obj'].apply(lambda x: Other_geo_objects.find_geo_obj_tag(x, osm_combined_df))
+        df_obj['other_geo_obj'] = df_obj[text_column].apply(OtherGeoObjects.extract_geo_obj)
+        df_obj['other_geo_obj_num'] = df_obj[text_column].apply(lambda x: OtherGeoObjects.find_num_city_obj(x, NUM_CITY_OBJ))
+        df_obj = OtherGeoObjects.combine_city_obj(df_obj)
+        df_obj['other_geo_obj'] = df_obj['other_geo_obj'].apply(lambda x: OtherGeoObjects.restoration_of_normal_form(x, osm_combined_df))
+        df_obj = OtherGeoObjects.expand_toponim(df_obj)
+        df_obj['geometry'] = df_obj['other_geo_obj'].apply(lambda x: OtherGeoObjects.find_geometry(x, osm_combined_df))
+        df_obj['geo_obj_tag'] = df_obj['other_geo_obj'].apply(lambda x: OtherGeoObjects.find_geo_obj_tag(x, osm_combined_df))
         df_obj = df_obj[df_obj['geometry'].notna()]
         return df_obj
 
@@ -956,7 +957,9 @@ class Geocoder:
             lambda x: Point(x.longitude, x.latitude)
         )
         df["Location"] = df.Location.apply(lambda x: x.address)
+        df['Numbers'].astype(str)
         gdf = gpd.GeoDataFrame(df, geometry="geometry", crs=Geocoder.global_crs)
+
 
         return gdf
 
@@ -1023,17 +1026,16 @@ class Geocoder:
         Returns:
             pd.DataFrame: The processed DataFrame after running the data processing pipeline.
         """
-        # initial_df = df.copy()
-        df_obj = Other_geo_objects.run(self.osm_city_name, df, text_column)
+        df[text_column] = df[text_column].str.replace('\n', ' ')
+        df_obj = OtherGeoObjects.run(self.osm_city_name, df, text_column)
         street_names = Streets.run(self.osm_city_name, self.osm_city_level)
 
         df = self.get_street(df, text_column)
         street_names = self.get_stem(street_names)
         df = self.find_word_form(df, street_names)
         gdf = self.create_gdf(df)
-        gdf = pd.merge(gdf, df_obj, how='outer')
+        gdf = pd.concat([gdf, df_obj], ignore_index=True)
         gdf['geo_obj_tag'] = gdf['geo_obj_tag'].apply(Geocoder.assign_street)
-        # gdf2 = self.merge_to_initial_df(gdf, initial_df)
 
         # # Add a new 'level' column using the get_level function
         # gdf2["level"] = gdf2.progress_apply(self.get_level, axis=1)
