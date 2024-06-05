@@ -11,6 +11,8 @@ The EmotionClassifiers class has the following method:
 from aniemore.recognizers.text import TextRecognizer
 from aniemore.models import HuggingFaceModel
 import torch
+import pandas as pd
+from tqdm import tqdm
 
 class EmotionRecognizer:
     """
@@ -32,41 +34,49 @@ class EmotionRecognizer:
         self.model = model
         self.recognizer = TextRecognizer(model=self.model, device=self.device)
 
-    def recognize_emotion(self, text):
-        """Return the emotion for a given text."""
-        emotion = self.recognizer.recognize(text, return_single_label=True)
-        return emotion
-
-    def recognize_average_emotion_from_multiple_models(self, text, models=None):
-        """Calculate the prevailing emotion using multiple models."""
-        default_models = [
+        # Preload all models to avoid repeated initialization
+        self.default_models = [
             HuggingFaceModel.Text.Bert_Tiny,
             HuggingFaceModel.Text.Bert_Base,
             HuggingFaceModel.Text.Bert_Large,
             HuggingFaceModel.Text.Bert_Tiny2
         ]
 
+    def recognize_emotion(self, text):
+        """Return the emotion for a given text."""
+        emotion = self.recognizer.recognize(text, return_single_label=True)
+        return emotion
+
+    def _recognize_with_model(self, model, texts):
+        """Helper function to recognize emotion with a given model for a list of texts."""
+        recognizer = TextRecognizer(model=model, device=self.device)
+        results = [recognizer.recognize(text, return_single_label=False) for text in texts]
+        return results
+    
+    def recognize_average_emotion_from_multiple_models(self, df, text_column, models=None, average=True):
+        """Calculate the prevailing emotion using multiple models for a DataFrame column."""
         if models is None:
-            models = default_models
+            models = self.default_models
         else:
-            # Validate that the provided models are in the default models list
             for model in models:
-                if model not in default_models:
-                    raise ValueError(f"Model {model} is not a valid model. Valid models are: {default_models}")
+                if model not in self.default_models:
+                    raise ValueError(f"Model {model} is not a valid model. Valid models are: {self.default_models}")
 
-        scores = {emotion: 0 for emotion in ["happiness", "sadness", "anger", "fear", "disgust", "enthusiasm", "neutral"]}
+        scores = pd.DataFrame(0, index=df.index, columns=["happiness", "sadness", "anger", "fear", "disgust", "enthusiasm", "neutral"])
+        counts = pd.DataFrame(0, index=df.index, columns=["happiness", "sadness", "anger", "fear", "disgust", "enthusiasm", "neutral"])
 
-        recognizers = [TextRecognizer(model=model, device=self.device) for model in models]
+        for model in tqdm(models, desc="Processing models"):
+            model_results = self._recognize_with_model(model, df[text_column])
 
-        for recognizer in recognizers:
-            results = recognizer.recognize(text, return_single_label=False)
-            for emotion, score in results.items():
-                scores[emotion] += score
-        
-        # Average the scores by the number of models
-        for emotion in scores:
-            scores[emotion] /= len(recognizers)
+            for idx, result in enumerate(model_results):
+                for emotion, score in result.items():
+                    scores.at[df.index[idx], emotion] += score
+                    counts.at[df.index[idx], emotion] += 1
 
-        # Determine the prevailing emotion with the highest average score
-        prevailing_emotion = max(scores, key=scores.get)
-        return prevailing_emotion
+        if average:
+            scores = scores.div(len(models))
+            prevailing_emotions = scores.idxmax(axis=1)
+        else:
+            prevailing_emotions = counts.idxmax(axis=1)
+
+        return prevailing_emotions
