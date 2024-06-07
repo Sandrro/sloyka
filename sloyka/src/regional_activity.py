@@ -37,6 +37,7 @@ class RegionalActivity:
         number_of_categories (int, optional): Number of categories to be used in TextClassifiers.
         Defaults to 1.
         device (str, optional): Device type to be used in models. Defaults to 'cpu'.
+        use_geocoded_data (bool, optional): Whether the input data is geocoded or not. If True skips geocoding fase. Defaults to False.
     """
 
     def __init__(self,
@@ -86,11 +87,11 @@ class RegionalActivity:
                 date=self.date,
                 text_column=self.text,
                 group_column=self.group_name
-            )
+            ) # type: ignore
         
         processed_geodata[['cats',
                            'probs']] = processed_geodata[self.text].progress_map(
-                                                                        self.text_classifier.run_text_classifier)
+                               lambda x: self.text_classifier.run_text_classifier(x)).to_list() # type: ignore
         processed_geodata = City_services().run(df=processed_geodata,
                                                      text_column=self.text)
         processed_geodata = EmotionRecognizer().add_emotion_column(df=processed_geodata,
@@ -100,13 +101,23 @@ class RegionalActivity:
             processed_geodata.to_file(self.path_to_save)
 
         return processed_geodata
-    
-    def update_geodata(self,
-                       data) -> None:
-        
+
+    def update_geodata(self, data:Union[pd.DataFrame, gpd.GeoDataFrame]) -> None:
+        """
+        Update the geodata with the given data. Will ran all stages for the new data.
+        If path_to_save was provided it also saves data in the path.
+        If use_geocoded_data was set to True, it will skip the geocoding stage.
+
+        Args:
+            data: The data to update the geodata with.
+
+        Returns:
+            None
+        """
+
         self.data = data
         self.processed_geodata = self.run_sloyka_modules()
-    
+
     @staticmethod
     def get_chain_ids(name: str,
                       data: Union[pd.DataFrame, gpd.GeoDataFrame],
