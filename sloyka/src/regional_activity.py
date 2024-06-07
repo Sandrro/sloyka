@@ -2,7 +2,7 @@
 This class is aimed to aggregate data by region and provide some information about it users
 activity
 """
-from typing import Union
+from typing import Union, Optional
 import pandas as pd
 import geopandas as gpd
 
@@ -40,31 +40,33 @@ class RegionalActivity:
     """
 
     def __init__(self,
-                 data: pd.DataFrame,
+                 data: Union[pd.DataFrame, gpd.GeoDataFrame],
                  osm_id: int,
-                 tags: dict,
+                 tags: dict[str, list[int]],
                  date: str,
-                 path_to_save: str = None,
+                 path_to_save: Optional[str] = None,
                  text_column: str = 'text',
                  group_name_column: str = 'group_name',
                  repository_id: str = 'Sandrro/text_to_subfunction_v10',
                  number_of_categories: int = 1,
-                 device: str='cpu'
+                 device: str='cpu',
+                 use_geocoded_data: bool = False
                  ) -> None:
 
-        self.data = data
-        self.osm_id = osm_id
-        self.tags = tags
-        self.date = date
-        self.text = text_column
-        self.group_name = group_name_column
-        self.device = device
-        self.path_to_save = path_to_save
+        self.data: pd.DataFrame | gpd.GeoDataFrame = data
+        self.osm_id: int = osm_id
+        self.tags: dict[str, list[int]] = tags
+        self.date: str = date
+        self.text: str = text_column
+        self.group_name: str = group_name_column
+        self.device: str = device
+        self.path_to_save: str | None = path_to_save
+        self.use_geocoded_data: bool = use_geocoded_data
         self.text_classifier = TextClassifiers(repository_id=repository_id,
                                                number_of_categories=number_of_categories,
                                                device_type=device)
-        self.processed_geodata = self.run_sloyka_modules()
-        self.top_topics = self.processed_geodata.copy()['cats'].value_counts(normalize=True)[:5] * 100
+        self.processed_geodata: gpd.GeoDataFrame = self.run_sloyka_modules()
+        self.top_topics = self.processed_geodata.copy()['cats'].value_counts(normalize=True)[:5]*100
         
     def run_sloyka_modules(self) -> gpd.GeoDataFrame:
         """This function runs data with the main functions of the Geocoder, TextClassifiers,City_services and
@@ -74,16 +76,21 @@ class RegionalActivity:
             None: Data is saved in RegionalActivity.processed_geodata and written to the path if path_to_save was provided
         """
         
-        processed_geodata = Geocoder(device=self.device).run(df=self.data,
-                                                             osm_id=self.osm_id,
-                                                             tags=self.tags,
-                                                             date=self.date,
-                                                             text_column=self.text,
-                                                             group_column=self.group_name)
+        if self.use_geocoded_data:
+            processed_geodata: gpd.GeoDataFrame = self.data.copy()
+        else:
+            processed_geodata: gpd.GeoDataFrame = Geocoder(device=self.device).run(
+                df=self.data,
+                osm_id=self.osm_id,
+                tags=self.tags,
+                date=self.date,
+                text_column=self.text,
+                group_column=self.group_name
+            )
         
-        processed_geodata[['cats', 'probs']] = (processed_geodata[self.text].progress_map(
-                                                                lambda x: self.text_classifier.run_text_classifier(x)).
-                                                                to_list())
+        processed_geodata[['cats',
+                           'probs']] = processed_geodata[self.text].progress_map(
+                                                                        self.text_classifier.run_text_classifier)
         processed_geodata = City_services().run(df=processed_geodata,
                                                      text_column=self.text)
         processed_geodata = EmotionRecognizer().add_emotion_column(df=processed_geodata,
@@ -93,6 +100,12 @@ class RegionalActivity:
             processed_geodata.to_file(self.path_to_save)
 
         return processed_geodata
+    
+    def update_geodata(self,
+                       data) -> None:
+        
+        self.data = data
+        self.processed_geodata = self.run_sloyka_modules()
     
     @staticmethod
     def get_chain_ids(name: str,
