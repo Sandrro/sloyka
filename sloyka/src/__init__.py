@@ -6,6 +6,7 @@ from .semantic_graph import Semgraph
 from .ner_parklike import NER_parklike
 from .city_services_extract import City_services
 from .area_matcher import AreaMatcher
+from .emotionclass import EmotionRecognizer
 
 __all__ = [
     "EventDetection",
@@ -18,4 +19,5 @@ __all__ = [
     "VKParser",
     "City_services",
     "AreaMatcher",
+    "EmotionRecognizer"
 ]
