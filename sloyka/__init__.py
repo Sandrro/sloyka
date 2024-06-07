@@ -10,7 +10,8 @@ from .src import (
     Streets, 
     NER_parklike,
     VKParser,
-    City_services
+    City_services,
+    EmotionRecognizer
 )
 
 __all__ = [
@@ -22,7 +23,8 @@ __all__ = [
     "Streets", 
     "NER_parklike",
     "VKParser",
-    "City_services"
+    "City_services",
+    "EmotionRecognizer"
 ]
 
 logger.remove()
