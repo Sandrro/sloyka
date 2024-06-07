@@ -30,6 +30,7 @@ import osm2geojson
 import random
 from typing import List, Optional
 from osmapi import OsmApi
+from loguru import logger
 
 class GeoDataGetter:
     """
@@ -190,8 +191,7 @@ class HistGeoDataGetter:
                 else:
                     timestamps.append(None)
             except Exception as e:
-                exception_type = type(e).__name__
-                print(f"Error fetching timestamp for osmid {osmid} [{exception_type}]: {e}")
+                logger.exception(f"Error fetching timestamp for osmid {osmid}")
                 timestamps.append(None)
 
         gdf['creation_timestamp'] = timestamps
@@ -275,8 +275,8 @@ class HistGeoDataGetter:
             G = ox.graph.graph_from_place(place_name, network_type)
             return G
         else:
-            print("Place name not found.")
-            return None
+            logger.error(f"Place name not found for OSM ID {osm_id} on date {date}.")
+        return None
 
 
 
