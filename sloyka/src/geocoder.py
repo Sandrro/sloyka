@@ -32,13 +32,19 @@ import torch
 import string
 import math
 from rapidfuzz import fuzz
+from nltk.stem.snowball import SnowballStemmer
+from sloyka.src.data_getter import HistGeoDataGetter
 from sloyka.src.constants import (
     START_INDEX_POSITION,
     REPLACEMENT_DICT,
     TARGET_TOPONYMS,
     END_INDEX_POSITION,
     NUM_CITY_OBJ,
-    EXCEPTIONS_CITY_COUNTRY
+    EXCEPTIONS_CITY_COUNTRY,
+    AREA_STOPWORDS,
+    GROUP_STOPWORDS,
+    REGEX_PATTERN,
+    REPLACEMENT_STRING
 )
 
 from flair.data import Sentence
@@ -73,6 +79,9 @@ morph_tagger = NewsMorphTagger(emb)
 syntax_parser = NewsSyntaxParser(emb)
 ner_tagger = NewsNERTagger(emb)
 warnings.simplefilter(action="ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+stemmer = SnowballStemmer("russian")
 
 tqdm.pandas()
 
@@ -298,7 +307,7 @@ class AddrNEWExtractor(Extractor):
         start = matches[0].start
         stop = matches[-1].stop
         parts = [_.fact for _ in matches]
-        return Match(start, stop, obj.Addr(parts))
+        return Match(start, stop, obj.Addr(parts)) # type: ignore
 class OtherGeoObjects:
     @staticmethod
     def get_OSM_green_obj(osm_city_name) -> pd.DataFrame:
@@ -583,12 +592,10 @@ class OtherGeoObjects:
         df_obj = df_obj[df_obj['geometry'].notna()]
         return df_obj
 
-
 class Geocoder:
     """
     This class provides a functionality of simple geocoder
     """
-
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
     global_crs: int = 4326
@@ -606,6 +613,7 @@ class Geocoder:
         self.classifier = SequenceTagger.load(model_path)
         self.osm_city_level = osm_city_level
         self.osm_city_name = osm_city_name
+
 
     def extract_ner_street(self, text: str) -> pd.Series:
         """
@@ -960,7 +968,6 @@ class Geocoder:
         df['Numbers'].astype(str)
         gdf = gpd.GeoDataFrame(df, geometry="geometry", crs=Geocoder.global_crs)
 
-
         return gdf
 
     def set_global_repr_point(self, gdf: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
@@ -1014,19 +1021,139 @@ class Geocoder:
             return "street"
         return variable
     
+    def get_df_areas(self, osm_id, tags, date):
+        
+        """
+        Retrieves the GeoDataFrame of areas corresponding to the given OSM ID and tags.
 
-    def run(self, df: pd.DataFrame, text_column: str = "Текст комментария"):
+        Args:
+            osm_id (int): The OpenStreetMap ID.
+            tags (dict): The tags to filter by.
+            date (str): The date of the data to retrieve.
+
+        Returns:
+            gpd.GeoDataFrame: The GeoDataFrame containing the areas.
+
+        This function first checks if the GeoDataFrame corresponding to the given OSM ID is already in the cache.
+        If it is, it returns the cached GeoDataFrame. Otherwise, it retrieves the GeoDataFrame from the HistGeoDataGetter,
+        filters out the 'way' elements, and adds it to the cache. Finally, it returns the GeoDataFrame from the cache.
+        """
+        area_cache = {}
+        if osm_id not in area_cache:
+            geo_data_getter = HistGeoDataGetter()
+            df_areas = geo_data_getter.get_features_from_id(osm_id=osm_id, tags=tags, date=date)
+            df_areas = df_areas[df_areas['element_type'] != 'way']
+            area_cache[osm_id] = df_areas
+        return area_cache[osm_id]
+
+    def preprocess_group_name(self, group_name):
+        """
+        Preprocesses a group name by converting it to lowercase, removing special characters, and removing specified stopwords.
+
+        Args:
+            group_name (str): The group name to preprocess.
+
+        Returns:
+            str: The preprocessed group name.
+        """
+        group_name = group_name.lower()
+        group_name = re.sub(REGEX_PATTERN, REPLACEMENT_STRING, group_name)
+        words_to_remove = GROUP_STOPWORDS
+        for word in words_to_remove:
+            group_name = re.sub(word, '', group_name, flags=re.IGNORECASE)
+        return group_name
+
+    def preprocess_area_names(self, df_areas):
+        """
+        Preprocesses the area names in the given DataFrame by removing specified stopwords, converting the names to lowercase,
+        and stemming them.
+
+        Parameters:
+            df_areas (DataFrame): The DataFrame containing the area names.
+
+        Returns:
+            DataFrame: The DataFrame with preprocessed area names, where the 'area_name' column contains the original names
+                      with stopwords removed, the 'area_name_processed' column contains the lowercase names with special characters
+                      removed, and the 'area_stems' column contains the stemmed names.
+        """
+        words_to_remove = AREA_STOPWORDS
+        for word in words_to_remove:
+            df_areas['area_name'] = df_areas['name'].str.replace(word, '', regex=True)
+
+        df_areas['area_name_processed'] = df_areas['area_name'].str.lower()
+        df_areas['area_name_processed'] = df_areas['area_name_processed'].str.replace(REGEX_PATTERN, REPLACEMENT_STRING, regex=True)
+        df_areas['area_stems'] = df_areas['area_name_processed'].apply(lambda x: [stemmer.stem(word) for word in x.split()])
+        return df_areas
+
+    def match_group_to_area(self, group_name, df_areas):
+        """
+        Matches a given group name to an area in a DataFrame of areas.
+
+        Args:
+            group_name (str): The name of the group to match.
+            df_areas (DataFrame): The DataFrame containing the areas to match against.
+
+        Returns:
+            tuple: A tuple containing the best match for the group name and the admin level of the match.
+                   If no match is found, returns (None, None).
+        """
+        group_name_stems = [stemmer.stem(word) for word in group_name.split()]
+        max_partial_ratio = 20
+        max_token_sort_ratio = 20
+        best_match = None
+        admin_level = None
+
+        for _, row in df_areas.iterrows():
+            area_stems = row['area_stems']
+
+            partial_ratio = fuzz.partial_ratio(group_name, row['area_name_processed'])
+            token_sort_ratio = fuzz.token_sort_ratio(group_name_stems, area_stems)
+
+            if partial_ratio > max_partial_ratio and token_sort_ratio > max_token_sort_ratio:
+                max_partial_ratio = partial_ratio
+                max_token_sort_ratio = token_sort_ratio
+                best_match = row['area_name']
+                admin_level = row['key']
+
+        return best_match, admin_level
+        
+
+    def run(self, osm_id, tags, date, df: pd.DataFrame, text_column: str = "text", group_column: str = "group_name"):
         """
         Runs the data processing pipeline on the input DataFrame.
 
         Args:
+            osm_id (int): The OpenStreetMap ID.
+            tags (dict): The tags to filter by.
+            date (str): The date of the data to retrieve.
             df (pd.DataFrame): The input DataFrame.
-            text_column (str): The name of the text column in the DataFrame. Defaults to "Текст комментария".
+            text_column (str, optional): The name of the text column in the DataFrame. Defaults to "text".
 
         Returns:
-            pd.DataFrame: The processed DataFrame after running the data processing pipeline.
+            gpd.GeoDataFrame: The processed DataFrame after running the data processing pipeline.
+
+        This function retrieves the GeoDataFrame of areas corresponding to the given OSM ID and tags.
+        It then preprocesses the area names and matches each group name to an area. The best match
+        and admin level are assigned to the DataFrame. The function also retrieves other geographic
+        objects and street names, preprocesses the street names, finds the word form, creates a GeoDataFrame,
+        merges it with the other geographic objects, assigns the street tag, and returns the final GeoDataFrame.
         """
+        
+            # initial_df = df.copy()
+        
+        
+        df_areas = self.get_df_areas(osm_id, tags, date)
+        df_areas = self.preprocess_area_names(df_areas)
+
+        for i, group_name in enumerate(df[group_column]):
+            processed_group_name = self.preprocess_group_name(group_name)
+            best_match, admin_level = self.match_group_to_area(processed_group_name, df_areas)
+            df.at[i, 'territory'] = best_match
+            df.at[i, 'admin_level'] = admin_level
+        #df = AreaMatcher.run(self, df, osm_id, tags, date)
+
         df[text_column] = df[text_column].str.replace('\n', ' ')
+        df[text_column] = df[text_column].apply(str)
         df_obj = OtherGeoObjects.run(self.osm_city_name, df, text_column)
         street_names = Streets.run(self.osm_city_name, self.osm_city_level)
 
@@ -1037,9 +1164,11 @@ class Geocoder:
         gdf = pd.concat([gdf, df_obj], ignore_index=True)
         gdf['geo_obj_tag'] = gdf['geo_obj_tag'].apply(Geocoder.assign_street)
 
-        # # Add a new 'level' column using the get_level function
-        # gdf2["level"] = gdf2.progress_apply(self.get_level, axis=1)
-        # gdf2 = self.set_global_repr_point(gdf2)
+            # gdf2 = self.merge_to_initial_df(gdf, initial_df)
+
+            # # Add a new 'level' column using the get_level function
+            # gdf2["level"] = gdf2.progress_apply(self.get_level, axis=1)
+            # gdf2 = self.set_global_repr_point(gdf2)
 
         return gdf
 

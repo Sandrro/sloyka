@@ -5,6 +5,7 @@ from .data_getter import GeoDataGetter, Streets, VKParser
 from .semantic_graph import Semgraph
 from .ner_parklike import NER_parklike
 from .city_services_extract import City_services
+from .area_matcher import AreaMatcher
 from .emotionclass import EmotionRecognizer
 
 __all__ = [
@@ -17,5 +18,6 @@ __all__ = [
     "NER_parklike",
     "VKParser",
     "City_services",
+    "AreaMatcher",
     "EmotionRecognizer"
 ]
