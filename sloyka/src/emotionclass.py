@@ -2,9 +2,7 @@
 This module contains the EmotionClassifiers class, which is designed to categorise input texts into emotion categories.
 It uses a Huggingface transformer model trained on Bert_Large by default.
 The EmotionClassifiers class has the following method:
-
 @method:recognize_emotion: Adding an emotion category.
-
 @method:recognize_average_emotion_from_multiple_models: Adding an average emotion category or the most likely emotion 
 category using multiple models.
 """
@@ -48,13 +46,17 @@ class EmotionRecognizer:
         ]
 
     def recognize_emotion(self, text):
-        """Return the emotion for a given text."""
+        """
+        Return the emotion for a given text.
+        """
         recognizer = TextRecognizer(model=self.model_name, device=self.device)
         emotion = recognizer.recognize(text, return_single_label=True)
         return emotion
 
     def recognize_average_emotion_from_multiple_models(self, df, text_column, models=None, average=True):
-        """Calculate the prevailing emotion using multiple models for a DataFrame column."""
+        """
+        Calculate the prevailing emotion using multiple models for a DataFrame column.
+        """
         if models is None:
             models = self.default_model_names
         else:
