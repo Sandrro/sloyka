@@ -6,26 +6,18 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-import os
-import sys
-
-sys.path.insert(0, os.path.abspath("..sloyka/src"))
-
 project = 'sloyka'
-copyright = '2024, Aleksandr Antonov, George Kontsevik'
-author = 'Aleksandr Antonov, George Kontsevik'
-release = '0.1.1'
+copyright = '2024, itmo_idu'
+author = 'itmo_idu'
+release = '0.1.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = [
-    "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
-]
+extensions = []
 
 templates_path = ['_templates']
-exclude_patterns = []
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 language = 'ru'
 

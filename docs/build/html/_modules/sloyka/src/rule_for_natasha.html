@@ -1,0 +1,2238 @@
+<!doctype html>
+<html class="no-js" lang="ru" data-content_root="../../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Алфавитный указатель" href="../../../genindex.html" /><link rel="search" title="Поиск" href="../../../search.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>sloyka.src.rule_for_natasha - документация sloyka 0.1.0</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/_static/custom.css" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../index.html"><div class="brand">документация sloyka 0.1.0</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">документация sloyka 0.1.0</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Поиск" name="q" aria-label="Поиск">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about/known-issues.html">Known Issues</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">User:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../user/sloyka.html">sloyka package</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of sloyka package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user/sloyka.src.html">sloyka.src package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <h1>Исходный код sloyka.src.rule_for_natasha</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">yargy</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">rule</span><span class="p">,</span>
+    <span class="n">or_</span><span class="p">,</span> <span class="n">and_</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">yargy.interpretation</span> <span class="kn">import</span> <span class="n">fact</span>
+<span class="kn">from</span> <span class="nn">yargy.predicates</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">eq</span><span class="p">,</span> <span class="n">lte</span><span class="p">,</span> <span class="n">gte</span><span class="p">,</span> <span class="n">gram</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span>
+    <span class="n">length_eq</span><span class="p">,</span>
+    <span class="n">in_</span><span class="p">,</span> <span class="n">in_caseless</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">,</span>
+    <span class="n">normalized</span><span class="p">,</span> <span class="n">caseless</span><span class="p">,</span>
+    <span class="n">is_title</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">yargy.pipelines</span> <span class="kn">import</span> <span class="n">morph_pipeline</span>
+<span class="kn">from</span> <span class="nn">yargy.tokenizer</span> <span class="kn">import</span> <span class="n">QUOTES</span>
+
+
+<span class="n">Index</span> <span class="o">=</span> <span class="n">fact</span><span class="p">(</span>
+    <span class="s1">&#39;Index&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">Region</span> <span class="o">=</span> <span class="n">fact</span><span class="p">(</span>
+    <span class="s1">&#39;Region&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">Raion</span> <span class="o">=</span> <span class="n">fact</span><span class="p">(</span>
+    <span class="s1">&#39;Raion&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">Settlement</span> <span class="o">=</span> <span class="n">fact</span><span class="p">(</span>
+    <span class="s1">&#39;Settlement&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">Street</span> <span class="o">=</span> <span class="n">fact</span><span class="p">(</span>
+    <span class="s1">&#39;Street&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">Building</span> <span class="o">=</span> <span class="n">fact</span><span class="p">(</span>
+    <span class="s1">&#39;Building&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">Room</span> <span class="o">=</span> <span class="n">fact</span><span class="p">(</span>
+    <span class="s1">&#39;Room&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">AddrPart</span> <span class="o">=</span> <span class="n">fact</span><span class="p">(</span>
+    <span class="s1">&#39;AddrPart&#39;</span><span class="p">,</span>
+    <span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="value">
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.rule_for_natasha.value">[документация]</a>
+<span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">field</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">field</span></div>
+
+
+
+<div class="viewcode-block" id="Index">
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.rule_for_natasha.Index">[документация]</a>
+<span class="k">class</span> <span class="nc">Index</span><span class="p">(</span><span class="n">Index</span><span class="p">):</span>
+    <span class="nb">type</span> <span class="o">=</span> <span class="s1">&#39;индекс&#39;</span></div>
+
+
+
+
+
+<div class="viewcode-block" id="Region">
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.rule_for_natasha.Region">[документация]</a>
+<span class="k">class</span> <span class="nc">Region</span><span class="p">(</span><span class="n">Region</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Raion">
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.rule_for_natasha.Raion">[документация]</a>
+<span class="k">class</span> <span class="nc">Raion</span><span class="p">(</span><span class="n">Raion</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Settlement">
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.rule_for_natasha.Settlement">[документация]</a>
+<span class="k">class</span> <span class="nc">Settlement</span><span class="p">(</span><span class="n">Settlement</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Street">
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.rule_for_natasha.Street">[документация]</a>
+<span class="k">class</span> <span class="nc">Street</span><span class="p">(</span><span class="n">Settlement</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Building">
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.rule_for_natasha.Building">[документация]</a>
+<span class="k">class</span> <span class="nc">Building</span><span class="p">(</span><span class="n">Building</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Room">
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.rule_for_natasha.Room">[документация]</a>
+<span class="k">class</span> <span class="nc">Room</span><span class="p">(</span><span class="n">Room</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="s1">&#39;number&#39;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="AddrPart">
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.rule_for_natasha.AddrPart">[документация]</a>
+<span class="k">class</span> <span class="nc">AddrPart</span><span class="p">(</span><span class="n">AddrPart</span><span class="p">):</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">obj</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">natasha</span> <span class="kn">import</span> <span class="n">obj</span>
+
+        <span class="n">part</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">AddrPart</span><span class="p">(</span><span class="n">part</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">part</span><span class="o">.</span><span class="n">type</span><span class="p">)</span></div>
+
+
+
+<span class="n">DASH</span> <span class="o">=</span> <span class="n">eq</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">DOT</span> <span class="o">=</span> <span class="n">eq</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+<span class="n">ADJF</span> <span class="o">=</span> <span class="n">gram</span><span class="p">(</span><span class="s1">&#39;ADJF&#39;</span><span class="p">)</span>
+<span class="n">NOUN</span> <span class="o">=</span> <span class="n">gram</span><span class="p">(</span><span class="s1">&#39;NOUN&#39;</span><span class="p">)</span>
+<span class="n">INT</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s1">&#39;INT&#39;</span><span class="p">)</span>
+<span class="n">TITLE</span> <span class="o">=</span> <span class="n">is_title</span><span class="p">()</span>
+
+<span class="n">ANUM</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">INT</span><span class="p">,</span>
+    <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+    <span class="n">in_caseless</span><span class="p">({</span>
+        <span class="s1">&#39;я&#39;</span><span class="p">,</span> <span class="s1">&#39;й&#39;</span><span class="p">,</span> <span class="s1">&#39;е&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ое&#39;</span><span class="p">,</span> <span class="s1">&#39;ая&#39;</span><span class="p">,</span> <span class="s1">&#39;ий&#39;</span><span class="p">,</span> <span class="s1">&#39;ой&#39;</span>
+    <span class="p">})</span>
+<span class="p">)</span>
+
+
+
+
+<span class="c1">#############</span>
+<span class="c1">#</span>
+<span class="c1">#  FED OKRUGA</span>
+<span class="c1">#</span>
+<span class="c1">############</span>
+
+
+<span class="n">FED_OKRUG_NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">dictionary</span><span class="p">({</span>
+            <span class="s1">&#39;дальневосточный&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;приволжский&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;сибирский&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;уральский&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;центральный&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;южный&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;северо&#39;</span><span class="p">),</span>
+        <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+        <span class="n">dictionary</span><span class="p">({</span>
+            <span class="s1">&#39;западный&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;кавказский&#39;</span>
+        <span class="p">})</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">FED_OKRUG_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;федеральный&#39;</span><span class="p">),</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;округ&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;фо&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;федеральный округ&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">FED_OKRUG</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">FED_OKRUG_WORDS</span><span class="p">,</span>
+    <span class="n">FED_OKRUG_NAME</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span>
+<span class="p">)</span>
+
+
+<span class="c1">#########</span>
+<span class="c1">#</span>
+<span class="c1">#   RESPUBLIKA</span>
+<span class="c1">#</span>
+<span class="c1">############</span>
+
+
+<span class="n">RESPUBLIKA_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;респ&#39;</span><span class="p">),</span> <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;республика&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;республика&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">RESPUBLIKA_ADJF</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">dictionary</span><span class="p">({</span>
+            <span class="s1">&#39;удмуртский&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;чеченский&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;чувашский&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;карачаево&#39;</span><span class="p">),</span>
+        <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;черкесский&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;кабардино&#39;</span><span class="p">),</span>
+        <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;балкарский&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">RESPUBLIKA_NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">dictionary</span><span class="p">({</span>
+            <span class="s1">&#39;адыгея&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;алтай&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;башкортостан&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;бурятия&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;дагестан&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ингушетия&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;калмыкия&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;карелия&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;коми&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;крым&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;мордовия&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;татарстан&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;тыва&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;удмуртия&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;хакасия&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;саха&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;якутия&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;марий&#39;</span><span class="p">),</span> <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;эл&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;северный&#39;</span><span class="p">),</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;осетия&#39;</span><span class="p">),</span>
+        <span class="n">rule</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;алания&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">RESPUBLIKA_ABBR</span> <span class="o">=</span> <span class="n">in_caseless</span><span class="p">({</span>
+    <span class="s1">&#39;кбр&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;кчр&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;рт&#39;</span><span class="p">,</span>  <span class="c1"># Татарстан</span>
+<span class="p">})</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">name</span>  <span class="c1"># TODO type</span>
+<span class="p">)</span>
+
+<span class="n">RESPUBLIKA</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">RESPUBLIKA_ADJF</span><span class="p">,</span> <span class="n">RESPUBLIKA_WORDS</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">RESPUBLIKA_WORDS</span><span class="p">,</span> <span class="n">RESPUBLIKA_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">RESPUBLIKA_ABBR</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span>
+<span class="p">)</span>
+
+
+<span class="c1">##########</span>
+<span class="c1">#</span>
+<span class="c1">#   KRAI</span>
+<span class="c1">#</span>
+<span class="c1">########</span>
+
+
+<span class="n">KRAI_WORDS</span> <span class="o">=</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;край&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;край&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">KRAI_NAME</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">({</span>
+    <span class="s1">&#39;алтайский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;забайкальский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;камчатский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;краснодарский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;красноярский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;пермский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;приморский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ставропольский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;хабаровский&#39;</span><span class="p">,</span>
+<span class="p">})</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">KRAI</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">KRAI_NAME</span><span class="p">,</span> <span class="n">KRAI_WORDS</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span>
+<span class="p">)</span>
+
+
+<span class="c1">############</span>
+<span class="c1">#</span>
+<span class="c1">#    OBLAST</span>
+<span class="c1">#</span>
+<span class="c1">############</span>
+
+
+<span class="n">OBLAST_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;область&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;обл&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;область&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">OBLAST_NAME</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">({</span>
+    <span class="s1">&#39;амурский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;архангельский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;астраханский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;белгородский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;брянский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;владимирский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;волгоградский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;вологодский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;воронежский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;горьковский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ивановский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ивановский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;иркутский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;калининградский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;калужский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;камчатский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;кемеровский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;кировский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;костромской&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;курганский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;курский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ленинградский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;липецкий&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;магаданский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;московский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;мурманский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;нижегородский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новгородский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новосибирский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;омский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;оренбургский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;орловский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;пензенский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;пермский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;псковский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ростовский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;рязанский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;самарский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;саратовский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;сахалинский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;свердловский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;смоленский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;тамбовский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;тверской&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;томский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;тульский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;тюменский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ульяновский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;челябинский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;читинский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ярославский&#39;</span><span class="p">,</span>
+<span class="p">})</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">OBLAST</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">OBLAST_NAME</span><span class="p">,</span>
+    <span class="n">OBLAST_WORDS</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span>
+<span class="p">)</span>
+
+
+<span class="c1">##########</span>
+<span class="c1">#</span>
+<span class="c1">#    AUTO OKRUG</span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+
+
+<span class="n">AUTO_OKRUG_NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">dictionary</span><span class="p">({</span>
+            <span class="s1">&#39;чукотский&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;эвенкийский&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;корякский&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ненецкий&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;таймырский&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;агинский&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;бурятский&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;коми&#39;</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;пермяцкий&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;долгано&#39;</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;ненецкий&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;ямало&#39;</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;ненецкий&#39;</span><span class="p">)),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">AUTO_OKRUG_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;автономный&#39;</span><span class="p">),</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;округ&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;ао&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;автономный округ&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">HANTI</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;ханты&#39;</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;мансийский&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">BURAT</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;усть&#39;</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;ордынский&#39;</span><span class="p">),</span>
+    <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;бурятский&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">AUTO_OKRUG</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">AUTO_OKRUG_NAME</span><span class="p">,</span> <span class="n">AUTO_OKRUG_WORDS</span><span class="p">),</span>
+    <span class="n">or_</span><span class="p">(</span>
+        <span class="n">rule</span><span class="p">(</span>
+            <span class="n">HANTI</span><span class="p">,</span>
+            <span class="n">AUTO_OKRUG_WORDS</span><span class="p">,</span>
+            <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;югра&#39;</span><span class="p">)</span>
+        <span class="p">),</span>
+        <span class="n">rule</span><span class="p">(</span>
+            <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;хмао&#39;</span><span class="p">),</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span><span class="n">Region</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+        <span class="n">rule</span><span class="p">(</span>
+            <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;хмао&#39;</span><span class="p">),</span>
+            <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;югра&#39;</span><span class="p">)</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span><span class="n">Region</span><span class="o">.</span><span class="n">name</span><span class="p">),</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">BURAT</span><span class="p">,</span>
+        <span class="n">AUTO_OKRUG_WORDS</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Region</span>
+<span class="p">)</span>
+
+
+<span class="c1">##########</span>
+<span class="c1">#</span>
+<span class="c1">#  RAION</span>
+<span class="c1">#</span>
+<span class="c1">###########</span>
+
+
+<span class="n">RAION_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;р&#39;</span><span class="p">),</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">in_caseless</span><span class="p">({</span><span class="s1">&#39;он&#39;</span><span class="p">,</span> <span class="s1">&#39;н&#39;</span><span class="p">})),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;район&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Raion</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;район&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">RAION_SIMPLE_NAME</span> <span class="o">=</span> <span class="n">and_</span><span class="p">(</span>
+    <span class="n">ADJF</span><span class="p">,</span>
+    <span class="n">TITLE</span>
+<span class="p">)</span>
+
+<span class="n">RAION_MODIFIERS</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">in_caseless</span><span class="p">({</span>
+        <span class="s1">&#39;усть&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;северо&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;александрово&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;гаврилово&#39;</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+    <span class="n">TITLE</span>
+<span class="p">)</span>
+
+<span class="n">RAION_COMPLEX_NAME</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">RAION_MODIFIERS</span><span class="p">,</span>
+    <span class="n">RAION_SIMPLE_NAME</span>
+<span class="p">)</span>
+
+<span class="n">RAION_NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">RAION_SIMPLE_NAME</span><span class="p">),</span>
+    <span class="n">RAION_COMPLEX_NAME</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Raion</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">RAION</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">RAION_NAME</span><span class="p">,</span>
+    <span class="n">RAION_WORDS</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Raion</span>
+<span class="p">)</span>
+
+
+<span class="c1">###########</span>
+<span class="c1">#</span>
+<span class="c1">#   GOROD</span>
+<span class="c1">#</span>
+<span class="c1">###########</span>
+
+
+<span class="c1"># Top 200 Russia cities, cover 75% of population</span>
+
+<span class="n">COMPLEX</span> <span class="o">=</span> <span class="n">morph_pipeline</span><span class="p">([</span>
+    <span class="s1">&#39;санкт-петербург&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;нижний новгород&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;н.новгород&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ростов-на-дону&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;набережные челны&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;улан-удэ&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;нижний тагил&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;комсомольск-на-амуре&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;йошкар-ола&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;старый оскол&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;великий новгород&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;южно-сахалинск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;петропавловск-камчатский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;каменск-уральский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;орехово-зуево&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;сергиев посад&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новый уренгой&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ленинск-кузнецкий&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;великие луки&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;каменск-шахтинский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;усть-илимск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;усолье-сибирский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;кирово-чепецк&#39;</span><span class="p">,</span>
+<span class="p">])</span>
+
+<span class="n">SIMPLE</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">({</span>
+    <span class="s1">&#39;москва&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новосибирск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;екатеринбург&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;казань&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;самара&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;омск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;челябинск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;уфа&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;волгоград&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;пермь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;красноярск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;воронеж&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;саратов&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;краснодар&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;тольятти&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;барнаул&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ижевск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ульяновск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;владивосток&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ярославль&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;иркутск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;тюмень&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;махачкала&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;хабаровск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;оренбург&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новокузнецк&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;кемерово&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;рязань&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;томск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;астрахань&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;пенза&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;липецк&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;тула&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;киров&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;чебоксары&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;калининград&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;брянск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;курск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;иваново&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;магнитогорск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;тверь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ставрополь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;симферополь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;белгород&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;архангельск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;владимир&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;севастополь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;сочи&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;курган&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;смоленск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;калуга&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;чита&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;орёл&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;волжский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;череповец&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;владикавказ&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;мурманск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;сургут&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;вологда&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;саранск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;тамбов&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;стерлитамак&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;грозный&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;якутск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;кострома&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;петрозаводск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;таганрог&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;нижневартовск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;братск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новороссийск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;дзержинск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;шахта&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;нальчик&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;орск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;сыктывкар&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;нижнекамск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ангарск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;балашиха&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;благовещенск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;прокопьевск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;химки&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;псков&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;бийск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;энгельс&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;рыбинск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;балаково&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;северодвинск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;армавир&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;подольск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;королёв&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;сызрань&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;норильск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;златоуст&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;мытищи&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;люберцы&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;волгодонск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новочеркасск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;абакан&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;находка&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;уссурийск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;березники&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;салават&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;электросталь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;миасс&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;первоуральск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;рубцовск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;альметьевск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ковровый&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;коломна&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;керчь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;майкоп&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;пятигорск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;одинцово&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;копейск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;хасавюрт&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новомосковск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;кисловодск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;серпухов&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новочебоксарск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;нефтеюганск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;димитровград&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;нефтекамск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;черкесск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;дербент&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;камышин&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;невинномысск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;красногорск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;мур&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;батайск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новошахтинск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ноябрьск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;кызыл&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;октябрьский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ачинск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;северск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новокуйбышевск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;елец&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;евпатория&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;арзамас&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;обнинск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;каспийск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;элиста&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;пушкино&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;жуковский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;междуреченск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;сарапул&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ессентуки&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;воткинск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ногинск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;тобольск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ухта&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;серов&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;бердск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;мичуринск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;киселёвск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новотроицк&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;зеленодольск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;соликамск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;раменский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;домодедово&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;магадан&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;глазов&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;железногорск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;канск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;назрань&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;гатчина&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;саров&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;новоуральск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;воскресенск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;долгопрудный&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;бугульма&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;кузнецк&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;губкин&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;кинешма&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ейск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;реутов&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;железногорск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;чайковский&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;азов&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;бузулук&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;озёрск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;балашов&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;юрга&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;кропоткин&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;клин&#39;</span>
+<span class="p">})</span>
+
+<span class="n">GOROD_ABBR</span> <span class="o">=</span> <span class="n">in_caseless</span><span class="p">({</span>
+    <span class="s1">&#39;спб&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;мск&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;нск&#39;</span>   <span class="c1"># Новосибирск</span>
+<span class="p">})</span>
+
+<span class="n">GOROD_NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">SIMPLE</span><span class="p">),</span>
+    <span class="n">COMPLEX</span><span class="p">,</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">GOROD_ABBR</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">SIMPLE</span> <span class="o">=</span> <span class="n">and_</span><span class="p">(</span>
+    <span class="n">TITLE</span><span class="p">,</span>
+    <span class="n">or_</span><span class="p">(</span>
+        <span class="n">NOUN</span><span class="p">,</span>
+        <span class="n">ADJF</span>  <span class="c1"># Железнодорожный, Юбилейный</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">COMPLEX</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">SIMPLE</span><span class="p">,</span>
+        <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+        <span class="n">SIMPLE</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">TITLE</span><span class="p">,</span>
+        <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;на&#39;</span><span class="p">),</span>
+        <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+        <span class="n">TITLE</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">SIMPLE</span><span class="p">),</span>
+    <span class="n">COMPLEX</span>
+<span class="p">)</span>
+
+<span class="n">MAYBE_GOROD_NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">NAME</span><span class="p">,</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">NAME</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">INT</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">GOROD_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;город&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;г&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;город&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">GOROD</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">GOROD_WORDS</span><span class="p">,</span> <span class="n">MAYBE_GOROD_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">GOROD_WORDS</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+        <span class="n">GOROD_NAME</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span>
+<span class="p">)</span>
+
+
+<span class="c1">##########</span>
+<span class="c1">#</span>
+<span class="c1">#  SETTLEMENT NAME</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">ADJS</span> <span class="o">=</span> <span class="n">gram</span><span class="p">(</span><span class="s1">&#39;ADJS&#39;</span><span class="p">)</span>
+<span class="n">SIMPLE</span> <span class="o">=</span> <span class="n">and_</span><span class="p">(</span>
+    <span class="n">or_</span><span class="p">(</span>
+        <span class="n">NOUN</span><span class="p">,</span>  <span class="c1"># Александровка, Заречье, Горки</span>
+        <span class="n">ADJS</span><span class="p">,</span>  <span class="c1"># Кузнецово</span>
+        <span class="n">ADJF</span><span class="p">,</span>  <span class="c1"># Никольское, Новая, Марьино</span>
+    <span class="p">),</span>
+    <span class="n">TITLE</span>
+<span class="p">)</span>
+
+<span class="n">COMPLEX</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">SIMPLE</span><span class="p">,</span>
+    <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+    <span class="n">SIMPLE</span>
+<span class="p">)</span>
+
+<span class="n">NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">SIMPLE</span><span class="p">),</span>
+    <span class="n">COMPLEX</span>
+<span class="p">)</span>
+
+<span class="n">SETTLEMENT_NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">NAME</span><span class="p">,</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">NAME</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="n">INT</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">NAME</span><span class="p">,</span> <span class="n">ANUM</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="c1">###########</span>
+<span class="c1">#</span>
+<span class="c1">#   SELO</span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+
+
+<span class="n">SELO_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;с&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;село&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;село&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">SELO_NAME</span> <span class="o">=</span> <span class="n">SETTLEMENT_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">SELO</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">SELO_WORDS</span><span class="p">,</span>
+    <span class="n">SELO_NAME</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span>
+<span class="p">)</span>
+
+
+<span class="c1">###########</span>
+<span class="c1">#</span>
+<span class="c1">#   DEREVNYA</span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+
+
+<span class="n">DEREVNYA_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;д&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;деревня&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;деревня&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">DEREVNYA_NAME</span> <span class="o">=</span> <span class="n">SETTLEMENT_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">DEREVNYA</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">DEREVNYA_WORDS</span><span class="p">,</span>
+    <span class="n">DEREVNYA_NAME</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span>
+<span class="p">)</span>
+
+
+<span class="c1">###########</span>
+<span class="c1">#</span>
+<span class="c1">#   POSELOK</span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+
+
+<span class="n">POSELOK_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">in_caseless</span><span class="p">({</span><span class="s1">&#39;п&#39;</span><span class="p">,</span> <span class="s1">&#39;пос&#39;</span><span class="p">}),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;посёлок&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;р&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;п&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;рабочий&#39;</span><span class="p">),</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;посёлок&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;пгт&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;п&#39;</span><span class="p">),</span> <span class="n">DOT</span><span class="p">,</span> <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;г&#39;</span><span class="p">),</span> <span class="n">DOT</span><span class="p">,</span> <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;т&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;посёлок&#39;</span><span class="p">),</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;городского&#39;</span><span class="p">),</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;типа&#39;</span><span class="p">),</span>
+    <span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;посёлок&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">POSELOK_NAME</span> <span class="o">=</span> <span class="n">SETTLEMENT_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">POSELOK</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">POSELOK_WORDS</span><span class="p">,</span>
+    <span class="n">POSELOK_NAME</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Settlement</span>
+<span class="p">)</span>
+
+
+<span class="c1">##############</span>
+<span class="c1">#</span>
+<span class="c1">#   ADDR PERSON</span>
+<span class="c1">#</span>
+<span class="c1">############</span>
+
+
+<span class="n">ABBR</span> <span class="o">=</span> <span class="n">and_</span><span class="p">(</span>
+    <span class="n">length_eq</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">is_title</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">PART</span> <span class="o">=</span> <span class="n">and_</span><span class="p">(</span>
+    <span class="n">TITLE</span><span class="p">,</span>
+    <span class="n">or_</span><span class="p">(</span>
+        <span class="n">gram</span><span class="p">(</span><span class="s1">&#39;Name&#39;</span><span class="p">),</span>
+        <span class="n">gram</span><span class="p">(</span><span class="s1">&#39;Surn&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">MAYBE_FIO</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">TITLE</span><span class="p">,</span> <span class="n">PART</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">PART</span><span class="p">,</span> <span class="n">TITLE</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">ABBR</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">TITLE</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">ABBR</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">ABBR</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">TITLE</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">TITLE</span><span class="p">,</span> <span class="n">ABBR</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">ABBR</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">POSITION_WORDS_</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">dictionary</span><span class="p">({</span>
+            <span class="s1">&#39;мичман&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;геолог&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;подводник&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;краевед&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;снайпер&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;штурман&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;бригадир&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;учитель&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;политрук&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;военком&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ветеран&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;историк&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;пулемётчик&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;авиаконструктор&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;адмирал&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;академик&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;актер&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;актриса&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;архитектор&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;атаман&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;врач&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;воевода&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;генерал&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;губернатор&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;хирург&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;декабрист&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;разведчик&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;граф&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;десантник&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;конструктор&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;скульптор&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;писатель&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;поэт&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;капитан&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;князь&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;комиссар&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;композитор&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;космонавт&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;купец&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;лейтенант&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;лётчик&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;майор&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;маршал&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;матрос&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;подполковник&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;полковник&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;профессор&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;сержант&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;старшина&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;танкист&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;художник&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;герой&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;княгиня&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;строитель&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;дружинник&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;диктор&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;прапорщик&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;артиллерист&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;графиня&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;большевик&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;патриарх&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;сварщик&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;офицер&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;рыбак&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;брат&#39;</span><span class="p">,</span>
+        <span class="p">})</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;генерал&#39;</span><span class="p">),</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;армия&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;герой&#39;</span><span class="p">),</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;россия&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;герой&#39;</span><span class="p">),</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;российский&#39;</span><span class="p">),</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;федерация&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;герой&#39;</span><span class="p">),</span>
+        <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;советский&#39;</span><span class="p">),</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;союз&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">ABBR_POSITION_WORDS</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">in_caseless</span><span class="p">({</span>
+        <span class="s1">&#39;адм&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ак&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;акад&#39;</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">POSITION_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">POSITION_WORDS_</span><span class="p">,</span>
+    <span class="n">ABBR_POSITION_WORDS</span>
+<span class="p">)</span>
+
+<span class="n">MAYBE_PERSON</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">MAYBE_FIO</span><span class="p">,</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">POSITION_WORDS</span><span class="p">,</span> <span class="n">MAYBE_FIO</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">POSITION_WORDS</span><span class="p">,</span> <span class="n">TITLE</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="c1">###########</span>
+<span class="c1">#</span>
+<span class="c1">#   IMENI</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">IMENI_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;им&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;имени&#39;</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="n">IMENI</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">IMENI_WORDS</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+        <span class="n">MAYBE_PERSON</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">IMENI_WORDS</span><span class="p">,</span>
+        <span class="n">TITLE</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">##########</span>
+<span class="c1">#</span>
+<span class="c1">#   LET</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">LET_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;лет&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;летия&#39;</span><span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">LET_NAME</span> <span class="o">=</span> <span class="n">in_caseless</span><span class="p">({</span>
+    <span class="s1">&#39;влксм&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ссср&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;алтая&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;башкирии&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;бурятии&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;дагестана&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;калмыкии&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;колхоза&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;комсомола&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;космонавтики&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;москвы&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;октября&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;пионерии&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;победы&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;приморья&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;района&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;совхоза&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;совхозу&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;татарстана&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;тувы&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;удмуртии&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;улуса&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;хакасии&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;целины&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;чувашии&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;якутии&#39;</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="n">LET</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">INT</span><span class="p">,</span>
+    <span class="n">LET_WORDS</span><span class="p">,</span>
+    <span class="n">LET_NAME</span>
+<span class="p">)</span>
+
+
+<span class="c1">##########</span>
+<span class="c1">#</span>
+<span class="c1">#    ADDR DATE</span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+
+
+<span class="n">MONTH_WORDS</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">({</span>
+    <span class="s1">&#39;январь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;февраль&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;март&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;апрель&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;май&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;июнь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;июль&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;август&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;сентябрь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;октябрь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ноябрь&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;декабрь&#39;</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="n">DAY</span> <span class="o">=</span> <span class="n">and_</span><span class="p">(</span>
+    <span class="n">INT</span><span class="p">,</span>
+    <span class="n">gte</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">lte</span><span class="p">(</span><span class="mi">31</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">YEAR</span> <span class="o">=</span> <span class="n">and_</span><span class="p">(</span>
+    <span class="n">INT</span><span class="p">,</span>
+    <span class="n">gte</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="n">lte</span><span class="p">(</span><span class="mi">2100</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">YEAR_WORDS</span> <span class="o">=</span> <span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;год&#39;</span><span class="p">)</span>
+
+<span class="n">DATE</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">DAY</span><span class="p">,</span> <span class="n">MONTH_WORDS</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">YEAR</span><span class="p">,</span> <span class="n">YEAR_WORDS</span><span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="c1">#########</span>
+<span class="c1">#</span>
+<span class="c1">#   MODIFIER</span>
+<span class="c1">#</span>
+<span class="c1">############</span>
+
+
+<span class="n">MODIFIER_WORDS_</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">dictionary</span><span class="p">({</span>
+        <span class="s1">&#39;большой&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;малый&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;средний&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;верхний&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;центральный&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;нижний&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;северный&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;дальний&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;первый&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;второй&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;старый&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;новый&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;красный&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;лесной&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;тихий&#39;</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">ABBR_MODIFIER_WORDS</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">in_caseless</span><span class="p">({</span>
+        <span class="s1">&#39;б&#39;</span><span class="p">,</span> <span class="s1">&#39;м&#39;</span><span class="p">,</span> <span class="s1">&#39;н&#39;</span>
+    <span class="p">}),</span>
+    <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">SHORT_MODIFIER_WORDS</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">in_caseless</span><span class="p">({</span>
+        <span class="s1">&#39;больше&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;мало&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;средне&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;верх&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;верхне&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;центрально&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;нижне&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;северо&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;дальне&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;восточно&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;западно&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;перво&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;второ&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;старо&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;ново&#39;</span><span class="p">,</span>
+
+        <span class="s1">&#39;красно&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;тихо&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;горно&#39;</span><span class="p">,</span>
+    <span class="p">}),</span>
+    <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">MODIFIER_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">MODIFIER_WORDS_</span><span class="p">,</span>
+    <span class="n">ABBR_MODIFIER_WORDS</span><span class="p">,</span>
+    <span class="n">SHORT_MODIFIER_WORDS</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<span class="c1">##########</span>
+<span class="c1">#</span>
+<span class="c1">#   ADDR NAME</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">ROD</span> <span class="o">=</span> <span class="n">gram</span><span class="p">(</span><span class="s1">&#39;gent&#39;</span><span class="p">)</span>
+
+<span class="n">SIMPLE</span> <span class="o">=</span> <span class="n">and_</span><span class="p">(</span>
+    <span class="n">or_</span><span class="p">(</span>
+        <span class="n">ADJF</span><span class="p">,</span>  <span class="c1"># Школьная</span>
+        <span class="n">and_</span><span class="p">(</span><span class="n">NOUN</span><span class="p">,</span> <span class="n">ROD</span><span class="p">),</span>  <span class="c1"># Ленина, Победы</span>
+    <span class="p">),</span>
+    <span class="n">TITLE</span>
+<span class="p">)</span>
+
+<span class="n">COMPLEX</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">and_</span><span class="p">(</span><span class="n">ADJF</span><span class="p">,</span> <span class="n">TITLE</span><span class="p">),</span>
+        <span class="n">NOUN</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">TITLE</span><span class="p">,</span>
+        <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+        <span class="n">TITLE</span>
+    <span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># TODO</span>
+<span class="n">EXCEPTION</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">({</span>
+    <span class="s1">&#39;арбат&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;варварка&#39;</span>
+<span class="p">})</span>
+
+<span class="n">MAYBE_NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">SIMPLE</span><span class="p">),</span>
+    <span class="n">COMPLEX</span><span class="p">,</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">EXCEPTION</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">MAYBE_NAME</span><span class="p">,</span>
+    <span class="n">LET</span><span class="p">,</span>
+    <span class="n">DATE</span><span class="p">,</span>
+    <span class="n">IMENI</span>
+<span class="p">)</span>
+
+<span class="n">NAME</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">MODIFIER_WORDS</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+    <span class="n">NAME</span>
+<span class="p">)</span>
+
+<span class="n">ADDR_CRF</span> <span class="o">=</span> <span class="n">tag</span><span class="p">(</span><span class="s1">&#39;I&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">repeatable</span><span class="p">()</span>
+
+<span class="n">NAME</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">NAME</span><span class="p">,</span>
+    <span class="n">ANUM</span><span class="p">,</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">NAME</span><span class="p">,</span> <span class="n">ANUM</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">ANUM</span><span class="p">,</span> <span class="n">NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">INT</span><span class="p">,</span> <span class="n">DASH</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span> <span class="n">NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">NAME</span><span class="p">,</span> <span class="n">DASH</span><span class="p">,</span> <span class="n">INT</span><span class="p">),</span>
+    <span class="n">ADDR_CRF</span>
+<span class="p">)</span>
+
+<span class="n">ADDR_NAME</span> <span class="o">=</span> <span class="n">NAME</span>
+
+
+<span class="c1">########</span>
+<span class="c1">#</span>
+<span class="c1">#    STREET</span>
+<span class="c1">#</span>
+<span class="c1">#########</span>
+
+
+<span class="n">STREET_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;улица&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;ул&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;улица&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">STREET_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">STREET</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">STREET_WORDS</span><span class="p">,</span> <span class="n">STREET_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">STREET_NAME</span><span class="p">,</span> <span class="n">STREET_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+
+<span class="c1">##########</span>
+<span class="c1">#</span>
+<span class="c1">#    PROSPEKT</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">PROSPEKT_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">in_caseless</span><span class="p">({</span><span class="s1">&#39;пр&#39;</span><span class="p">,</span> <span class="s1">&#39;просп&#39;</span><span class="p">}),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;пр&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+        <span class="n">in_caseless</span><span class="p">({</span><span class="s1">&#39;кт&#39;</span><span class="p">,</span> <span class="s1">&#39;т&#39;</span><span class="p">}),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;проспект&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;проспект&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">PROSPEKT_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">PROSPEKT</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">PROSPEKT_WORDS</span><span class="p">,</span> <span class="n">PROSPEKT_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">PROSPEKT_NAME</span><span class="p">,</span> <span class="n">PROSPEKT_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+
+<span class="c1">############</span>
+<span class="c1">#</span>
+<span class="c1">#    PROEZD</span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+
+
+<span class="n">PROEZD_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;пр&#39;</span><span class="p">),</span> <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;пр&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+        <span class="n">in_caseless</span><span class="p">({</span><span class="s1">&#39;зд&#39;</span><span class="p">,</span> <span class="s1">&#39;д&#39;</span><span class="p">}),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;проезд&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;проезд&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">PROEZD_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">PROEZD</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">PROEZD_WORDS</span><span class="p">,</span> <span class="n">PROEZD_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">PROEZD_NAME</span><span class="p">,</span> <span class="n">PROEZD_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+
+<span class="c1">###########</span>
+<span class="c1">#</span>
+<span class="c1">#   PEREULOK</span>
+<span class="c1">#</span>
+<span class="c1">##############</span>
+
+
+<span class="n">PEREULOK_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;п&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;пер&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;переулок&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;переулок&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">PEREULOK_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">PEREULOK</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">PEREULOK_WORDS</span><span class="p">,</span> <span class="n">PEREULOK_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">PEREULOK_NAME</span><span class="p">,</span> <span class="n">PEREULOK_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+
+<span class="c1">########</span>
+<span class="c1">#</span>
+<span class="c1">#  PLOSHAD</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">PLOSHAD_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;пл&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;площадь&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;площадь&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">PLOSHAD_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">PLOSHAD</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">PLOSHAD_WORDS</span><span class="p">,</span> <span class="n">PLOSHAD_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">PLOSHAD_NAME</span><span class="p">,</span> <span class="n">PLOSHAD_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+
+<span class="c1">############</span>
+<span class="c1">#</span>
+<span class="c1">#   SHOSSE</span>
+<span class="c1">#</span>
+<span class="c1">###########</span>
+
+
+<span class="c1"># TODO</span>
+<span class="c1"># Покровское 17 км.</span>
+<span class="c1"># Сергеляхское 13 км</span>
+<span class="c1"># Сергеляхское 14 км.</span>
+
+
+<span class="n">SHOSSE_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;ш&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;шоссе&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;шоссе&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">SHOSSE_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">SHOSSE</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">SHOSSE_WORDS</span><span class="p">,</span> <span class="n">SHOSSE_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">SHOSSE_NAME</span><span class="p">,</span> <span class="n">SHOSSE_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+
+<span class="c1">########</span>
+<span class="c1">#</span>
+<span class="c1">#  NABEREG</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">NABEREG_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;наб&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;набережная&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;набережная&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">NABEREG_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">NABEREG</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">NABEREG_WORDS</span><span class="p">,</span> <span class="n">NABEREG_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">NABEREG_NAME</span><span class="p">,</span> <span class="n">NABEREG_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+<span class="c1">########</span>
+<span class="c1">#</span>
+<span class="c1">#  SAD</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">SAD_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;са&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;сад&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;сад&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">SAD_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">SAD</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">SAD_WORDS</span><span class="p">,</span> <span class="n">SAD_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">SAD_NAME</span><span class="p">,</span> <span class="n">SAD_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+<span class="c1">########</span>
+<span class="c1">#</span>
+<span class="c1">#  PARK</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">PARK_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;пар&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;парк&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;парк&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">PARK_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">PARK</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">PARK_WORDS</span><span class="p">,</span> <span class="n">PARK_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">PARK_NAME</span><span class="p">,</span> <span class="n">PARK_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+<span class="c1">########</span>
+<span class="c1">#</span>
+<span class="c1">#  SQVER</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">SQVER_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;ск&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;сквер&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;сквер&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">SQVER_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">SQVER</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">SQVER_WORDS</span><span class="p">,</span> <span class="n">SQVER_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">SQVER_NAME</span><span class="p">,</span> <span class="n">SQVER_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+<span class="c1">########</span>
+<span class="c1">#</span>
+<span class="c1">#  ROSCHA</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">ROSCHA_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;рощ&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;роща&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;роща&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">ROSCHA_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">ROSCHA</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">ROSCHA_WORDS</span><span class="p">,</span> <span class="n">ROSCHA_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">ROSCHA_NAME</span><span class="p">,</span> <span class="n">ROSCHA_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+<span class="c1">########</span>
+<span class="c1">#</span>
+<span class="c1">#  BULVAR</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">BULVAR_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;б&#39;</span><span class="p">),</span>
+        <span class="s1">&#39;-&#39;</span><span class="p">,</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;р&#39;</span><span class="p">)</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;б&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;бул&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;бульвар&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;бульвар&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">BULVAR_NAME</span> <span class="o">=</span> <span class="n">ADDR_NAME</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span><span class="o">.</span><span class="n">name</span>
+<span class="p">)</span>
+
+<span class="n">BULVAR</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">BULVAR_WORDS</span><span class="p">,</span> <span class="n">BULVAR_NAME</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">BULVAR_NAME</span><span class="p">,</span> <span class="n">BULVAR_WORDS</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Street</span>
+<span class="p">)</span>
+
+
+<span class="c1">##############</span>
+<span class="c1">#</span>
+<span class="c1">#   ADDR VALUE</span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+
+
+<span class="n">LETTER</span> <span class="o">=</span> <span class="n">in_caseless</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="s1">&#39;абвгдежзиклмнопрстуфхшщэюя&#39;</span><span class="p">))</span>
+
+<span class="n">QUOTE</span> <span class="o">=</span> <span class="n">in_</span><span class="p">(</span><span class="n">QUOTES</span><span class="p">)</span>
+
+<span class="n">LETTER</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">LETTER</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">QUOTE</span><span class="p">,</span> <span class="n">LETTER</span><span class="p">,</span> <span class="n">QUOTE</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">VALUE</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">INT</span><span class="p">,</span>
+    <span class="n">LETTER</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+<span class="p">)</span>
+
+<span class="n">SEP</span> <span class="o">=</span> <span class="n">in_</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;/\-&#39;</span><span class="p">)</span>
+
+<span class="n">VALUE</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">VALUE</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">VALUE</span><span class="p">,</span> <span class="n">SEP</span><span class="p">,</span> <span class="n">VALUE</span><span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">VALUE</span><span class="p">,</span> <span class="n">SEP</span><span class="p">,</span> <span class="n">LETTER</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">ADDR_VALUE</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">eq</span><span class="p">(</span><span class="s1">&#39;№&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">optional</span><span class="p">(),</span>
+    <span class="n">VALUE</span>
+<span class="p">)</span>
+
+
+<span class="c1">############</span>
+<span class="c1">#</span>
+<span class="c1">#    DOM</span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+
+
+<span class="n">DOM_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;дом&#39;</span><span class="p">)),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;д&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Building</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;дом&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">DOM_VALUE</span> <span class="o">=</span> <span class="n">ADDR_VALUE</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Building</span><span class="o">.</span><span class="n">number</span>
+<span class="p">)</span>
+
+<span class="n">DOM</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">DOM_WORDS</span><span class="p">,</span>
+    <span class="n">DOM_VALUE</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Building</span>
+<span class="p">)</span>
+
+
+<span class="c1">###########</span>
+<span class="c1">#</span>
+<span class="c1">#  KORPUS</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">KORPUS_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">in_caseless</span><span class="p">({</span><span class="s1">&#39;корп&#39;</span><span class="p">,</span> <span class="s1">&#39;кор&#39;</span><span class="p">}),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;корпус&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Building</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;корпус&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">KORPUS_VALUE</span> <span class="o">=</span> <span class="n">ADDR_VALUE</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Building</span><span class="o">.</span><span class="n">number</span>
+<span class="p">)</span>
+
+<span class="n">KORPUS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">KORPUS_WORDS</span><span class="p">,</span>
+        <span class="n">KORPUS_VALUE</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">KORPUS_VALUE</span><span class="p">,</span>
+        <span class="n">KORPUS_WORDS</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Building</span>
+<span class="p">)</span>
+
+
+<span class="c1">###########</span>
+<span class="c1">#</span>
+<span class="c1">#  STROENIE</span>
+<span class="c1">#</span>
+<span class="c1">##########</span>
+
+
+<span class="n">STROENIE_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;стр&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;строение&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Building</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;строение&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">STROENIE_VALUE</span> <span class="o">=</span> <span class="n">ADDR_VALUE</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Building</span><span class="o">.</span><span class="n">number</span>
+<span class="p">)</span>
+
+<span class="n">STROENIE</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">STROENIE_WORDS</span><span class="p">,</span>
+    <span class="n">STROENIE_VALUE</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Building</span>
+<span class="p">)</span>
+
+
+<span class="c1">###########</span>
+<span class="c1">#</span>
+<span class="c1">#   OFIS</span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+
+
+<span class="n">OFIS_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;оф&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;офис&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Room</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;офис&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">OFIS_VALUE</span> <span class="o">=</span> <span class="n">ADDR_VALUE</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Room</span><span class="o">.</span><span class="n">number</span>
+<span class="p">)</span>
+
+<span class="n">OFIS</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">OFIS_WORDS</span><span class="p">,</span>
+    <span class="n">OFIS_VALUE</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Room</span>
+<span class="p">)</span>
+
+
+<span class="c1">###########</span>
+<span class="c1">#</span>
+<span class="c1">#   KVARTIRA</span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+
+
+<span class="n">KVARTIRA_WORDS</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">rule</span><span class="p">(</span>
+        <span class="n">caseless</span><span class="p">(</span><span class="s1">&#39;кв&#39;</span><span class="p">),</span>
+        <span class="n">DOT</span><span class="o">.</span><span class="n">optional</span><span class="p">()</span>
+    <span class="p">),</span>
+    <span class="n">rule</span><span class="p">(</span><span class="n">normalized</span><span class="p">(</span><span class="s1">&#39;квартира&#39;</span><span class="p">))</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Room</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">const</span><span class="p">(</span><span class="s1">&#39;квартира&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">KVARTIRA_VALUE</span> <span class="o">=</span> <span class="n">ADDR_VALUE</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Room</span><span class="o">.</span><span class="n">number</span>
+<span class="p">)</span>
+
+<span class="n">KVARTIRA</span> <span class="o">=</span> <span class="n">rule</span><span class="p">(</span>
+    <span class="n">KVARTIRA_WORDS</span><span class="p">,</span>
+    <span class="n">KVARTIRA_VALUE</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Room</span>
+<span class="p">)</span>
+
+
+<span class="c1">###########</span>
+<span class="c1">#</span>
+<span class="c1">#   INDEX</span>
+<span class="c1">#</span>
+<span class="c1">#############</span>
+
+
+<span class="n">INDEX</span> <span class="o">=</span> <span class="n">and_</span><span class="p">(</span>
+    <span class="n">INT</span><span class="p">,</span>
+    <span class="n">gte</span><span class="p">(</span><span class="mi">100000</span><span class="p">),</span>
+    <span class="n">lte</span><span class="p">(</span><span class="mi">999999</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Index</span><span class="o">.</span><span class="n">value</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">Index</span>
+<span class="p">)</span>
+
+
+<span class="c1">#############</span>
+<span class="c1">#</span>
+<span class="c1">#   ADDR PART</span>
+<span class="c1">#</span>
+<span class="c1">############</span>
+
+
+<span class="n">ADDR_PART</span> <span class="o">=</span> <span class="n">or_</span><span class="p">(</span>
+    <span class="n">PLOSHAD</span><span class="p">,</span>
+    <span class="n">SAD</span><span class="p">,</span>
+    <span class="n">ROSCHA</span><span class="p">,</span>
+    <span class="n">SQVER</span><span class="p">,</span>
+    <span class="n">PARK</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">AddrPart</span><span class="o">.</span><span class="n">value</span>
+<span class="p">)</span><span class="o">.</span><span class="n">interpretation</span><span class="p">(</span>
+    <span class="n">AddrPart</span>
+<span class="p">)</span>
+</pre></div>
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, itmo_idu
+            </div>
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../../_static/documentation_options.js?v=6ff560e8"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../../../_static/translations.js?v=29b1f277"></script>
+    </body>
+</html>
