@@ -278,10 +278,10 @@
 <span class="n">tagger</span> <span class="o">=</span> <span class="n">SequenceTagger</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;Glebosol/city_services&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="City_services">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.City_services">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.city_services_extract.City_services">[документация]</a>
 <span class="k">class</span> <span class="nc">City_services</span><span class="p">:</span>
 <div class="viewcode-block" id="City_services.extraction_services">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.City_services.extraction_services">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.city_services_extract.City_services.extraction_services">[документация]</a>
     <span class="k">def</span> <span class="nf">extraction_services</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
         <span class="n">sentence</span> <span class="o">=</span> <span class="n">Sentence</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="n">tagger</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
@@ -291,7 +291,7 @@
 
 
 <div class="viewcode-block" id="City_services.remove_last_letter">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.City_services.remove_last_letter">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.city_services_extract.City_services.remove_last_letter">[документация]</a>
     <span class="k">def</span> <span class="nf">remove_last_letter</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
         <span class="n">reduced_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">reduced_words</span></div>
@@ -302,7 +302,7 @@
     <span class="c1">#     return true_city_services_names</span>
     
 <div class="viewcode-block" id="City_services.replace_with_most_similar">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.City_services.replace_with_most_similar">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.city_services_extract.City_services.replace_with_most_similar">[документация]</a>
     <span class="k">def</span> <span class="nf">replace_with_most_similar</span><span class="p">(</span><span class="n">list_of_entities</span><span class="p">):</span>
         <span class="n">similarity_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">list_of_entities</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">CITY_SERVICES_NAMES</span><span class="p">)))</span>
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">word1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">list_of_entities</span><span class="p">):</span>
@@ -317,7 +317,7 @@
 
     
 <div class="viewcode-block" id="City_services.run">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.City_services.run">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.city_services_extract.City_services.run">[документация]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">text_column</span><span class="p">):</span>
         <span class="n">df</span><span class="p">[</span><span class="s1">&#39;City_services_extraced&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">text_column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">text</span><span class="p">:</span> <span class="n">City_services</span><span class="o">.</span><span class="n">extraction_services</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
         <span class="n">df</span><span class="p">[</span><span class="s1">&#39;City_services_cuted&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;City_services_extraced&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">City_services</span><span class="o">.</span><span class="n">remove_last_letter</span><span class="p">(</span><span class="n">row</span><span class="p">))</span>

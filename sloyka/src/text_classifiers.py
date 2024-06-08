@@ -21,71 +21,46 @@ The TextClassifiers class has the following methods:
 """
 import pandas as pd
 from transformers import pipeline
-
+from sloyka.src.utils.exceptions import InvalidInputError, ClassifierInitializationError, ClassificationError
 
 class TextClassifiers:
-    """
-    This class is aimed to classify input texts into themes, or structured types of events. It uses a Huggingface transformer model trained on rubert-tiny.
-    In many cases count of messages per theme was too low to efficiently train, so we used synthetic themes based on the categories as upper level (for example, 'unknown_ЖКХ')
-    """
-    def __init__(
-        self,
-        repository_id:str,
-        number_of_categories=1,
-        device_type=None,
-    ):
-        self.REP_ID = repository_id
-        self.CATS_NUM = number_of_categories
-        self.device_type = device_type
+    def __init__(self, repository_id, number_of_categories=1, device_type=None):
+        self.repository_id = repository_id
+        self.number_of_categories = number_of_categories
+        self.device_type = device_type or -1  # -1 will automatically choose the device based on availability
+        self.classifier = None
 
-    def initialize_classifier(self, device_type):
-        return pipeline(
-            "text-classification",
-            model=self.REP_ID,
-            tokenizer="cointegrated/rubert-tiny2",
-            max_length=2048,
-            truncation=True,
-            device=device_type,
-        )
+    def initialize_classifier(self):
+        if not self.classifier:
+            try:
+                self.classifier = pipeline(
+                    "text-classification",
+                    model=self.repository_id,
+                    tokenizer="cointegrated/rubert-tiny2",
+                    device=self.device_type
+                )
+            except Exception as e:
+                raise ClassifierInitializationError(f"Failed to initialize the classifier: {e}")
 
+    def classify_text(self, text, is_topic=False):
+        if not isinstance(text, str):
+            raise InvalidInputError("Input must be a string.")
+        
+        self.initialize_classifier()
 
-    def run_text_classifier_topics(self, t):
-        """
-        This method takes a text as input and returns the predicted themes and probabilities.
-        :param t: text to classify
-        :return: list of predicted themes and probabilities
-        """
-        classifier = self.initialize_classifier(self.device_type)
+        try:
+            predictions = self.classifier(text, top_k=self.number_of_categories)
+            preds_df = pd.DataFrame(predictions)
+            categories = "; ".join(preds_df["label"].tolist())
+            probabilities = "; ".join(preds_df["score"].round(3).astype(str).tolist())
+        except Exception as e:
+            raise ClassificationError(f"Error during text classification: {e}")
+        
+        return categories, probabilities
 
-        preds = pd.DataFrame(classifier(t, top_k=self.CATS_NUM))
-        classifier.call_count = 0
-        if self.CATS_NUM > 1:
-            cats = "; ".join(preds["label"].tolist())
-            probs = "; ".join(preds["score"].round(3).astype(str).tolist())
-        else:
-            cats = preds["label"][0]
-            probs = preds["score"].round(3).astype(str)[0]
-        return [cats, probs]
-    
-    def run_text_classifier(self, t):
-        """
-        This method takes a text as input and returns the predicted categories and probabilities.
-        :param t: text to classify
-        :return: list of predicted categories and probabilities
-        """
-        classifier = self.initialize_classifier(self.device_type)
+    def run_text_classifier_topics(self, text):
+        return self.classify_text(text, is_topic=True)
 
-        if isinstance(t, str):
-            preds = pd.DataFrame(classifier(t, top_k=self.CATS_NUM))
-            classifier.call_count = 0
-            if self.CATS_NUM > 1:
-                cats = "; ".join(preds["label"].tolist())
-                probs = "; ".join(preds["score"].round(3).astype(str).tolist())
-            else:
-                cats = preds["label"][0]
-                probs = preds["score"].round(3).astype(str)[0]
-        else:
-            print("text is not string")
-            cats = None
-            probs = None
-        return [cats, probs]
+    def run_text_classifier(self, text):
+        return self.classify_text(text)
+

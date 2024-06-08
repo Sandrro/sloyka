@@ -1,7 +1,11 @@
 Introduction
 ============
 
-`Crest` is a technically advanced ocean system for Unity.
+Sloyka is a comprehensive library for analyzing city identity using social media data.
 
-It is architected for performance and makes heavy use of Level Of Detail (LOD) strategies and GPU acceleration for fast update and rendering.
-It is also highly flexible and allows any custom input to the water shape/foam/dynamic waves/etcetera, and has an intuitive and easy to use shape authoring interface.
+Features
+--------
+* Area matching
+* City services extraction
+* Comments reply automation
+* And more...

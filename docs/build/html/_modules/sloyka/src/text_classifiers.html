@@ -291,85 +291,63 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">transformers</span> <span class="kn">import</span> <span class="n">pipeline</span>
-
+<span class="kn">from</span> <span class="nn">sloyka.src.utils.exceptions</span> <span class="kn">import</span> <span class="n">InvalidInputError</span><span class="p">,</span> <span class="n">ClassifierInitializationError</span><span class="p">,</span> <span class="n">ClassificationError</span>
 
 <div class="viewcode-block" id="TextClassifiers">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.TextClassifiers">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.text_classifiers.TextClassifiers">[документация]</a>
 <span class="k">class</span> <span class="nc">TextClassifiers</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    This class is aimed to classify input texts into themes, or structured types of events. It uses a Huggingface transformer model trained on rubert-tiny.</span>
-<span class="sd">    In many cases count of messages per theme was too low to efficiently train, so we used synthetic themes based on the categories as upper level (for example, &#39;unknown_ЖКХ&#39;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">repository_id</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span>
-        <span class="n">number_of_categories</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">device_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">REP_ID</span> <span class="o">=</span> <span class="n">repository_id</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">CATS_NUM</span> <span class="o">=</span> <span class="n">number_of_categories</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">device_type</span> <span class="o">=</span> <span class="n">device_type</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">repository_id</span><span class="p">,</span> <span class="n">number_of_categories</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">device_type</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">repository_id</span> <span class="o">=</span> <span class="n">repository_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_categories</span> <span class="o">=</span> <span class="n">number_of_categories</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device_type</span> <span class="o">=</span> <span class="n">device_type</span> <span class="ow">or</span> <span class="o">-</span><span class="mi">1</span>  <span class="c1"># -1 will automatically choose the device based on availability</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="TextClassifiers.initialize_classifier">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.TextClassifiers.initialize_classifier">[документация]</a>
-    <span class="k">def</span> <span class="nf">initialize_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_type</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">pipeline</span><span class="p">(</span>
-            <span class="s2">&quot;text-classification&quot;</span><span class="p">,</span>
-            <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">REP_ID</span><span class="p">,</span>
-            <span class="n">tokenizer</span><span class="o">=</span><span class="s2">&quot;cointegrated/rubert-tiny2&quot;</span><span class="p">,</span>
-            <span class="n">max_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
-            <span class="n">truncation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">device</span><span class="o">=</span><span class="n">device_type</span><span class="p">,</span>
-        <span class="p">)</span></div>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.text_classifiers.TextClassifiers.initialize_classifier">[документация]</a>
+    <span class="k">def</span> <span class="nf">initialize_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
+                    <span class="s2">&quot;text-classification&quot;</span><span class="p">,</span>
+                    <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">repository_id</span><span class="p">,</span>
+                    <span class="n">tokenizer</span><span class="o">=</span><span class="s2">&quot;cointegrated/rubert-tiny2&quot;</span><span class="p">,</span>
+                    <span class="n">device</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">device_type</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ClassifierInitializationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to initialize the classifier: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
+
+<div class="viewcode-block" id="TextClassifiers.classify_text">
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.text_classifiers.TextClassifiers.classify_text">[документация]</a>
+    <span class="k">def</span> <span class="nf">classify_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">is_topic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="n">InvalidInputError</span><span class="p">(</span><span class="s2">&quot;Input must be a string.&quot;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">initialize_classifier</span><span class="p">()</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">predictions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classifier</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">number_of_categories</span><span class="p">)</span>
+            <span class="n">preds_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
+            <span class="n">categories</span> <span class="o">=</span> <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preds_df</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+            <span class="n">probabilities</span> <span class="o">=</span> <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preds_df</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ClassificationError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error during text classification: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">categories</span><span class="p">,</span> <span class="n">probabilities</span></div>
 
 
 <div class="viewcode-block" id="TextClassifiers.run_text_classifier_topics">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.TextClassifiers.run_text_classifier_topics">[документация]</a>
-    <span class="k">def</span> <span class="nf">run_text_classifier_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This method takes a text as input and returns the predicted themes and probabilities.</span>
-<span class="sd">        :param t: text to classify</span>
-<span class="sd">        :return: list of predicted themes and probabilities</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">classifier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device_type</span><span class="p">)</span>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.text_classifiers.TextClassifiers.run_text_classifier_topics">[документация]</a>
+    <span class="k">def</span> <span class="nf">run_text_classifier_topics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classify_text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">is_topic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
-        <span class="n">preds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">classifier</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CATS_NUM</span><span class="p">))</span>
-        <span class="n">classifier</span><span class="o">.</span><span class="n">call_count</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CATS_NUM</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">cats</span> <span class="o">=</span> <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preds</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-            <span class="n">probs</span> <span class="o">=</span> <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preds</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">cats</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">probs</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">cats</span><span class="p">,</span> <span class="n">probs</span><span class="p">]</span></div>
 
-    
 <div class="viewcode-block" id="TextClassifiers.run_text_classifier">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.TextClassifiers.run_text_classifier">[документация]</a>
-    <span class="k">def</span> <span class="nf">run_text_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        This method takes a text as input and returns the predicted categories and probabilities.</span>
-<span class="sd">        :param t: text to classify</span>
-<span class="sd">        :return: list of predicted categories and probabilities</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">classifier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize_classifier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device_type</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">preds</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">classifier</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">top_k</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CATS_NUM</span><span class="p">))</span>
-            <span class="n">classifier</span><span class="o">.</span><span class="n">call_count</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">CATS_NUM</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">cats</span> <span class="o">=</span> <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preds</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-                <span class="n">probs</span> <span class="o">=</span> <span class="s2">&quot;; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">preds</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">cats</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[</span><span class="s2">&quot;label&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-                <span class="n">probs</span> <span class="o">=</span> <span class="n">preds</span><span class="p">[</span><span class="s2">&quot;score&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;text is not string&quot;</span><span class="p">)</span>
-            <span class="n">cats</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="n">probs</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">cats</span><span class="p">,</span> <span class="n">probs</span><span class="p">]</span></div>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.text_classifiers.TextClassifiers.run_text_classifier">[документация]</a>
+    <span class="k">def</span> <span class="nf">run_text_classifier</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">classify_text</span><span class="p">(</span><span class="n">text</span><span class="p">)</span></div>
 </div>
+
 
 </pre></div>
         </article>

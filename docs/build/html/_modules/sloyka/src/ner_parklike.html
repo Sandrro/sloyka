@@ -300,13 +300,13 @@
 <span class="kn">import</span> <span class="nn">math</span>
 
 <div class="viewcode-block" id="AddrNEWExtractor">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.AddrNEWExtractor">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.ner_parklike.AddrNEWExtractor">[документация]</a>
 <span class="k">class</span> <span class="nc">AddrNEWExtractor</span><span class="p">(</span><span class="n">Extractor</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">morph</span><span class="p">):</span>
         <span class="n">Extractor</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ADDR_PART</span><span class="p">,</span> <span class="n">morph</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AddrNEWExtractor.find">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.AddrNEWExtractor.find">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.ner_parklike.AddrNEWExtractor.find">[документация]</a>
     <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="n">matches</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">matches</span><span class="p">:</span>
@@ -323,10 +323,10 @@
 
 
 <div class="viewcode-block" id="NER_parklike">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.NER_parklike">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.ner_parklike.NER_parklike">[документация]</a>
 <span class="k">class</span> <span class="nc">NER_parklike</span><span class="p">:</span>
 <div class="viewcode-block" id="NER_parklike.extract_parklike">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.NER_parklike.extract_parklike">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.ner_parklike.NER_parklike.extract_parklike">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">extract_parklike</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -350,7 +350,7 @@
         
 
 <div class="viewcode-block" id="NER_parklike.natasha_normalization">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.NER_parklike.natasha_normalization">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.ner_parklike.NER_parklike.natasha_normalization">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">natasha_normalization</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start_ind</span><span class="p">,</span> <span class="n">stop_ind</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -374,7 +374,7 @@
 
     
 <div class="viewcode-block" id="NER_parklike.OSM_park_import">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.NER_parklike.OSM_park_import">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.ner_parklike.NER_parklike.OSM_park_import">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">OSM_park_import</span><span class="p">(</span><span class="n">city_name</span><span class="p">):</span>
         <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
@@ -421,7 +421,7 @@
 
     
 <div class="viewcode-block" id="NER_parklike.split_parkwords">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.NER_parklike.split_parkwords">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.ner_parklike.NER_parklike.split_parkwords">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">split_parkwords</span><span class="p">(</span><span class="n">osm_df</span><span class="p">):</span>
         <span class="n">osm_df</span><span class="p">[</span><span class="s1">&#39;missing_parkword&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
@@ -439,7 +439,7 @@
 
 
 <div class="viewcode-block" id="NER_parklike.cut_park_name">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.NER_parklike.cut_park_name">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.ner_parklike.NER_parklike.cut_park_name">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">cut_park_name</span><span class="p">(</span><span class="n">cell_value</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">cell_value</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
@@ -451,13 +451,13 @@
 
     
 <div class="viewcode-block" id="NER_parklike.similar">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.NER_parklike.similar">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.ner_parklike.NER_parklike.similar">[документация]</a>
     <span class="k">def</span> <span class="nf">similar</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">SequenceMatcher</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="o">.</span><span class="n">ratio</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="NER_parklike.match_point_name">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.NER_parklike.match_point_name">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.ner_parklike.NER_parklike.match_point_name">[документация]</a>
     <span class="k">def</span> <span class="nf">match_point_name</span><span class="p">(</span><span class="n">osm_df</span><span class="p">,</span> <span class="n">df</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
             <span class="n">toponim_cut_value</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;Toponim_cut&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -480,7 +480,7 @@
 
 
 <div class="viewcode-block" id="NER_parklike.run">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.NER_parklike.run">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.ner_parklike.NER_parklike.run">[документация]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">text_column</span><span class="p">,</span> <span class="n">city_name</span><span class="p">):</span>
         <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;Start&quot;</span><span class="p">,</span> <span class="s2">&quot;Stop&quot;</span><span class="p">,</span> <span class="s2">&quot;Toponim&quot;</span><span class="p">,</span> <span class="s2">&quot;Toponim_type&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">text_column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">text</span><span class="p">:</span> <span class="n">NER_parklike</span><span class="o">.</span><span class="n">extract_parklike</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">if</span> <span class="n">NER_parklike</span><span class="o">.</span><span class="n">extract_parklike</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span><span class="p">)</span>
         <span class="n">osm_df</span> <span class="o">=</span> <span class="n">NER_parklike</span><span class="o">.</span><span class="n">OSM_park_import</span><span class="p">(</span><span class="n">city_name</span><span class="p">)</span>

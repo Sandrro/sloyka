@@ -278,13 +278,13 @@
 <span class="n">stemmer</span> <span class="o">=</span> <span class="n">SnowballStemmer</span><span class="p">(</span><span class="s2">&quot;russian&quot;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AreaMatcher">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.AreaMatcher">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.area_matcher.AreaMatcher">[документация]</a>
 <span class="k">class</span> <span class="nc">AreaMatcher</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">area_cache</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="AreaMatcher.get_df_areas">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.AreaMatcher.get_df_areas">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.area_matcher.AreaMatcher.get_df_areas">[документация]</a>
     <span class="k">def</span> <span class="nf">get_df_areas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">osm_id</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">date</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">osm_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">area_cache</span><span class="p">:</span>
             <span class="n">geo_data_getter</span> <span class="o">=</span> <span class="n">HistGeoDataGetter</span><span class="p">()</span>
@@ -295,7 +295,7 @@
 
 
 <div class="viewcode-block" id="AreaMatcher.preprocess_group_name">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.AreaMatcher.preprocess_group_name">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.area_matcher.AreaMatcher.preprocess_group_name">[документация]</a>
     <span class="k">def</span> <span class="nf">preprocess_group_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_name</span><span class="p">):</span>
         <span class="n">group_name</span> <span class="o">=</span> <span class="n">group_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
         <span class="n">group_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[\&quot;!?\u2665\u2022()|,.-:]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">group_name</span><span class="p">)</span>
@@ -306,7 +306,7 @@
 
 
 <div class="viewcode-block" id="AreaMatcher.preprocess_area_names">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.AreaMatcher.preprocess_area_names">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.area_matcher.AreaMatcher.preprocess_area_names">[документация]</a>
     <span class="k">def</span> <span class="nf">preprocess_area_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_areas</span><span class="p">):</span>
         <span class="n">words_to_remove</span> <span class="o">=</span> <span class="n">AREA_STOPWORDS</span>
         <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words_to_remove</span><span class="p">:</span>
@@ -319,7 +319,7 @@
 
 
 <div class="viewcode-block" id="AreaMatcher.match_group_to_area">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.AreaMatcher.match_group_to_area">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.area_matcher.AreaMatcher.match_group_to_area">[документация]</a>
     <span class="k">def</span> <span class="nf">match_group_to_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_name</span><span class="p">,</span> <span class="n">df_areas</span><span class="p">):</span>
         <span class="n">group_name_stems</span> <span class="o">=</span> <span class="p">[</span><span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">group_name</span><span class="o">.</span><span class="n">split</span><span class="p">()]</span>
         <span class="n">max_partial_ratio</span> <span class="o">=</span> <span class="mi">20</span>
@@ -343,7 +343,7 @@
 
 
 <div class="viewcode-block" id="AreaMatcher.run">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.AreaMatcher.run">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.area_matcher.AreaMatcher.run">[документация]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">osm_id</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">date</span><span class="p">):</span>
         <span class="n">df_areas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_df_areas</span><span class="p">(</span><span class="n">osm_id</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">date</span><span class="p">)</span>
         <span class="n">df_areas</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preprocess_area_names</span><span class="p">(</span><span class="n">df_areas</span><span class="p">)</span>

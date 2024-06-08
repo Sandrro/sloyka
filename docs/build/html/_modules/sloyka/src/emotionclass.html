@@ -285,7 +285,7 @@
 <span class="kn">import</span> <span class="nn">gc</span>
 
 <div class="viewcode-block" id="EmotionRecognizer">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.EmotionRecognizer">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.emotionclass.EmotionRecognizer">[документация]</a>
 <span class="k">class</span> <span class="nc">EmotionRecognizer</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class is designed to categorise input texts into emotion categories.</span>
@@ -318,7 +318,7 @@
         <span class="p">]</span>
 
 <div class="viewcode-block" id="EmotionRecognizer.recognize_emotion">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.EmotionRecognizer.recognize_emotion">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.emotionclass.EmotionRecognizer.recognize_emotion">[документация]</a>
     <span class="k">def</span> <span class="nf">recognize_emotion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return the emotion for a given text.</span>
@@ -329,7 +329,7 @@
 
 
 <div class="viewcode-block" id="EmotionRecognizer.recognize_average_emotion_from_multiple_models">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.EmotionRecognizer.recognize_average_emotion_from_multiple_models">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.emotionclass.EmotionRecognizer.recognize_average_emotion_from_multiple_models">[документация]</a>
     <span class="k">def</span> <span class="nf">recognize_average_emotion_from_multiple_models</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">text_column</span><span class="p">,</span> <span class="n">models</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Calculate the prevailing emotion using multiple models for a DataFrame column.</span>

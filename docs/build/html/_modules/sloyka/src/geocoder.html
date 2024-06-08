@@ -357,7 +357,7 @@
 
 
 <div class="viewcode-block" id="Location">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Location">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Location">[документация]</a>
 <span class="k">class</span> <span class="nc">Location</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class is aimed to efficiently geocode addresses using Nominatim.</span>
@@ -373,7 +373,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">book</span> <span class="o">=</span> <span class="p">{}</span>
 
 <div class="viewcode-block" id="Location.geocode_with_retry">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Location.geocode_with_retry">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Location.geocode_with_retry">[документация]</a>
     <span class="k">def</span> <span class="nf">geocode_with_retry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function to handle 403 error while geocoding using Nominatim.</span>
@@ -393,7 +393,7 @@
 
 
 <div class="viewcode-block" id="Location.query">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Location.query">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Location.query">[документация]</a>
     <span class="k">def</span> <span class="nf">query</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A function to query the address and return its geocode if available.</span>
@@ -412,7 +412,7 @@
 
 
 <div class="viewcode-block" id="Streets">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Streets">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Streets">[документация]</a>
 <span class="k">class</span> <span class="nc">Streets</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class encapsulates functionality for retrieving street data</span>
@@ -423,7 +423,7 @@
     <span class="n">global_crs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4326</span>
 
 <div class="viewcode-block" id="Streets.get_city_bounds">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Streets.get_city_bounds">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Streets.get_city_bounds">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_city_bounds</span><span class="p">(</span>
         <span class="n">osm_city_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">osm_city_level</span><span class="p">:</span> <span class="nb">int</span>
@@ -454,7 +454,7 @@
 
 
 <div class="viewcode-block" id="Streets.get_drive_graph">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Streets.get_drive_graph">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Streets.get_drive_graph">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_drive_graph</span><span class="p">(</span><span class="n">city_bounds</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -472,7 +472,7 @@
 
 
 <div class="viewcode-block" id="Streets.graph_to_gdf">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Streets.graph_to_gdf">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Streets.graph_to_gdf">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">graph_to_gdf</span><span class="p">(</span><span class="n">G_drive</span><span class="p">:</span> <span class="n">nx</span><span class="o">.</span><span class="n">MultiDiGraph</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -491,7 +491,7 @@
 
 
 <div class="viewcode-block" id="Streets.get_street_names">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Streets.get_street_names">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Streets.get_street_names">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_street_names</span><span class="p">(</span><span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -506,7 +506,7 @@
 
 
 <div class="viewcode-block" id="Streets.find_toponim_words_from_name">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Streets.find_toponim_words_from_name">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Streets.find_toponim_words_from_name">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">find_toponim_words_from_name</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -535,7 +535,7 @@
 
 
 <div class="viewcode-block" id="Streets.drop_words_from_name">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Streets.drop_words_from_name">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Streets.drop_words_from_name">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">drop_words_from_name</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -560,7 +560,7 @@
 
 
 <div class="viewcode-block" id="Streets.clear_names">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Streets.clear_names">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Streets.clear_names">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">clear_names</span><span class="p">(</span><span class="n">streets_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -581,7 +581,7 @@
 
 
 <div class="viewcode-block" id="Streets.run">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Streets.run">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Streets.run">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">osm_city_level</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -599,13 +599,13 @@
 
 
 <div class="viewcode-block" id="AddrNEWExtractor">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.AddrNEWExtractor">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.AddrNEWExtractor">[документация]</a>
 <span class="k">class</span> <span class="nc">AddrNEWExtractor</span><span class="p">(</span><span class="n">Extractor</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">morph</span><span class="p">):</span>
         <span class="n">Extractor</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ADDR_PART</span><span class="p">,</span> <span class="n">morph</span><span class="p">)</span>
 
 <div class="viewcode-block" id="AddrNEWExtractor.find">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.AddrNEWExtractor.find">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.AddrNEWExtractor.find">[документация]</a>
     <span class="k">def</span> <span class="nf">find</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
         <span class="n">matches</span> <span class="o">=</span> <span class="bp">self</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">matches</span><span class="p">:</span>
@@ -621,10 +621,10 @@
 </div>
 
 <div class="viewcode-block" id="OtherGeoObjects">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects">[документация]</a>
 <span class="k">class</span> <span class="nc">OtherGeoObjects</span><span class="p">:</span>
 <div class="viewcode-block" id="OtherGeoObjects.get_OSM_green_obj">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.get_OSM_green_obj">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.get_OSM_green_obj">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_OSM_green_obj</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -639,7 +639,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.get_OSM_num_obj">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.get_OSM_num_obj">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.get_OSM_num_obj">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_OSM_num_obj</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -654,7 +654,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.get_OSM_cemetery">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.get_OSM_cemetery">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.get_OSM_cemetery">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_OSM_cemetery</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -669,7 +669,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.get_OSM_natural">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.get_OSM_natural">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.get_OSM_natural">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_OSM_natural</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -684,7 +684,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.get_OSM_railway">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.get_OSM_railway">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.get_OSM_railway">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_OSM_railway</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -699,7 +699,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.get_OSM_tourism">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.get_OSM_tourism">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.get_OSM_tourism">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_OSM_tourism</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -714,7 +714,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.get_OSM_historic">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.get_OSM_historic">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.get_OSM_historic">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_OSM_historic</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -729,7 +729,7 @@
 
 
 <div class="viewcode-block" id="OtherGeoObjects.get_OSM_square">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.get_OSM_square">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.get_OSM_square">[документация]</a>
     <span class="nd">@staticmethod</span>    
     <span class="k">def</span> <span class="nf">get_OSM_square</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -744,7 +744,7 @@
 
 
 <div class="viewcode-block" id="OtherGeoObjects.calculate_centroid">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.calculate_centroid">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.calculate_centroid">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">calculate_centroid</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -759,7 +759,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.get_and_process_osm_data">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.get_and_process_osm_data">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.get_and_process_osm_data">[документация]</a>
     <span class="k">def</span> <span class="nf">get_and_process_osm_data</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">,</span> <span class="n">get_data_function</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function allows you to build an OSM array for different urban objects.</span>
@@ -771,7 +771,7 @@
 
         
 <div class="viewcode-block" id="OtherGeoObjects.run_OSM_dfs">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.run_OSM_dfs">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.run_OSM_dfs">[документация]</a>
     <span class="k">def</span> <span class="nf">run_OSM_dfs</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function collects dataframes with OSM spatial data, finds centroids and combines files into one.</span>
@@ -795,7 +795,7 @@
 
         
 <div class="viewcode-block" id="OtherGeoObjects.extract_geo_obj">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.extract_geo_obj">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.extract_geo_obj">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">extract_geo_obj</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -821,7 +821,7 @@
 
 
 <div class="viewcode-block" id="OtherGeoObjects.restoration_of_normal_form">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.restoration_of_normal_form">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.restoration_of_normal_form">[документация]</a>
     <span class="k">def</span> <span class="nf">restoration_of_normal_form</span><span class="p">(</span><span class="n">other_geo_obj</span><span class="p">,</span> <span class="n">osm_combined_df</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function compares the extracted location entity with an OSM array and returns a normalized form if the percentage of similarity is at least 70%.</span>
@@ -854,7 +854,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.find_num_city_obj">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.find_num_city_obj">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.find_num_city_obj">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">find_num_city_obj</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">NUM_CITY_OBJ</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -882,7 +882,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.combine_city_obj">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.combine_city_obj">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.combine_city_obj">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">combine_city_obj</span><span class="p">(</span><span class="n">df_obj</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -894,7 +894,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.expand_toponim">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.expand_toponim">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.expand_toponim">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">expand_toponim</span><span class="p">(</span><span class="n">df_obj</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -907,7 +907,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.find_geometry">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.find_geometry">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.find_geometry">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">find_geometry</span><span class="p">(</span><span class="n">toponim</span><span class="p">,</span> <span class="n">osm_combined_df</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -924,7 +924,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.find_geo_obj_tag">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.find_geo_obj_tag">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.find_geo_obj_tag">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">find_geo_obj_tag</span><span class="p">(</span><span class="n">toponim</span><span class="p">,</span> <span class="n">osm_combined_df</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -942,7 +942,7 @@
 
     
 <div class="viewcode-block" id="OtherGeoObjects.run">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.OtherGeoObjects.run">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.OtherGeoObjects.run">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">osm_city_name</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">text_column</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -965,7 +965,7 @@
 
 
 <div class="viewcode-block" id="Geocoder">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder">[документация]</a>
 <span class="k">class</span> <span class="nc">Geocoder</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    This class provides a functionality of simple geocoder</span>
@@ -990,7 +990,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.extract_ner_street">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.extract_ner_street">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.extract_ner_street">[документация]</a>
     <span class="k">def</span> <span class="nf">extract_ner_street</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function calls the pre-trained custom NER model to extract mentioned</span>
@@ -1024,7 +1024,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.get_ner_address_natasha">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.get_ner_address_natasha">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.get_ner_address_natasha">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_ner_address_natasha</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">EXCEPTIONS_CITY_COUNTRY</span><span class="p">,</span> <span class="n">text_col</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">string</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1055,7 +1055,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.extract_building_num">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.extract_building_num">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.extract_building_num">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">extract_building_num</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">street_name</span><span class="p">,</span> <span class="n">number</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">string</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1105,7 +1105,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.extract_toponym">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.extract_toponym">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.extract_toponym">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">extract_toponym</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">street_name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">string</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1147,7 +1147,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.get_stem">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.get_stem">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.get_stem">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_stem</span><span class="p">(</span><span class="n">street_names_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1171,7 +1171,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.find_word_form">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.find_word_form">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.find_word_form">[документация]</a>
     <span class="k">def</span> <span class="nf">find_word_form</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">strts_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
@@ -1259,7 +1259,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.get_level">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.get_level">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.get_level">[документация]</a>
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">get_level</span><span class="p">(</span><span class="n">row</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1279,7 +1279,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.get_street">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.get_street">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.get_street">[документация]</a>
     <span class="k">def</span> <span class="nf">get_street</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">text_column</span><span class="p">:</span> <span class="nb">str</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
@@ -1351,7 +1351,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.create_gdf">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.create_gdf">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.create_gdf">[документация]</a>
     <span class="k">def</span> <span class="nf">create_gdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Function simply creates gdf from the recognised geocoded geometries.</span>
@@ -1372,7 +1372,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.set_global_repr_point">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.set_global_repr_point">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.set_global_repr_point">[документация]</a>
     <span class="k">def</span> <span class="nf">set_global_repr_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function set the centroid (actually, representative point) of the</span>
@@ -1391,7 +1391,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.merge_to_initial_df">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.merge_to_initial_df">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.merge_to_initial_df">[документация]</a>
     <span class="k">def</span> <span class="nf">merge_to_initial_df</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">,</span> <span class="n">initial_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">:</span>
@@ -1424,7 +1424,7 @@
 
     
 <div class="viewcode-block" id="Geocoder.assign_street">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.assign_street">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.assign_street">[документация]</a>
     <span class="k">def</span> <span class="nf">assign_street</span><span class="p">(</span><span class="n">variable</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">variable</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">variable</span><span class="p">):</span>
             <span class="k">return</span> <span class="s2">&quot;street&quot;</span>
@@ -1432,7 +1432,7 @@
 
     
 <div class="viewcode-block" id="Geocoder.get_df_areas">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.get_df_areas">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.get_df_areas">[документация]</a>
     <span class="k">def</span> <span class="nf">get_df_areas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">osm_id</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">date</span><span class="p">):</span>
 <span class="w">        </span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1460,7 +1460,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.preprocess_group_name">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.preprocess_group_name">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.preprocess_group_name">[документация]</a>
     <span class="k">def</span> <span class="nf">preprocess_group_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_name</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Preprocesses a group name by converting it to lowercase, removing special characters, and removing specified stopwords.</span>
@@ -1480,7 +1480,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.preprocess_area_names">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.preprocess_area_names">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.preprocess_area_names">[документация]</a>
     <span class="k">def</span> <span class="nf">preprocess_area_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df_areas</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Preprocesses the area names in the given DataFrame by removing specified stopwords, converting the names to lowercase,</span>
@@ -1505,7 +1505,7 @@
 
 
 <div class="viewcode-block" id="Geocoder.match_group_to_area">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.match_group_to_area">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.match_group_to_area">[документация]</a>
     <span class="k">def</span> <span class="nf">match_group_to_area</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_name</span><span class="p">,</span> <span class="n">df_areas</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Matches a given group name to an area in a DataFrame of areas.</span>
@@ -1541,7 +1541,7 @@
         
 
 <div class="viewcode-block" id="Geocoder.run">
-<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.Geocoder.run">[документация]</a>
+<a class="viewcode-back" href="../../../user/sloyka.src.html#sloyka.src.geocoder.Geocoder.run">[документация]</a>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">osm_id</span><span class="p">,</span> <span class="n">tags</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">text_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">group_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;group_name&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Runs the data processing pipeline on the input DataFrame.</span>

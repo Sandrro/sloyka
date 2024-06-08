@@ -1465,404 +1465,6 @@ extraction of «extract_parklike», it returns a normalized form.</p>
 </section>
 <section id="module-sloyka.src.semantic_graph">
 <span id="sloyka-src-semantic-graph-module"></span><h2>sloyka.src.semantic_graph module<a class="headerlink" href="#module-sloyka.src.semantic_graph" title="Link to this heading"></a></h2>
-<p>&#64;class:Semgraph:
-The main class of the semantic graph module. It is aimed to build a semantic graph based on the provided data
-and parameters.
-More convenient to use after extracting data from geocoder.</p>
-<p>The Semgraph class has the following methods:</p>
-<p>&#64;method:clean_from_dublicates:
-A function to clean a DataFrame from duplicates based on specified columns.</p>
-<p>&#64;method:clean_from_digits:
-Removes digits from the text in the specified column of the input DataFrame.</p>
-<p>&#64;method:clean_from_toponyms:
-Clean the text in the specified text column by removing any words that match the toponyms in the name and
-toponym columns.</p>
-<p>&#64;method:aggregate_data:
-Creates a new DataFrame by aggregating the data based on the provided text and toponyms columns.</p>
-<dl class="py class">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sloyka.src.semantic_graph.</span></span><span class="sig-name descname"><span class="pre">Semgraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bert_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'DeepPavlov/rubert-base-cased'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'russian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph" title="Link to this definition"></a></dt>
-<dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>This is the main class of semantic graph module.
-It is aimed to build a semantic graph based on the provided data and parameters.
-More convinient to use after extracting data from geocoder.</p>
-<p>Param:
-bert_name: the name of the BERT model to use (default is „DeepPavlov/rubert-base-cased“)
-language: the language of the BERT model (default is „russian“)
-device: the device to use for inference (default is „cpu“)</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.add_attributes">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute_tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.add_attributes"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.add_attributes" title="Link to this definition"></a></dt>
-<dd><p>Add attributes to nodes in the graph based on the specified conditions.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – The graph to which attributes will be added.</p></li>
-<li><p><strong>new_attributes</strong> (<em>dict</em>) – A dictionary containing the new attributes to be added.</p></li>
-<li><p><strong>attribute_tag</strong> (<em>str</em>) – The tag of the attribute to be added.</p></li>
-<li><p><strong>toponym_attributes</strong> (<em>bool</em>) – A boolean flag indicating whether to add attributes to toponyms.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The graph with the new attributes added.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.add_city_graph">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_city_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">districts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">municipals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">city_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">district_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.add_city_graph"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.add_city_graph" title="Link to this definition"></a></dt>
-<dd><p>Add a city graph to the input graph based on the provided district and municipal data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – The input graph.</p></li>
-<li><p><strong>districts</strong> (<em>gpd.GeoDataFrame</em>) – The district data.</p></li>
-<li><p><strong>municipals</strong> (<em>gpd.GeoDataFrame</em>) – The municipal data.</p></li>
-<li><p><strong>city_column</strong> (<em>str</em>) – The column name in districts containing the city data.</p></li>
-<li><p><strong>district_column</strong> (<em>str</em>) – The column name in municipals containing the district data.</p></li>
-<li><p><strong>name_column</strong> (<em>str</em>) – The column name in districts and municipals containing the name data.</p></li>
-<li><p><strong>geometry_column</strong> (<em>str</em>) – The column name in districts and municipals containing the geometry data.</p></li>
-<li><p><strong>directed</strong> (<em>bool</em>) – Whether the graph should be directed. Defaults to True.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The graph with the added city graph.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.build_graph">
-<span class="sig-name descname"><span class="pre">build_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents_stack_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semantic_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.build_graph"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.build_graph" title="Link to this definition"></a></dt>
-<dd><p>Build a graph based on the provided data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The input data to build the graph from.</p></li>
-<li><p><strong>id_column</strong> (<em>str</em>) – The column containing unique identifiers.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The column containing text information.</p></li>
-<li><p><strong>text_type_column</strong> (<em>str</em>) – The column indicating the type of text.</p></li>
-<li><p><strong>toponym_column</strong> (<em>str</em>) – The column containing toponym information.</p></li>
-<li><p><strong>toponym_name_column</strong> (<em>str</em>) – The column containing toponym names.</p></li>
-<li><p><strong>toponym_type_column</strong> (<em>str</em>) – The column containing toponym types.</p></li>
-<li><p><strong>post_id_column</strong> (<em>str</em>) – The column containing post identifiers.</p></li>
-<li><p><strong>parents_stack_column</strong> (<em>str</em>) – The column containing parent-child relationships.</p></li>
-<li><p><strong>directed</strong> (<em>bool</em>) – Flag indicating if the graph is directed. Defaults to True.</p></li>
-<li><p><strong>location_column</strong> (<em>str</em><em> or </em><em>None</em>) – The column containing location information. Defaults to None.</p></li>
-<li><p><strong>geometry_column</strong> (<em>str</em><em> or </em><em>None</em>) – The column containing geometry information. Defaults to None.</p></li>
-<li><p><strong>key_score_filter</strong> (<em>float</em>) – The threshold for key score filtering. Defaults to 0.6.</p></li>
-<li><p><strong>semantic_score_filter</strong> (<em>float</em>) – The threshold for semantic score filtering. Defaults to 0.75.</p></li>
-<li><p><strong>top_n</strong> (<em>int</em>) – The number of top keywords to extract. Defaults to 1.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The constructed graph.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.calculate_distances">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.calculate_distances"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.calculate_distances" title="Link to this definition"></a></dt>
-<dd><p>Calculate the distances between pairs of nodes in the graph and add them as edges.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – The input graph.</p></li>
-<li><p><strong>directed</strong> (<em>bool</em>) – Whether the graph should be directed or undirected. Defaults to True.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>NetworkX graph object with added distance edges</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>G</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.clean_from_digits">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clean_from_digits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.clean_from_digits"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.clean_from_digits" title="Link to this definition"></a></dt>
-<dd><p>Removes digits from the text in the specified column of the input DataFrame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – The input DataFrame.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The name of the text column to clean.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The DataFrame with the specified text column cleaned from digits.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.clean_from_dublicates">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clean_from_dublicates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.clean_from_dublicates"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.clean_from_dublicates" title="Link to this definition"></a></dt>
-<dd><p>A function to clean a DataFrame from duplicates based on specified columns.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – The input DataFrame to be cleaned.</p></li>
-<li><p><strong>id_column</strong> (<em>str</em>) – The name of the column to use as the unique identifier.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>A cleaned DataFrame or GeoDataFrame without duplicates based on the
-specified text column.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.clean_from_links">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clean_from_links</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.clean_from_links"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.clean_from_links" title="Link to this definition"></a></dt>
-<dd><p>Clean the text in the specified text column by removing links and specific patterns.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The input DataFrame.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The name of the column containing the text to be cleaned.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The DataFrame with the cleaned text.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.clean_from_toponyms">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clean_from_toponyms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.clean_from_toponyms"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.clean_from_toponyms" title="Link to this definition"></a></dt>
-<dd><p>Clean the text in the specified text column by removing any words that match the toponyms in the name
-and toponym columns.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The input DataFrame.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The name of the column containing the text to be cleaned.</p></li>
-<li><p><strong>name_column</strong> (<em>str</em>) – The name of the column containing the toponym name (e.g. Nevski, Moika etc).</p></li>
-<li><p><strong>toponym_type_column</strong> (<em>str</em>) – The name of the column containing the toponym type</p></li>
-<li><p><strong>street</strong> (<em>(</em><em>e.g.</em>)</p></li>
-<li><p><strong>alley</strong></p></li>
-<li><p><strong>etc.</strong><strong>)</strong><strong>.</strong> (<em>avenue</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The DataFrame or GeoDataFrame with the cleaned text.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.convert_df_to_edge_df">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convert_df_to_edge_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_info_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'words_score'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.convert_df_to_edge_df"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.convert_df_to_edge_df" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.extract_keywords">
-<span class="sig-name descname"><span class="pre">extract_keywords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents_stack_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semantic_key_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.extract_keywords"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.extract_keywords" title="Link to this definition"></a></dt>
-<dd><p>Extract keywords from the given data based on certain criteria.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The input data containing information.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The column in the data containing text information.</p></li>
-<li><p><strong>text_type_column</strong> (<em>str</em>) – The column in the data indicating the type of text (e.g., post, comment, reply).</p></li>
-<li><p><strong>toponym_column</strong> (<em>str</em>) – The column in the data containing toponym information.</p></li>
-<li><p><strong>id_column</strong> (<em>str</em>) – The column in the data containing unique text identifiers.</p></li>
-<li><p><strong>post_id_column</strong> (<em>str</em>) – The column in the data containing post identifiers for comments and replies.</p></li>
-<li><p><strong>parents_stack_column</strong> (<em>str</em>) – The column in the data containing information about parent-child relationships to comments.</p></li>
-<li><p><strong>semantic_key_filter</strong> (<em>float</em><em>, </em><em>optional</em>) – The threshold for semantic key filtering. Defaults to 0.75.</p></li>
-<li><p><strong>top_n</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of top keywords to extract. Defaults to 1.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>Processed data with extracted keywords, toponym counts, and word counts.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.fill_empty_toponym">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fill_empty_toponym</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.fill_empty_toponym"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.fill_empty_toponym" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.get_coordinates">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geocoded_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.get_coordinates"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.get_coordinates" title="Link to this definition"></a></dt>
-<dd><p>Get and write coordinates from geometry column in gpd.GeoDataFrame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – Prebuild input graph.</p></li>
-<li><p><strong>geocoded_data</strong> (<em>gpd.GeoDataFrame</em>) – Data containing toponim, location and geometry of toponim.</p></li>
-<li><p><strong>toponym_column</strong> (<em>str</em>) – The name of the column containing the toponim data.</p></li>
-<li><p><strong>location_column</strong> (<em>str</em>) – The name of the column containing the location data.</p></li>
-<li><p><strong>geometry_column</strong> (<em>str</em>) – The name of the column containing the geometry data.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>Graph with toponym nodes („tag“==“TOPONYM“) containing information
-about address and geometry („Location“,“Lon“,“Lat“ as node attributes)</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.get_house_text_id">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_house_text_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geocoded_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.get_house_text_id"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.get_house_text_id" title="Link to this definition"></a></dt>
-<dd><p>Get house text ids from geocoded data and assign them to the graph nodes.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – The input graph.</p></li>
-<li><p><strong>geocoded_data</strong> (<em>gpd.GeoDataFrame</em>) – Data containing geocoded information.</p></li>
-<li><p><strong>text_id_column</strong> (<em>str</em>) – The name of the column containing the text id.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The name of the column containing the text.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The graph with assigned text ids to the nodes.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.get_semantic_closeness">
-<span class="sig-name descname"><span class="pre">get_semantic_closeness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">similarity_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.get_semantic_closeness"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.get_semantic_closeness" title="Link to this definition"></a></dt>
-<dd><p>Calculate the semantic closeness between unique words in the specified column of the input DataFrame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The input DataFrame.</p></li>
-<li><p><strong>column</strong> (<em>str</em>) – The column in the DataFrame to calculate semantic closeness for.</p></li>
-<li><p><strong>similarity_filter</strong> (<em>float = 0.75</em>) – The score of cosine semantic proximity, from which and upper the edge</p></li>
-<li><p><strong>generated.</strong> (<em>will be</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>A DataFrame or GeoDataFrame containing the pairs of words with their
-similarity scores.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.get_tag">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponyms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.get_tag"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.get_tag" title="Link to this definition"></a></dt>
-<dd><p>Get attributes of part of speech for the given nodes, with the option to specify toponyms.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>nodes</strong> (<em>list</em>) – list of strings representing the nodes</p></li>
-<li><p><strong>toponyms</strong> (<em>list</em>) – list of strings representing the toponyms</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>dictionary containing attributes for the nodes</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.get_text_ids">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_text_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filtered_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.get_text_ids"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.get_text_ids" title="Link to this definition"></a></dt>
-<dd><p>Update the text_ids attribute of nodes in the graph based on the provided filtered data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – The input graph.</p></li>
-<li><p><strong>filtered_data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The data to filter.</p></li>
-<li><p><strong>toponym_column</strong> (<em>str</em>) – The column name in filtered_data containing toponyms.</p></li>
-<li><p><strong>text_id_column</strong> (<em>str</em>) – The column name in filtered_data containing text IDs.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The graph with updated text_ids attributes.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.semantic_graph.Semgraph.update_graph">
-<span class="sig-name descname"><span class="pre">update_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents_stack_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">counts_attribute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semantic_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.update_graph"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.semantic_graph.Semgraph.update_graph" title="Link to this definition"></a></dt>
-<dd><p>Update the input graph based on the provided data, returning the updated graph.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – The input graph to be updated.</p></li>
-<li><p><strong>data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The input data to update the graph.</p></li>
-<li><p><strong>id_column</strong> (<em>str</em>) – The column containing unique identifiers.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The column containing text information.</p></li>
-<li><p><strong>text_type_column</strong> (<em>str</em>) – The column indicating the type of text.</p></li>
-<li><p><strong>toponym_column</strong> (<em>str</em>) – The column containing toponym information.</p></li>
-<li><p><strong>toponym_name_column</strong> (<em>str</em>) – The column containing toponym names.</p></li>
-<li><p><strong>toponym_type_column</strong> (<em>str</em>) – The column containing toponym types.</p></li>
-<li><p><strong>post_id_column</strong> (<em>str</em>) – The column containing post identifiers.</p></li>
-<li><p><strong>parents_stack_column</strong> (<em>str</em>) – The column containing parent-child relationships.</p></li>
-<li><p><strong>directed</strong> (<em>bool</em>) – Flag indicating if the graph is directed. Defaults to True.</p></li>
-<li><p><strong>counts_attribute</strong> (<em>str</em><em> or </em><em>None</em>) – The attribute to be used for counting. Defaults to None.</p></li>
-<li><p><strong>location_column</strong> (<em>str</em><em> or </em><em>None</em>) – The column containing location information. Defaults to None.</p></li>
-<li><p><strong>geometry_column</strong> (<em>str</em><em> or </em><em>None</em>) – The column containing geometry information. Defaults to None.</p></li>
-<li><p><strong>key_score_filter</strong> (<em>float</em>) – The threshold for key score filtering. Defaults to 0.6.</p></li>
-<li><p><strong>semantic_score_filter</strong> (<em>float</em>) – The threshold for semantic score filtering. Defaults to 0.75.</p></li>
-<li><p><strong>top_n</strong> (<em>int</em>) – The number of top keywords to extract. Defaults to 1.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The updated graph.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
 </section>
 <section id="module-sloyka.src.text_classifiers">
 <span id="sloyka-src-text-classifiers-module"></span><h2>sloyka.src.text_classifiers module<a class="headerlink" href="#module-sloyka.src.text_classifiers" title="Link to this heading"></a></h2>
@@ -1884,30 +1486,27 @@ on the categories as the upper level were used (for example, „unknown_ЖКХ�
 </dl>
 <dl class="py class">
 <dt class="sig sig-object py" id="sloyka.src.text_classifiers.TextClassifiers">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sloyka.src.text_classifiers.</span></span><span class="sig-name descname"><span class="pre">TextClassifiers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_categories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.text_classifiers.TextClassifiers" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sloyka.src.text_classifiers.</span></span><span class="sig-name descname"><span class="pre">TextClassifiers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_categories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.text_classifiers.TextClassifiers" title="Link to this definition"></a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>This class is aimed to classify input texts into themes, or structured types of events. It uses a Huggingface transformer model trained on rubert-tiny.
-In many cases count of messages per theme was too low to efficiently train, so we used synthetic themes based on the categories as upper level (for example, „unknown_ЖКХ“)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.text_classifiers.TextClassifiers.classify_text">
+<span class="sig-name descname"><span class="pre">classify_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_topic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.classify_text"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.text_classifiers.TextClassifiers.classify_text" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.text_classifiers.TextClassifiers.initialize_classifier">
-<span class="sig-name descname"><span class="pre">initialize_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.initialize_classifier"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.text_classifiers.TextClassifiers.initialize_classifier" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">initialize_classifier</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.initialize_classifier"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.text_classifiers.TextClassifiers.initialize_classifier" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.text_classifiers.TextClassifiers.run_text_classifier">
-<span class="sig-name descname"><span class="pre">run_text_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.run_text_classifier"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.text_classifiers.TextClassifiers.run_text_classifier" title="Link to this definition"></a></dt>
-<dd><p>This method takes a text as input and returns the predicted categories and probabilities.
-:param t: text to classify
-:return: list of predicted categories and probabilities</p>
-</dd></dl>
+<span class="sig-name descname"><span class="pre">run_text_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.run_text_classifier"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.text_classifiers.TextClassifiers.run_text_classifier" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.text_classifiers.TextClassifiers.run_text_classifier_topics">
-<span class="sig-name descname"><span class="pre">run_text_classifier_topics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.run_text_classifier_topics"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.text_classifiers.TextClassifiers.run_text_classifier_topics" title="Link to this definition"></a></dt>
-<dd><p>This method takes a text as input and returns the predicted themes and probabilities.
-:param t: text to classify
-:return: list of predicted themes and probabilities</p>
-</dd></dl>
+<span class="sig-name descname"><span class="pre">run_text_classifier_topics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.run_text_classifier_topics"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.text_classifiers.TextClassifiers.run_text_classifier_topics" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -2337,7 +1936,7 @@ extraction of «extract_parklike», it returns a normalized form.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sloyka.src.Semgraph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sloyka.src.</span></span><span class="sig-name descname"><span class="pre">Semgraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bert_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'DeepPavlov/rubert-base-cased'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'russian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sloyka.src.</span></span><span class="sig-name descname"><span class="pre">Semgraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bert_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'DeepPavlov/rubert-base-cased'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">language</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'russian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cpu'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph/semantic_graph.html#Semgraph"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph" title="Link to this definition"></a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>This is the main class of semantic graph module.
 It is aimed to build a semantic graph based on the provided data and parameters.
@@ -2347,56 +1946,8 @@ bert_name: the name of the BERT model to use (default is „DeepPavlov/rubert-ba
 language: the language of the BERT model (default is „russian“)
 device: the device to use for inference (default is „cpu“)</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.add_attributes">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_attributes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attribute_tag</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_attributes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.add_attributes"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.add_attributes" title="Link to this definition"></a></dt>
-<dd><p>Add attributes to nodes in the graph based on the specified conditions.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – The graph to which attributes will be added.</p></li>
-<li><p><strong>new_attributes</strong> (<em>dict</em>) – A dictionary containing the new attributes to be added.</p></li>
-<li><p><strong>attribute_tag</strong> (<em>str</em>) – The tag of the attribute to be added.</p></li>
-<li><p><strong>toponym_attributes</strong> (<em>bool</em>) – A boolean flag indicating whether to add attributes to toponyms.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The graph with the new attributes added.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.add_city_graph">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_city_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">districts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">municipals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">city_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">district_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.add_city_graph"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.add_city_graph" title="Link to this definition"></a></dt>
-<dd><p>Add a city graph to the input graph based on the provided district and municipal data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – The input graph.</p></li>
-<li><p><strong>districts</strong> (<em>gpd.GeoDataFrame</em>) – The district data.</p></li>
-<li><p><strong>municipals</strong> (<em>gpd.GeoDataFrame</em>) – The municipal data.</p></li>
-<li><p><strong>city_column</strong> (<em>str</em>) – The column name in districts containing the city data.</p></li>
-<li><p><strong>district_column</strong> (<em>str</em>) – The column name in municipals containing the district data.</p></li>
-<li><p><strong>name_column</strong> (<em>str</em>) – The column name in districts and municipals containing the name data.</p></li>
-<li><p><strong>geometry_column</strong> (<em>str</em>) – The column name in districts and municipals containing the geometry data.</p></li>
-<li><p><strong>directed</strong> (<em>bool</em>) – Whether the graph should be directed. Defaults to True.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The graph with the added city graph.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.Semgraph.build_graph">
-<span class="sig-name descname"><span class="pre">build_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents_stack_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semantic_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.build_graph"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.build_graph" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">build_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents_stack_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semantic_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph/semantic_graph.html#Semgraph.build_graph"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.build_graph" title="Link to this definition"></a></dt>
 <dd><p>Build a graph based on the provided data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
@@ -2428,263 +1979,13 @@ device: the device to use for inference (default is „cpu“)</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.calculate_distances">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_distances</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.calculate_distances"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.calculate_distances" title="Link to this definition"></a></dt>
-<dd><p>Calculate the distances between pairs of nodes in the graph and add them as edges.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – The input graph.</p></li>
-<li><p><strong>directed</strong> (<em>bool</em>) – Whether the graph should be directed or undirected. Defaults to True.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>NetworkX graph object with added distance edges</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>G</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.clean_from_digits">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clean_from_digits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.clean_from_digits"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.clean_from_digits" title="Link to this definition"></a></dt>
-<dd><p>Removes digits from the text in the specified column of the input DataFrame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – The input DataFrame.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The name of the text column to clean.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The DataFrame with the specified text column cleaned from digits.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.clean_from_dublicates">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clean_from_dublicates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.clean_from_dublicates"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.clean_from_dublicates" title="Link to this definition"></a></dt>
-<dd><p>A function to clean a DataFrame from duplicates based on specified columns.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – The input DataFrame to be cleaned.</p></li>
-<li><p><strong>id_column</strong> (<em>str</em>) – The name of the column to use as the unique identifier.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>A cleaned DataFrame or GeoDataFrame without duplicates based on the
-specified text column.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.clean_from_links">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clean_from_links</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.clean_from_links"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.clean_from_links" title="Link to this definition"></a></dt>
-<dd><p>Clean the text in the specified text column by removing links and specific patterns.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The input DataFrame.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The name of the column containing the text to be cleaned.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The DataFrame with the cleaned text.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.clean_from_toponyms">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">clean_from_toponyms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.clean_from_toponyms"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.clean_from_toponyms" title="Link to this definition"></a></dt>
-<dd><p>Clean the text in the specified text column by removing any words that match the toponyms in the name
-and toponym columns.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The input DataFrame.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The name of the column containing the text to be cleaned.</p></li>
-<li><p><strong>name_column</strong> (<em>str</em>) – The name of the column containing the toponym name (e.g. Nevski, Moika etc).</p></li>
-<li><p><strong>toponym_type_column</strong> (<em>str</em>) – The name of the column containing the toponym type</p></li>
-<li><p><strong>street</strong> (<em>(</em><em>e.g.</em>)</p></li>
-<li><p><strong>alley</strong></p></li>
-<li><p><strong>etc.</strong><strong>)</strong><strong>.</strong> (<em>avenue</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The DataFrame or GeoDataFrame with the cleaned text.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.Semgraph.convert_df_to_edge_df">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convert_df_to_edge_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_info_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'words_score'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.convert_df_to_edge_df"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.convert_df_to_edge_df" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">convert_df_to_edge_df</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">word_info_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'words_score'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph/semantic_graph.html#Semgraph.convert_df_to_edge_df"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.convert_df_to_edge_df" title="Link to this definition"></a></dt>
 <dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.extract_keywords">
-<span class="sig-name descname"><span class="pre">extract_keywords</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents_stack_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semantic_key_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.extract_keywords"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.extract_keywords" title="Link to this definition"></a></dt>
-<dd><p>Extract keywords from the given data based on certain criteria.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The input data containing information.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The column in the data containing text information.</p></li>
-<li><p><strong>text_type_column</strong> (<em>str</em>) – The column in the data indicating the type of text (e.g., post, comment, reply).</p></li>
-<li><p><strong>toponym_column</strong> (<em>str</em>) – The column in the data containing toponym information.</p></li>
-<li><p><strong>id_column</strong> (<em>str</em>) – The column in the data containing unique text identifiers.</p></li>
-<li><p><strong>post_id_column</strong> (<em>str</em>) – The column in the data containing post identifiers for comments and replies.</p></li>
-<li><p><strong>parents_stack_column</strong> (<em>str</em>) – The column in the data containing information about parent-child relationships to comments.</p></li>
-<li><p><strong>semantic_key_filter</strong> (<em>float</em><em>, </em><em>optional</em>) – The threshold for semantic key filtering. Defaults to 0.75.</p></li>
-<li><p><strong>top_n</strong> (<em>int</em><em>, </em><em>optional</em>) – The number of top keywords to extract. Defaults to 1.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>Processed data with extracted keywords, toponym counts, and word counts.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.fill_empty_toponym">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">fill_empty_toponym</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.fill_empty_toponym"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.fill_empty_toponym" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.get_coordinates">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geocoded_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.get_coordinates"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.get_coordinates" title="Link to this definition"></a></dt>
-<dd><p>Get and write coordinates from geometry column in gpd.GeoDataFrame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – Prebuild input graph.</p></li>
-<li><p><strong>geocoded_data</strong> (<em>gpd.GeoDataFrame</em>) – Data containing toponim, location and geometry of toponim.</p></li>
-<li><p><strong>toponym_column</strong> (<em>str</em>) – The name of the column containing the toponim data.</p></li>
-<li><p><strong>location_column</strong> (<em>str</em>) – The name of the column containing the location data.</p></li>
-<li><p><strong>geometry_column</strong> (<em>str</em>) – The name of the column containing the geometry data.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>Graph with toponym nodes („tag“==“TOPONYM“) containing information
-about address and geometry („Location“,“Lon“,“Lat“ as node attributes)</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.get_house_text_id">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_house_text_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geocoded_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GeoDataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.get_house_text_id"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.get_house_text_id" title="Link to this definition"></a></dt>
-<dd><p>Get house text ids from geocoded data and assign them to the graph nodes.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – The input graph.</p></li>
-<li><p><strong>geocoded_data</strong> (<em>gpd.GeoDataFrame</em>) – Data containing geocoded information.</p></li>
-<li><p><strong>text_id_column</strong> (<em>str</em>) – The name of the column containing the text id.</p></li>
-<li><p><strong>text_column</strong> (<em>str</em>) – The name of the column containing the text.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The graph with assigned text ids to the nodes.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.get_semantic_closeness">
-<span class="sig-name descname"><span class="pre">get_semantic_closeness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">similarity_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.get_semantic_closeness"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.get_semantic_closeness" title="Link to this definition"></a></dt>
-<dd><p>Calculate the semantic closeness between unique words in the specified column of the input DataFrame.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The input DataFrame.</p></li>
-<li><p><strong>column</strong> (<em>str</em>) – The column in the DataFrame to calculate semantic closeness for.</p></li>
-<li><p><strong>similarity_filter</strong> (<em>float = 0.75</em>) – The score of cosine semantic proximity, from which and upper the edge</p></li>
-<li><p><strong>generated.</strong> (<em>will be</em>)</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>A DataFrame or GeoDataFrame containing the pairs of words with their
-similarity scores.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame or gpd.GeoDataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.get_tag">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">nodes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponyms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.get_tag"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.get_tag" title="Link to this definition"></a></dt>
-<dd><p>Get attributes of part of speech for the given nodes, with the option to specify toponyms.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>nodes</strong> (<em>list</em>) – list of strings representing the nodes</p></li>
-<li><p><strong>toponyms</strong> (<em>list</em>) – list of strings representing the toponyms</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>dictionary containing attributes for the nodes</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>dict</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.Semgraph.get_text_ids">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_text_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filtered_data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.get_text_ids"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.get_text_ids" title="Link to this definition"></a></dt>
-<dd><p>Update the text_ids attribute of nodes in the graph based on the provided filtered data.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Параметры<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>G</strong> (<em>nx.classes.graph.Graph</em>) – The input graph.</p></li>
-<li><p><strong>filtered_data</strong> (<em>pd.DataFrame</em><em> or </em><em>gpd.GeoDataFrame</em>) – The data to filter.</p></li>
-<li><p><strong>toponym_column</strong> (<em>str</em>) – The column name in filtered_data containing toponyms.</p></li>
-<li><p><strong>text_id_column</strong> (<em>str</em>) – The column name in filtered_data containing text IDs.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Результат<span class="colon">:</span></dt>
-<dd class="field-even"><p>The graph with updated text_ids attributes.</p>
-</dd>
-<dt class="field-odd">Тип результата<span class="colon">:</span></dt>
-<dd class="field-odd"><p>nx.classes.graph.Graph</p>
-</dd>
-</dl>
-</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.Semgraph.update_graph">
-<span class="sig-name descname"><span class="pre">update_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents_stack_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">counts_attribute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semantic_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph.html#Semgraph.update_graph"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.update_graph" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">update_graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">G</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Graph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_name_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">toponym_type_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_id_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parents_stack_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">counts_attribute</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">location_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">geometry_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">key_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">semantic_score_filter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.75</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Graph</span></span></span><a class="reference internal" href="../_modules/sloyka/src/semantic_graph/semantic_graph.html#Semgraph.update_graph"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.Semgraph.update_graph" title="Link to this definition"></a></dt>
 <dd><p>Update the input graph based on the provided data, returning the updated graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Параметры<span class="colon">:</span></dt>
@@ -2743,30 +2044,27 @@ the boundary as a polygon.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="sloyka.src.TextClassifiers">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sloyka.src.</span></span><span class="sig-name descname"><span class="pre">TextClassifiers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_categories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.TextClassifiers" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sloyka.src.</span></span><span class="sig-name descname"><span class="pre">TextClassifiers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repository_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_categories</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.TextClassifiers" title="Link to this definition"></a></dt>
 <dd><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>This class is aimed to classify input texts into themes, or structured types of events. It uses a Huggingface transformer model trained on rubert-tiny.
-In many cases count of messages per theme was too low to efficiently train, so we used synthetic themes based on the categories as upper level (for example, „unknown_ЖКХ“)</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.TextClassifiers.classify_text">
+<span class="sig-name descname"><span class="pre">classify_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_topic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.classify_text"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.TextClassifiers.classify_text" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.TextClassifiers.initialize_classifier">
-<span class="sig-name descname"><span class="pre">initialize_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">device_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.initialize_classifier"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.TextClassifiers.initialize_classifier" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">initialize_classifier</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.initialize_classifier"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.TextClassifiers.initialize_classifier" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.TextClassifiers.run_text_classifier">
-<span class="sig-name descname"><span class="pre">run_text_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.run_text_classifier"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.TextClassifiers.run_text_classifier" title="Link to this definition"></a></dt>
-<dd><p>This method takes a text as input and returns the predicted categories and probabilities.
-:param t: text to classify
-:return: list of predicted categories and probabilities</p>
-</dd></dl>
+<span class="sig-name descname"><span class="pre">run_text_classifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.run_text_classifier"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.TextClassifiers.run_text_classifier" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.TextClassifiers.run_text_classifier_topics">
-<span class="sig-name descname"><span class="pre">run_text_classifier_topics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">t</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.run_text_classifier_topics"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.TextClassifiers.run_text_classifier_topics" title="Link to this definition"></a></dt>
-<dd><p>This method takes a text as input and returns the predicted themes and probabilities.
-:param t: text to classify
-:return: list of predicted themes and probabilities</p>
-</dd></dl>
+<span class="sig-name descname"><span class="pre">run_text_classifier_topics</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/text_classifiers.html#TextClassifiers.run_text_classifier_topics"><span class="viewcode-link"><span class="pre">[исходный</span> <span class="pre">код]</span></span></a><a class="headerlink" href="#sloyka.src.TextClassifiers.run_text_classifier_topics" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 
@@ -3189,31 +2487,10 @@ access token, post number limit, and step size. Returns a list of post IDs.</p>
 <li><a class="reference internal" href="#sloyka.src.rule_for_natasha.value"><code class="docutils literal notranslate"><span class="pre">value()</span></code></a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#module-sloyka.src.semantic_graph">sloyka.src.semantic_graph module</a><ul>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph"><code class="docutils literal notranslate"><span class="pre">Semgraph</span></code></a><ul>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.add_attributes"><code class="docutils literal notranslate"><span class="pre">Semgraph.add_attributes()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.add_city_graph"><code class="docutils literal notranslate"><span class="pre">Semgraph.add_city_graph()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.build_graph"><code class="docutils literal notranslate"><span class="pre">Semgraph.build_graph()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.calculate_distances"><code class="docutils literal notranslate"><span class="pre">Semgraph.calculate_distances()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.clean_from_digits"><code class="docutils literal notranslate"><span class="pre">Semgraph.clean_from_digits()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.clean_from_dublicates"><code class="docutils literal notranslate"><span class="pre">Semgraph.clean_from_dublicates()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.clean_from_links"><code class="docutils literal notranslate"><span class="pre">Semgraph.clean_from_links()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.clean_from_toponyms"><code class="docutils literal notranslate"><span class="pre">Semgraph.clean_from_toponyms()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.convert_df_to_edge_df"><code class="docutils literal notranslate"><span class="pre">Semgraph.convert_df_to_edge_df()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.extract_keywords"><code class="docutils literal notranslate"><span class="pre">Semgraph.extract_keywords()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.fill_empty_toponym"><code class="docutils literal notranslate"><span class="pre">Semgraph.fill_empty_toponym()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.get_coordinates"><code class="docutils literal notranslate"><span class="pre">Semgraph.get_coordinates()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.get_house_text_id"><code class="docutils literal notranslate"><span class="pre">Semgraph.get_house_text_id()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.get_semantic_closeness"><code class="docutils literal notranslate"><span class="pre">Semgraph.get_semantic_closeness()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.get_tag"><code class="docutils literal notranslate"><span class="pre">Semgraph.get_tag()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.get_text_ids"><code class="docutils literal notranslate"><span class="pre">Semgraph.get_text_ids()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.semantic_graph.Semgraph.update_graph"><code class="docutils literal notranslate"><span class="pre">Semgraph.update_graph()</span></code></a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="reference internal" href="#module-sloyka.src.semantic_graph">sloyka.src.semantic_graph module</a></li>
 <li><a class="reference internal" href="#module-sloyka.src.text_classifiers">sloyka.src.text_classifiers module</a><ul>
 <li><a class="reference internal" href="#sloyka.src.text_classifiers.TextClassifiers"><code class="docutils literal notranslate"><span class="pre">TextClassifiers</span></code></a><ul>
+<li><a class="reference internal" href="#sloyka.src.text_classifiers.TextClassifiers.classify_text"><code class="docutils literal notranslate"><span class="pre">TextClassifiers.classify_text()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.text_classifiers.TextClassifiers.initialize_classifier"><code class="docutils literal notranslate"><span class="pre">TextClassifiers.initialize_classifier()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.text_classifiers.TextClassifiers.run_text_classifier"><code class="docutils literal notranslate"><span class="pre">TextClassifiers.run_text_classifier()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.text_classifiers.TextClassifiers.run_text_classifier_topics"><code class="docutils literal notranslate"><span class="pre">TextClassifiers.run_text_classifier_topics()</span></code></a></li>
@@ -3284,22 +2561,8 @@ access token, post number limit, and step size. Returns a list of post IDs.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#sloyka.src.Semgraph"><code class="docutils literal notranslate"><span class="pre">Semgraph</span></code></a><ul>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.add_attributes"><code class="docutils literal notranslate"><span class="pre">Semgraph.add_attributes()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.add_city_graph"><code class="docutils literal notranslate"><span class="pre">Semgraph.add_city_graph()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.Semgraph.build_graph"><code class="docutils literal notranslate"><span class="pre">Semgraph.build_graph()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.calculate_distances"><code class="docutils literal notranslate"><span class="pre">Semgraph.calculate_distances()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.clean_from_digits"><code class="docutils literal notranslate"><span class="pre">Semgraph.clean_from_digits()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.clean_from_dublicates"><code class="docutils literal notranslate"><span class="pre">Semgraph.clean_from_dublicates()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.clean_from_links"><code class="docutils literal notranslate"><span class="pre">Semgraph.clean_from_links()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.clean_from_toponyms"><code class="docutils literal notranslate"><span class="pre">Semgraph.clean_from_toponyms()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.Semgraph.convert_df_to_edge_df"><code class="docutils literal notranslate"><span class="pre">Semgraph.convert_df_to_edge_df()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.extract_keywords"><code class="docutils literal notranslate"><span class="pre">Semgraph.extract_keywords()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.fill_empty_toponym"><code class="docutils literal notranslate"><span class="pre">Semgraph.fill_empty_toponym()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.get_coordinates"><code class="docutils literal notranslate"><span class="pre">Semgraph.get_coordinates()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.get_house_text_id"><code class="docutils literal notranslate"><span class="pre">Semgraph.get_house_text_id()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.get_semantic_closeness"><code class="docutils literal notranslate"><span class="pre">Semgraph.get_semantic_closeness()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.get_tag"><code class="docutils literal notranslate"><span class="pre">Semgraph.get_tag()</span></code></a></li>
-<li><a class="reference internal" href="#sloyka.src.Semgraph.get_text_ids"><code class="docutils literal notranslate"><span class="pre">Semgraph.get_text_ids()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.Semgraph.update_graph"><code class="docutils literal notranslate"><span class="pre">Semgraph.update_graph()</span></code></a></li>
 </ul>
 </li>
@@ -3309,6 +2572,7 @@ access token, post number limit, and step size. Returns a list of post IDs.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#sloyka.src.TextClassifiers"><code class="docutils literal notranslate"><span class="pre">TextClassifiers</span></code></a><ul>
+<li><a class="reference internal" href="#sloyka.src.TextClassifiers.classify_text"><code class="docutils literal notranslate"><span class="pre">TextClassifiers.classify_text()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.TextClassifiers.initialize_classifier"><code class="docutils literal notranslate"><span class="pre">TextClassifiers.initialize_classifier()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.TextClassifiers.run_text_classifier"><code class="docutils literal notranslate"><span class="pre">TextClassifiers.run_text_classifier()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.TextClassifiers.run_text_classifier_topics"><code class="docutils literal notranslate"><span class="pre">TextClassifiers.run_text_classifier_topics()</span></code></a></li>
