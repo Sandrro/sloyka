@@ -3,9 +3,12 @@ from typing import Optional, List
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderUnavailable
 
+
 class GeocodingError(Exception):
     """Custom exception for geocoding errors"""
+
     pass
+
 
 class Location:
     """
@@ -31,9 +34,7 @@ class Location:
         self.logger.info(f"Geocoding query: {query}")
         for _ in range(Location.max_tries):
             try:
-                geocode = self.geolocator.geocode(
-                    query, addressdetails=True, language="ru"
-                )
+                geocode = self.geolocator.geocode(query, addressdetails=True, language="ru")
                 self.logger.debug(f"Geocode result: {geocode}")
                 return geocode
             except GeocoderUnavailable as e:
@@ -45,7 +46,7 @@ class Location:
     def query(self, address: str) -> Optional[List[float]]:
         """
         A function to query the address and return its geocode if available.
-        
+
         :param address: A string representing the address to be queried.
         :return: An optional list of floats representing the geocode of the address, or None if not found.
         """

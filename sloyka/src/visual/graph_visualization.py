@@ -3,14 +3,15 @@ import folium
 import random
 from folium.plugins import MarkerCluster
 
+
 def visualize_graph(graph_path, output_file=None):
     """
     Visualizes a graph from the given graph_path using Folium and MarkerCluster.
-    
+
     Args:
         graph_path (str): The path to the graphml file.
         output_file (str, optional): The file to save the visualization to. Defaults to None.
-        
+
     Returns:
         folium.Map: The folium map object representing the visualized graph.
     """
@@ -36,10 +37,10 @@ def visualize_graph(graph_path, output_file=None):
         15: "cadetblue",
         16: "red",
         17: "lightgreen",
-        18: "lightblue"
+        18: "lightblue",
     }
 
-    target_clusters = range(1,19)
+    target_clusters = range(1, 19)
 
     m = folium.Map(
         location=[59.9343, 30.3351],
@@ -55,7 +56,6 @@ def visualize_graph(graph_path, output_file=None):
             if "Lat" in data and "Lon" in data:
                 main_node_location = [data["Lat"], data["Lon"]]
                 for n in G.neighbors(node):
-                    
                     if "Cluster" in G.nodes[n] and G.nodes[n]["Cluster"] == c:
                         neighbor_data = G.nodes[n]
                         neighbor_location = [
@@ -69,13 +69,12 @@ def visualize_graph(graph_path, output_file=None):
                             fill=True,
                             fill_color=color_mapping[G.nodes[n]["Cluster"]],
                             popup=neighbor_data,
-                            name=f'cluster_{G.nodes[n]["Cluster"]}'
+                            name=f'cluster_{G.nodes[n]["Cluster"]}',
                         ).add_to(mc)
         mc.add_to(m)
-
 
     folium.LayerControl().add_to(m)
     if not output_file is None:
         m.save(output_file)
-    
+
     return m

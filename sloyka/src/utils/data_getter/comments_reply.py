@@ -2,42 +2,43 @@ import requests
 from datetime import datetime
 import pandas as pd
 
+
 class CommentsReply:
-    def get_comments(self,owner_id, post_id, access_token):
+    def get_comments(self, owner_id, post_id, access_token):
         """
         Retrieves comments for a specific post from VK API.
-        
+
         Parameters:
             owner_id (int): The ID of the post owner.
             post_id (int): The ID of the post.
             access_token (str): The access token for authentication.
-        
+
         Returns:
             list: A list of dictionaries containing comment information.
         """
         params = {
-            'owner_id': owner_id,
-            'post_id': post_id,
-            'access_token': access_token,
-            'v': '5.131',
-            'extended': 1,
-            'count': 100,
-            'need_likes': 1
+            "owner_id": owner_id,
+            "post_id": post_id,
+            "access_token": access_token,
+            "v": "5.131",
+            "extended": 1,
+            "count": 100,
+            "need_likes": 1,
         }
 
         comments = []
 
-        response = requests.get('https://api.vk.com/method/wall.getComments', params=params)
+        response = requests.get("https://api.vk.com/method/wall.getComments", params=params)
         data = response.json()
 
-        if 'response' in data:
-            for item in data['response']['items']:
-                item['date'] = datetime.utcfromtimestamp(item['date']).strftime('%Y-%m-%d %H:%M:%S')
-                if 'likes' in item:
-                    item['likes_count'] = item['likes']['count']
+        if "response" in data:
+            for item in data["response"]["items"]:
+                item["date"] = datetime.utcfromtimestamp(item["date"]).strftime("%Y-%m-%d %H:%M:%S")
+                if "likes" in item:
+                    item["likes_count"] = item["likes"]["count"]
                 comments.append(item)
-                if item['thread']['count'] > 0:
-                    params['comment_id'] = item['id']
+                if item["thread"]["count"] > 0:
+                    params["comment_id"] = item["id"]
                     subcomments = self.get_subcomments(owner_id, post_id, access_token, params)
                     comments.extend(subcomments)
 
@@ -58,14 +59,14 @@ class CommentsReply:
         """
         subcomments = []
 
-        response = requests.get('https://api.vk.com/method/wall.getComments', params=params)
+        response = requests.get("https://api.vk.com/method/wall.getComments", params=params)
         data = response.json()
 
-        if 'response' in data:
-            for item in data['response']['items']:
-                item['date'] = datetime.utcfromtimestamp(item['date']).strftime('%Y-%m-%d %H:%M:%S')
-                if 'likes' in item:
-                    item['likes_count'] = item['likes']['count']
+        if "response" in data:
+            for item in data["response"]["items"]:
+                item["date"] = datetime.utcfromtimestamp(item["date"]).strftime("%Y-%m-%d %H:%M:%S")
+                if "likes" in item:
+                    item["likes_count"] = item["likes"]["count"]
                 subcomments.append(item)
 
         return subcomments
@@ -78,5 +79,5 @@ class CommentsReply:
         :return: DataFrame containing selected columns from the comments
         """
         df = pd.DataFrame(comments)
-        df = df[['id', 'date', 'text', 'post_id', 'parents_stack', 'likes_count']]
+        df = df[["id", "date", "text", "post_id", "parents_stack", "likes_count"]]
         return df

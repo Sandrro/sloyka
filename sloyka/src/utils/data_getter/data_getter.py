@@ -30,6 +30,7 @@ from typing import List, Optional
 from osmapi import OsmApi
 from loguru import logger
 
+
 class GeoDataGetter:
     """
     This class is used to retrieve geospatial data from OpenStreetMap (OSM) based on given OSM ID and tags.
@@ -41,22 +42,23 @@ class GeoDataGetter:
     - _get_features_from_place: Retrieves features from a specific place based on category and tag.
     - _handle_error: Handles any errors that occur during the process and prints an error message.
     """
+
     def get_features_from_id(
-            self,
-            osm_id: int,
-            tags: dict,
-            osm_type="R",
-            selected_columns=['tag', 'element_type', 'osmid', 'name', 'geometry', 'centroid']
-            ) -> gpd.GeoDataFrame:
+        self,
+        osm_id: int,
+        tags: dict,
+        osm_type="R",
+        selected_columns=["tag", "element_type", "osmid", "name", "geometry", "centroid"],
+    ) -> gpd.GeoDataFrame:
         """
         Get features from the given OSM ID using the provided tags and OSM type, and return the results as a GeoDataFrame.
-        
+
         Args:
             osm_id (int): The OpenStreetMap ID.
             tags (dict): The tags to filter by.
             osm_type (str, optional): The OpenStreetMap type. Defaults to "R".
             selected_columns (list, optional): The selected columns to include in the result GeoDataFrame. Defaults to ['tag', 'element_type', 'osmid', 'name', 'geometry', 'centroid'].
-        
+
         Returns:
             gpd.GeoDataFrame: The GeoDataFrame containing the features.
         """
@@ -64,31 +66,23 @@ class GeoDataGetter:
         gdf_list = self._process_tags(tags, place, selected_columns)
 
         if len(gdf_list) > 0:
-            merged_gdf = (
-                pd.concat(gdf_list).reset_index().loc[:, selected_columns]
-            )
+            merged_gdf = pd.concat(gdf_list).reset_index().loc[:, selected_columns]
         else:
             merged_gdf = pd.DataFrame(columns=selected_columns)
 
         return merged_gdf
 
     def _get_place_from_id(self, osm_id, osm_type):
-        place = ox.project_gdf(
-            ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True)
-        )
+        place = ox.project_gdf(ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True))
         return place
 
     def _process_tags(self, tags, place, selected_columns):
         gdf_list = []
         place_name = place.name.iloc[0]
         for category, category_tags in tags.items():
-            for tag in tqdm(
-                category_tags, desc=f"Processing category {category}"
-            ):
+            for tag in tqdm(category_tags, desc=f"Processing category {category}"):
                 try:
-                    gdf = self._get_features_from_place(
-                        place_name, category, tag
-                    )
+                    gdf = self._get_features_from_place(place_name, category, tag)
                     gdf_list.append(gdf)
                 except AttributeError:
                     self._handle_error(category, tag)
@@ -101,9 +95,7 @@ class GeoDataGetter:
         gdf["tag"] = category
         gdf["centroid"] = gdf["geometry"]
 
-        tmpgdf = ox.projection.project_gdf(
-            gdf, to_crs=GLOBAL_METRIC_CRS, to_latlong=False
-        )
+        tmpgdf = ox.projection.project_gdf(gdf, to_crs=GLOBAL_METRIC_CRS, to_latlong=False)
         tmpgdf["centroid"] = tmpgdf["geometry"].centroid
         tmpgdf = tmpgdf.to_crs(GLOBAL_CRS)
         gdf["centroid"] = tmpgdf["centroid"]
@@ -115,6 +107,7 @@ class GeoDataGetter:
         print(
             f"\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}"
         )
+
 
 class HistGeoDataGetter:
     @staticmethod
@@ -131,15 +124,15 @@ class HistGeoDataGetter:
         if date:
             ox.settings.overpass_settings = f'[out:json][timeout:600][date:"{date}"]'
         else:
-            ox.settings.overpass_settings = '[out:json][timeout:600]'
+            ox.settings.overpass_settings = "[out:json][timeout:600]"
 
     def get_features_from_id(
         self,
         osm_id: int,
         tags: dict,
         osm_type="R",
-        selected_columns=['tag', 'key', 'element_type', 'osmid', 'name', 'geometry', 'centroid'],
-        date: Optional[str] = None
+        selected_columns=["tag", "key", "element_type", "osmid", "name", "geometry", "centroid"],
+        date: Optional[str] = None,
     ) -> gpd.GeoDataFrame:
         """
         Get features from the given OSM ID using the provided tags and OSM type, and return the results as a GeoDataFrame.
@@ -155,22 +148,20 @@ class HistGeoDataGetter:
             gpd.GeoDataFrame: The GeoDataFrame containing the features.
         """
         place = HistGeoDataGetter._get_place_from_id(osm_id, osm_type)
-    
+
         HistGeoDataGetter.set_overpass_settings(date)
-        
+
         gdf_list = self._process_tags(tags, place, selected_columns, date)
 
         if len(gdf_list) > 0:
-            merged_gdf = (
-                pd.concat(gdf_list).reset_index().loc[:, selected_columns]
-            )
+            merged_gdf = pd.concat(gdf_list).reset_index().loc[:, selected_columns]
         else:
             merged_gdf = pd.DataFrame(columns=selected_columns)
 
         if not merged_gdf.empty:
             merged_gdf = self._add_creation_timestamps(merged_gdf)
 
-        merged_gdf = merged_gdf.dropna(subset=['name'])
+        merged_gdf = merged_gdf.dropna(subset=["name"])
         merged_gdf.reset_index(drop=True, inplace=True)
         return merged_gdf
 
@@ -178,13 +169,13 @@ class HistGeoDataGetter:
         MyApi = OsmApi()
         timestamps = []
 
-        for osmid in gdf['osmid']:
+        for osmid in gdf["osmid"]:
             try:
                 object_history = MyApi.NodeHistory(osmid)
                 if object_history:
                     first_version = list(object_history.values())[0]
-                    timestamp = int(first_version['timestamp'].timestamp())
-                    creation_timestamp = datetime.datetime.utcfromtimestamp(timestamp).strftime('%Y-%m-%d %H:%M:%S')
+                    timestamp = int(first_version["timestamp"].timestamp())
+                    creation_timestamp = datetime.datetime.utcfromtimestamp(timestamp).strftime("%Y-%m-%d %H:%M:%S")
                     timestamps.append(creation_timestamp)
                 else:
                     timestamps.append(None)
@@ -192,28 +183,22 @@ class HistGeoDataGetter:
                 logger.exception(f"Error fetching timestamp for osmid {osmid}")
                 timestamps.append(None)
 
-        gdf['creation_timestamp'] = timestamps
+        gdf["creation_timestamp"] = timestamps
 
         return gdf
 
     @staticmethod
     def _get_place_from_id(osm_id, osm_type):
-        place = ox.project_gdf(
-            ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True)
-        )
+        place = ox.project_gdf(ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True))
         return place
 
     def _process_tags(self, tags, place, selected_columns, date):
         gdf_list = []
         place_name = place.name.iloc[0]
         for category, category_tags in tags.items():
-            for tag in tqdm(
-                category_tags, desc=f"Processing category {category}"
-            ):
+            for tag in tqdm(category_tags, desc=f"Processing category {category}"):
                 try:
-                    gdf = self._get_features_from_place(
-                        place_name, category, tag, date
-                    )
+                    gdf = self._get_features_from_place(place_name, category, tag, date)
                     if len(gdf) > 0:
                         gdf_list.append(gdf)
                 except Exception as e:
@@ -227,9 +212,7 @@ class HistGeoDataGetter:
         gdf["centroid"] = gdf["geometry"]
         gdf["key"] = tag
 
-        tmpgdf = ox.projection.project_gdf(
-            gdf, to_crs=GLOBAL_METRIC_CRS, to_latlong=False
-        )
+        tmpgdf = ox.projection.project_gdf(gdf, to_crs=GLOBAL_METRIC_CRS, to_latlong=False)
         tmpgdf["centroid"] = tmpgdf["geometry"].centroid
         tmpgdf = tmpgdf.to_crs(GLOBAL_CRS)
         gdf["centroid"] = tmpgdf["centroid"]
@@ -238,15 +221,15 @@ class HistGeoDataGetter:
         return gdf
 
     def _handle_error(self, category, tag):
-        print(f"\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}")
+        print(
+            f"\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}"
+        )
 
     @staticmethod
     def get_place_name_from_osm_id(osm_id, osm_type="R"):
-        place = ox.project_gdf(
-            ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True)
-        )
+        place = ox.project_gdf(ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True))
         if not place.empty:
-            place_name = place.iloc[0]['display_name']
+            place_name = place.iloc[0]["display_name"]
             return place_name
         else:
             return None
@@ -277,7 +260,6 @@ class HistGeoDataGetter:
         return None
 
 
-
 class Streets:
     """
     This class encapsulates functionality for retrieving street data
@@ -288,9 +270,7 @@ class Streets:
     global_crs: int = 4326
 
     @staticmethod
-    def get_city_bounds(
-        osm_city_name: str, osm_city_level: int
-    ) -> gpd.GeoDataFrame:
+    def get_city_bounds(osm_city_name: str, osm_city_level: int) -> gpd.GeoDataFrame:
         """
         Method retrieves the boundary of a specified city from OSM
         using Overpass API and returns a GeoDataFrame representing
@@ -306,65 +286,56 @@ class Streets:
         out geom;
         """
 
-        result = requests.get(
-            overpass_url, params={"data": overpass_query}
-        ).json()
+        result = requests.get(overpass_url, params={"data": overpass_query}).json()
         # time.sleep(random.random())
         resp = osm2geojson.json2geojson(result)
-        city_bounds = gpd.GeoDataFrame.from_features(resp["features"]).set_crs(
-            Streets.global_crs
-        )
+        city_bounds = gpd.GeoDataFrame.from_features(resp["features"]).set_crs(Streets.global_crs)
         return city_bounds
 
-class VKParser:
 
-    API_VERISON = '5.131'
+class VKParser:
+    API_VERISON = "5.131"
     COUNT_ITEMS = 100
     # SLEEP_TIME = 0.5
     TIMEOUT_LIMIT = 15
 
     @staticmethod
     def get_group_name(domain, accsess_token):
-        params = {
-        'group_id': domain,
-        'access_token': accsess_token,
-        'v': VKParser.API_VERISON
-    }
-        response = requests.get('https://api.vk.com/method/groups.getById', params=params) #передвинуть повыше
+        params = {"group_id": domain, "access_token": accsess_token, "v": VKParser.API_VERISON}
+        response = requests.get("https://api.vk.com/method/groups.getById", params=params)  # передвинуть повыше
         data = response.json()
-        if 'response' in data and data['response']:
-            group_name = data['response'][0]['name']
-            return pd.DataFrame({'group_name': [group_name]})
+        if "response" in data and data["response"]:
+            group_name = data["response"][0]["name"]
+            return pd.DataFrame({"group_name": [group_name]})
         else:
             print("Error while fetching group name:", data)
-            return pd.DataFrame({'group_name': [None]})
+            return pd.DataFrame({"group_name": [None]})
 
     @staticmethod
     def get_owner_id_by_domain(domain, access_token):
         """
-    Get the owner ID of a VK group by its domain.
+        Get the owner ID of a VK group by its domain.
 
-    Args:
-        domain (str): The domain of the VK group.
-        access_token (str): The access token for the VK API.
+        Args:
+            domain (str): The domain of the VK group.
+            access_token (str): The access token for the VK API.
 
-    Returns:
-        int: The owner ID of the VK group, or None if the request was not successful.
-    """    
+        Returns:
+            int: The owner ID of the VK group, or None if the request was not successful.
+        """
         url = "https://api.vk.com/method/wall.get"
         params = {
-        "domain": domain,
-        "access_token": access_token,
-        "v": VKParser.API_VERISON,
+            "domain": domain,
+            "access_token": access_token,
+            "v": VKParser.API_VERISON,
         }
         response = requests.get(url, params=params)
         if response.ok:
-            owner_id = response.json()['response']['items'][0]['owner_id']
+            owner_id = response.json()["response"]["items"][0]["owner_id"]
         else:
             owner_id = None
         return owner_id
 
-    
     @staticmethod
     def get_group_post_ids(domain, access_token, post_num_limit, step) -> list:
         """
@@ -375,7 +346,7 @@ class VKParser:
         post_ids = []
 
         while offset < post_num_limit:
-            print(offset, ' | ', post_num_limit, end="\r")
+            print(offset, " | ", post_num_limit, end="\r")
             res = requests.get(
                 "https://api.vk.com/method/wall.get",
                 params={
@@ -384,7 +355,8 @@ class VKParser:
                     "domain": domain,
                     "count": step,
                     "offset": offset,
-                }, timeout=10
+                },
+                timeout=10,
             ).json()["response"]
             # print(res.json().keys())
             time.sleep(random.random())
@@ -411,16 +383,16 @@ class VKParser:
         """
         subcomments = []
 
-        response = requests.get('https://api.vk.com/method/wall.getComments', params=params)
+        response = requests.get("https://api.vk.com/method/wall.getComments", params=params)
         # print(response.json().keys())
         time.sleep(random.random())
         data = response.json()
 
-        if 'response' in data:
-            for item in data['response']['items']:
-                item['date'] = datetime.datetime.utcfromtimestamp(item['date']).strftime('%Y-%m-%d %H:%M:%S')
-                if 'likes' in item:
-                    item['likes.count'] = item['likes']['count']
+        if "response" in data:
+            for item in data["response"]["items"]:
+                item["date"] = datetime.datetime.utcfromtimestamp(item["date"]).strftime("%Y-%m-%d %H:%M:%S")
+                if "likes" in item:
+                    item["likes.count"] = item["likes"]["count"]
                 subcomments.append(item)
 
         return subcomments
@@ -428,42 +400,42 @@ class VKParser:
     def get_comments(self, owner_id, post_id, access_token):
         """
         Get comments for a post on VK using the specified owner ID, post ID, and access token.
-        
+
         Parameters:
             owner_id (int): The ID of the post owner.
             post_id (int): The ID of the post.
             access_token (str): The access token for authentication.
-        
+
         Returns:
             list: A list of dictionaries containing comment information.
         """
         params = {
-            'owner_id': owner_id,
-            'post_id': post_id,
-            'access_token': access_token,
-            'v': VKParser.API_VERISON,
-            'extended': 1,
-            'count': 100,
-            'need_likes': 1
+            "owner_id": owner_id,
+            "post_id": post_id,
+            "access_token": access_token,
+            "v": VKParser.API_VERISON,
+            "extended": 1,
+            "count": 100,
+            "need_likes": 1,
         }
 
         comments = []
 
-        response = requests.get('https://api.vk.com/method/wall.getComments', params=params)
+        response = requests.get("https://api.vk.com/method/wall.getComments", params=params)
         # print(response.json().keys())
         time.sleep(random.random())
         data = response.json()
 
-        if 'response' in data:
-            for item in data['response']['items']:
-                if item['text'] == '':
+        if "response" in data:
+            for item in data["response"]["items"]:
+                if item["text"] == "":
                     continue
-                item['date'] = datetime.datetime.utcfromtimestamp(item['date']).strftime('%Y-%m-%d %H:%M:%S')
-                if 'likes' in item:
-                    item['likes.count'] = item['likes']['count']
+                item["date"] = datetime.datetime.utcfromtimestamp(item["date"]).strftime("%Y-%m-%d %H:%M:%S")
+                if "likes" in item:
+                    item["likes.count"] = item["likes"]["count"]
                 comments.append(item)
-                if item['thread']['count'] > 0:
-                    params['comment_id'] = item['id']
+                if item["thread"]["count"] > 0:
+                    params["comment_id"] = item["id"]
                     subcomments = self.get_subcomments(owner_id, post_id, access_token, params)
                     comments.extend(subcomments)
         return comments
@@ -480,10 +452,10 @@ class VKParser:
             DataFrame: A DataFrame containing specific columns from the input comments.
         """
         df = pd.DataFrame(comments)
-        df = df[['id', 'from_id', 'date', 'text', 'post_id', 'parents_stack', 'likes.count']]
+        df = df[["id", "from_id", "date", "text", "post_id", "parents_stack", "likes.count"]]
         return df
-    
-    def run_posts(self, domain, access_token, step, cutoff_date, number_of_messages=float('inf')):
+
+    def run_posts(self, domain, access_token, step, cutoff_date, number_of_messages=float("inf")):
         """
         A function to retrieve posts from a social media API based on specified parameters.
 
@@ -504,57 +476,58 @@ class VKParser:
         if step > number_of_messages:
             step = number_of_messages
         while offset < number_of_messages:
-            print(offset, ' | ', number_of_messages, end="\r")
+            print(offset, " | ", number_of_messages, end="\r")
 
-            response = requests.get('https://api.vk.com/method/wall.get',
-                                    params={
-                                        'access_token': access_token,
-                                        'v': VKParser.API_VERISON,
-                                        'domain': domain,
-                                        'count': step,
-                                        'offset': offset
-                                    }
-                                    )
+            response = requests.get(
+                "https://api.vk.com/method/wall.get",
+                params={
+                    "access_token": access_token,
+                    "v": VKParser.API_VERISON,
+                    "domain": domain,
+                    "count": step,
+                    "offset": offset,
+                },
+            )
             if response.ok:
                 # print(response.json().keys())
-                data = response.json()['response']['items']
+                data = response.json()["response"]["items"]
                 offset += step
                 current_posts = pd.json_normalize(data)
-                current_posts = current_posts[['date', 'id', 'text', 'views.count', 'likes.count', 'reposts.count']]
-                current_posts['date'] = [datetime.datetime.fromtimestamp(current_posts['date'][i]) for i in range(len(current_posts['date']))]
-                current_posts['type'] = 'post'
+                current_posts = current_posts[["date", "id", "text", "views.count", "likes.count", "reposts.count"]]
+                current_posts["date"] = [
+                    datetime.datetime.fromtimestamp(current_posts["date"][i]) for i in range(len(current_posts["date"]))
+                ]
+                current_posts["type"] = "post"
                 all_posts.append(current_posts)
                 print(current_posts.date.min())
-                if any(current_posts['date'] < datetime.datetime.strptime(cutoff_date, '%Y-%m-%d')):
-                    print('posts downloaded')
+                if any(current_posts["date"] < datetime.datetime.strptime(cutoff_date, "%Y-%m-%d")):
+                    print("posts downloaded")
                     break
             else:
                 continue
             time.sleep(random.random())
         df_posts = pd.concat(all_posts).reset_index(drop=True)
         df_posts = df_posts[df_posts.text.map(lambda x: len(x)) > 0]
-        df_posts['text'] = df_posts['text'].str.replace(r'\n', '', regex=True)
-        df_posts['link'] = df_posts['text'].str.extract(r'(https://\S+)')
+        df_posts["text"] = df_posts["text"].str.replace(r"\n", "", regex=True)
+        df_posts["link"] = df_posts["text"].str.extract(r"(https://\S+)")
         return df_posts
 
-
     def run_comments(self, domain, post_ids, access_token):
-
         owner_id = self.get_owner_id_by_domain(domain, access_token)
         all_comments = []
         for post_id in tqdm(post_ids):
             comments = self.get_comments(owner_id, post_id, access_token)
             all_comments.extend(comments)
         df = self.comments_to_dataframe(all_comments)
-        df['type'] = 'comment'
+        df["type"] = "comment"
         df = df.reset_index(drop=True)
-        print('comments downloaded')
+        print("comments downloaded")
         return df
-    
-    def run_parser(self, domain, access_token, step, cutoff_date, number_of_messages=float('inf')):
+
+    def run_parser(self, domain, access_token, step, cutoff_date, number_of_messages=float("inf")):
         """
         Runs the parser with the given parameters and returns a combined DataFrame of posts and comments.
-        
+
         :param owner_id: The owner ID for the parser.
         :param access_token: The user token for authentication.
         :param step: The step size for fetching data.
@@ -564,22 +537,21 @@ class VKParser:
         """
         owner_id = self.get_owner_id_by_domain(domain, access_token)
         df_posts = self.run_posts(owner_id, access_token, step, cutoff_date, number_of_messages)
-        post_ids = df_posts['id'].tolist()
-        
+        post_ids = df_posts["id"].tolist()
+
         df_comments = self.run_comments(owner_id, post_ids, access_token)
-        df_comments.loc[df_comments['parents_stack'].apply(lambda x: len(x) > 0), 'type'] = 'reply'
+        df_comments.loc[df_comments["parents_stack"].apply(lambda x: len(x) > 0), "type"] = "reply"
         for i in range(len(df_comments)):
-            tmp = df_comments['parents_stack'].iloc[i]
+            tmp = df_comments["parents_stack"].iloc[i]
             if tmp is not None:
                 if len(tmp) > 0:
-                    df_comments['parents_stack'].iloc[i] = tmp[0]
+                    df_comments["parents_stack"].iloc[i] = tmp[0]
                 else:
-                    df_comments['parents_stack'].iloc[i] = None
+                    df_comments["parents_stack"].iloc[i] = None
 
-        df_combined = df_comments.join(df_posts, on='post_id', rsuffix='_post')
+        df_combined = df_comments.join(df_posts, on="post_id", rsuffix="_post")
         df_combined = pd.concat([df_posts, df_comments], ignore_index=True)
         df_group_name = self.get_group_name(domain, access_token)
-        df_combined['group_name'] = df_group_name['group_name'][0]
+        df_combined["group_name"] = df_group_name["group_name"][0]
 
         return df_combined
-    

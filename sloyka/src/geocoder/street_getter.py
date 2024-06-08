@@ -9,9 +9,12 @@ import networkx as nx
 import pandas as pd
 import osmnx as ox
 
+
 class StreetsError(Exception):
     """Custom exception for streets-related errors"""
+
     pass
+
 
 class Streets:
     """

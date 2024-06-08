@@ -24,22 +24,28 @@ import nltk
 import pandas as pd
 import geopandas as gpd
 import networkx as nx
-from transformers import BertTokenizer, BertModel # type: ignore
+from transformers import BertTokenizer, BertModel  # type: ignore
 
 from .g_attrs_adder import add_attributes
 from .keyword_extracter import extract_keywords
 from .semantic_closeness_annotator import get_semantic_closeness
 from .text_data_getter import get_tag, get_coordinates, get_text_ids
-from ..utils.preprocessing.preprocessor import clean_from_dublicates, clean_from_digits, clean_from_toponyms, clean_from_links
+from ..utils.preprocessing.preprocessor import (
+    clean_from_dublicates,
+    clean_from_digits,
+    clean_from_toponyms,
+    clean_from_links,
+)
 
-nltk.download('stopwords')
+nltk.download("stopwords")
 
 
 from sloyka.src.utils.constants import TAG_ROUTER
 
+
 class Semgraph:
     """
-    This is the main class of semantic graph module. 
+    This is the main class of semantic graph module.
     It is aimed to build a semantic graph based on the provided data and parameters.
     More convinient to use after extracting data from geocoder.
 
@@ -49,25 +55,19 @@ class Semgraph:
     device: the device to use for inference (default is 'cpu')
     """
 
-    def __init__(self,
-                 bert_name: str = 'DeepPavlov/rubert-base-cased',
-                 language: str = 'russian',
-                 device: str = 'cpu'
-                 ) -> None:
-
+    def __init__(
+        self, bert_name: str = "DeepPavlov/rubert-base-cased", language: str = "russian", device: str = "cpu"
+    ) -> None:
         self.language = language
         self.device = device
         self.tokenizer = BertTokenizer.from_pretrained(bert_name)
         self.model_name = bert_name
         self.model = BertModel.from_pretrained(bert_name).to(device)
 
-
     @staticmethod
-    def convert_df_to_edge_df(data: pd.DataFrame or gpd.GeoDataFrame,
-                              toponym_column: str,
-                              word_info_column: str = 'words_score'
-                              ) -> pd.DataFrame or gpd.GeoDataFrame:
-
+    def convert_df_to_edge_df(
+        data: pd.DataFrame or gpd.GeoDataFrame, toponym_column: str, word_info_column: str = "words_score"
+    ) -> pd.DataFrame or gpd.GeoDataFrame:
         edge_list = []
 
         for i in data[toponym_column]:
@@ -80,27 +80,28 @@ class Semgraph:
                     if k[2] in TAG_ROUTER.keys():
                         edge_list.append([toponym, k[0], k[1], TAG_ROUTER[k[2]]])
 
-        edge_df = pd.DataFrame(edge_list, columns=['FROM', 'TO', 'distance', 'type'])
+        edge_df = pd.DataFrame(edge_list, columns=["FROM", "TO", "distance", "type"])
 
         return edge_df
 
-    def build_graph(self,
-                    data: pd.DataFrame or gpd.GeoDataFrame,
-                    id_column: str,
-                    text_column: str,
-                    text_type_column: str,
-                    toponym_column: str,
-                    toponym_name_column: str,
-                    toponym_type_column: str,
-                    post_id_column: str,
-                    parents_stack_column: str,
-                    directed: bool = True,
-                    location_column: str or None = None,
-                    geometry_column: str or None = None,
-                    key_score_filter: float = 0.6,
-                    semantic_score_filter: float = 0.75,
-                    top_n: int = 1
-                    ) -> nx.classes.graph.Graph:
+    def build_graph(
+        self,
+        data: pd.DataFrame or gpd.GeoDataFrame,
+        id_column: str,
+        text_column: str,
+        text_type_column: str,
+        toponym_column: str,
+        toponym_name_column: str,
+        toponym_type_column: str,
+        post_id_column: str,
+        parents_stack_column: str,
+        directed: bool = True,
+        location_column: str or None = None,
+        geometry_column: str or None = None,
+        key_score_filter: float = 0.6,
+        semantic_score_filter: float = 0.75,
+        top_n: int = 1,
+    ) -> nx.classes.graph.Graph:
         """
         Build a graph based on the provided data.
 
@@ -125,102 +126,84 @@ class Semgraph:
             nx.classes.graph.Graph: The constructed graph.
         """
 
-        data = clean_from_dublicates(data,
-                                          id_column)
+        data = clean_from_dublicates(data, id_column)
 
-        data = clean_from_digits(data,
-                                      text_column)
+        data = clean_from_digits(data, text_column)
 
-        data = clean_from_toponyms(data,
-                                        text_column,
-                                        toponym_name_column,
-                                        toponym_type_column)
+        data = clean_from_toponyms(data, text_column, toponym_name_column, toponym_type_column)
 
-        data = clean_from_links(data,
-                                     text_column)
+        data = clean_from_links(data, text_column)
 
-        extracted = extract_keywords(data,
-                                          text_column,
-                                          text_type_column,
-                                          toponym_column,
-                                          id_column,
-                                          post_id_column,
-                                          parents_stack_column,
-                                          key_score_filter,
-                                          top_n)
+        extracted = extract_keywords(
+            data,
+            text_column,
+            text_type_column,
+            toponym_column,
+            id_column,
+            post_id_column,
+            parents_stack_column,
+            key_score_filter,
+            top_n,
+        )
 
         df = extracted[0]
         toponyms_attributes = extracted[1]
         words_attributes = extracted[2]
 
-        preprocessed_df = self.convert_df_to_edge_df(data=df,
-                                                     toponym_column=toponym_column)
+        preprocessed_df = self.convert_df_to_edge_df(data=df, toponym_column=toponym_column)
 
-        words_df = get_semantic_closeness(preprocessed_df,
-                                               'TO',
-                                               semantic_score_filter)
+        words_df = get_semantic_closeness(preprocessed_df, "TO", semantic_score_filter)
 
-        graph_df = pd.concat([preprocessed_df, words_df],
-                             ignore_index=True)
+        graph_df = pd.concat([preprocessed_df, words_df], ignore_index=True)
         if directed:
-            G = nx.from_pandas_edgelist(graph_df,
-                                        source='FROM',
-                                        target='TO',
-                                        edge_attr=['distance', 'type'],
-                                        create_using=nx.DiGraph())
+            G = nx.from_pandas_edgelist(
+                graph_df, source="FROM", target="TO", edge_attr=["distance", "type"], create_using=nx.DiGraph()
+            )
 
         else:
-            G = nx.from_pandas_edgelist(graph_df,
-                                        source='FROM',
-                                        target='TO',
-                                        edge_attr=['distance', 'type'])
+            G = nx.from_pandas_edgelist(graph_df, source="FROM", target="TO", edge_attr=["distance", "type"])
 
         nodes = list(G.nodes())
         attributes = get_tag(nodes, list(set(data[toponym_column])))
 
-        nx.set_node_attributes(G, attributes, 'tag')
-        G = add_attributes(G=G,
-                                new_attributes=toponyms_attributes,
-                                attribute_tag='counts',
-                                toponym_attributes=True)
+        nx.set_node_attributes(G, attributes, "tag")
+        G = add_attributes(G=G, new_attributes=toponyms_attributes, attribute_tag="counts", toponym_attributes=True)
 
-        G = add_attributes(G=G,
-                                new_attributes=words_attributes,
-                                attribute_tag='counts',
-                                toponym_attributes=False)
+        G = add_attributes(G=G, new_attributes=words_attributes, attribute_tag="counts", toponym_attributes=False)
 
         if type(data) is gpd.GeoDataFrame:
-            G = get_coordinates(G=G,
-                                     geocoded_data=data,
-                                     toponym_column=toponym_column,
-                                     location_column=location_column,
-                                     geometry_column=geometry_column)
+            G = get_coordinates(
+                G=G,
+                geocoded_data=data,
+                toponym_column=toponym_column,
+                location_column=location_column,
+                geometry_column=geometry_column,
+            )
 
-        G = get_text_ids(G=G,
-                              filtered_data=df,
-                              toponym_column=toponym_column,
-                              text_id_column=id_column)
+        G = get_text_ids(G=G, filtered_data=df, toponym_column=toponym_column, text_id_column=id_column)
 
         return G
 
-    def update_graph(self,
-                     G: nx.classes.graph.Graph,
-                     data: pd.DataFrame or gpd.GeoDataFrame,
-                     id_column: str,
-                     text_column: str,
-                     text_type_column: str,
-                     toponym_column: str,
-                     toponym_name_column: str,
-                     toponym_type_column: str,
-                     post_id_column: str,
-                     parents_stack_column: str,
-                     directed: bool = True,
-                     counts_attribute: str or None = None,
-                     location_column: str or None = None,
-                     geometry_column: str or None = None,
-                     key_score_filter: float = 0.6,
-                     semantic_score_filter: float = 0.75,
-                     top_n: int = 1) -> nx.classes.graph.Graph:
+    def update_graph(
+        self,
+        G: nx.classes.graph.Graph,
+        data: pd.DataFrame or gpd.GeoDataFrame,
+        id_column: str,
+        text_column: str,
+        text_type_column: str,
+        toponym_column: str,
+        toponym_name_column: str,
+        toponym_type_column: str,
+        post_id_column: str,
+        parents_stack_column: str,
+        directed: bool = True,
+        counts_attribute: str or None = None,
+        location_column: str or None = None,
+        geometry_column: str or None = None,
+        key_score_filter: float = 0.6,
+        semantic_score_filter: float = 0.75,
+        top_n: int = 1,
+    ) -> nx.classes.graph.Graph:
         """
         Update the input graph based on the provided data, returning the updated graph.
 
@@ -247,28 +230,30 @@ class Semgraph:
             nx.classes.graph.Graph: The updated graph.
         """
 
-        new_G = self.build_graph(data,
-                                 id_column,
-                                 text_column,
-                                 text_type_column,
-                                 toponym_column,
-                                 toponym_name_column,
-                                 toponym_type_column,
-                                 post_id_column,
-                                 parents_stack_column,
-                                 directed,
-                                 location_column,
-                                 geometry_column,
-                                 key_score_filter,
-                                 semantic_score_filter,
-                                 top_n)
+        new_G = self.build_graph(
+            data,
+            id_column,
+            text_column,
+            text_type_column,
+            toponym_column,
+            toponym_name_column,
+            toponym_type_column,
+            post_id_column,
+            parents_stack_column,
+            directed,
+            location_column,
+            geometry_column,
+            key_score_filter,
+            semantic_score_filter,
+            top_n,
+        )
 
         joined_G = nx.compose(G, new_G)
 
         if counts_attribute is not None:
             nodes = list(set(G.nodes) & set(new_G.nodes))
             for i in nodes:
-                joined_G.nodes[i]['total_counts'] = G.nodes[i][counts_attribute] + new_G.nodes[i]['counts']
+                joined_G.nodes[i]["total_counts"] = G.nodes[i][counts_attribute] + new_G.nodes[i]["counts"]
 
         return joined_G
 

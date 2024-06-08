@@ -17,5 +17,5 @@ __all__ = [
     "VKParser",
     "City_services",
     "AreaMatcher",
-    "EmotionRecognizer"
+    "EmotionRecognizer",
 ]

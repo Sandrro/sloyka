@@ -7,9 +7,12 @@ from natasha.extractors import Extractor
 
 from .rule_for_natasha import ADDR_PART
 
+
 class AddrExtractorError(Exception):
     """Custom exception for address extractor errors"""
+
     pass
+
 
 class AddrNEWExtractor(Extractor):
     """

@@ -75,17 +75,15 @@ class EventDetection:
             links (GeoDataFrame): GeoDataFrame with the city's road links and roads.
         """
         links = ox.graph_from_place(city_name, network_type="drive")
-        links = ox.utils_graph.graph_to_gdfs(links, nodes=False).to_crs(
-            city_crs
-        )
+        links = ox.utils_graph.graph_to_gdfs(links, nodes=False).to_crs(city_crs)
         links = links.reset_index(drop=True)
         links["link_id"] = links.index
         links["geometry"] = links["geometry"].buffer(7)
         links = links.to_crs(4326)
         links = links[["link_id", "name", "geometry"]]
-        links.loc[links["name"].map(type) == list, "name"] = links[
-            links["name"].map(type) == list
-        ]["name"].map(lambda x: ", ".join(x))
+        links.loc[links["name"].map(type) == list, "name"] = links[links["name"].map(type) == list]["name"].map(
+            lambda x: ", ".join(x)
+        )
         road_id_name = dict(enumerate(links.name.dropna().unique().tolist()))
         road_name_id = {v: k for k, v in road_id_name.items()}
         links["road_id"] = links["name"].replace(road_name_id)
@@ -101,9 +99,7 @@ class EventDetection:
             buildings (GeoDataFrame): GeoDataFrame with the city's buildings.
         """
         buildings = gpd.read_file(self.population_filepath)
-        buildings = buildings[
-            ["address", "building_id", "population_balanced", "geometry"]
-        ]
+        buildings = buildings[["address", "building_id", "population_balanced", "geometry"]]
         buildings = buildings.to_crs(4326)
         buildings["building_id"] = buildings.index
         buildings = (
@@ -127,16 +123,10 @@ class EventDetection:
         pops_global = {0: buildings.population_balanced.sum()}
         pops_buildings = buildings["population_balanced"].to_dict()
         pops_links = (
-            buildings[["population_balanced", "link_id"]]
-            .groupby("link_id")
-            .sum()["population_balanced"]
-            .to_dict()
+            buildings[["population_balanced", "link_id"]].groupby("link_id").sum()["population_balanced"].to_dict()
         )
         pops_roads = (
-            buildings[["population_balanced", "road_id"]]
-            .groupby("road_id")
-            .sum()["population_balanced"]
-            .to_dict()
+            buildings[["population_balanced", "road_id"]].groupby("road_id").sum()["population_balanced"].to_dict()
         )
         pops = {
             "global": pops_global,
@@ -197,12 +187,12 @@ class EventDetection:
             on="building_id",
             rsuffix="_from_building",
         )
-        messages.loc[messages.link_id.isna(), "link_id"] = messages.loc[
-            messages.link_id.isna()
-        ]["link_id_from_building"]
-        messages.loc[messages.road_id.isna(), "road_id"] = messages.loc[
-            messages.road_id.isna()
-        ]["road_id_from_building"]
+        messages.loc[messages.link_id.isna(), "link_id"] = messages.loc[messages.link_id.isna()][
+            "link_id_from_building"
+        ]
+        messages.loc[messages.road_id.isna(), "road_id"] = messages.loc[messages.road_id.isna()][
+            "road_id_from_building"
+        ]
         messages = messages[
             [
                 "message_id",
@@ -215,9 +205,7 @@ class EventDetection:
                 "cats",
             ]
         ].dropna(subset="text")
-        messages["cats"] = (
-            messages.cats.astype(str).str.split("; ").map(lambda x: x[0])
-        )
+        messages["cats"] = messages.cats.astype(str).str.split("; ").map(lambda x: x[0])
         messages["importance"] = messages["cats"].map(self.functions_weights)
         messages["importance"].fillna(0.16, inplace=True)
         messages["global_id"] = 0
@@ -241,9 +229,7 @@ class EventDetection:
             cluster_selection_method="eom",
             prediction_data=True,
         )
-        embedding_model = pipeline(
-            "feature-extraction", model="cointegrated/rubert-tiny2"
-        )
+        embedding_model = pipeline("feature-extraction", model="cointegrated/rubert-tiny2")
         topic_model = BERTopic(
             embedding_model=embedding_model,
             hdbscan_model=hdbscan_model,
@@ -289,42 +275,26 @@ class EventDetection:
                 axis=1,
             )
             try:
-                event_model["potential_population"] = population[event_level][
-                    object_id
-                ]
+                event_model["potential_population"] = population[event_level][object_id]
             except Exception:  # need to select type of error
                 event_model["potential_population"] = population["global"][0]
 
-            clustered_messages = pd.DataFrame(
-                data={"id": message_ids, "text": docs, "topic_id": topics}
-            )
+            clustered_messages = pd.DataFrame(data={"id": message_ids, "text": docs, "topic_id": topics})
             event_model["message_ids"] = [
-                clustered_messages[clustered_messages["topic_id"] == topic][
-                    "id"
-                ].tolist()
+                clustered_messages[clustered_messages["topic_id"] == topic]["id"].tolist()
                 for topic in event_model.Topic
             ]
             event_model["duration"] = event_model.message_ids.map(
                 lambda x: (
-                    pd.to_datetime(
-                        messages[messages["message_id"].isin(x)].date_time
-                    ).max()
-                    - pd.to_datetime(
-                        messages[messages["message_id"].isin(x)].date_time
-                    ).min()
+                    pd.to_datetime(messages[messages["message_id"].isin(x)].date_time).max()
+                    - pd.to_datetime(messages[messages["message_id"].isin(x)].date_time).min()
                 ).days
             )
             event_model["category"] = event_model.message_ids.map(
-                lambda x: ", ".join(
-                    messages[messages["message_id"].isin(x)]
-                    .cats.mode()
-                    .tolist()
-                )
+                lambda x: ", ".join(messages[messages["message_id"].isin(x)].cats.mode().tolist())
             )
             event_model["importance"] = event_model.message_ids.map(
-                lambda x: messages[
-                    messages["message_id"].isin(x)
-                ].importance.mean()
+                lambda x: messages[messages["message_id"].isin(x)].importance.mean()
             )
             return event_model
         else:
@@ -341,21 +311,15 @@ class EventDetection:
         topic_model = self._create_model(min_event_size)
         events = [
             [
-                self._event_from_object(
-                    messages, topic_model, f"{level}_id", pops, oid, level
-                )
+                self._event_from_object(messages, topic_model, f"{level}_id", pops, oid, level)
                 for oid in messages[f"{level}_id"].unique().tolist()
             ]
             for level in reversed(self.levels)
         ]
-        events = [
-            item for sublist in events for item in sublist if item is not None
-        ]
+        events = [item for sublist in events for item in sublist if item is not None]
         events = pd.concat(list(chain(events)))
         events["geometry"] = events.message_ids.map(
-            lambda x: messages[
-                messages.message_id.isin(x)
-            ].geometry.unary_union.representative_point()
+            lambda x: messages[messages.message_id.isin(x)].geometry.unary_union.representative_point()
         )
         events = gpd.GeoDataFrame(events, geometry="geometry").set_crs(4326)
         events.rename(
@@ -368,33 +332,20 @@ class EventDetection:
             inplace=True,
         )
         events["docs"] = events["docs"].map(
-            lambda x: ", ".join(
-                [str(index_list[messages_list.index(text)]) for text in x]
-            )
+            lambda x: ", ".join([str(index_list[messages_list.index(text)]) for text in x])
         )
-        events.message_ids = events.message_ids.map(
-            lambda x: ", ".join([str(id) for id in x])
+        events.message_ids = events.message_ids.map(lambda x: ", ".join([str(id) for id in x]))
+        events["intensity"] = (events["intensity"] - events["intensity"].min()) / (
+            events["intensity"].max() - events["intensity"].min()
         )
-        events["intensity"] = (
-            events["intensity"] - events["intensity"].min()
-        ) / (events["intensity"].max() - events["intensity"].min())
         events["duration"] = (events["duration"] - events["duration"].min()) / (
             events["duration"].max() - events["duration"].min()
         )
         events.loc[events.intensity == 0, "intensity"] = 0.1  # fix later
         events.loc[events.duration.isna(), "duration"] = 1  # fix later
-        events["risk"] = (
-            events.intensity
-            * events.duration
-            * events.importance
-            * events.population
-        )
-        events["message_ids"] = events.message_ids.map(
-            lambda x: ", ".join(list(set(x.split(", "))))
-        )
-        events["docs"] = events.docs.map(
-            lambda x: ", ".join(list(set(x.split(", "))))
-        )
+        events["risk"] = events.intensity * events.duration * events.importance * events.population
+        events["message_ids"] = events.message_ids.map(lambda x: ", ".join(list(set(x.split(", ")))))
+        events["docs"] = events.docs.map(lambda x: ", ".join(list(set(x.split(", ")))))
         return events
 
     def _get_event_connections(self) -> gpd.GeoDataFrame:
@@ -404,10 +355,7 @@ class EventDetection:
         events = self.events.copy()
         events.index = events.id
         events.geometry = events.centroid
-        weights = [
-            len((set(c[0]) & set(c[1])))
-            for c in combinations(self.events.message_ids, 2)
-        ]
+        weights = [len((set(c[0]) & set(c[1]))) for c in combinations(self.events.message_ids, 2)]
         nodes = [c for c in combinations(events.id, 2)]
         connections = pd.DataFrame(nodes, weights).reset_index()
         connections.columns = ["weight", "a", "b"]
@@ -415,33 +363,24 @@ class EventDetection:
         connections = connections.join(events.geometry, on="a", rsuffix="_")
         connections = connections.join(events.geometry, on="b", rsuffix="_")
         events.reset_index(drop=True, inplace=True)
-        connections["geometry"] = connections.apply(
-            lambda x: LineString([x["geometry"], x["geometry_"]]), axis=1
-        )
+        connections["geometry"] = connections.apply(lambda x: LineString([x["geometry"], x["geometry_"]]), axis=1)
         connections.drop(columns=["geometry_"], inplace=True)
-        connections = gpd.GeoDataFrame(
-            connections, geometry="geometry"
-        ).set_crs(32636)
+        connections = gpd.GeoDataFrame(connections, geometry="geometry").set_crs(32636)
         return connections
 
-    def _rebalance(
-        self, connections, events, levels, event_population: int, event_id: str
-    ):
+    def _rebalance(self, connections, events, levels, event_population: int, event_id: str):
         """
         Rebalance the population of an event.
         """
         connections_of_event = connections[connections.a == event_id].b
         if len(connections_of_event) > 0:
-            accounted_pops = events[
-                events.id.isin(connections_of_event) & events.level.isin(levels)
-            ].population.sum()
+            accounted_pops = events[events.id.isin(connections_of_event) & events.level.isin(levels)].population.sum()
             if event_population >= accounted_pops:
                 rebalanced_pops = event_population - accounted_pops
             else:
                 connections_of_event = connections[connections.b == event_id].a
                 accounted_pops = events[
-                    events.id.isin(connections_of_event)
-                    & events.level.isin(levels)
+                    events.id.isin(connections_of_event) & events.level.isin(levels)
                 ].population.sum()
                 rebalanced_pops = event_population - accounted_pops
             return rebalanced_pops
@@ -475,39 +414,25 @@ class EventDetection:
             events_rebalanced.rebalanced_population.isna(),
             "rebalanced_population",
         ] = 0
-        events_rebalanced[
-            "population"
-        ] = events_rebalanced.rebalanced_population
+        events_rebalanced["population"] = events_rebalanced.rebalanced_population
         events_rebalanced.drop(columns=["rebalanced_population"], inplace=True)
         events_rebalanced.population = events_rebalanced.population.astype(int)
-        events_rebalanced["population"] = (
-            events_rebalanced["population"]
-            - events_rebalanced["population"].min()
-        ) / (
-            events_rebalanced["population"].max()
-            - events_rebalanced["population"].min()
+        events_rebalanced["population"] = (events_rebalanced["population"] - events_rebalanced["population"].min()) / (
+            events_rebalanced["population"].max() - events_rebalanced["population"].min()
         )
+        events_rebalanced.loc[events_rebalanced.population == 0, "population"] = 0.01  # fix later
         events_rebalanced.loc[
-            events_rebalanced.population == 0, "population"
-        ] = 0.01  # fix later
-        events_rebalanced.loc[
-            events_rebalanced.population.isna()
-            & events_rebalanced.level.isin(["building", "link"]),
+            events_rebalanced.population.isna() & events_rebalanced.level.isin(["building", "link"]),
             "population",
         ] = 0.01  # fix later
         events_rebalanced.loc[
-            events_rebalanced.population.isna()
-            & events_rebalanced.level.isin(["road", "global"]),
+            events_rebalanced.population.isna() & events_rebalanced.level.isin(["road", "global"]),
             "population",
         ] = 1  # fix later
         events_rebalanced["risk"] = (
-            events_rebalanced.intensity
-            * (events_rebalanced.duration + 1)
-            * events_rebalanced.importance
+            events_rebalanced.intensity * (events_rebalanced.duration + 1) * events_rebalanced.importance
         )
-        events_rebalanced = events_rebalanced[
-            ["name", "docs", "level", "id", "risk", "message_ids", "geometry"]
-        ]
+        events_rebalanced = events_rebalanced[["name", "docs", "level", "id", "risk", "message_ids", "geometry"]]
         return events_rebalanced
 
     def _filter_outliers(self):
@@ -518,26 +443,14 @@ class EventDetection:
         events = self.events
         connections = self.connections
         print(
-            len(
-                events[
-                    events.name.map(
-                        lambda x: True if re.match(pattern, x) else False
-                    )
-                ]
-            ),
+            len(events[events.name.map(lambda x: True if re.match(pattern, x) else False)]),
             "outlier clusters of",
             len(events),
             "total clusters. Filtering...",
         )
-        events = events[
-            events.name.map(lambda x: False if re.match(pattern, x) else True)
-        ]
-        connections = connections[
-            connections.a.map(lambda x: False if re.match(pattern, x) else True)
-        ]
-        connections = connections[
-            connections.b.map(lambda x: False if re.match(pattern, x) else True)
-        ]
+        events = events[events.name.map(lambda x: False if re.match(pattern, x) else True)]
+        connections = connections[connections.a.map(lambda x: False if re.match(pattern, x) else True)]
+        connections = connections[connections.b.map(lambda x: False if re.match(pattern, x) else True)]
         return events, connections
 
     def _prepare_messages(self):
@@ -547,9 +460,7 @@ class EventDetection:
         messages = self.messages.copy()
         messages = messages.reset_index(drop=True)
         messages.rename(columns={"cats": "block"}, inplace=True)
-        messages = messages[
-            ["message_id", "text", "geometry", "date_time", "block"]
-        ]
+        messages = messages[["message_id", "text", "geometry", "date_time", "block"]]
         messages = messages.to_crs(4326)
         return messages
 

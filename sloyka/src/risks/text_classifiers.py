@@ -23,6 +23,7 @@ import pandas as pd
 from transformers import pipeline
 from sloyka.src.utils.exceptions import InvalidInputError, ClassifierInitializationError, ClassificationError
 
+
 class TextClassifiers:
     def __init__(self, repository_id, number_of_categories=1, device_type=None):
         self.repository_id = repository_id
@@ -37,7 +38,7 @@ class TextClassifiers:
                     "text-classification",
                     model=self.repository_id,
                     tokenizer="cointegrated/rubert-tiny2",
-                    device=self.device_type
+                    device=self.device_type,
                 )
             except Exception as e:
                 raise ClassifierInitializationError(f"Failed to initialize the classifier: {e}")
@@ -45,7 +46,7 @@ class TextClassifiers:
     def classify_text(self, text, is_topic=False):
         if not isinstance(text, str):
             raise InvalidInputError("Input must be a string.")
-        
+
         self.initialize_classifier()
 
         try:
@@ -55,7 +56,7 @@ class TextClassifiers:
             probabilities = "; ".join(preds_df["score"].round(3).astype(str).tolist())
         except Exception as e:
             raise ClassificationError(f"Error during text classification: {e}")
-        
+
         return categories, probabilities
 
     def run_text_classifier_topics(self, text):
@@ -63,4 +64,3 @@ class TextClassifiers:
 
     def run_text_classifier(self, text):
         return self.classify_text(text)
-

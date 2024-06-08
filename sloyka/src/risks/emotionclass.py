@@ -14,16 +14,17 @@ import pandas as pd
 from tqdm import tqdm
 import gc
 
+
 class EmotionRecognizer:
     """
     This class is designed to categorise input texts into emotion categories.
 
         Attributes:
 
-    - model: This attribute holds the model used for emotion recognition. It defaults to HuggingFaceModel.Text.Bert_Large, 
+    - model: This attribute holds the model used for emotion recognition. It defaults to HuggingFaceModel.Text.Bert_Large,
     but can be set to any other compatible model during the instantiation of the class.
 
-    - device: the device to use for inference. It automatically selects 'cuda' (GPU) if a compatible GPU 
+    - device: the device to use for inference. It automatically selects 'cuda' (GPU) if a compatible GPU
     is available and CUDA is enabled, otherwise, it falls back to 'cpu'.
 
     - text: The text to be analyzed.
@@ -34,7 +35,7 @@ class EmotionRecognizer:
     """
 
     def __init__(self, model_name=HuggingFaceModel.Text.Bert_Large, device=None):
-        self.device = device if device is not None else ('cuda' if torch.cuda.is_available() else 'cpu')
+        self.device = device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu")
         self.model_name = model_name
 
         # Define the default model names to avoid repeated initialization
@@ -42,7 +43,7 @@ class EmotionRecognizer:
             HuggingFaceModel.Text.Bert_Tiny,
             HuggingFaceModel.Text.Bert_Base,
             HuggingFaceModel.Text.Bert_Large,
-            HuggingFaceModel.Text.Bert_Tiny2
+            HuggingFaceModel.Text.Bert_Tiny2,
         ]
 
     def recognize_emotion(self, text):
@@ -63,10 +64,14 @@ class EmotionRecognizer:
             # Validate that the provided models are in the default models list
             for model in models:
                 if model not in self.default_model_names:
-                    raise ValueError(f"Model {model} is not a valid model. Valid models are: {self.default_model_names}")
+                    raise ValueError(
+                        f"Model {model} is not a valid model. Valid models are: {self.default_model_names}"
+                    )
 
         # Initialize scores DataFrame
-        scores = pd.DataFrame(0, index=df.index, columns=["happiness", "sadness", "anger", "fear", "disgust", "enthusiasm", "neutral"])
+        scores = pd.DataFrame(
+            0, index=df.index, columns=["happiness", "sadness", "anger", "fear", "disgust", "enthusiasm", "neutral"]
+        )
 
         # Process each model one by one with progress bar
         for model_name in tqdm(models, desc="Processing models"):
