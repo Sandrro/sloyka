@@ -5,10 +5,14 @@ import geopandas as gpd
 import tqdm
 
 from keybert import KeyBERT
+import nltk
 from nltk.corpus import stopwords
 import pymorphy3
 
 from sloyka.src.utils.constants import STOPWORDS, TAG_ROUTER, SPB_DISTRICTS
+
+nltk.download('stopwords')
+
 
 RUS_STOPWORDS = stopwords.words("russian") + STOPWORDS
 
