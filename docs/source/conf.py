@@ -6,6 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+
 project = 'sloyka'
 copyright = '2024, itmo_idu'
 author = 'itmo_idu'
@@ -19,6 +20,18 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
     'sphinx_rtd_theme',
+    "sphinx_inline_tabs",
+    "sphinx_design",
+    "sphinx_issues",
+
+    # For using CONTRIBUTING.md.
+    "myst_parser",
+
+    "notfound.extension",
+
+    # These extensions require RTDs to work so they will not work locally.
+    "hoverxref.extension",
+    "sphinx_search.extension",
 ]
 
 templates_path = ['_templates']
