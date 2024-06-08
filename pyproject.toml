@@ -50,6 +50,7 @@ aniemore = "^1.2.3"
 scipy = "1.12"
 folium = "^0.16.0"
 
+
 [tool.poetry.group.docs]
 optional = true
 

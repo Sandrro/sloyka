@@ -8,7 +8,7 @@ Thus, if the address repeats, it would be taken from the book.
 
 @class:Streets: 
 A class encapsulating functionality for retrieving street data
- for a specified city from OSM and processing it to extract useful information for geocoding purposes.
+for a specified city from OSM and processing it to extract useful information for geocoding purposes.
 
 @class:Geocoder:
 A class providing functionality for simple geocoding and address extraction.
