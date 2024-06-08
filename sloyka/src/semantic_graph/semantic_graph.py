@@ -35,7 +35,7 @@ from ..utils.preprocessing.preprocessor import clean_from_dublicates, clean_from
 nltk.download('stopwords')
 
 
-from sloyka.src.constants import TAG_ROUTER
+from sloyka.src.utils.constants import TAG_ROUTER
 
 class Semgraph:
     """

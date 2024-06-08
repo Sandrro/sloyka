@@ -13,6 +13,7 @@ build:
     post_install:
       # Install dependencies
       - poetry install --with docs
+      - poetry add sphinx-rtd-theme
 
 sphinx:
   configuration: docs/source/conf.py

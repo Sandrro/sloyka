@@ -8,7 +8,7 @@ from keybert import KeyBERT
 from nltk.corpus import stopwords
 import pymorphy3
 
-from sloyka.src.constants import STOPWORDS, TAG_ROUTER, SPB_DISTRICTS
+from sloyka.src.utils.constants import STOPWORDS, TAG_ROUTER, SPB_DISTRICTS
 
 RUS_STOPWORDS = stopwords.words('russian') + STOPWORDS
 
