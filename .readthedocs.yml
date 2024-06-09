@@ -7,7 +7,7 @@ build:
   jobs:
     post_install:
       # Install dependencies
-      - pip install sphinx, furo, readthedocs-sphinx-search, sphinx-autobuild, sphinx-design, sphinx-hoverxref, sphinx-inline-tabs, sphinx-issues, sphinx-notfound-page, myst-parser,sphinx-rtd-theme
+      - pip install sphinx furo readthedocs-sphinx-search sphinx-autobuild sphinx-design  sphinx-hoverxref sphinx-inline-tabs sphinx-issues sphinx-notfound-page myst-parser sphinx-rtd-theme
 
 sphinx:
   configuration: docs/source/conf.py
