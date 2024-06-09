@@ -12,8 +12,7 @@ build:
       - poetry config virtualenvs.create false
     post_install:
       # Install dependencies
-      - poetry install --with docs
-      - poetry add sphinx-rtd-theme
+      - poetry install
 
 sphinx:
   configuration: docs/source/conf.py
