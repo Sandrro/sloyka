@@ -1027,6 +1027,7 @@ class Geocoder:
             pd.DataFrame: The processed DataFrame after running the data processing pipeline.
         """
         df[text_column] = df[text_column].str.replace('\n', ' ')
+        df_reconstruction = df.copy()
         df_obj = OtherGeoObjects.run(self.osm_city_name, df, text_column)
         street_names = Streets.run(self.osm_city_name, self.osm_city_level)
 
@@ -1036,6 +1037,7 @@ class Geocoder:
         gdf = self.create_gdf(df)
         gdf = pd.concat([gdf, df_obj], ignore_index=True)
         gdf['geo_obj_tag'] = gdf['geo_obj_tag'].apply(Geocoder.assign_street)
+        gdf = pd.concat([gdf, df_reconstruction[~df_reconstruction[text_column].isin(gdf[text_column])]], ignore_index=True)
 
         # # Add a new 'level' column using the get_level function
         # gdf2["level"] = gdf2.progress_apply(self.get_level, axis=1)
