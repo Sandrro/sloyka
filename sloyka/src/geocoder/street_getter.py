@@ -53,7 +53,6 @@ class Streets:
             Streets.logger.error(f"Error retrieving city bounds: {e}")
             raise StreetsError(f"Error retrieving city bounds: {e}")
 
-
     @staticmethod
     def get_drive_graph(city_bounds: gpd.GeoDataFrame) -> nx.MultiDiGraph:
         """
@@ -181,4 +180,3 @@ class Streets:
         streets_df = Streets.clear_names(streets_df)
         Streets.logger.info(f"Street data retrieval complete: {streets_df}")
         return streets_df
-

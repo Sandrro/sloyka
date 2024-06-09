@@ -524,7 +524,7 @@ class VKParser:
         print("comments downloaded")
         return df
 
-    def run_parser(self, domain, access_token, step, cutoff_date, number_of_messages=float("inf")):
+    def run_parser(self, domain, access_token, cutoff_date, number_of_messages=float("inf"), step=100):
         """
         Runs the parser with the given parameters and returns a combined DataFrame of posts and comments.
 

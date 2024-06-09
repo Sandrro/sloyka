@@ -11,7 +11,7 @@ import pymorphy3
 
 from sloyka.src.utils.constants import STOPWORDS, TAG_ROUTER, SPB_DISTRICTS
 
-nltk.download('stopwords')
+nltk.download("stopwords")
 
 
 RUS_STOPWORDS = stopwords.words("russian") + STOPWORDS

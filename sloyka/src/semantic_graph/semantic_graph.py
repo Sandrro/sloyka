@@ -29,7 +29,7 @@ from transformers import BertTokenizer, BertModel  # type: ignore
 from .g_attrs_adder import add_attributes
 from .keyword_extracter import extract_keywords
 from .semantic_closeness_annotator import get_semantic_closeness
-from .text_data_getter import get_tag, get_coordinates, get_text_ids
+from .g_text_data_getter import get_tag, get_coordinates, get_text_ids
 from ..utils.preprocessing.preprocessor import (
     clean_from_dublicates,
     clean_from_digits,
@@ -66,8 +66,8 @@ class Semgraph:
 
     @staticmethod
     def convert_df_to_edge_df(
-        data: pd.DataFrame or gpd.GeoDataFrame, toponym_column: str, word_info_column: str = "words_score"
-    ) -> pd.DataFrame or gpd.GeoDataFrame:
+        data: pd.DataFrame | gpd.GeoDataFrame, toponym_column: str, word_info_column: str = "words_score"
+    ) -> pd.DataFrame | gpd.GeoDataFrame:
         edge_list = []
 
         for i in data[toponym_column]:
@@ -86,7 +86,7 @@ class Semgraph:
 
     def build_graph(
         self,
-        data: pd.DataFrame or gpd.GeoDataFrame,
+        data: pd.DataFrame | gpd.GeoDataFrame,
         id_column: str,
         text_column: str,
         text_type_column: str,
@@ -96,8 +96,8 @@ class Semgraph:
         post_id_column: str,
         parents_stack_column: str,
         directed: bool = True,
-        location_column: str or None = None,
-        geometry_column: str or None = None,
+        location_column: str | None = None,
+        geometry_column: str | None = None,
         key_score_filter: float = 0.6,
         semantic_score_filter: float = 0.75,
         top_n: int = 1,
@@ -171,7 +171,7 @@ class Semgraph:
 
         G = add_attributes(G=G, new_attributes=words_attributes, attribute_tag="counts", toponym_attributes=False)
 
-        if type(data) is gpd.GeoDataFrame:
+        if isinstance(data, gpd.GeoDataFrame):
             G = get_coordinates(
                 G=G,
                 geocoded_data=data,
@@ -187,7 +187,7 @@ class Semgraph:
     def update_graph(
         self,
         G: nx.classes.graph.Graph,
-        data: pd.DataFrame or gpd.GeoDataFrame,
+        data: pd.DataFrame | gpd.GeoDataFrame,
         id_column: str,
         text_column: str,
         text_type_column: str,
@@ -197,9 +197,9 @@ class Semgraph:
         post_id_column: str,
         parents_stack_column: str,
         directed: bool = True,
-        counts_attribute: str or None = None,
-        location_column: str or None = None,
-        geometry_column: str or None = None,
+        counts_attribute: str | None = None,
+        location_column: str | None = None,
+        geometry_column: str | None = None,
         key_score_filter: float = 0.6,
         semantic_score_filter: float = 0.75,
         top_n: int = 1,
