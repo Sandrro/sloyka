@@ -5,14 +5,9 @@ build:
   tools:
     python: "3.11"
   jobs:
-    post_create_environment:
-      # Install poetry
-      - pip install poetry
-      # Tell poetry to not use a virtual environment
-      - poetry config virtualenvs.create false
     post_install:
       # Install dependencies
-      - poetry install --with docs
+      - pip install sphinx furo readthedocs-sphinx-search sphinx-autobuild sphinx-design  sphinx-hoverxref sphinx-inline-tabs sphinx-issues sphinx-notfound-page myst-parser sphinx-rtd-theme
 
 sphinx:
   configuration: docs/source/conf.py

@@ -14,7 +14,8 @@ Sloyka is a library for analyzing city identity using social media data.
    :maxdepth: 2
    :caption: User:
 
-   user/sloyka.src
+   user/geocoder
+   user/semantic_graph
 
 Indices and tables
 ==================

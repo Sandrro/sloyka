@@ -50,12 +50,6 @@ aniemore = "^1.2.3"
 scipy = "1.12"
 folium = "^0.16.0"
 
-
-[tool.poetry.group.docs]
-optional = true
-
-[tool.poetry.group.docs.dependencies]
-sphinx-rtd-theme = "^2.0.0"
 furo = "^2024.5.6"
 readthedocs-sphinx-search = "^0.3.2"
 sphinx-autobuild = "^2024.4.16"
@@ -66,6 +60,24 @@ sphinx-issues = "^4.1.0"
 sphinx-notfound-page = "^1.0.2"
 sphinx = "^7.3.7"
 myst-parser = "^3.0.1"
+sphinx-rtd-theme = "^2.0.0"
+
+
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
+furo = "^2024.5.6"
+readthedocs-sphinx-search = "^0.3.2"
+sphinx-autobuild = "^2024.4.16"
+sphinx-design = "^0.6.0"
+sphinx-hoverxref = "^1.4.0"
+sphinx-inline-tabs = "^2023.4.21"
+sphinx-issues = "^4.1.0"
+sphinx-notfound-page = "^1.0.2"
+sphinx = "^7.3.7"
+myst-parser = "^3.0.1"
+sphinx-rtd-theme = "^2.0.0"
 
 [tool.poetry.group.test.dependencies]
 pytest = "7.4.3"
