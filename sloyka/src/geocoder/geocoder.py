@@ -72,6 +72,9 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 from .city_objects_getter import OtherGeoObjects
 from .street_getter import Streets
+from .location_getter import Location
+
+
 
 stemmer = SnowballStemmer("russian")
 
@@ -543,7 +546,7 @@ class Geocoder:
 
         return best_match, admin_level
 
-    def run(self, osm_id, tags, date, df: pd.DataFrame, text_column: str = "text", group_column: str = "group_name"):
+    def run(self, osm_id, tags, date, df: pd.DataFrame, text_column: str = "text", group_column: str | None = "group_name"):
         """
         Runs the data processing pipeline on the input DataFrame.
 
@@ -569,6 +572,7 @@ class Geocoder:
         df_areas = self.get_df_areas(osm_id, tags, date)
         df_areas = self.preprocess_area_names(df_areas)
 
+        # if group_column:
         for i, group_name in enumerate(df[group_column]):
             processed_group_name = self.preprocess_group_name(group_name)
             best_match, admin_level = self.match_group_to_area(processed_group_name, df_areas)

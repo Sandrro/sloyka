@@ -1,5 +1,5 @@
 from typing import List
-
+import re
 import pandas as pd
 import osmnx as ox
 from shapely.geometry import Point, Polygon, MultiPolygon
@@ -7,6 +7,7 @@ from loguru import logger
 from natasha import MorphVocab
 from sloyka.src.utils.constants import NUM_CITY_OBJ
 from sloyka.src.geocoder.address_extractor_titles import AddrNEWExtractor
+from rapidfuzz import fuzz
 import numpy as np
 
 
