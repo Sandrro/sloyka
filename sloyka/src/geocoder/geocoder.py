@@ -73,6 +73,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 from .city_objects_getter import OtherGeoObjects
 from .street_getter import Streets
 from .location_getter import Location
+from sloyka.src.utils.data_getter.data_getter import GeoDataGetter
 
 
 
@@ -94,14 +95,13 @@ class Geocoder:
         self,
         model_path: str = "Geor111y/flair-ner-addresses-extractor",
         device: str = "cpu",
-        osm_city_level: int = 5,
-        osm_city_name: str = "Санкт-Петербург",
+        osm_id: int = None,
     ):
         self.device = device
         flair.device = torch.device(device)
         self.classifier = SequenceTagger.load(model_path)
-        self.osm_city_level = osm_city_level
-        self.osm_city_name = osm_city_name
+        self.osm_id = osm_id 
+        self.osm_city_name = GeoDataGetter().get_features_from_id(osm_id=self.osm_id, tags={"place": ["city"]}, selected_columns=['name', 'geometry']).iloc[0]['name']
 
     def extract_ner_street(self, text: str) -> pd.Series:
         """
@@ -577,14 +577,14 @@ class Geocoder:
             processed_group_name = self.preprocess_group_name(group_name)
             best_match, admin_level = self.match_group_to_area(processed_group_name, df_areas)
             df.at[i, "territory"] = best_match
-            df.at[i, "admin_level"] = admin_level
+            df.at[i, "key"] = admin_level
         # df = AreaMatcher.run(self, df, osm_id, tags, date)
 
         df[text_column] = df[text_column].str.replace("\n", " ")
         df_reconstruction = df.copy()
         df[text_column] = df[text_column].apply(str)
-        df_obj = OtherGeoObjects.run(self.osm_city_name, df, text_column)
-        street_names = Streets.run(self.osm_city_name, self.osm_city_level)
+        df_obj = OtherGeoObjects.run(osm_id, df, text_column)
+        street_names = Streets.run(osm_id)
 
         df = self.get_street(df, text_column)
         street_names = self.get_stem(street_names)

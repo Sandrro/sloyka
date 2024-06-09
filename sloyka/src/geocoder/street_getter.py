@@ -27,22 +27,21 @@ class Streets:
     logger = logging.getLogger(__name__)
 
     @staticmethod
-    def get_city_bounds(osm_city_name: str, osm_city_level: int) -> gpd.GeoDataFrame:
+    def get_city_bounds(osm_id: int) -> gpd.GeoDataFrame:
         """
         Method retrieves the boundary of a specified city from OSM
         using Overpass API and returns a GeoDataFrame representing
         the boundary as a polygon.
         """
-        Streets.logger.info(f"Retrieving city bounds for {osm_city_name} (level {osm_city_level})")
+        Streets.logger.info(f"Retrieving city bounds for osm_id {osm_id}")
         overpass_url = "http://overpass-api.de/api/interpreter"
         overpass_query = f"""
         [out:json];
-                area[name="{osm_city_name}"]->.searchArea;
-                (
-                relation["admin_level"="{osm_city_level}"](area.searchArea);
-                );
-        out geom;
-        """
+            (
+            relation({osm_id});
+            );
+            out geom;
+            """
 
         try:
             result = requests.get(overpass_url, params={"data": overpass_query}).json()
@@ -53,6 +52,7 @@ class Streets:
         except requests.exceptions.RequestException as e:
             Streets.logger.error(f"Error retrieving city bounds: {e}")
             raise StreetsError(f"Error retrieving city bounds: {e}")
+
 
     @staticmethod
     def get_drive_graph(city_bounds: gpd.GeoDataFrame) -> nx.MultiDiGraph:
@@ -168,16 +168,17 @@ class Streets:
         return streets_df
 
     @staticmethod
-    def run(osm_city_name: str, osm_city_level: int) -> pd.DataFrame:
+    def run(osm_id: int) -> pd.DataFrame:
         """
         A static method to run the process of getting street data based on the given
-        OSM city name and level, returning a pandas DataFrame.
+        OSM id, returning a pandas DataFrame.
         """
-        Streets.logger.info(f"Running street data retrieval for {osm_city_name} (level {osm_city_level})")
-        city_bounds = Streets.get_city_bounds(osm_city_name, osm_city_level)
+        Streets.logger.info(f"Running street data retrieval for osm_id {osm_id}")
+        city_bounds = Streets.get_city_bounds(osm_id)
         streets_graph = Streets.get_drive_graph(city_bounds)
         streets_gdf = Streets.graph_to_gdf(streets_graph)
         streets_df = Streets.get_street_names(streets_gdf)
         streets_df = Streets.clear_names(streets_df)
         Streets.logger.info(f"Street data retrieval complete: {streets_df}")
         return streets_df
+

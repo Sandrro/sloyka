@@ -9,112 +9,34 @@ from sloyka.src.utils.constants import NUM_CITY_OBJ
 from sloyka.src.geocoder.address_extractor_titles import AddrNEWExtractor
 from rapidfuzz import fuzz
 import numpy as np
+import warnings
+
+warnings.simplefilter("ignore")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 class OtherGeoObjects:
-    """
-    TODO: эту жесть надо переписать
-    """
-    @staticmethod
-    def get_OSM_green_obj(osm_city_name) -> pd.DataFrame:
-        """
-        This function sets spatial data from OSM about green_obj.
-        """
-        tags = {"leisure": ["park", "garden", "recreation_ground"]}
-        green_obj = ox.geometries_from_place(osm_city_name, tags)
-        osm_green_obj_df = pd.DataFrame(green_obj)
-        osm_green_obj_df = osm_green_obj_df.dropna(subset=["name"])
-        osm_green_obj_df = osm_green_obj_df[["name", "geometry", "leisure"]]
-        return osm_green_obj_df
 
     @staticmethod
-    def get_OSM_num_obj(osm_city_name) -> pd.DataFrame:
+    def get_osm_data(osm_id: int, tags: dict) -> pd.DataFrame:
         """
-        This function sets spatial data from OSM about amenity.
+        Retrieves spatial data from OSM for given tags using OSM ID and returns a DataFrame.
         """
-        tags = {"amenity": ["hospital", "clinic", "school", "kindergarten"]}
-        osm_num_obj = ox.geometries_from_place(osm_city_name, tags)
-        osm_num_obj_df = pd.DataFrame(osm_num_obj)
-        osm_num_obj_df = osm_num_obj_df.dropna(subset=["name"])
-        osm_num_obj_df = osm_num_obj_df[["name", "geometry", "amenity"]]
-        return osm_num_obj_df
+        try:
+            city_boundary_gdf = ox.geocode_to_gdf(f'R{osm_id}', by_osmid = True)
+            polygon = city_boundary_gdf["geometry"].iloc[0]
+            data = ox.features_from_polygon(polygon, tags)
+            df = pd.DataFrame(data)
+            df = df.dropna(subset=["name"])
+            df = df[["name", "geometry"] + list(tags.keys())]
+            return df
+        except Exception as e:
+            raise RuntimeError(f"Error retrieving OSM data: {e}")
 
     @staticmethod
-    def get_OSM_cemetery(osm_city_name) -> pd.DataFrame:
+    def calculate_centroid(geometry) -> Point:
         """
-        This function sets spatial data from OSM about cemetery.
-        """
-        tags = {"landuse": ["cemetery"]}
-        osm_cemetery = ox.geometries_from_place(osm_city_name, tags)
-        osm_cemetery_df = pd.DataFrame(osm_cemetery)
-        osm_cemetery_df = osm_cemetery_df.dropna(subset=["name"])
-        osm_cemetery_df = osm_cemetery_df[["name", "geometry", "landuse"]]
-        return osm_cemetery_df
-
-    @staticmethod
-    def get_OSM_natural(osm_city_name) -> pd.DataFrame:
-        """
-        This function sets spatial data from OSM about natural obj.
-        """
-        tags = {"natural": ["beach", "water"]}
-        osm_natural = ox.geometries_from_place(osm_city_name, tags)
-        osm_natural_df = pd.DataFrame(osm_natural)
-        osm_natural_df = osm_natural_df.dropna(subset=["name"])
-        osm_natural_df = osm_natural_df[["name", "geometry", "natural"]]
-        return osm_natural_df
-
-    @staticmethod
-    def get_OSM_railway(osm_city_name) -> pd.DataFrame:
-        """
-        This function sets spatial data from OSM about railway obj.
-        """
-        tags = {"railway": ["station", "subway"]}
-        osm_railway = ox.geometries_from_place(osm_city_name, tags)
-        osm_railway_df = pd.DataFrame(osm_railway)
-        osm_railway_df = osm_railway_df.dropna(subset=["name"])
-        osm_railway_df = osm_railway_df[["name", "geometry", "railway"]]
-        return osm_railway_df
-
-    @staticmethod
-    def get_OSM_tourism(osm_city_name) -> pd.DataFrame:
-        """
-        This function sets spatial data from OSM about tourism obj.
-        """
-        tags = {"tourism": ["attraction", "museum"]}
-        osm_tourism = ox.geometries_from_place(osm_city_name, tags)
-        osm_tourism_df = pd.DataFrame(osm_tourism)
-        osm_tourism_df = osm_tourism_df.dropna(subset=["name"])
-        osm_tourism_df = osm_tourism_df[["name", "geometry", "tourism"]]
-        return osm_tourism_df
-
-    @staticmethod
-    def get_OSM_historic(osm_city_name) -> pd.DataFrame:
-        """
-        This function sets spatial data from OSM about historical obj.
-        """
-        tags = {"historic": ["monument", "memorial"]}
-        osm_historic = ox.geometries_from_place(osm_city_name, tags)
-        osm_historic_df = pd.DataFrame(osm_historic)
-        osm_historic_df = osm_historic_df.dropna(subset=["name"])
-        osm_historic_df = osm_historic_df[["name", "geometry", "historic"]]
-        return osm_historic_df
-
-    @staticmethod
-    def get_OSM_square(osm_city_name) -> pd.DataFrame:
-        """
-        This function sets spatial data from OSM about square obj.
-        """
-        tags = {"place": ["square"]}
-        osm_square = ox.geometries_from_place(osm_city_name, tags)
-        osm_square_df = pd.DataFrame(osm_square)
-        osm_square_df = osm_square_df.dropna(subset=["name"])
-        osm_square_df = osm_square_df[["name", "geometry", "place"]]
-        return osm_square_df
-
-    @staticmethod
-    def calculate_centroid(geometry) -> pd.DataFrame:
-        """
-        This function counts the centroid for polygons.
+        Calculates the centroid for polygons.
         """
         if isinstance(geometry, (Polygon, MultiPolygon)):
             return geometry.centroid
@@ -123,34 +45,34 @@ class OtherGeoObjects:
         else:
             return None
 
-    def get_and_process_osm_data(osm_city_name, get_data_function) -> pd.DataFrame:
+    @staticmethod
+    def get_and_process_osm_data(osm_id: int, tags: dict) -> pd.DataFrame:
         """
-        This function allows you to build an OSM array for different urban objects.
+        Retrieves and processes OSM data for different urban objects.
         """
-        df = get_data_function(osm_city_name)
+        df = OtherGeoObjects.get_osm_data(osm_id, tags)
         df["geometry"] = df["geometry"].apply(OtherGeoObjects.calculate_centroid)
-        df.rename(columns={df.columns[2]: "geo_obj_tag"}, inplace=True)
+        df.rename(columns={df.columns[-1]: "geo_obj_tag"}, inplace=True)
         return df
 
-    def run_OSM_dfs(osm_city_name) -> pd.DataFrame:
+    @staticmethod
+    def run_osm_dfs(osm_id: int) -> pd.DataFrame:
         """
-        This function collects dataframes with OSM spatial data, finds centroids and combines files into one.
+        Collects dataframes with OSM spatial data, finds centroids and combines them into one.
         """
-        logger.info("run_OSM_dfs started")
-
-        osm_functions = [
-            OtherGeoObjects.get_OSM_green_obj,
-            OtherGeoObjects.get_OSM_num_obj,
-            OtherGeoObjects.get_OSM_cemetery,
-            OtherGeoObjects.get_OSM_natural,
-            OtherGeoObjects.get_OSM_railway,
-            OtherGeoObjects.get_OSM_tourism,
-            OtherGeoObjects.get_OSM_historic,
+        tags_list = [
+            {"leisure": ["park", "garden", "recreation_ground"]},
+            {"amenity": ["hospital", "clinic", "school", "kindergarten"]},
+            {"landuse": ["cemetery"]},
+            {"natural": ["beach", "water"]},
+            {"railway": ["station", "subway"]},
+            {"tourism": ["attraction", "museum"]},
+            {"historic": ["monument", "memorial"]},
+            {"place": ["square"]}
         ]
 
-        osm_dfs = [OtherGeoObjects.get_and_process_osm_data(osm_city_name, func) for func in osm_functions]
+        osm_dfs = [OtherGeoObjects.get_and_process_osm_data(osm_id, tags) for tags in tags_list]
         osm_combined_df = pd.concat(osm_dfs, axis=0)
-
         return osm_combined_df
 
     @staticmethod
@@ -158,22 +80,33 @@ class OtherGeoObjects:
         """
         The function extracts location entities from the text, using the Natasha library.
         """
+        if text is None:
+            return None
         morph = MorphVocab()
         extractor = AddrNEWExtractor(morph)
 
         other_geo_obj = []
 
         matches = extractor(text)
-        for match in matches:
-            part = match.fact
-            if part.value and part.type:
-                combined_phrase = f"{part.value} {part.type}"
-                other_geo_obj.append(combined_phrase)
-            elif part.value:
-                other_geo_obj.append(part.value)
-            elif part.type:
-                other_geo_obj.append(part.type)
-
+        if not matches:
+            return other_geo_obj
+        try:
+            for match in matches:
+                if not match:
+                    continue
+                part = match.fact
+                if part.value and part.type:
+                    combined_phrase = f"{part.value} {part.type}"
+                    other_geo_obj.append(combined_phrase)
+                elif part.value:
+                    other_geo_obj.append(part.value)
+                elif part.type:
+                    other_geo_obj.append(part.type)
+            if not other_geo_obj:
+                return other_geo_obj
+        except Exception as e:
+            #logger.exception(f"Error extracting geo objects: {e}")
+            return other_geo_obj
         return other_geo_obj
 
     def restoration_of_normal_form(other_geo_obj, osm_combined_df, threshold=0.7) -> List[str]:
@@ -211,6 +144,7 @@ class OtherGeoObjects:
         """
         This function searches for urban objects in the text, the names of which are represented as a number. For example, "school No. 6".
         """
+        text = str(text)
         text = text.lower()
         num_obj_list = []
         for key, forms in NUM_CITY_OBJ.items():
@@ -234,16 +168,16 @@ class OtherGeoObjects:
     @staticmethod
     def combine_city_obj(df_obj) -> pd.DataFrame:
         """
-        This function combines the found named urban objects and urban objects whose names are in the form of numbers.
+        Combines the found named urban objects and urban objects whose names are in the form of numbers.
         """
         df_obj["other_geo_obj"] = df_obj["other_geo_obj"] + df_obj["other_geo_obj_num"]
         df_obj.drop(columns=["other_geo_obj_num"], inplace=True)
         return df_obj
 
     @staticmethod
-    def expand_toponim(df_obj) -> pd.DataFrame:
+    def expand_toponym(df_obj) -> pd.DataFrame:
         """
-        This function splits the list of found entities into different rows for further analysis.
+        Splits the list of found entities into different rows for further analysis.
         """
         expanded_df = df_obj.copy()
         expanded_df["other_geo_obj"] = expanded_df["other_geo_obj"].apply(
@@ -253,42 +187,40 @@ class OtherGeoObjects:
         return expanded_df
 
     @staticmethod
-    def find_geometry(toponim, osm_combined_df) -> List[str]:
+    def find_geometry(toponym, osm_combined_df) -> Point:
         """
-        This function finds the coordinate in the OSM array by the name of the city object.
+        Finds the coordinate in the OSM array by the name of the city object.
         """
-        if toponim is None:
+        if toponym is None:
             return None
-        match = osm_combined_df[osm_combined_df["name"] == toponim]
+        match = osm_combined_df[osm_combined_df["name"] == toponym]
         if not match.empty:
-            geometry = match.iloc[0, 1]
-            return geometry
+            return match.iloc[0, 1]
         else:
             return None
 
     @staticmethod
-    def find_geo_obj_tag(toponim, osm_combined_df) -> List[str]:
+    def find_geo_obj_tag(toponym, osm_combined_df) -> str:
         """
-        This function finds the geo_obj_tag in the OSM array by the name of the city object.
+        Finds the geo_obj_tag in the OSM array by the name of the city object.
         """
-        if toponim is None:
+        if toponym is None:
             return None
-        match = osm_combined_df[osm_combined_df["name"] == toponim]
+        match = osm_combined_df[osm_combined_df["name"] == toponym]
         if not match.empty:
-            leisure = match.iloc[0, 2]
-            return leisure
+            return match.iloc[0, -1]
         else:
             return None
 
     @staticmethod
-    def run(osm_city_name, df, text_column) -> pd.DataFrame:
+    def run(osm_id: int, df: pd.DataFrame, text_column: str) -> pd.DataFrame:
         """
-        This function launches the module for extracting urban objects from texts that do not relate to streets.
+        Launches the module for extracting urban objects from texts that do not relate to streets.
         """
         df_obj = df.copy()
-        df_obj["Numbers"] = np.nan
-        osm_combined_df = OtherGeoObjects.run_OSM_dfs(osm_city_name)
-        logger.info("find_other_geo_obj started")
+        df_obj["Numbers"] = pd.NA
+        osm_combined_df = OtherGeoObjects.run_osm_dfs(osm_id)
+        
         df_obj["other_geo_obj"] = df_obj[text_column].apply(OtherGeoObjects.extract_geo_obj)
         df_obj["other_geo_obj_num"] = df_obj[text_column].apply(
             lambda x: OtherGeoObjects.find_num_city_obj(x, NUM_CITY_OBJ)
@@ -297,7 +229,7 @@ class OtherGeoObjects:
         df_obj["other_geo_obj"] = df_obj["other_geo_obj"].apply(
             lambda x: OtherGeoObjects.restoration_of_normal_form(x, osm_combined_df)
         )
-        df_obj = OtherGeoObjects.expand_toponim(df_obj)
+        df_obj = OtherGeoObjects.expand_toponym(df_obj)
         df_obj["geometry"] = df_obj["other_geo_obj"].apply(lambda x: OtherGeoObjects.find_geometry(x, osm_combined_df))
         df_obj["geo_obj_tag"] = df_obj["other_geo_obj"].apply(
             lambda x: OtherGeoObjects.find_geo_obj_tag(x, osm_combined_df)
