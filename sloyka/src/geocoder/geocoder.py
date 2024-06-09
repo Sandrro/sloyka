@@ -577,6 +577,7 @@ class Geocoder:
         # df = AreaMatcher.run(self, df, osm_id, tags, date)
 
         df[text_column] = df[text_column].str.replace("\n", " ")
+        df_reconstruction = df.copy()
         df[text_column] = df[text_column].apply(str)
         df_obj = OtherGeoObjects.run(self.osm_city_name, df, text_column)
         street_names = Streets.run(self.osm_city_name, self.osm_city_level)
@@ -587,6 +588,7 @@ class Geocoder:
         gdf = self.create_gdf(df)
         gdf = pd.concat([gdf, df_obj], ignore_index=True)
         gdf["geo_obj_tag"] = gdf["geo_obj_tag"].apply(Geocoder.assign_street)
+        gdf = pd.concat([gdf, df_reconstruction[~df_reconstruction[text_column].isin(gdf[text_column])]], ignore_index=True)
 
         # gdf2 = self.merge_to_initial_df(gdf, initial_df)
 
