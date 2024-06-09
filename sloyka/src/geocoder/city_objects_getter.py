@@ -11,6 +11,9 @@ import numpy as np
 
 
 class OtherGeoObjects:
+    """
+    TODO: эту жесть надо переписать
+    """
     @staticmethod
     def get_OSM_green_obj(osm_city_name) -> pd.DataFrame:
         """

@@ -17,20 +17,7 @@ release = '0.1.0'
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.napoleon',
-    'sphinx.ext.viewcode',
-    'sphinx_rtd_theme',
-    "sphinx_inline_tabs",
-    "sphinx_design",
-    "sphinx_issues",
-
-    # For using CONTRIBUTING.md.
-    "myst_parser",
-
-    "notfound.extension",
-
-    # These extensions require RTDs to work so they will not work locally.
-    "hoverxref.extension",
-    "sphinx_search.extension",
+    'sphinx.ext.viewcode'
 ]
 
 templates_path = ['_templates']
