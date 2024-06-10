@@ -7,11 +7,11 @@ from .src import (
     TextClassifiers,
     GeoDataGetter,
     Semgraph,
-    Streets, 
+    Streets,
     VKParser,
     City_services,
     AreaMatcher,
-    EmotionRecognizer
+    EmotionRecognizer,
 )
 
 __all__ = [
@@ -20,11 +20,11 @@ __all__ = [
     "Geocoder",
     "GeoDataGetter",
     "Semgraph",
-    "Streets", 
+    "Streets",
     "VKParser",
     "City_services",
     "AreaMatcher",
-    "EmotionRecognizer"
+    "EmotionRecognizer",
 ]
 
 logger.remove()
@@ -32,5 +32,5 @@ logger.add(
     sys.stdout,
     format="<green>{time:MM-DD HH:mm}</green> | <level>{level: <8}</level> | <cyan>{message}</cyan>",
     level="INFO",
-    colorize=True
+    colorize=True,
 )

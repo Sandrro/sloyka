@@ -76,7 +76,6 @@ from .location_getter import Location
 from sloyka.src.utils.data_getter.data_getter import GeoDataGetter
 
 
-
 stemmer = SnowballStemmer("russian")
 
 tqdm.pandas()
@@ -100,8 +99,12 @@ class Geocoder:
         self.device = device
         flair.device = torch.device(device)
         self.classifier = SequenceTagger.load(model_path)
-        self.osm_id = osm_id 
-        self.osm_city_name = GeoDataGetter().get_features_from_id(osm_id=self.osm_id, tags={"place": ["city"]}, selected_columns=['name', 'geometry']).iloc[0]['name']
+        self.osm_id = osm_id
+        self.osm_city_name = (
+            GeoDataGetter()
+            .get_features_from_id(osm_id=self.osm_id, tags={"place": ["city"]}, selected_columns=["name", "geometry"])
+            .iloc[0]["name"]
+        )
 
     def extract_ner_street(self, text: str) -> pd.Series:
         """
@@ -447,7 +450,7 @@ class Geocoder:
             return "street"
         return variable
 
-    def get_df_areas(self, osm_id, tags, date):
+    def get_df_areas(self, osm_id, tags):
         """
         Retrieves the GeoDataFrame of areas corresponding to the given OSM ID and tags.
 
@@ -466,7 +469,7 @@ class Geocoder:
         area_cache = {}
         if osm_id not in area_cache:
             geo_data_getter = HistGeoDataGetter()
-            df_areas = geo_data_getter.get_features_from_id(osm_id=osm_id, tags=tags, date=date)
+            df_areas = geo_data_getter.get_features_from_id(osm_id=osm_id, tags=tags)
             df_areas = df_areas[df_areas["element_type"] != "way"]
             area_cache[osm_id] = df_areas
         return area_cache[osm_id]
@@ -546,12 +549,13 @@ class Geocoder:
 
         return best_match, admin_level
 
-    def run(self, osm_id, tags, date, df: pd.DataFrame, text_column: str = "text", group_column: str | None = "group_name"):
+    def run(
+        self, tags, df: pd.DataFrame, text_column: str = "text", group_column: str | None = "group_name"
+    ):
         """
         Runs the data processing pipeline on the input DataFrame.
 
         Args:
-            osm_id (int): The OpenStreetMap ID.
             tags (dict): The tags to filter by.
             date (str): The date of the data to retrieve.
             df (pd.DataFrame): The input DataFrame.
@@ -569,22 +573,22 @@ class Geocoder:
 
         # initial_df = df.copy()
 
-        df_areas = self.get_df_areas(osm_id, tags, date)
+        df_areas = self.get_df_areas(self.osm_id, tags)
         df_areas = self.preprocess_area_names(df_areas)
 
-        # if group_column:
-        for i, group_name in enumerate(df[group_column]):
-            processed_group_name = self.preprocess_group_name(group_name)
-            best_match, admin_level = self.match_group_to_area(processed_group_name, df_areas)
-            df.at[i, "territory"] = best_match
-            df.at[i, "key"] = admin_level
+        if group_column and group_column in df.columns:
+            for i, group_name in enumerate(df[group_column]):
+                processed_group_name = self.preprocess_group_name(group_name)
+                best_match, admin_level = self.match_group_to_area(processed_group_name, df_areas)
+                df.at[i, "territory"] = best_match
+                df.at[i, "key"] = admin_level
         # df = AreaMatcher.run(self, df, osm_id, tags, date)
 
         df[text_column] = df[text_column].str.replace("\n", " ")
         df_reconstruction = df.copy()
         df[text_column] = df[text_column].apply(str)
-        df_obj = OtherGeoObjects.run(osm_id, df, text_column)
-        street_names = Streets.run(osm_id)
+        df_obj = OtherGeoObjects.run(self.osm_id, df, text_column)
+        street_names = Streets.run(self.osm_id)
 
         df = self.get_street(df, text_column)
         street_names = self.get_stem(street_names)
@@ -592,7 +596,9 @@ class Geocoder:
         gdf = self.create_gdf(df)
         gdf = pd.concat([gdf, df_obj], ignore_index=True)
         gdf["geo_obj_tag"] = gdf["geo_obj_tag"].apply(Geocoder.assign_street)
-        gdf = pd.concat([gdf, df_reconstruction[~df_reconstruction[text_column].isin(gdf[text_column])]], ignore_index=True)
+        gdf = pd.concat(
+            [gdf, df_reconstruction[~df_reconstruction[text_column].isin(gdf[text_column])]], ignore_index=True
+        )
 
         # gdf2 = self.merge_to_initial_df(gdf, initial_df)
 

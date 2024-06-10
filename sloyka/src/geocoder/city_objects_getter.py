@@ -9,26 +9,21 @@ from sloyka.src.utils.constants import NUM_CITY_OBJ
 from sloyka.src.geocoder.address_extractor_titles import AddrNEWExtractor
 from rapidfuzz import fuzz
 import numpy as np
-import warnings
-
-warnings.simplefilter("ignore")
-warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 class OtherGeoObjects:
-
     @staticmethod
     def get_osm_data(osm_id: int, tags: dict) -> pd.DataFrame:
         """
         Retrieves spatial data from OSM for given tags using OSM ID and returns a DataFrame.
         """
         try:
-            city_boundary_gdf = ox.geocode_to_gdf(f'R{osm_id}', by_osmid = True)
+            city_boundary_gdf = ox.geocode_to_gdf(f"R{osm_id}", by_osmid=True)
             polygon = city_boundary_gdf["geometry"].iloc[0]
             data = ox.features_from_polygon(polygon, tags)
             df = pd.DataFrame(data)
             df = df.dropna(subset=["name"])
-            df = df[["name", "geometry"] + list(tags.keys())]
+            df = df.loc[:, ["name", "geometry"] + list(tags.keys())]
             return df
         except Exception as e:
             raise RuntimeError(f"Error retrieving OSM data: {e}")
@@ -68,7 +63,7 @@ class OtherGeoObjects:
             {"railway": ["station", "subway"]},
             {"tourism": ["attraction", "museum"]},
             {"historic": ["monument", "memorial"]},
-            {"place": ["square"]}
+            {"place": ["square"]},
         ]
 
         osm_dfs = [OtherGeoObjects.get_and_process_osm_data(osm_id, tags) for tags in tags_list]
@@ -105,7 +100,7 @@ class OtherGeoObjects:
             if not other_geo_obj:
                 return other_geo_obj
         except Exception as e:
-            #logger.exception(f"Error extracting geo objects: {e}")
+            # logger.exception(f"Error extracting geo objects: {e}")
             return other_geo_obj
         return other_geo_obj
 
@@ -220,7 +215,7 @@ class OtherGeoObjects:
         df_obj = df.copy()
         df_obj["Numbers"] = pd.NA
         osm_combined_df = OtherGeoObjects.run_osm_dfs(osm_id)
-        
+
         df_obj["other_geo_obj"] = df_obj[text_column].apply(OtherGeoObjects.extract_geo_obj)
         df_obj["other_geo_obj_num"] = df_obj[text_column].apply(
             lambda x: OtherGeoObjects.find_num_city_obj(x, NUM_CITY_OBJ)
