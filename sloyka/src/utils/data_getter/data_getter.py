@@ -397,7 +397,7 @@ class VKParser:
 
         return subcomments
 
-    def get_comments(self, owner_id, post_id, access_token):
+    def get_comments(owner_id, post_id, access_token):
         """
         Get comments for a post on VK using the specified owner ID, post ID, and access token.
 
@@ -436,7 +436,7 @@ class VKParser:
                 comments.append(item)
                 if item["thread"]["count"] > 0:
                     params["comment_id"] = item["id"]
-                    subcomments = self.get_subcomments(owner_id, post_id, access_token, params)
+                    subcomments = VKParser.get_subcomments(owner_id, post_id, access_token, params)
                     comments.extend(subcomments)
         return comments
 
@@ -539,10 +539,10 @@ class VKParser:
         :return: A combined DataFrame of posts and comments.
         """
         owner_id = VKParser.get_owner_id_by_domain(domain, access_token)
-        df_posts = VKParser.run_posts(owner_id, access_token, step, cutoff_date, number_of_messages)
+        df_posts = VKParser.run_posts(domain=owner_id, access_token=access_token, step=step, cutoff_date=cutoff_date, number_of_messages=number_of_messages)
         post_ids = df_posts["id"].tolist()
 
-        df_comments = VKParser.run_comments(owner_id, post_ids, access_token)
+        df_comments = VKParser.run_comments(domain=owner_id, post_ids=post_ids, access_token=access_token)
         df_comments.loc[df_comments["parents_stack"].apply(lambda x: len(x) > 0), "type"] = "reply"
         for i in range(len(df_comments)):
             tmp = df_comments["parents_stack"].iloc[i]

@@ -605,7 +605,7 @@ class Geocoder:
         # # Add a new 'level' column using the get_level function
         # gdf2["level"] = gdf2.progress_apply(self.get_level, axis=1)
         # gdf2 = self.set_global_repr_point(gdf2)
-
+        gdf.set_crs(4326, inplace=True)
         return gdf
 
 
