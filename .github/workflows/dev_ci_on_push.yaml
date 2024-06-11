@@ -1,0 +1,96 @@
+name: Test and Publish to PyPI
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10, 3.11]  # Define the Python versions you want to test
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache Poetry dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pypoetry
+            ~/.venv
+          key: ${{ runner.os }}-poetry-${{ matrix.python-version }}-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-${{ matrix.python-version }}-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+
+      - name: Run tests
+        run: poetry run pytest  # Adjust according to your test framework
+
+  build:
+    needs: test  # Ensure 'test' job completes successfully
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'  # Use the latest Python version or your preferred version for building
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install
+
+      - name: Build package
+        run: poetry build
+        env:
+          POETRY_VIRTUALENVS_IN_PROJECT: true
+
+      - name: Upload package
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-package
+          path: dist/*.whl  # or dist/*.tar.gz depending on your build
+
+  publish:
+    needs: build  # Ensure 'build' job completes successfully
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'  # Use the same Python version as used in build
+
+      - name: Download package
+        uses: actions/download-artifact@v3
+        with:
+          name: built-package
+          path: ./dist
+
+      - name: Publish to PyPI
+        uses: JRubics/poetry-publish@v2.0
+        with:
+          pypi_token: ${{ secrets.PYPI_TOKEN }}
+        env:
+          POETRY_VIRTUALENVS_IN_PROJECT: true
