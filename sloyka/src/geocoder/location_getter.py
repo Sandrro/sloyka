@@ -3,6 +3,10 @@ from typing import Optional, List
 from geopy.geocoders import Nominatim
 from geopy.exc import GeocoderUnavailable
 
+import warnings
+
+warnings.simplefilter("ignore")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 class GeocodingError(Exception):
     """Custom exception for geocoding errors"""

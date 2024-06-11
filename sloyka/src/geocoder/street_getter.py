@@ -9,6 +9,10 @@ import networkx as nx
 import pandas as pd
 import osmnx as ox
 
+import warnings
+
+warnings.simplefilter("ignore")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 class StreetsError(Exception):
     """Custom exception for streets-related errors"""
