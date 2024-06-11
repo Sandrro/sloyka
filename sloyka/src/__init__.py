@@ -1,9 +1,11 @@
-from .event_detection import EventDetection
-from .geocoder import Geocoder
-from .text_classifiers import TextClassifiers
-from .data_getter import GeoDataGetter, VkPostGetter, Streets, VkCommentsParser
-from .semantic_graph import Semgraph
-from .ner_parklike import NER_parklike
+from .risks.event_detection import EventDetection
+from .geocoder.geocoder import Geocoder
+from .risks.text_classifiers import TextClassifiers
+from .utils.data_getter.data_getter import GeoDataGetter, Streets, VKParser
+from .semantic_graph.semantic_graph import Semgraph
+from .utils.data_getter.city_services_extract import City_services
+from .utils.area_matcher import AreaMatcher
+from .risks.emotionclass import EmotionRecognizer
 
 __all__ = [
     "EventDetection",
@@ -11,8 +13,9 @@ __all__ = [
     "Geocoder",
     "GeoDataGetter",
     "Semgraph",
-    "VkPostGetter", 
-    "Streets", 
-    "VkCommentsParser",
-    "NER_parklike"
+    "Streets",
+    "VKParser",
+    "City_services",
+    "AreaMatcher",
+    "EmotionRecognizer",
 ]
