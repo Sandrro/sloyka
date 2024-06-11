@@ -584,7 +584,7 @@ class Geocoder:
                 df.at[i, "key"] = admin_level
         # df = AreaMatcher.run(self, df, osm_id, tags, date)
 
-        df[text_column] = df[text_column].str.replace("\n", " ")
+        df[text_column] = df[text_column].astype(str).str.replace('\n', ' ')
         df_reconstruction = df.copy()
         df[text_column] = df[text_column].apply(str)
         df_obj = OtherGeoObjects.run(self.osm_id, df, text_column)
