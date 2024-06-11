@@ -10,6 +10,11 @@ from sloyka.src.geocoder.address_extractor_titles import AddrNEWExtractor
 from rapidfuzz import fuzz
 import numpy as np
 
+import warnings
+
+warnings.simplefilter("ignore")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 
 class OtherGeoObjects:
     @staticmethod

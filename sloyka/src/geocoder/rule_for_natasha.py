@@ -18,6 +18,11 @@ from yargy.predicates import (
 from yargy.pipelines import morph_pipeline
 from yargy.tokenizer import QUOTES
 
+import warnings
+
+warnings.simplefilter("ignore")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 
 Index = fact("Index", ["value"])
 Region = fact("Region", ["name", "type"])

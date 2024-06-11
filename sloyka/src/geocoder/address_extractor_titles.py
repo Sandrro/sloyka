@@ -1,4 +1,8 @@
 # addr_extractor.py
+import warnings
+
+warnings.simplefilter("ignore")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 import logging
 

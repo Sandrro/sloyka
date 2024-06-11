@@ -57,6 +57,11 @@ from loguru import logger
 
 from pandarallel import pandarallel
 
+import warnings
+
+warnings.simplefilter("ignore")
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
 pandarallel.initialize(progress_bar=True, nb_workers=-1)
 
 segmenter = Segmenter()
