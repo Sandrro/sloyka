@@ -3,7 +3,7 @@
 [![Documentation Status](https://readthedocs.org/projects/soika/badge/?version=latest)](https://soika.readthedocs.io/en/latest/?badge=latest)
 [![PythonVersion](https://img.shields.io/badge/python-3.10-blue)](https://pypi.org/project/scikit-learn/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Tests](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/tests.yml/badge.svg?branch=dev)](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/tests.yml)
+[![Tests](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/test_on_push.yaml/badge.svg?branch=dev)](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/test_on_push.yaml)
 [![Documentation Status](https://readthedocs.org/projects/sloyka/badge/?version=latest)](https://sloyka.readthedocs.io/ru/latest/?badge=latest)
 
 [![sloyka_community_chat](https://img.shields.io/badge/-community-blue?logo=telegram)](https://t.me/sloyka_community)
