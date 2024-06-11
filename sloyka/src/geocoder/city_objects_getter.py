@@ -104,6 +104,7 @@ class OtherGeoObjects:
             return other_geo_obj
         return other_geo_obj
 
+    @staticmethod
     def restoration_of_normal_form(other_geo_obj, osm_combined_df, threshold=0.7) -> List[str]:
         """
         This function compares the extracted location entity with an OSM array and returns a normalized form if the percentage of similarity is at least 70%.
