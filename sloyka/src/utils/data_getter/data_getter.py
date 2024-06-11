@@ -455,7 +455,8 @@ class VKParser:
         df = df[["id", "from_id", "date", "text", "post_id", "parents_stack", "likes.count"]]
         return df
 
-    def run_posts(self, domain, access_token, step, cutoff_date, number_of_messages=float("inf")):
+    @staticmethod
+    def run_posts(domain, access_token, cutoff_date, number_of_messages=float("inf"), step=50):
         """
         A function to retrieve posts from a social media API based on specified parameters.
 
@@ -469,7 +470,7 @@ class VKParser:
         Returns:
             pandas.DataFrame: A DataFrame containing the retrieved posts.
         """
-        token = access_token
+    
         domain = domain
         offset = 0
         all_posts = []
@@ -486,7 +487,7 @@ class VKParser:
                     "domain": domain,
                     "count": step,
                     "offset": offset,
-                },
+                }, timeout=600
             )
             if response.ok:
                 # print(response.json().keys())
@@ -511,20 +512,22 @@ class VKParser:
         df_posts["text"] = df_posts["text"].str.replace(r"\n", "", regex=True)
         df_posts["link"] = df_posts["text"].str.extract(r"(https://\S+)")
         return df_posts
-
-    def run_comments(self, domain, post_ids, access_token):
-        owner_id = self.get_owner_id_by_domain(domain, access_token)
+    
+    @staticmethod
+    def run_comments(domain, post_ids, access_token):
+        owner_id = VKParser.get_owner_id_by_domain(domain, access_token)
         all_comments = []
         for post_id in tqdm(post_ids):
-            comments = self.get_comments(owner_id, post_id, access_token)
+            comments = VKParser.get_comments(owner_id, post_id, access_token)
             all_comments.extend(comments)
-        df = self.comments_to_dataframe(all_comments)
+        df = VKParser.comments_to_dataframe(all_comments)
         df["type"] = "comment"
         df = df.reset_index(drop=True)
         print("comments downloaded")
         return df
 
-    def run_parser(self, domain, access_token, cutoff_date, number_of_messages=float("inf"), step=100):
+    @staticmethod
+    def run_parser(domain, access_token, cutoff_date, number_of_messages=float("inf"), step=100):
         """
         Runs the parser with the given parameters and returns a combined DataFrame of posts and comments.
 
@@ -535,11 +538,11 @@ class VKParser:
         :param number_of_messages: The maximum number of messages to fetch. Defaults to positive infinity.
         :return: A combined DataFrame of posts and comments.
         """
-        owner_id = self.get_owner_id_by_domain(domain, access_token)
-        df_posts = self.run_posts(owner_id, access_token, step, cutoff_date, number_of_messages)
+        owner_id = VKParser.get_owner_id_by_domain(domain, access_token)
+        df_posts = VKParser.run_posts(owner_id, access_token, step, cutoff_date, number_of_messages)
         post_ids = df_posts["id"].tolist()
 
-        df_comments = self.run_comments(owner_id, post_ids, access_token)
+        df_comments = VKParser.run_comments(owner_id, post_ids, access_token)
         df_comments.loc[df_comments["parents_stack"].apply(lambda x: len(x) > 0), "type"] = "reply"
         for i in range(len(df_comments)):
             tmp = df_comments["parents_stack"].iloc[i]
@@ -551,7 +554,7 @@ class VKParser:
 
         df_combined = df_comments.join(df_posts, on="post_id", rsuffix="_post")
         df_combined = pd.concat([df_posts, df_comments], ignore_index=True)
-        df_group_name = self.get_group_name(domain, access_token)
+        df_group_name = VKParser.get_group_name(domain, access_token)
         df_combined["group_name"] = df_group_name["group_name"][0]
 
         return df_combined

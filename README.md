@@ -3,8 +3,7 @@
 [![Documentation Status](https://readthedocs.org/projects/soika/badge/?version=latest)](https://soika.readthedocs.io/en/latest/?badge=latest)
 [![PythonVersion](https://img.shields.io/badge/python-3.10-blue)](https://pypi.org/project/scikit-learn/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Tests](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/tests.yml/badge.svg?branch=dev)](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/tests.yml)
-[![Documentation Status](https://readthedocs.org/projects/sloyka/badge/?version=latest)](https://sloyka.readthedocs.io/ru/latest/?badge=latest)
+[![Test and Publish to PyPI](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/dev_ci_on_push.yaml/badge.svg?branch=dev)](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/dev_ci_on_push.yaml)
 
 [![sloyka_community_chat](https://img.shields.io/badge/-community-blue?logo=telegram)](https://t.me/sloyka_community)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wCUJAqlq9GMKw1wpTsWrzYwr10pWDeHv?usp=sharing)
@@ -29,7 +28,7 @@ SLOYKA включает в себя две группы методов: мето
 - [НЦКР](https://actcognitive.org/o-tsentre/kontakty) - Национальный Центр Когнитивных Разработок.
 - [ИДУ](https://idu.itmo.ru/en/contacts/contacts.htm) - Институт Дизайна и Урбанистики.
 - Если у вас есть вопросы или предложения, вы можете связаться с нами по следующему адресу:
-asantonov@itmo.ru (Александр Антонов, Project Lead), kontsevik@itmo.ru (Dev Team Lead).
+asantonov@itmo.ru (Александр Антонов, Project Lead), kontsevik@itmo.ru (just in case).
 
 ## Цитирование
 
