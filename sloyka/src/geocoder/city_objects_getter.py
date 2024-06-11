@@ -29,18 +29,6 @@ class OtherGeoObjects:
             raise RuntimeError(f"Error retrieving OSM data: {e}")
 
     @staticmethod
-    def calculate_centroid(geometry) -> Point:
-        """
-        Calculates the centroid for polygons.
-        """
-        if isinstance(geometry, (Polygon, MultiPolygon)):
-            return geometry.centroid
-        elif isinstance(geometry, Point):
-            return geometry
-        else:
-            return None
-
-    @staticmethod
     def get_and_process_osm_data(osm_id: int, tags: dict) -> pd.DataFrame:
         """
         Retrieves and processes OSM data for different urban objects.
@@ -69,6 +57,18 @@ class OtherGeoObjects:
         osm_dfs = [OtherGeoObjects.get_and_process_osm_data(osm_id, tags) for tags in tags_list]
         osm_combined_df = pd.concat(osm_dfs, axis=0)
         return osm_combined_df
+    
+    @staticmethod
+    def calculate_centroid(geometry) -> Point:
+        """
+        Calculates the centroid for polygons.
+        """
+        if isinstance(geometry, (Polygon, MultiPolygon)):
+            return geometry.centroid
+        elif isinstance(geometry, Point):
+            return geometry
+        else:
+            return None
 
     @staticmethod
     def extract_geo_obj(text) -> List[str]:
@@ -104,6 +104,7 @@ class OtherGeoObjects:
             return other_geo_obj
         return other_geo_obj
 
+    @staticmethod
     def restoration_of_normal_form(other_geo_obj, osm_combined_df, threshold=0.7) -> List[str]:
         """
         This function compares the extracted location entity with an OSM array and returns a normalized form if the percentage of similarity is at least 70%.
@@ -206,6 +207,10 @@ class OtherGeoObjects:
             return match.iloc[0, -1]
         else:
             return None
+        
+    @staticmethod
+    def get_unique_part_types(df):
+        return df["other_geo_obj"].unique()
 
     @staticmethod
     def run(osm_id: int, df: pd.DataFrame, text_column: str) -> pd.DataFrame:
@@ -214,17 +219,19 @@ class OtherGeoObjects:
         """
         df_obj = df.copy()
         df_obj["Numbers"] = pd.NA
-        osm_combined_df = OtherGeoObjects.run_osm_dfs(osm_id)
+        # osm_combined_df = OtherGeoObjects.run_osm_dfs(osm_id)
 
         df_obj["other_geo_obj"] = df_obj[text_column].apply(OtherGeoObjects.extract_geo_obj)
         df_obj["other_geo_obj_num"] = df_obj[text_column].apply(
             lambda x: OtherGeoObjects.find_num_city_obj(x, NUM_CITY_OBJ)
         )
+        osm_combined_df = OtherGeoObjects.run_osm_dfs(osm_id)
         df_obj = OtherGeoObjects.combine_city_obj(df_obj)
         df_obj["other_geo_obj"] = df_obj["other_geo_obj"].apply(
             lambda x: OtherGeoObjects.restoration_of_normal_form(x, osm_combined_df)
         )
         df_obj = OtherGeoObjects.expand_toponym(df_obj)
+        
         df_obj["geometry"] = df_obj["other_geo_obj"].apply(lambda x: OtherGeoObjects.find_geometry(x, osm_combined_df))
         df_obj["geo_obj_tag"] = df_obj["other_geo_obj"].apply(
             lambda x: OtherGeoObjects.find_geo_obj_tag(x, osm_combined_df)
