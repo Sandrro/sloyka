@@ -36,8 +36,8 @@ jobs:
                 pip install --upgrade poetry
                 poetry self update
                 pip install virtualenv filelock
-                poetry config virtualenvs.create false
-                poetry env remove $(poetry env list --full-path)
+                poetry config virtualenvs.create true
+                # poetry env remove $(poetry env list --full-path)
 
           - name: Cache dependencies
             uses: actions/cache@v3
@@ -57,31 +57,35 @@ jobs:
             env:
                 POETRY_VIRTUALENVS_IN_PROJECT: true
 
-          - name: Upload package
-            uses: actions/upload-artifact@v4
-            with:
-              name: built-package
-              path: dist/*.whl  # or dist/*.tar.gz depending on your build
-
-    publish:
-        needs: build
-        runs-on: ubuntu-latest
-
-        steps:
-          - name: Check out repository
-            uses: actions/checkout@v4
-
-          - name: Set up Python
-            uses: actions/setup-python@v4
-            with:
-              python-version: '3.11'  # Use the same version as used in build
-
-          - name: Download package
-            uses: actions/download-artifact@v4
-            with:
-              name: built-package
-              path: ./dist
+          # - name: Upload package
+          #   uses: actions/upload-artifact@v4
+          #   with:
+          #     name: built-package
+          #     path: dist/*.whl  # or dist/*.tar.gz depending on your build
 
           - name: Publish package to PyPI
             run: 
               poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}
+
+    # publish:
+    #     needs: build
+    #     runs-on: ubuntu-latest
+
+    #     steps:
+    #       - name: Check out repository
+    #         uses: actions/checkout@v3
+
+    #       - name: Set up Python
+    #         uses: actions/setup-python@v4
+    #         with:
+    #           python-version: '3.11'  # Use the same version as used in build
+
+    #       - name: Download package
+    #         uses: actions/download-artifact@v4
+    #         with:
+    #           name: built-package
+    #           path: ./dist
+
+    #       - name: Publish package to PyPI
+    #         run: 
+    #           poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}
