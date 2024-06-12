@@ -63,9 +63,12 @@ jobs:
           #     name: built-package
           #     path: dist/*.whl  # or dist/*.tar.gz depending on your build
 
-          - name: Publish package to PyPI
-            run: 
-              poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}
+          - name: Publish
+            env:
+              PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
+            run: |
+              poetry config pypi-token.pypi $PYPI_TOKEN
+              poetry publish --build
 
     # publish:
     #     needs: build
