@@ -2,6 +2,8 @@ import re
 
 import pandas as pd
 import geopandas as gpd
+import osmnx as ox
+import networkx as nx
 
 
 @staticmethod
@@ -112,3 +114,23 @@ def fill_empty_toponym(data: pd.DataFrame or gpd.GeoDataFrame, toponym_column: s
             data.at[i, toponym_column] = None
 
     return data
+
+@staticmethod
+def graph_to_gdf(G_drive: nx.MultiDiGraph) -> gpd.GeoDataFrame:
+    """
+    Method converts the street network from a NetworkX MultiDiGraph object
+    to a GeoDataFrame representing the edges (streets) with columns
+    for street name, length, and geometry.
+    """
+    # Streets.logger.info("Converting graph to GeoDataFrame")
+    try:
+        gdf = ox.graph_to_gdfs(G_drive, nodes=False)
+        gdf["name"].dropna(inplace=True)
+        gdf = gdf[["name", "length", "geometry"]]
+        gdf.reset_index(inplace=True)
+        gdf = gpd.GeoDataFrame(data=gdf, geometry="geometry")
+        # Streets.logger.debug(f"GeoDataFrame created: {gdf}")
+        return gdf
+    except Exception as e:
+        # Streets.logger.error(f"Error converting graph to GeoDataFrame: {e}")
+        raise e

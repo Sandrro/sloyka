@@ -6,7 +6,7 @@ from shapely.geometry import Point, Polygon, MultiPolygon
 from loguru import logger
 from natasha import MorphVocab
 from sloyka.src.utils.constants import NUM_CITY_OBJ
-from sloyka.src.geocoder.address_extractor_titles import AddrNEWExtractor
+from sloyka.src.geocoder.address_extractor_titles import AddressExtractorExtra
 from rapidfuzz import fuzz
 import numpy as np
 
@@ -83,7 +83,7 @@ class OtherGeoObjects:
         if text is None:
             return None
         morph = MorphVocab()
-        extractor = AddrNEWExtractor(morph)
+        extractor = AddressExtractorExtra(morph)
 
         other_geo_obj = []
 

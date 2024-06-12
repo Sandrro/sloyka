@@ -76,7 +76,7 @@ warnings.simplefilter(action="ignore", category=FutureWarning)
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 from .city_objects_getter import OtherGeoObjects
-from .street_getter import Streets
+from ..utils.data_getter.street_getter import Streets
 from .location_getter import Location
 from sloyka.src.utils.data_getter.data_getter import GeoDataGetter
 
