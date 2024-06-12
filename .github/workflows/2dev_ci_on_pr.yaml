@@ -1,9 +1,12 @@
 name:
 
 on:
+  push:
+    branches:
+      - '**'  # Any push to any branch
   pull_request:
     branches:
-      - dev
+      - '**'  # Any PR to any branch
 
 jobs:
   test:
