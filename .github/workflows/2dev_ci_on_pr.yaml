@@ -15,8 +15,8 @@ jobs:
       - name: Check disk usage
         run: df -h
 
-      - name: Clean up disk space
-        run: sudo rm -rf /tmp/* /var/tmp/*
+      # - name: Clean up disk space
+      #   run: sudo rm -rf /tmp/* /var/tmp/*
         
       - name: Check out repository
         uses: actions/checkout@v3

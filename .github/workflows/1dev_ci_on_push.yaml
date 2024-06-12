@@ -1,9 +1,9 @@
 name: Publish
 
 on:
-    push:
-      branches:
-        - feat/refactor
+  push:
+    branches:
+      - feat/refactor
   
 jobs:
     build:
@@ -14,8 +14,8 @@ jobs:
           - name: Check disk usage
             run: df -h
 
-          - name: Clean up disk space
-            run: sudo rm -rf /tmp/* /var/tmp/*
+          # - name: Clean up disk space
+          #   run: sudo rm -rf /tmp/* /var/tmp/*
 
           - name: Check out repository
             uses: actions/checkout@v4
