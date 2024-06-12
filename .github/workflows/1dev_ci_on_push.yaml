@@ -37,8 +37,6 @@ jobs:
                 poetry self update
                 pip install virtualenv filelock
                 poetry config virtualenvs.create false
-                python -m venv .venv
-                source .venv/bin/activate
                 poetry env remove $(poetry env list --full-path)
 
           - name: Cache dependencies
