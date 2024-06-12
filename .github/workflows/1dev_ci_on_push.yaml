@@ -82,9 +82,6 @@ jobs:
               name: built-package
               path: ./dist
 
-          - name: Publish to PyPI
-            uses: JRubics/poetry-publish@v2.0
-            with:
-              pypi_token: ${{ secrets.PYPI_TOKEN }}
-            env:
-              POETRY_VIRTUALENVS_IN_PROJECT: true
+          - name: Publish package to PyPI
+            run: 
+              poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}
