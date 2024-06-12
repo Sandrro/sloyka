@@ -1,4 +1,4 @@
-name:
+name: Tests
 
 on:
   push:
