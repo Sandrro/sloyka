@@ -1,9 +1,9 @@
-name: Publish
+name: Publish1
 
 on:
-  push:
-    branches:
-      - feat/refactor
+   pull_request:
+      branches:
+        - feat/refactor
   
 jobs:
     build:
@@ -11,16 +11,16 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-          - name: Check disk usage
-            run: df -h
+          # - name: Check disk usage
+          #   run: df -h
 
           # - name: Clean up disk space
           #   run: sudo rm -rf /tmp/* /var/tmp/*
 
           - name: Check out repository
             uses: actions/checkout@v4
-            with:
-                fetch-depth: 1
+            # with:
+            #     fetch-depth: 1
 
           - name: Set up Python
             uses: actions/setup-python@v4
