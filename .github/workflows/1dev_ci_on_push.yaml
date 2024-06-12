@@ -37,17 +37,17 @@ jobs:
                 poetry self update
                 pip install virtualenv filelock
                 poetry config virtualenvs.create true
-                # poetry env remove $(poetry env list --full-path)
+          #       # poetry env remove $(poetry env list --full-path)
 
-          - name: Cache dependencies
-            uses: actions/cache@v3
-            with:
-              path: |
-                ~/.cache/pip
-                ~/.cache/pypoetry
-              key: ${{ runner.os }}-pip-${{ hashFiles('**/poetry.lock', '**/requirements.txt') }}
-              restore-keys: |
-                ${{ runner.os }}-pip-
+          # - name: Cache dependencies
+          #   uses: actions/cache@v3
+          #   with:
+          #     path: |
+          #       ~/.cache/pip
+          #       ~/.cache/pypoetry
+          #     key: ${{ runner.os }}-pip-${{ hashFiles('**/poetry.lock', '**/requirements.txt') }}
+          #     restore-keys: |
+          #       ${{ runner.os }}-pip-
               
           - name: Install dependencies
             run: poetry install
