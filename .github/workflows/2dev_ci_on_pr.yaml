@@ -2,11 +2,11 @@ name: Tests
 
 on:
   push:
-    branches:
-      - '**'  # Any push to any branch
+      branches:
+        - dev
   pull_request:
-    branches:
-      - '**'  # Any PR to any branch
+      branches:
+        - dev
 
 jobs:
   test:
