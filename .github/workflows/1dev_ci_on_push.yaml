@@ -3,10 +3,10 @@ name: Publish1
 on:
   pull_request:
       branches:
-        - feat/refactor
+        - feature/refactor
   push:
       branches:
-        - feat/refactor
+        - feature/refactor
   
 jobs:
     build:
