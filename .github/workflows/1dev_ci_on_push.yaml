@@ -30,11 +30,29 @@ jobs:
             with:
               python-version: '3.11'  # Use the latest Python version or your preferred version for building
 
-          - name: Install dependencies
+          - name: Install env
             run: |
                 python -m pip install --upgrade pip
-                pip install poetry
-                poetry install
+                pip install --upgrade poetry
+                poetry self update
+                pip install virtualenv==20.16.3 filelock==3.8.0
+                poetry config virtualenvs.create false
+                python -m venv .venv
+                source .venv/bin/activate
+                poetry env remove $(poetry env list --full-path)
+
+          - name: Cache dependencies
+            uses: actions/cache@v3
+            with:
+              path: |
+                ~/.cache/pip
+                ~/.cache/pypoetry
+              key: ${{ runner.os }}-pip-${{ hashFiles('**/poetry.lock', '**/requirements.txt') }}
+              restore-keys: |
+                ${{ runner.os }}-pip-
+              
+          - name: Install dependencies
+            run: poetry install
 
           - name: Build package
             run: poetry build
