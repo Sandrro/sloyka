@@ -65,10 +65,11 @@ jobs:
 
           - name: Publish
             env:
+              POETRY_HTTP_BASIC_PYPI_USERNAME: __token__
+              POETRY_HTTP_BASIC_PYPI_PASSWORD: ${{ secrets.PYPI_TOKEN }}
               PYPI_TOKEN: ${{ secrets.PYPI_TOKEN }}
-            run: |
-              poetry config pypi-token.pypi $PYPI_TOKEN
-              poetry publish --build
+            run: poetry publish --build --username __token__ --password ${{ secrets.PYPI_TOKEN }}
+
 
     # publish:
     #     needs: build
