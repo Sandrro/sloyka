@@ -46,3 +46,6 @@ jobs:
 
       - name: Run tests
         run: poetry run pytest  # Adjust according to your test framework
+
+      - name: Clean up disk space
+        run: sudo rm -rf /tmp/* /var/tmp/*
