@@ -1,7 +1,7 @@
 name: Test and Publish to PyPI
 
 on:
-  push:
+  pull_request:
     branches:
       - dev
 
@@ -45,7 +45,7 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -64,7 +64,7 @@ jobs:
           POETRY_VIRTUALENVS_IN_PROJECT: true
 
       - name: Upload package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-package
           path: dist/*.whl  # or dist/*.tar.gz depending on your build
@@ -75,7 +75,7 @@ jobs:
 
       steps:
         - name: Check out repository
-          uses: actions/checkout@v3
+          uses: actions/checkout@v4
 
         - name: Set up Python
           uses: actions/setup-python@v4
@@ -83,7 +83,7 @@ jobs:
             python-version: '3.11'  # Use the same version as used in build
 
         - name: Download package
-          uses: actions/download-artifact@v3
+          uses: actions/download-artifact@v4
           with:
             name: built-package
             path: ./dist
