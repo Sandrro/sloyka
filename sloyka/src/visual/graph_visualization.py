@@ -4,7 +4,7 @@ import random
 from folium.plugins import MarkerCluster
 
 
-def visualize_graph(graph_path, output_file=None):
+def draw_graph_folium(graph_path, output_file=None):
     """
     Visualizes a graph from the given graph_path using Folium and MarkerCluster.
 

@@ -7,6 +7,7 @@ from loguru import logger
 from natasha import MorphVocab
 from sloyka.src.utils.constants import NUM_CITY_OBJ
 from sloyka.src.geocoder.objects_address_extractor_by_rules import AddressExtractorExtra
+from sloyka.src.utils.data_getter.geo_data_getter import GeoDataGetter
 from rapidfuzz import fuzz
 import numpy as np
 
@@ -18,28 +19,11 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 class OtherGeoObjects:
     @staticmethod
-    def get_osm_data(osm_id: int, tags: dict) -> pd.DataFrame:
-        """
-        Retrieves spatial data from OSM for given tags using OSM ID and returns a DataFrame.
-        """
-        try:
-            osm_id_rel = f"R{osm_id}"
-            city_boundary_gdf = ox.geocode_to_gdf(osm_id_rel, by_osmid=True)
-            polygon = city_boundary_gdf["geometry"].iloc[0]
-            data = ox.features_from_polygon(polygon, tags)
-            df = pd.DataFrame(data)
-            df = df.dropna(subset=["name"])
-            df = df.loc[:, ["name", "geometry"] + list(tags.keys())]
-            return df
-        except Exception as e:
-            raise RuntimeError(f"Error retrieving OSM data for {osm_id_rel}: {e}")
-
-    @staticmethod
     def get_and_process_osm_data(osm_id: int, tags: dict) -> pd.DataFrame:
         """
         Retrieves and processes OSM data for different urban objects.
         """
-        df = OtherGeoObjects.get_osm_data(osm_id, tags)
+        df = GeoDataGetter.get_osm_data(osm_id, tags)
         df["geometry"] = df["geometry"].apply(OtherGeoObjects.calculate_centroid)
         df.rename(columns={df.columns[-1]: "geo_obj_tag"}, inplace=True)
         return df
@@ -63,7 +47,7 @@ class OtherGeoObjects:
         osm_dfs = [OtherGeoObjects.get_and_process_osm_data(osm_id, tags) for tags in tags_list]
         osm_combined_df = pd.concat(osm_dfs, axis=0)
         return osm_combined_df
-    
+
     @staticmethod
     def calculate_centroid(geometry) -> Point:
         """
@@ -213,7 +197,7 @@ class OtherGeoObjects:
             return match.iloc[0, -1]
         else:
             return None
-        
+
     @staticmethod
     def get_unique_part_types(df):
         return df["other_geo_obj"].unique()
@@ -237,7 +221,7 @@ class OtherGeoObjects:
             lambda x: OtherGeoObjects.restoration_of_normal_form(x, osm_combined_df)
         )
         df_obj = OtherGeoObjects.expand_toponym(df_obj)
-        
+
         df_obj["geometry"] = df_obj["other_geo_obj"].apply(lambda x: OtherGeoObjects.find_geometry(x, osm_combined_df))
         df_obj["geo_obj_tag"] = df_obj["other_geo_obj"].apply(
             lambda x: OtherGeoObjects.find_geo_obj_tag(x, osm_combined_df)

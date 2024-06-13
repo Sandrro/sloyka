@@ -1,0 +1,3090 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d6" for="edge" attr.name="SIMILARITY_SCORE" attr.type="double"/>
+<key id="d5" for="node" attr.name="Group_name" attr.type="string"/>
+<key id="d4" for="node" attr.name="Cluster" attr.type="int"/>
+<key id="d3" for="node" attr.name="Lon" attr.type="double"/>
+<key id="d2" for="node" attr.name="Lat" attr.type="double"/>
+<key id="d1" for="node" attr.name="Location" attr.type="string"/>
+<key id="d0" for="node" attr.name="tag" attr.type="string"/>
+<graph edgedefault="undirected"><node id="Ленинградское шоссе">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Пятёрочка, 57, Ленинградское шоссе, микрорайон Д, Центральный микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188805, Россия</data>
+  <data key="d2">28.7824091</data>
+  <data key="d3">60.6997985</data>
+</node>
+<node id="адрес">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="гранит">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="фримаркет">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="кровать">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="балкон">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="бесплатный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Лесхозная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Лесхозная улица, микрорайон Кировские Дачи, Кировские Дачи, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188808, Россия</data>
+  <data key="d2">28.7495894</data>
+  <data key="d3">60.745552</data>
+</node>
+<node id="светогорск">
+  <data key="d0">NOUN</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="Петровская площадь">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Петровская площадь, Петровский микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, Россия</data>
+  <data key="d2">28.724384195912627</data>
+  <data key="d3">60.71750025</data>
+</node>
+<node id="замок">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="задний">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="собака">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Выборгский путепровод">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Выборгский путепровод, Петровский микрорайон, Выборгский, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188811, Россия</data>
+  <data key="d2">28.7303886</data>
+  <data key="d3">60.7207378</data>
+</node>
+<node id="корабел">
+  <data key="d0">NOUN</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="выборгский">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="мальчик">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="герой">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="пожарный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="готэма">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="прихожанин">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="литургия">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="фестиваль">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Карельская улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Карельская улица, Калининский микрорайон, Калинино, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188804, Россия</data>
+  <data key="d2">28.6591952</data>
+  <data key="d3">60.7572168</data>
+</node>
+<node id="водоотвод">
+  <data key="d0">NOUN</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="Рубероидная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Рубероидная улица, Калининский микрорайон, Калинино, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188804, Россия</data>
+  <data key="d2">28.6443175</data>
+  <data key="d3">60.7524155</data>
+</node>
+<node id="закрыть">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Кривоносова улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">13, Кривоносова улица, Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188808, Россия</data>
+  <data key="d2">28.763067679692014</data>
+  <data key="d3">60.71772525</data>
+</node>
+<node id="мебель">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Прогонная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Балтика, 9, Прогонная улица, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.735109529546797</data>
+  <data key="d3">60.7135811</data>
+</node>
+<node id="балет">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="улица Данилова">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">19, улица Данилова, Центральный микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188802, Россия</data>
+  <data key="d2">28.752160155918</data>
+  <data key="d3">60.69778735</data>
+</node>
+<node id="автозапчасть">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="Спичечная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Спичечная улица, микрорайон В, Центральный микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188810, Россия</data>
+  <data key="d2">28.7715158</data>
+  <data key="d3">60.7014185</data>
+</node>
+<node id="хореография">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="кладбище">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="пить">
+  <data key="d0">INFN</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="Пионерская улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Объединенный банк Северных стран, 4, Пионерская улица, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.73714957865999</data>
+  <data key="d3">60.7124949</data>
+</node>
+<node id="Вокзальная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Винлаб, 4, Вокзальная улица, Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7513253</data>
+  <data key="d3">60.7132339</data>
+</node>
+<node id="одежда">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="знак">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Выборгская улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Выборгская улица, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7334711</data>
+  <data key="d3">60.7109636</data>
+</node>
+<node id="хахахах">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="крыша">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="город">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="дорожный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="квиток">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="улица Штурма">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">улица Штурма, Петровский микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188811, Россия</data>
+  <data key="d2">28.722727</data>
+  <data key="d3">60.7157503</data>
+</node>
+<node id="музей">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Приморское шоссе">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Приморское шоссе, Центральный микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7551035</data>
+  <data key="d3">60.7002334</data>
+</node>
+<node id="дорога">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="крыса">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="птица">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="голубеть">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="петрович">
+  <data key="d0">NOUN</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="шоссе">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="молодец">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="субботник">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="утро">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="ночь">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="ремонт">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="дождь">
+  <data key="d0">NOUN</data>
+  <data key="d4">0</data>
+  <data key="d5">0_холодный_снежный_снегоуборочный_снегопад</data>
+</node>
+<node id="лес">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="проспект Ленина">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">проспект Ленина, микрорайон А (Черёмушки), Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7579706</data>
+  <data key="d3">60.7068446</data>
+</node>
+<node id="деревня">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="руина">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="фасад">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="батарейный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="букетик">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="зима">
+  <data key="d0">NOUN</data>
+  <data key="d4">0</data>
+  <data key="d5">0_холодный_снежный_снегоуборочный_снегопад</data>
+</node>
+<node id="сломать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="сказать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="снежный">
+  <data key="d0">ADJF</data>
+  <data key="d4">0</data>
+  <data key="d5">0_холодный_снежный_снегоуборочный_снегопад</data>
+</node>
+<node id="оценить">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="забор">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="экспозиция">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="эвакуатор">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="ленин">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="шахматный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="грузовик">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="запах">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="весна">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="собачий">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="ждать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="плавать">
+  <data key="d0">INFN</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="залив">
+  <data key="d0">NOUN</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="немешалоба">
+  <data key="d0">ADJS</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="озеро">
+  <data key="d0">NOUN</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="фильм">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="писать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="перестать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="привыкать">
+  <data key="d0">INFN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="работать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="гуманизм">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="российский">
+  <data key="d0">ADJF</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="Большая Чернозёмная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Большая Чернозёмная улица, микрорайон Д, Центральный микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188805, Россия</data>
+  <data key="d2">28.7854462</data>
+  <data key="d3">60.6927412</data>
+</node>
+<node id="субботникиукитсж">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="проспект Суворова">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">проспект Суворова, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7420265</data>
+  <data key="d3">60.704918</data>
+</node>
+<node id="тротуарный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="русский">
+  <data key="d0">ADJF</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="Крепостная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Совет Депутатов, 35, Крепостная улица, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.74414850718966</data>
+  <data key="d3">60.70854575</data>
+</node>
+<node id="проспект">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="посмотреть">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="трамвай">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="стих">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="провод">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="выборг">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="крепостной">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="дом">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="надоесть">
+  <data key="d0">INFN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="клюква">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="снять">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="выручка">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="инвалид">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="очередной">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="снимать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="александровский">
+  <data key="d0">ADJF</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="реставрация">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="красота">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="дверь">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="губернатор">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="советский">
+  <data key="d0">ADJF</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="истребитель">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="соль">
+  <data key="d0">NOUN</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="ракета">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="крутой">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="фургончик">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="ходить">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="фибоначча">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="реставрировать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="хороший">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="перила">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="пешеходный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="мусор">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="улица Димитрова">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Platinum, 4, улица Димитрова, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7467535</data>
+  <data key="d3">60.7114577</data>
+</node>
+<node id="делать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="выставочный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="дождик">
+  <data key="d0">NOUN</data>
+  <data key="d4">0</data>
+  <data key="d5">0_холодный_снежный_снегоуборочный_снегопад</data>
+</node>
+<node id="пугать">
+  <data key="d0">INFN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="погнать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="городской">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="аааа">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="финский">
+  <data key="d0">ADJF</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="добрый">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="чистить">
+  <data key="d0">INFN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="паника">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="ливень">
+  <data key="d0">NOUN</data>
+  <data key="d4">0</data>
+  <data key="d5">0_холодный_снежный_снегоуборочный_снегопад</data>
+</node>
+<node id="вода">
+  <data key="d0">NOUN</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="тёпленький">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="россия">
+  <data key="d0">NOUN</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="улица Володарского">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">18, улица Володарского, микрорайон А (Черёмушки), Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.760813160481586</data>
+  <data key="d3">60.71105085</data>
+</node>
+<node id="благородный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="пункт">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="благотворительный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Светогорский переулок">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Светогорский переулок, микрорайон Кировские Дачи, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188808, Россия</data>
+  <data key="d2">28.7657821</data>
+  <data key="d3">60.7243378</data>
+</node>
+<node id="сияние">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="мост Дружбы">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">мост Дружбы, Мостовой Переход, Петровский микрорайон, Гвардейский, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188811, Россия</data>
+  <data key="d2">28.6893151</data>
+  <data key="d3">60.7375592</data>
+</node>
+<node id="мост">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="гостиница">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="автомобилист">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="Майорова улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Майорова улица, Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188808, Россия</data>
+  <data key="d2">28.758997</data>
+  <data key="d3">60.7171876</data>
+</node>
+<node id="vtzqvznhatстудия">
+  <data key="d0">NOUN</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="Приморская улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Приморская улица, микрорайон Г, Центральный микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188802, Россия</data>
+  <data key="d2">28.7679907</data>
+  <data key="d3">60.6962826</data>
+</node>
+<node id="житель">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="приморский">
+  <data key="d0">ADJF</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="марафон">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="чемодан">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="аренда">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="ужас">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="Карельский проезд">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Карельский проезд, Калининский микрорайон, Калинино, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188804, Россия</data>
+  <data key="d2">28.6521395</data>
+  <data key="d3">60.7576421</data>
+</node>
+<node id="военный">
+  <data key="d0">ADJF</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="Петровская улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Петровская улица, Петровский микрорайон, Северный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188811, Россия</data>
+  <data key="d2">28.7221543</data>
+  <data key="d3">60.7228771</data>
+</node>
+<node id="ворота">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="лодка">
+  <data key="d0">NOUN</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="Ленинградский проспект">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Ленинградский проспект, Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7497049</data>
+  <data key="d3">60.7143085</data>
+</node>
+<node id="виновный">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="почтовый">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="новость">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="водитель">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="Подгорная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Подгорная улица, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7303799</data>
+  <data key="d3">60.7131179</data>
+</node>
+<node id="ресторан">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Петровский мост">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Петровский мост, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.733453</data>
+  <data key="d3">60.715249</data>
+</node>
+<node id="улица Куйбышева">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">МСК, 9, улица Куйбышева, микрорайон А (Черёмушки), Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7561706</data>
+  <data key="d3">60.7118634</data>
+</node>
+<node id="привезти">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="куйбышев">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="картина">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Красноармейская улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Красноармейская улица, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7358949</data>
+  <data key="d3">60.7124961</data>
+</node>
+<node id="улица Пушкина">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">улица Пушкина, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7453325</data>
+  <data key="d3">60.7081691</data>
+</node>
+<node id="александрович">
+  <data key="d0">NOUN</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="улица Южный Вал">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">None</data>
+</node>
+<node id="уйти">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="бетон">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="колодец">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="мрак">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="мучиться">
+  <data key="d0">INFN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="виновник">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="рассвет">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="бедный">
+  <data key="d0">ADJF</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="этаж">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="клапан">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="пойти">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="прокуратура">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="кремль">
+  <data key="d0">NOUN</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="канализация">
+  <data key="d0">NOUN</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="платить">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="улица Кировские Дачи">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">улица Кировские Дачи, микрорайон Кировские Дачи, Кировские Дачи, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188808, Россия</data>
+  <data key="d2">28.7568073</data>
+  <data key="d3">60.7429182</data>
+</node>
+<node id="лыжа">
+  <data key="d0">NOUN</data>
+  <data key="d4">0</data>
+  <data key="d5">0_холодный_снежный_снегоуборочный_снегопад</data>
+</node>
+<node id="снег">
+  <data key="d0">NOUN</data>
+  <data key="d4">0</data>
+  <data key="d5">0_холодный_снежный_снегоуборочный_снегопад</data>
+</node>
+<node id="колхоз">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="лыжный">
+  <data key="d0">ADJF</data>
+  <data key="d4">0</data>
+  <data key="d5">0_холодный_снежный_снегоуборочный_снегопад</data>
+</node>
+<node id="Рубежная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">25, Рубежная улица, микрорайон Г, Центральный микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188802, Россия</data>
+  <data key="d2">28.771402817104203</data>
+  <data key="d3">60.6935001</data>
+</node>
+<node id="парковка">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="возраст">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="маска">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="инженер">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Школьная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">10, Школьная улица, Калининский микрорайон, Калинино, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188804, Россия</data>
+  <data key="d2">28.645837382039417</data>
+  <data key="d3">60.7567352</data>
+</node>
+<node id="забыть">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="администрация">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="почистить">
+  <data key="d0">INFN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="пост">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="думать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="фамилия">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="проблема">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="мужик">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="двор">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="очистка">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="Батарейная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Батарейная улица, микрорайон А (Черёмушки), Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7578317</data>
+  <data key="d3">60.7067106</data>
+</node>
+<node id="Судостроительная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">12, Судостроительная улица, Петровский микрорайон, Выборгский, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.73568390241752</data>
+  <data key="d3">60.7230935</data>
+</node>
+<node id="красавец">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="совка">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="видеокамера">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="праздничный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Привокзальная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Привокзальная улица, Калининский микрорайон, Калинино, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188804, Россия</data>
+  <data key="d2">28.6421424</data>
+  <data key="d3">60.7544147</data>
+</node>
+<node id="улица Гагарина">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">19, улица Гагарина, микрорайон Г, Центральный микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188802, Россия</data>
+  <data key="d2">28.76140808081795</data>
+  <data key="d3">60.69707545</data>
+</node>
+<node id="кот">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="проспект Победы">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">29, проспект Победы, микрорайон Г, Центральный микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188801, Россия</data>
+  <data key="d2">28.777738430696164</data>
+  <data key="d3">60.6945038</data>
+</node>
+<node id="холодный">
+  <data key="d0">ADJF</data>
+  <data key="d4">0</data>
+  <data key="d5">0_холодный_снежный_снегоуборочный_снегопад</data>
+</node>
+<node id="тротуар">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="гидроудар">
+  <data key="d0">NOUN</data>
+  <data key="d4">2</data>
+  <data key="d5">2_соль_приморский_плавать_пить</data>
+</node>
+<node id="Садовая улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Садовая улица, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7482638</data>
+  <data key="d3">60.7052676</data>
+</node>
+<node id="счастие">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="электростанция">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="смысл">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="иметь">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="наблюдать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="плюсовать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="дворник">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="зарплата">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="минусовать">
+  <data key="d0">INFN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="снегопад">
+  <data key="d0">NOUN</data>
+  <data key="d4">0</data>
+  <data key="d5">0_холодный_снежный_снегоуборочный_снегопад</data>
+</node>
+<node id="шутник">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="побрехать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="говорить">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="нигерия">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="неуважаемый">
+  <data key="d0">ADJF</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="снегоуборочный">
+  <data key="d0">ADJF</data>
+  <data key="d4">0</data>
+  <data key="d5">0_холодный_снежный_снегоуборочный_снегопад</data>
+</node>
+<node id="московский">
+  <data key="d0">ADJF</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="Московский проспект">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">14, Московский проспект, Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.74936679402947</data>
+  <data key="d3">60.7075049</data>
+</node>
+<node id="поджечь">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="экстремизм">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="статья">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="жёлтый">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="карта">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="поддерживать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="гост">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="показуха">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="автобус">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="производитель">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="порадоваться">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="завязывать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="гадость">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="скользкий">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="наивный">
+  <data key="d0">ADJF</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="улица">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="садовый">
+  <data key="d0">ADJF</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="улица Акулова">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">улица Акулова, Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188808, Россия</data>
+  <data key="d2">28.7545446</data>
+  <data key="d3">60.713915</data>
+</node>
+<node id="дтп">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Промышленная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">2, Промышленная улица, Лазаревка, Промышленный микрорайон, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188805, Россия</data>
+  <data key="d2">28.8090407433387</data>
+  <data key="d3">60.69644865</data>
+</node>
+<node id="год">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="гетто">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="единственный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Парковая улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Парковая улица, Петровский микрорайон, Северный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188811, Россия</data>
+  <data key="d2">28.7258789</data>
+  <data key="d3">60.7286105</data>
+</node>
+<node id="путепровод">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Советская улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Администрация Выборгского района, 12, Советская улица, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7433934227204</data>
+  <data key="d3">60.70876145</data>
+</node>
+<node id="танец">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="мелодия">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="комедия">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Школьный переулок">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Школьный переулок, микрорайон А (Черёмушки), Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7551708</data>
+  <data key="d3">60.7097662</data>
+</node>
+<node id="обед">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="набережная Адмирала Апраксина">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">набережная Адмирала Апраксина, Петровский микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188811, Россия</data>
+  <data key="d2">28.7256583</data>
+  <data key="d3">60.7113898</data>
+</node>
+<node id="танцевальный">
+  <data key="d0">ADJF</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="Физкультурная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Бизнес-центр «Галс», 17, Физкультурная улица, микрорайон А (Черёмушки), Центральный микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188802, Россия</data>
+  <data key="d2">28.764883127986685</data>
+  <data key="d3">60.7012985</data>
+</node>
+<node id="стоматолог">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Железнодорожная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Железнодорожная улица, Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7482947</data>
+  <data key="d3">60.7153177</data>
+</node>
+<node id="позор">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="мафия">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="мафиози">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="торт">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="воастить">
+  <data key="d0">INFN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="отваливаться">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="железнодорожный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="японский">
+  <data key="d0">ADJF</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="улица Мира">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">улица Мира, микрорайон А (Черёмушки), Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7554542</data>
+  <data key="d3">60.7084378</data>
+</node>
+<node id="лицензирование">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="больной">
+  <data key="d0">ADJF</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="дезинформация">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="враньё">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="знать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="лицензия">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="свой">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="июль">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="лидер">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="викторов">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="мир">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="бульвар Кутузова">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Дикси, 7, бульвар Кутузова, Центральный микрорайон, Старый город, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7499319</data>
+  <data key="d3">60.7046209</data>
+</node>
+<node id="лифт">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="привет">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="кутузов">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Павловский мост">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Павловский мост, Сайменский микрорайон, Раппатилы, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, Россия</data>
+  <data key="d2">28.7180771</data>
+  <data key="d3">60.7900723</data>
+</node>
+<node id="улица Сухова">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">ОАО "Выборгтеплоэнерго", 2, улица Сухова, микрорайон А (Черёмушки), Центральный микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188810, Россия</data>
+  <data key="d2">28.769321854003433</data>
+  <data key="d3">60.70444055</data>
+</node>
+<node id="косить">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="трава">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="прилететь">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="камень">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="газоногосильщик">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="улица Таммисуо">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">улица Таммисуо, Кировский микрорайон, Таммисуо, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188810, Россия</data>
+  <data key="d2">28.8001561</data>
+  <data key="d3">60.7300692</data>
+</node>
+<node id="такса">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="улица Ушакова">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">улица Ушакова, Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7506773</data>
+  <data key="d3">60.7116548</data>
+</node>
+<node id="ленинградский">
+  <data key="d0">ADJF</data>
+  <data key="d4">1</data>
+  <data key="d5">1_японский_финский_советский_светогорск</data>
+</node>
+<node id="Ростовская улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Mobile service, 5, Ростовская улица, Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188800, Россия</data>
+  <data key="d2">28.7502425</data>
+  <data key="d3">60.7127663</data>
+</node>
+<node id="паспорт">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Сайменское шоссе">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Сайменское шоссе, Калининский микрорайон, Калинино, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188804, Россия</data>
+  <data key="d2">28.6404768</data>
+  <data key="d3">60.754773</data>
+</node>
+<node id="лестница">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="контроль">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="соболезнование">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="посёлок">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="открыть">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="погибнуть">
+  <data key="d0">INFN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="информация">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="показать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="соболезновать">
+  <data key="d0">INFN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="пипец">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="искренний">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="мёртвый">
+  <data key="d0">NOUN</data>
+  <data key="d4">-1</data>
+  <data key="d5">-1_погибнуть_почистить_хореография_фургончик</data>
+</node>
+<node id="дитя">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="халатность">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="рассказать">
+  <data key="d0">INFN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="родный">
+  <data key="d0">ADJF</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="бред">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Дальняя улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Дальняя улица, Петербургский микрорайон, Южный, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188802, Россия</data>
+  <data key="d2">28.7728127</data>
+  <data key="d3">60.6847292</data>
+</node>
+<node id="Транспортная улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Магнит Экстра, 1, Транспортная улица, Лазаревка, Промышленный микрорайон, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188805, Россия</data>
+  <data key="d2">28.784381782259693</data>
+  <data key="d3">60.70052595</data>
+</node>
+<node id="направление">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<node id="Гатчинский переулок">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Гатчинский переулок, микрорайон А (Черёмушки), Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188810, Россия</data>
+  <data key="d2">28.7666339</data>
+  <data key="d3">60.7100627</data>
+</node>
+<node id="грабитель">
+  <data key="d0">NOUN</data>
+  <data key="d4">3</data>
+  <data key="d5">3_бедный_больной_ужас_ракета</data>
+</node>
+<node id="Офицерская улица">
+  <data key="d0">TOPONIM</data>
+  <data key="d1">Офицерская улица, Центральный микрорайон, Папула, Выборг, город Выборг, Выборгский район, Ленинградская область, Северо-Западный федеральный округ, 188808, Россия</data>
+  <data key="d2">28.7617259</data>
+  <data key="d3">60.7151144</data>
+</node>
+<node id="павильон">
+  <data key="d0">NOUN</data>
+  <data key="d4">4</data>
+  <data key="d5">4_аааа_проспект_обед_отваливаться</data>
+</node>
+<edge source="Ленинградское шоссе" target="адрес">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Ленинградское шоссе" target="гранит">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Ленинградское шоссе" target="фримаркет">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Ленинградское шоссе" target="кровать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Ленинградское шоссе" target="балкон">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Ленинградское шоссе" target="бесплатный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="адрес" target="улица Володарского">
+  <data key="d6">nan</data>
+</edge>
+<edge source="кровать" target="поджечь">
+  <data key="d6">0.7645581364631653</data>
+</edge>
+<edge source="балкон" target="лестница">
+  <data key="d6">0.7785098552703857</data>
+</edge>
+<edge source="балкон" target="житель">
+  <data key="d6">0.7531839609146118</data>
+</edge>
+<edge source="балкон" target="ресторан">
+  <data key="d6">0.7870476245880127</data>
+</edge>
+<edge source="балкон" target="карта">
+  <data key="d6">0.7584284543991089</data>
+</edge>
+<edge source="балкон" target="чемодан">
+  <data key="d6">0.7649297118186951</data>
+</edge>
+<edge source="балкон" target="писать">
+  <data key="d6">0.7517582178115845</data>
+</edge>
+<edge source="бесплатный" target="оценить">
+  <data key="d6">0.7574687004089355</data>
+</edge>
+<edge source="Лесхозная улица" target="светогорск">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Петровская площадь" target="замок">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Петровская площадь" target="задний">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Петровская площадь" target="собака">
+  <data key="d6">nan</data>
+</edge>
+<edge source="задний" target="маска">
+  <data key="d6">0.7701679468154907</data>
+</edge>
+<edge source="собака" target="Рубежная улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгский путепровод" target="корабел">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгский путепровод" target="выборгский">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгский путепровод" target="мальчик">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгский путепровод" target="герой">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгский путепровод" target="пожарный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгский путепровод" target="готэма">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгский путепровод" target="прихожанин">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгский путепровод" target="литургия">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгский путепровод" target="фестиваль">
+  <data key="d6">nan</data>
+</edge>
+<edge source="мальчик" target="Сайменское шоссе">
+  <data key="d6">nan</data>
+</edge>
+<edge source="пожарный" target="Сайменское шоссе">
+  <data key="d6">nan</data>
+</edge>
+<edge source="прихожанин" target="ленин">
+  <data key="d6">0.7549004554748535</data>
+</edge>
+<edge source="литургия" target="кремль">
+  <data key="d6">0.7514643669128418</data>
+</edge>
+<edge source="фестиваль" target="Пионерская улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Карельская улица" target="водоотвод">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Рубероидная улица" target="закрыть">
+  <data key="d6">nan</data>
+</edge>
+<edge source="закрыть" target="открыть">
+  <data key="d6">0.7877689599990845</data>
+</edge>
+<edge source="Кривоносова улица" target="мебель">
+  <data key="d6">nan</data>
+</edge>
+<edge source="мебель" target="информация">
+  <data key="d6">0.7719029188156128</data>
+</edge>
+<edge source="мебель" target="администрация">
+  <data key="d6">0.7723618745803833</data>
+</edge>
+<edge source="Прогонная улица" target="балет">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Данилова" target="автозапчасть">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Спичечная улица" target="хореография">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Спичечная улица" target="кладбище">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Спичечная улица" target="пить">
+  <data key="d6">nan</data>
+</edge>
+<edge source="кладбище" target="Дальняя улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="пить" target="одежда">
+  <data key="d6">0.7911723852157593</data>
+</edge>
+<edge source="пить" target="красота">
+  <data key="d6">0.7884951829910278</data>
+</edge>
+<edge source="пить" target="ресторан">
+  <data key="d6">0.7724889516830444</data>
+</edge>
+<edge source="пить" target="праздничный">
+  <data key="d6">0.7735252380371094</data>
+</edge>
+<edge source="Вокзальная улица" target="одежда">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Вокзальная улица" target="знак">
+  <data key="d6">nan</data>
+</edge>
+<edge source="одежда" target="новость">
+  <data key="d6">0.7531505823135376</data>
+</edge>
+<edge source="одежда" target="красота">
+  <data key="d6">0.8023245930671692</data>
+</edge>
+<edge source="одежда" target="ресторан">
+  <data key="d6">0.7948112487792969</data>
+</edge>
+<edge source="одежда" target="чемодан">
+  <data key="d6">0.7758243680000305</data>
+</edge>
+<edge source="знак" target="Московский проспект">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгская улица" target="хахахах">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгская улица" target="крыша">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгская улица" target="город">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгская улица" target="дорожный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Выборгская улица" target="квиток">
+  <data key="d6">nan</data>
+</edge>
+<edge source="крыша" target="снег">
+  <data key="d6">0.7692180871963501</data>
+</edge>
+<edge source="город" target="Сайменское шоссе">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Штурма" target="музей">
+  <data key="d6">nan</data>
+</edge>
+<edge source="музей" target="администрация">
+  <data key="d6">0.7669968605041504</data>
+</edge>
+<edge source="музей" target="экспозиция">
+  <data key="d6">0.7682861089706421</data>
+</edge>
+<edge source="Приморское шоссе" target="дорога">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="крыса">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="птица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="голубеть">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="петрович">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="шоссе">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="молодец">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="субботник">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="утро">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="ночь">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="ремонт">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="дождь">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморское шоссе" target="лес">
+  <data key="d6">nan</data>
+</edge>
+<edge source="дорога" target="Московский проспект">
+  <data key="d6">nan</data>
+</edge>
+<edge source="голубеть" target="прилететь">
+  <data key="d6">0.7877535820007324</data>
+</edge>
+<edge source="молодец" target="Судостроительная улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="молодец" target="Сайменское шоссе">
+  <data key="d6">nan</data>
+</edge>
+<edge source="молодец" target="красавец">
+  <data key="d6">0.7717660069465637</data>
+</edge>
+<edge source="утро" target="ночь">
+  <data key="d6">0.7686285972595215</data>
+</edge>
+<edge source="ремонт" target="Железнодорожная улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="деревня">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="руина">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="фасад">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="батарейный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="букетик">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="зима">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="сломать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="сказать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="снежный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="оценить">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="забор">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="экспозиция">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="эвакуатор">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="ленин">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="шахматный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="грузовик">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="запах">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="весна">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="собачий">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="ждать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="плавать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="залив">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="немешалоба">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="озеро">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="фильм">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="писать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="перестать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="привыкать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="работать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="гуманизм">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Ленина" target="российский">
+  <data key="d6">nan</data>
+</edge>
+<edge source="деревня" target="посёлок">
+  <data key="d6">0.8118849992752075</data>
+</edge>
+<edge source="фасад" target="павильон">
+  <data key="d6">0.7500536441802979</data>
+</edge>
+<edge source="батарейный" target="Батарейная улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="зима" target="улица Южный Вал">
+  <data key="d6">nan</data>
+</edge>
+<edge source="сломать" target="лестница">
+  <data key="d6">0.7697820663452148</data>
+</edge>
+<edge source="сломать" target="ходить">
+  <data key="d6">0.7562645673751831</data>
+</edge>
+<edge source="сломать" target="маска">
+  <data key="d6">0.7564704418182373</data>
+</edge>
+<edge source="сломать" target="рассказать">
+  <data key="d6">0.7836337089538574</data>
+</edge>
+<edge source="сломать" target="поджечь">
+  <data key="d6">0.7824761271476746</data>
+</edge>
+<edge source="сломать" target="чемодан">
+  <data key="d6">0.7519201040267944</data>
+</edge>
+<edge source="сказать" target="Сайменское шоссе">
+  <data key="d6">nan</data>
+</edge>
+<edge source="снежный" target="водитель">
+  <data key="d6">0.7541599273681641</data>
+</edge>
+<edge source="забор" target="Московский проспект">
+  <data key="d6">nan</data>
+</edge>
+<edge source="забор" target="снег">
+  <data key="d6">0.7641247510910034</data>
+</edge>
+<edge source="забор" target="электростанция">
+  <data key="d6">0.7509396076202393</data>
+</edge>
+<edge source="эвакуатор" target="Московский проспект">
+  <data key="d6">nan</data>
+</edge>
+<edge source="грузовик" target="ракета">
+  <data key="d6">0.7529174089431763</data>
+</edge>
+<edge source="грузовик" target="писать">
+  <data key="d6">0.7580771446228027</data>
+</edge>
+<edge source="плавать" target="мафиози">
+  <data key="d6">0.7526986598968506</data>
+</edge>
+<edge source="плавать" target="истребитель">
+  <data key="d6">0.7527785301208496</data>
+</edge>
+<edge source="залив" target="озеро">
+  <data key="d6">0.7534435391426086</data>
+</edge>
+<edge source="залив" target="вода">
+  <data key="d6">0.7839274406433105</data>
+</edge>
+<edge source="фильм" target="Крепостная улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Большая Чернозёмная улица" target="субботникиукитсж">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Суворова" target="тротуарный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Суворова" target="русский">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="проспект">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="посмотреть">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="трамвай">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="стих">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="провод">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="выборг">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="крепостной">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="дом">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="надоесть">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="клюква">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="снять">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="выручка">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="инвалид">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="очередной">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="снимать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="александровский">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="реставрация">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="красота">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="дверь">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="губернатор">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="советский">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="истребитель">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="соль">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="ракета">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="крутой">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="фургончик">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="ходить">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="фибоначча">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="реставрировать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="хороший">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="перила">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="пешеходный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Крепостная улица" target="мусор">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект" target="улица">
+  <data key="d6">0.7768568992614746</data>
+</edge>
+<edge source="посмотреть" target="пешеходный">
+  <data key="d6">0.7508757710456848</data>
+</edge>
+<edge source="посмотреть" target="наблюдать">
+  <data key="d6">0.8056052923202515</data>
+</edge>
+<edge source="снять" target="снимать">
+  <data key="d6">0.7554067969322205</data>
+</edge>
+<edge source="очередной" target="добрый">
+  <data key="d6">0.7617800235748291</data>
+</edge>
+<edge source="красота" target="маска">
+  <data key="d6">0.7661539316177368</data>
+</edge>
+<edge source="красота" target="новость">
+  <data key="d6">0.7817764282226562</data>
+</edge>
+<edge source="красота" target="забыть">
+  <data key="d6">0.7772194743156433</data>
+</edge>
+<edge source="красота" target="администрация">
+  <data key="d6">0.7548078298568726</data>
+</edge>
+<edge source="красота" target="ресторан">
+  <data key="d6">0.7905040979385376</data>
+</edge>
+<edge source="красота" target="праздничный">
+  <data key="d6">0.7784711718559265</data>
+</edge>
+<edge source="советский" target="Привокзальная улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="хороший" target="Рубежная улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="мусор" target="снег">
+  <data key="d6">0.7741389274597168</data>
+</edge>
+<edge source="улица Димитрова" target="делать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="выставочный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="дождик">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="пугать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="погнать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="городской">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="аааа">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="финский">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="добрый">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="чистить">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="паника">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="ливень">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="вода">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="тёпленький">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Димитрова" target="россия">
+  <data key="d6">nan</data>
+</edge>
+<edge source="делать" target="думать">
+  <data key="d6">0.7589935064315796</data>
+</edge>
+<edge source="чистить" target="Школьная улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="вода" target="улица Гагарина">
+  <data key="d6">nan</data>
+</edge>
+<edge source="россия" target="информация">
+  <data key="d6">0.7691397070884705</data>
+</edge>
+<edge source="россия" target="железнодорожный">
+  <data key="d6">0.786545991897583</data>
+</edge>
+<edge source="улица Володарского" target="благородный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Володарского" target="пункт">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Володарского" target="благотворительный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="благородный" target="бедный">
+  <data key="d6">0.7719178795814514</data>
+</edge>
+<edge source="Светогорский переулок" target="сияние">
+  <data key="d6">nan</data>
+</edge>
+<edge source="мост Дружбы" target="мост">
+  <data key="d6">nan</data>
+</edge>
+<edge source="мост Дружбы" target="гостиница">
+  <data key="d6">nan</data>
+</edge>
+<edge source="мост Дружбы" target="автомобилист">
+  <data key="d6">nan</data>
+</edge>
+<edge source="мост" target="Петровский мост">
+  <data key="d6">nan</data>
+</edge>
+<edge source="мост" target="Павловский мост">
+  <data key="d6">nan</data>
+</edge>
+<edge source="гостиница" target="гост">
+  <data key="d6">0.7508671283721924</data>
+</edge>
+<edge source="гостиница" target="администрация">
+  <data key="d6">0.7524790167808533</data>
+</edge>
+<edge source="гостиница" target="электростанция">
+  <data key="d6">0.754118800163269</data>
+</edge>
+<edge source="Майорова улица" target="vtzqvznhatстудия">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморская улица" target="житель">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморская улица" target="приморский">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморская улица" target="марафон">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморская улица" target="чемодан">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморская улица" target="аренда">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Приморская улица" target="ужас">
+  <data key="d6">nan</data>
+</edge>
+<edge source="чемодан" target="лестница">
+  <data key="d6">0.8058832883834839</data>
+</edge>
+<edge source="чемодан" target="ресторан">
+  <data key="d6">0.8116455674171448</data>
+</edge>
+<edge source="ужас" target="улица Южный Вал">
+  <data key="d6">nan</data>
+</edge>
+<edge source="ужас" target="Сайменское шоссе">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Карельский проезд" target="военный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Петровская улица" target="ворота">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Петровская улица" target="лодка">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Ленинградский проспект" target="виновный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Ленинградский проспект" target="почтовый">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Ленинградский проспект" target="новость">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Ленинградский проспект" target="водитель">
+  <data key="d6">nan</data>
+</edge>
+<edge source="новость" target="Московский проспект">
+  <data key="d6">nan</data>
+</edge>
+<edge source="новость" target="ресторан">
+  <data key="d6">0.7805846929550171</data>
+</edge>
+<edge source="водитель" target="экстремизм">
+  <data key="d6">0.7532674670219421</data>
+</edge>
+<edge source="Подгорная улица" target="ресторан">
+  <data key="d6">nan</data>
+</edge>
+<edge source="ресторан" target="Красноармейская улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="ресторан" target="этаж">
+  <data key="d6">0.7673367857933044</data>
+</edge>
+<edge source="ресторан" target="администрация">
+  <data key="d6">0.75092613697052</data>
+</edge>
+<edge source="улица Куйбышева" target="привезти">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Куйбышева" target="куйбышев">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Куйбышева" target="картина">
+  <data key="d6">nan</data>
+</edge>
+<edge source="куйбышев" target="бульвар Кутузова">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Пушкина" target="александрович">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="уйти">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="бетон">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="колодец">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="мрак">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="мучиться">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="виновник">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="рассвет">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="бедный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="этаж">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="клапан">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="пойти">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="прокуратура">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="кремль">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="канализация">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Южный Вал" target="платить">
+  <data key="d6">nan</data>
+</edge>
+<edge source="прокуратура" target="халатность">
+  <data key="d6">0.758641242980957</data>
+</edge>
+<edge source="прокуратура" target="администрация">
+  <data key="d6">0.7549288868904114</data>
+</edge>
+<edge source="прокуратура" target="электростанция">
+  <data key="d6">0.7602763175964355</data>
+</edge>
+<edge source="кремль" target="лыжный">
+  <data key="d6">0.797722339630127</data>
+</edge>
+<edge source="канализация" target="дезинформация">
+  <data key="d6">0.7685559988021851</data>
+</edge>
+<edge source="платить" target="улица Мира">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Кировские Дачи" target="лыжа">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Кировские Дачи" target="снег">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Кировские Дачи" target="колхоз">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Кировские Дачи" target="лыжный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="снег" target="Садовая улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="снег" target="снегопад">
+  <data key="d6">0.8135698437690735</data>
+</edge>
+<edge source="снег" target="электростанция">
+  <data key="d6">0.7803702354431152</data>
+</edge>
+<edge source="Рубежная улица" target="парковка">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Рубежная улица" target="возраст">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Рубежная улица" target="маска">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Рубежная улица" target="инженер">
+  <data key="d6">nan</data>
+</edge>
+<edge source="парковка" target="Советская улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="парковка" target="информация">
+  <data key="d6">0.7591224908828735</data>
+</edge>
+<edge source="маска" target="забыть">
+  <data key="d6">0.8196008205413818</data>
+</edge>
+<edge source="маска" target="праздничный">
+  <data key="d6">0.7645723819732666</data>
+</edge>
+<edge source="Школьная улица" target="забыть">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Школьная улица" target="администрация">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Школьная улица" target="почистить">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Школьная улица" target="пост">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Школьная улица" target="думать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Школьная улица" target="фамилия">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Школьная улица" target="проблема">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Школьная улица" target="мужик">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Школьная улица" target="двор">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Школьная улица" target="очистка">
+  <data key="d6">nan</data>
+</edge>
+<edge source="забыть" target="праздничный">
+  <data key="d6">0.7737310528755188</data>
+</edge>
+<edge source="думать" target="Сайменское шоссе">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Судостроительная улица" target="красавец">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Судостроительная улица" target="совка">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Судостроительная улица" target="видеокамера">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Судостроительная улица" target="праздничный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="праздничный" target="рассказать">
+  <data key="d6">0.7730927467346191</data>
+</edge>
+<edge source="праздничный" target="привет">
+  <data key="d6">0.7769279479980469</data>
+</edge>
+<edge source="праздничный" target="поджечь">
+  <data key="d6">0.7584226131439209</data>
+</edge>
+<edge source="улица Гагарина" target="кот">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Победы" target="холодный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Победы" target="тротуар">
+  <data key="d6">nan</data>
+</edge>
+<edge source="проспект Победы" target="гидроудар">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="счастие">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="электростанция">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="смысл">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="иметь">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="наблюдать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="плюсовать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="дворник">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="зарплата">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="минусовать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="снегопад">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="шутник">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="побрехать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="говорить">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="нигерия">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="неуважаемый">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="снегоуборочный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Садовая улица" target="московский">
+  <data key="d6">nan</data>
+</edge>
+<edge source="электростанция" target="железнодорожный">
+  <data key="d6">0.756013035774231</data>
+</edge>
+<edge source="Московский проспект" target="поджечь">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="экстремизм">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="статья">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="жёлтый">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="карта">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="поддерживать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="гост">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="показуха">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="автобус">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="производитель">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="порадоваться">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="завязывать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="гадость">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="скользкий">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="наивный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Московский проспект" target="садовый">
+  <data key="d6">nan</data>
+</edge>
+<edge source="поджечь" target="лестница">
+  <data key="d6">0.7534929513931274</data>
+</edge>
+<edge source="поджечь" target="рассказать">
+  <data key="d6">0.7734464406967163</data>
+</edge>
+<edge source="улица Акулова" target="дтп">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Промышленная улица" target="год">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Промышленная улица" target="гетто">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Промышленная улица" target="единственный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Парковая улица" target="путепровод">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Советская улица" target="танец">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Советская улица" target="мелодия">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Советская улица" target="комедия">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Школьный переулок" target="обед">
+  <data key="d6">nan</data>
+</edge>
+<edge source="обед" target="Железнодорожная улица">
+  <data key="d6">nan</data>
+</edge>
+<edge source="набережная Адмирала Апраксина" target="танцевальный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Физкультурная улица" target="стоматолог">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Железнодорожная улица" target="позор">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Железнодорожная улица" target="мафия">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Железнодорожная улица" target="мафиози">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Железнодорожная улица" target="торт">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Железнодорожная улица" target="воастить">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Железнодорожная улица" target="отваливаться">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Железнодорожная улица" target="железнодорожный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Железнодорожная улица" target="японский">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Мира" target="лицензирование">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Мира" target="больной">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Мира" target="дезинформация">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Мира" target="враньё">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Мира" target="знать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Мира" target="лицензия">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Мира" target="свой">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Мира" target="июль">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Мира" target="лидер">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Мира" target="викторов">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Мира" target="мир">
+  <data key="d6">nan</data>
+</edge>
+<edge source="бульвар Кутузова" target="лифт">
+  <data key="d6">nan</data>
+</edge>
+<edge source="бульвар Кутузова" target="привет">
+  <data key="d6">nan</data>
+</edge>
+<edge source="бульвар Кутузова" target="кутузов">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Сухова" target="косить">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Сухова" target="трава">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Сухова" target="прилететь">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Сухова" target="камень">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Сухова" target="газоногосильщик">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Таммисуо" target="такса">
+  <data key="d6">nan</data>
+</edge>
+<edge source="улица Ушакова" target="ленинградский">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Ростовская улица" target="паспорт">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="лестница">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="контроль">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="соболезнование">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="посёлок">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="открыть">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="погибнуть">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="информация">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="показать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="соболезновать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="пипец">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="искренний">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="мёртвый">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="дитя">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="халатность">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="рассказать">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="родный">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Сайменское шоссе" target="бред">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Транспортная улица" target="направление">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Гатчинский переулок" target="грабитель">
+  <data key="d6">nan</data>
+</edge>
+<edge source="Офицерская улица" target="павильон">
+  <data key="d6">nan</data>
+</edge>
+</graph></graphml>
