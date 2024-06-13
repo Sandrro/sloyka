@@ -28,7 +28,7 @@ class CommentsReply:
 
         comments = []
 
-        response = requests.get("https://api.vk.com/method/wall.getComments", params=params)
+        response = requests.get("https://api.vk.com/method/wall.getComments", params=params, timeout=60)
         data = response.json()
 
         if "response" in data:

@@ -30,7 +30,7 @@ from .g_attrs_adder import add_attributes
 from .keyword_extracter import extract_keywords
 from .semantic_closeness_annotator import get_semantic_closeness
 from .g_text_data_getter import get_tag, get_coordinates, get_text_ids
-from ..utils.preprocessing.preprocessor import (
+from ..utils.data_preprocessing.preprocessor import (
     clean_from_dublicates,
     clean_from_digits,
     clean_from_toponyms,

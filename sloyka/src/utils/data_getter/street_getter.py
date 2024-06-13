@@ -11,7 +11,7 @@ import osmnx as ox
 import warnings
 
 from sloyka.src.utils.data_getter.data_getter import GeoDataGetter as dg
-from sloyka.src.utils.preprocessing import preprocessor as pp 
+from sloyka.src.utils.data_preprocessing import preprocessor as pp 
 
 
 warnings.simplefilter("ignore")

@@ -7,7 +7,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 from natasha.extractors import Match
 from natasha.extractors import Extractor
 
-from ..utils.data_getter.rule_for_natasha import ADDR_PART
+from ..utils.data_processing.rule_for_natasha import ADDR_PART
 
 
 class AddrExtractorError(Exception):

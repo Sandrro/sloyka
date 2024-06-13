@@ -1,6 +1,8 @@
 TARGET_SCORE: int = 0.7
 END_INDEX_POSITION: int = 4
 START_INDEX_POSITION: int = 3
+SCORE_THRESHOLD = 0.7
+
 TARGET_TOPONYMS = [
     "пр",
     "проспект",

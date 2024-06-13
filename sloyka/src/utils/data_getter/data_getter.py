@@ -62,7 +62,7 @@ class GeoDataGetter:
             """
 
         try:
-            result = requests.get(overpass_url, params={"data": overpass_query}. timeout=30).json()
+            result = requests.get(overpass_url, params={"data": overpass_query},timeout=30).json()
             resp = osm2geojson.json2geojson(result)
             city_bounds = gpd.GeoDataFrame.from_features(resp["features"]).set_crs(Streets.global_crs)
             # Streets.logger.debug(f"City bounds retrieved: {city_bounds}")
