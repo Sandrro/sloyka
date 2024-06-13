@@ -1,7 +1,7 @@
 # SLOYKA
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Documentation Status](https://readthedocs.org/projects/soika/badge/?version=latest)](https://soika.readthedocs.io/en/latest/?badge=latest)
-[![PythonVersion](https://img.shields.io/badge/python-3.10-blue)](https://pypi.org/project/scikit-learn/)
+[![PythonVersion](https://img.shields.io/badge/python-3.11-blue)](https://pypi.org/project/scikit-learn/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Tests](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/2dev_ci_on_pr.yaml/badge.svg?branch=dev)](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/2dev_ci_on_pr.yaml)
 
@@ -28,7 +28,8 @@ SLOYKA включает в себя две группы методов: мето
 - [НЦКР](https://actcognitive.org/o-tsentre/kontakty) - Национальный Центр Когнитивных Разработок.
 - [ИДУ](https://idu.itmo.ru/en/contacts/contacts.htm) - Институт Дизайна и Урбанистики.
 - Если у вас есть вопросы или предложения, вы можете связаться с нами по следующему адресу:
-asantonov@itmo.ru (Александр Антонов, Project Lead), kontsevik@itmo.ru (just in case).
+asantonov@itmo.ru (Александр Антонов, Project Lead)
+kontsevik@itmo.ru (just in case).
 
 ## Цитирование
 

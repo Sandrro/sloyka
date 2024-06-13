@@ -2,7 +2,7 @@ import time
 
 import pandas as pd
 import geopandas as gpd
-import tqdm
+from tqdm import tqdm
 
 from keybert import KeyBERT
 import nltk

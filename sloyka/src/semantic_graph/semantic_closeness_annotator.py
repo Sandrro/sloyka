@@ -4,7 +4,7 @@ import itertools
 import pandas as pd
 import geopandas as gpd
 import torch
-import tqdm
+from tqdm import tqdm
 
 
 def get_semantic_closeness(
