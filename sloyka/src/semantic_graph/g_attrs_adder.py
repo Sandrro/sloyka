@@ -5,7 +5,7 @@ import geopy
 import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point
-import tqdm
+from tqdm import tqdm
 
 
 @staticmethod

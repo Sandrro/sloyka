@@ -28,6 +28,7 @@ import osm2geojson
 import random
 from typing import List, Optional
 from osmapi import OsmApi
+import networkx as nx
 from loguru import logger
 
 
@@ -43,8 +44,35 @@ class GeoDataGetter:
     - _handle_error: Handles any errors that occur during the process and prints an error message.
     """
 
+    @staticmethod
+    def get_city_bounds(osm_id: int) -> gpd.GeoDataFrame:
+        """
+        Method retrieves the boundary of a specified city from OSM
+        using Overpass API and returns a GeoDataFrame representing
+        the boundary as a polygon.
+        """
+        # Streets.logger.info(f"Retrieving city bounds for osm_id {osm_id}")
+        overpass_url = "http://overpass-api.de/api/interpreter"
+        overpass_query = f"""
+        [out:json];
+            (
+            relation({osm_id});
+            );
+            out geom;
+            """
+
+        try:
+            result = requests.get(overpass_url, params={"data": overpass_query},timeout=30).json()
+            resp = osm2geojson.json2geojson(result)
+            city_bounds = gpd.GeoDataFrame.from_features(resp["features"]).set_crs(Streets.global_crs)
+            # Streets.logger.debug(f"City bounds retrieved: {city_bounds}")
+            return city_bounds
+        except requests.exceptions.RequestException as e:
+            # Streets.logger.error(f"Error retrieving city bounds: {e}")
+            raise e
+
+    @staticmethod
     def get_features_from_id(
-        self,
         osm_id: int,
         tags: dict,
         osm_type="R",
@@ -62,8 +90,8 @@ class GeoDataGetter:
         Returns:
             gpd.GeoDataFrame: The GeoDataFrame containing the features.
         """
-        place = self._get_place_from_id(osm_id, osm_type)
-        gdf_list = self._process_tags(tags, place, selected_columns)
+        place = GeoDataGetter._get_place_from_id(osm_id, osm_type)
+        gdf_list = GeoDataGetter._process_tags(tags, place)
 
         if len(gdf_list) > 0:
             merged_gdf = pd.concat(gdf_list).reset_index().loc[:, selected_columns]
@@ -72,24 +100,27 @@ class GeoDataGetter:
 
         return merged_gdf
 
-    def _get_place_from_id(self, osm_id, osm_type):
+    @staticmethod
+    def _get_place_from_id(osm_id, osm_type):
         place = ox.project_gdf(ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True))
         return place
 
-    def _process_tags(self, tags, place, selected_columns):
+    @staticmethod
+    def _process_tags(tags, place):
         gdf_list = []
         place_name = place.name.iloc[0]
         for category, category_tags in tags.items():
             for tag in tqdm(category_tags, desc=f"Processing category {category}"):
                 try:
-                    gdf = self._get_features_from_place(place_name, category, tag)
+                    gdf = GeoDataGetter._get_features_from_place(place_name, category, tag)
                     gdf_list.append(gdf)
                 except AttributeError:
-                    self._handle_error(category, tag)
+                    # GeoDataGetter._handle_error(category, tag)
                     pass
         return gdf_list
 
-    def _get_features_from_place(self, place_name, category, tag):
+    @staticmethod
+    def _get_features_from_place(place_name, category, tag):
         gdf = ox.features_from_place(place_name, tags={category: tag})
         gdf.geometry.dropna(inplace=True)
         gdf["tag"] = category
@@ -102,11 +133,28 @@ class GeoDataGetter:
         tmpgdf = None
 
         return gdf
+    
+    @staticmethod
+    def get_drive_graph(city_bounds: gpd.GeoDataFrame) -> nx.MultiDiGraph:
+        """
+        Method uses the OSMnx library to retrieve the street network for a
+        specified city and returns it as a NetworkX MultiDiGraph object, where
+        each edge represents a street segment and each node represents
+        an intersection.
+        """
+        # Streets.logger.info("Retrieving drive graph")
+        try:
+            G_drive = ox.graph_from_polygon(city_bounds.dissolve()["geometry"].squeeze(), network_type="drive")
+            # Streets.logger.debug(f"Drive graph retrieved: {G_drive}")
+            return G_drive
+        except Exception as e:
+            # Streets.logger.error(f"Error retrieving drive graph: {e}")
+            raise e
 
-    def _handle_error(self, category, tag):
-        print(
-            f"\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}"
-        )
+    # def _handle_error(self, category, tag):
+    #     print(
+    #         f"\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}"
+    #     )
 
 
 class HistGeoDataGetter:

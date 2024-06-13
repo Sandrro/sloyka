@@ -6,7 +6,7 @@ from shapely.geometry import Point, Polygon, MultiPolygon
 from loguru import logger
 from natasha import MorphVocab
 from sloyka.src.utils.constants import NUM_CITY_OBJ
-from sloyka.src.geocoder.address_extractor_titles import AddrNEWExtractor
+from sloyka.src.geocoder.objects_address_extractor_by_rules import AddressExtractorExtra
 from rapidfuzz import fuzz
 import numpy as np
 
@@ -23,7 +23,8 @@ class OtherGeoObjects:
         Retrieves spatial data from OSM for given tags using OSM ID and returns a DataFrame.
         """
         try:
-            city_boundary_gdf = ox.geocode_to_gdf(f"R{osm_id}", by_osmid=True)
+            osm_id_rel = f"R{osm_id}"
+            city_boundary_gdf = ox.geocode_to_gdf(osm_id_rel, by_osmid=True)
             polygon = city_boundary_gdf["geometry"].iloc[0]
             data = ox.features_from_polygon(polygon, tags)
             df = pd.DataFrame(data)
@@ -31,7 +32,7 @@ class OtherGeoObjects:
             df = df.loc[:, ["name", "geometry"] + list(tags.keys())]
             return df
         except Exception as e:
-            raise RuntimeError(f"Error retrieving OSM data: {e}")
+            raise RuntimeError(f"Error retrieving OSM data for {osm_id_rel}: {e}")
 
     @staticmethod
     def get_and_process_osm_data(osm_id: int, tags: dict) -> pd.DataFrame:
@@ -83,7 +84,7 @@ class OtherGeoObjects:
         if text is None:
             return None
         morph = MorphVocab()
-        extractor = AddrNEWExtractor(morph)
+        extractor = AddressExtractorExtra(morph)
 
         other_geo_obj = []
 
