@@ -2,7 +2,7 @@ import re
 import pandas as pd
 from rapidfuzz import fuzz, process
 from nltk.stem.snowball import SnowballStemmer
-from sloyka.src.utils.data_getter.data_getter import HistGeoDataGetter
+from sloyka.src.utils.data_getter.historical_geo_data_getter import HistGeoDataGetter
 from sloyka.src.utils.constants import AREA_STOPWORDS
 from sloyka.src.utils.constants import GROUP_STOPWORDS
 

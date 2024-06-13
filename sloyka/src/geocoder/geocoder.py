@@ -28,7 +28,7 @@ import string
 import math
 from rapidfuzz import fuzz
 from nltk.stem.snowball import SnowballStemmer
-from sloyka.src.utils.data_getter.data_getter import HistGeoDataGetter
+from sloyka.src.utils.data_getter.historical_geo_data_getter import HistGeoDataGetter
 from sloyka.src.utils.constants import (
     AREA_STOPWORDS,
     GROUP_STOPWORDS,
@@ -55,7 +55,7 @@ from pandarallel import pandarallel
 from sloyka.src.geocoder.city_objects_getter import OtherGeoObjects
 from sloyka.src.utils.data_getter.street_getter import Streets
 from sloyka.src.utils.data_getter.location_getter import Location
-from sloyka.src.utils.data_getter.data_getter import GeoDataGetter
+from sloyka.src.utils.data_getter.geo_data_getter import GeoDataGetter
 from sloyka.src.geocoder.street_extractor import StreetExtractor
 from sloyka.src.geocoder.word_form_matcher import WordFormFinder
 

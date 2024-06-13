@@ -8,7 +8,7 @@
 [![sloyka_community_chat](https://img.shields.io/badge/-community-blue?logo=telegram)](https://t.me/sloyka_community)
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1wCUJAqlq9GMKw1wpTsWrzYwr10pWDeHv?usp=sharing)
 
-<img align="right" src="docs/logo/logo.png" alt="Your Banner" width="40%">
+<img align="right" src="docs/logo/logo.png" alt="Your Banner" width="20%">
 
 **SLOYKA** - это библиотека, нацеленная на обогащение цифровых моделей городов данными, получаемыми из текстовых данных цифрового следа горожан, 
 а также на моделирование вернакулярной оценки качества городской среды.
@@ -18,6 +18,12 @@
 
 SLOYKA также предоставляет методы для моделирования
 социальных рисков относительно эмоциональной оценки упоминаемых мест.
+
+
+Данные, полученные после сбора и обработки данных в SLOYK'е, представляют собой пространственно-семантический гиперграф:
+<img align="center" src="images/gexample.png" alt="Your Banner" width="100%">
+
+
 
 ## Лицензия
 
@@ -34,5 +40,3 @@ kontsevik@itmo.ru (just in case).
 ## Цитирование
 
 ---
-
-
