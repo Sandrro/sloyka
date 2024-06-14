@@ -1,17 +1,13 @@
-# Required
 version: 2
 
-# Set the OS, Python version and other tools you might need
 build:
-  os: ubuntu-22.04
+  os: ubuntu-20.04
   tools:
-    python: "3.10"
+    python: "3.11"
+  jobs:
+    post_install:
+      # Install dependencies
+      - pip install sphinx furo readthedocs-sphinx-search sphinx-autobuild sphinx-design  sphinx-hoverxref sphinx-inline-tabs sphinx-issues sphinx-notfound-page myst-parser sphinx-rtd-theme
 
-# Build documentation in the "docs/" directory with Sphinx
 sphinx:
   configuration: docs/source/conf.py
-
-# Optional but recommended, declare the Python requirements required
-python:
-   install:
-   - requirements: requirements.txt

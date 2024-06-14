@@ -1,20 +1,25 @@
-Welcome to SOIKA documentation!
+Welcome to Sloyka's documentation!
 ==================================
 
-.. container::
+Sloyka is a library for analyzing city identity using social media data.
 
-   | |logo|
-   | There is contained main documentation for the `SOIKA <https://github.com/Text-Analytics/SOIKA>`__.
-
-Content:
-========
 .. toctree::
-   :maxdepth: 1
-   
-   soika/index
-   components/index
-   contribution
-   faq
-   about
+   :maxdepth: 2
+   :caption: About:
 
-.. |logo| image:: https://i.ibb.co/qBjVx8N/soika.jpg
+   about/introduction
+   about/installation
+
+.. toctree::
+   :maxdepth: 2
+   :caption: User:
+
+   user/geocoder
+   user/semantic_graph
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

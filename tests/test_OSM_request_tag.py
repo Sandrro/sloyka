@@ -2,8 +2,8 @@ import pytest
 import sys
 import os
 
-from sloyka.src.data_getter import GeoDataGetter
-from sloyka.src.constants import OSM_TAGS
+from sloyka.src.utils.data_getter.geo_data_getter import GeoDataGetter
+from sloyka.src.utils.constants import OSM_TAGS
 
 tdict = [(category, category_tags) for category, category_tags in OSM_TAGS.items()]
 
