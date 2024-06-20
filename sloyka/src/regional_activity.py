@@ -6,10 +6,10 @@ from typing import Union, Optional
 import pandas as pd
 import geopandas as gpd
 
-from sloyka.src.geocoder import Geocoder
+from sloyka.src.geocoder.geocoder import Geocoder
 from sloyka.src.text_classifiers import TextClassifiers
-from sloyka.src.city_services_extract import City_services
-from sloyka.src.emotionclass import EmotionRecognizer
+from sloyka.src.utils.data_processing.city_services_extract import City_services
+from sloyka.src.risks.emotion_classifier import EmotionRecognizer
 
 
 class RegionalActivity:
@@ -78,15 +78,15 @@ class RegionalActivity:
         """
         
         if self.use_geocoded_data:
-            processed_geodata: gpd.GeoDataFrame = self.data.copy()
+            processed_geodata: gpd.GeoDataFrame = self.data.copy() # type: ignore
         else:
-            processed_geodata: gpd.GeoDataFrame = Geocoder(device=self.device).run(
+            processed_geodata: gpd.GeoDataFrame = Geocoder(device=self.device,
+                                                           osm_id=self.osm_id,
+                                                           city_tags=self.tags).run(
                 df=self.data,
-                osm_id=self.osm_id,
-                tags=self.tags,
-                date=self.date,
                 text_column=self.text,
-                group_column=self.group_name
+                group_column=self.group_name,
+                search_for_objects=True
             ) # type: ignore
         
         processed_geodata[['cats',
@@ -171,6 +171,7 @@ class RegionalActivity:
         return dataframe
 
     def get_risks(self,
+                  processed_data: Optional[gpd.GeoDataFrame]=None,
                   top_n: int=5,
                   to_df: bool=False) -> dict:
         """This function returns a toponyms_dict with info about top n most mentioned toponyms.
@@ -201,8 +202,10 @@ class RegionalActivity:
             } 
         """
 
-        gdf_final = self.processed_geodata.copy()
-        
+        if not processed_data:
+            gdf_final = self.processed_geodata.copy()
+        else:
+            gdf_final = processed_data
         top_n_toponyms = self.processed_geodata['only_full_street_name'].value_counts(normalize=True).index[:top_n]
         
         result = {}
