@@ -94,8 +94,8 @@ class RegionalActivity:
                                lambda x: self.text_classifier.run_text_classifier(x)).to_list() # type: ignore
         processed_geodata = City_services().run(df=processed_geodata,
                                                      text_column=self.text)
-        processed_geodata = EmotionRecognizer().add_emotion_column(df=processed_geodata,
-                                                                   text=self.text)
+        processed_geodata = EmotionRecognizer().recognize_average_emotion_from_multiple_models(df=processed_geodata,
+                                                                   text_column=self.text) # type: ignore
 
         if self.path_to_save:
             processed_geodata.to_file(self.path_to_save)
@@ -136,11 +136,11 @@ class RegionalActivity:
             tuple: tuple of unique identifiers of chains
         """
         
-        posts_ids = data[id_column].loc[data[name_column] == name].to_list()
-        comments_ids = data[id_column].loc[data['post_id'].isin(posts_ids) & data[name_column].isin([name, None])].to_list()
-        replies_ids = data[id_column].loc[data['parents_stack'].isin(comments_ids) & data[name_column].isin([name, None])].to_list()
+        posts_ids = data[id_column].loc[data[name_column] == name].to_list() # type: ignore
+        comments_ids = data[id_column].loc[data['post_id'].isin(posts_ids) & data[name_column].isin([name, None])].to_list() # type: ignore
+        replies_ids = data[id_column].loc[data['parents_stack'].isin(comments_ids) & data[name_column].isin([name, None])].to_list() # type: ignore
 
-        return tuple(sorted(list(set(posts_ids + comments_ids + replies_ids))))
+        return tuple(sorted(list(set(posts_ids + comments_ids + replies_ids)))) # type: ignore
     
     @staticmethod
     def dict_to_df(toponyms_dict: dict) -> pd.DataFrame:
@@ -170,6 +170,7 @@ class RegionalActivity:
         
         return dataframe
 
+    # TODO This function should be splited in multiple
     def get_risks(self,
                   processed_data: Optional[gpd.GeoDataFrame]=None,
                   top_n: int=5,
@@ -263,9 +264,9 @@ class RegionalActivity:
                         if k in emotions_dict:
                             emotions_dict[k] = emotions_dict[k] + 1
                     
-                service_info['emotions'] = emotions_dict
-                services_dict[j] = service_info
-                info['services'] = services_dict
+                service_info['emotions'] = emotions_dict # type: ignore
+                services_dict[j] = service_info # type: ignore
+                info['services'] = services_dict # type: ignore
                 result[i] = info
                 
             if to_df:
@@ -276,7 +277,7 @@ class RegionalActivity:
 
 if __name__ == "__main__":
     
-    df = pd.read_csv('',
+    df = pd.read_csv(r'C:\Projects\IDU\sloyka\sloyka\sample_data\vnukovomos.csv',
                      sep=';',
                      index_col=0)
 
@@ -287,4 +288,5 @@ if __name__ == "__main__":
                           text_column='text')
 
     print(ra.processed_geodata['Location'], ra.processed_geodata['City_services'], ra.processed_geodata['classified_text'])
-    print(ra.get_risks())
+    res = ra.get_risks()
+    print(res)
