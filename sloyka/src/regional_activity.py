@@ -43,8 +43,6 @@ class RegionalActivity:
     def __init__(self,
                  data: Union[pd.DataFrame, gpd.GeoDataFrame],
                  osm_id: int,
-                 tags: dict[str, list[int]],
-                 date: str,
                  path_to_save: Optional[str] = None,
                  text_column: str = 'text',
                  group_name_column: str = 'group_name',
@@ -56,8 +54,6 @@ class RegionalActivity:
 
         self.data: pd.DataFrame | gpd.GeoDataFrame = data
         self.osm_id: int = osm_id
-        self.tags: dict[str, list[int]] = tags
-        self.date: str = date
         self.text: str = text_column
         self.group_name: str = group_name_column
         self.device: str = device
@@ -81,12 +77,10 @@ class RegionalActivity:
             processed_geodata: gpd.GeoDataFrame = self.data.copy() # type: ignore
         else:
             processed_geodata: gpd.GeoDataFrame = Geocoder(device=self.device,
-                                                           osm_id=self.osm_id,
-                                                           city_tags=self.tags).run(
+                                                           osm_id=self.osm_id,).run(
                 df=self.data,
                 text_column=self.text,
-                group_column=self.group_name,
-                search_for_objects=True
+                group_column=self.group_name
             ) # type: ignore
         
         processed_geodata[['cats',
@@ -282,9 +276,7 @@ if __name__ == "__main__":
                      index_col=0)
 
     ra = RegionalActivity(data=df,
-                          osm_id=338635,
-                          tags={"admin_level": ["8"]},
-                          date="2024-04-22T00:00:00Z",
+                          osm_id=2555133,
                           text_column='text')
 
     print(ra.processed_geodata['Location'], ra.processed_geodata['City_services'], ra.processed_geodata['classified_text'])
