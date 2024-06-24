@@ -6,7 +6,7 @@ from sloyka.src.geocoder.geocoder import Geocoder
 def sample_dataframe():
     s_data = {
         "text": [
-            "Рубинштейна 25 дворовую территорию уберите, где работники?"
+            "Биржевая линия 16 дворовую территорию уберите, где работники?"
         ]
     }
     return pd.DataFrame(s_data)
@@ -17,5 +17,5 @@ def test_run_function(sample_dataframe):
 
     result_df = instance.run(df=sample_dataframe)
 
-    assert result_df.loc[0, "Street"] == "рубинштейна"
-    assert result_df.loc[0, "Numbers"] == "25"
+    assert result_df.loc[0, "Street"] == "Биржевая"
+    assert result_df.loc[0, "Numbers"] == "16"
