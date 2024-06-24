@@ -49,6 +49,7 @@ class WordFormFinder:
             val_num = row.get("Numbers", "")
 
             if not search_val or pd.isna(search_val):
+                logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponims')}")
                 return {"full_street_name": None, "only_full_street_name": None}
 
             for col in strts_df.columns[2:]:
@@ -69,6 +70,9 @@ class WordFormFinder:
                     "full_street_name": ",".join(full_streets),
                     "only_full_street_name": ",".join(only_streets_full)
                 }
+            else:
+                logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponims')}'")
+                return {"full_street_name": None, "only_full_street_name": None}
 
         except Exception as e:
             logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponims')}': {e}")
@@ -119,11 +123,12 @@ class WordFormFinder:
         Returns:
             pd.DataFrame: DataFrame with additional columns for full street names.
         """
-        results_df = pd.DataFrame(results)
+        results_df = pd.DataFrame.from_records(results)
         merged_df = df.reset_index(drop=True).join(results_df)
 
         # Explode lists into rows and merge them back into the DataFrame
         merged_df.dropna(subset=["full_street_name", "only_full_street_name"], inplace=True)
+
         merged_df["location_options"] = merged_df["full_street_name"].str.split(",")
         merged_df["only_full_street_name"] = merged_df["only_full_street_name"].str.split(",")
 
