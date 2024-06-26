@@ -349,9 +349,6 @@ class StreetExtractor:
             str: The first building number found if present, otherwise an empty string.
         """
         try:
-            if pd.notna(number) and number != "":
-                return number
-
             if isinstance(text, float) and math.isnan(text):
                 return ""
 

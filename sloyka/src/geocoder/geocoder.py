@@ -340,7 +340,7 @@ class Geocoder:
         merges it with the other geographic objects, assigns the street tag, and returns the final GeoDataFrame.
         """
 
-        # initial_df = df.copy()
+        initial_df = df.copy()
         if tags:
             df_areas = self.get_df_areas(self.osm_id, tags)
             df_areas = self.preprocess_area_names(df_areas)
@@ -357,7 +357,6 @@ class Geocoder:
         # df = AreaMatcher.run(self, df, osm_id, tags, date)
 
         df[text_column] = df[text_column].astype(str).str.replace("\n", " ")
-        df_reconstruction = df.copy()
         df[text_column] = df[text_column].apply(str)
 
         df = StreetExtractor.process_pipeline(df, text_column, self.classifier)
@@ -376,15 +375,11 @@ class Geocoder:
             del df_obj
             gdf["geo_obj_tag"] = gdf["geo_obj_tag"].apply(Geocoder.assign_street)
 
-        gdf = pd.concat(
-            [
-                gdf,
-                df_reconstruction[
-                    ~df_reconstruction[text_column].isin(gdf[text_column])
-                ],
-            ],
-            ignore_index=True,
-        )
+        gdf = pd.merge(gdf, initial_df, on=text_column, how='right')
+
+        # gdf = pd.concat(
+        #     [gdf, df.copy()[~df.copy()[text_column].isin(gdf[text_column])]], ignore_index=True
+        # )
 
         # gdf2 = self.merge_to_initial_df(gdf, initial_df)
 
