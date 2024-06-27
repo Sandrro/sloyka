@@ -44,9 +44,18 @@ class OtherGeoObjects:
             {"place": ["square"]},
         ]
 
-        osm_dfs = [OtherGeoObjects.get_and_process_osm_data(osm_id, tags) for tags in tags_list]
-        osm_combined_df = pd.concat(osm_dfs, axis=0)
-        return osm_combined_df
+        osm_dfs = list()
+        for tags in tags_list:
+            try:
+                tmp_df = OtherGeoObjects.get_and_process_osm_data(osm_id, tags)
+                osm_dfs.append(tmp_df)
+            except RuntimeError:
+                continue
+        if osm_dfs:
+            osm_combined_df = pd.concat(osm_dfs, axis=0)
+            return osm_combined_df
+        else:
+            return pd.DataFrame()
 
     @staticmethod
     def calculate_centroid(geometry) -> Point:
@@ -215,16 +224,21 @@ class OtherGeoObjects:
         df_obj["other_geo_obj_num"] = df_obj[text_column].apply(
             lambda x: OtherGeoObjects.find_num_city_obj(x, NUM_CITY_OBJ)
         )
-        osm_combined_df = OtherGeoObjects.run_osm_dfs(osm_id)
+        
         df_obj = OtherGeoObjects.combine_city_obj(df_obj)
-        df_obj["other_geo_obj"] = df_obj["other_geo_obj"].apply(
-            lambda x: OtherGeoObjects.restoration_of_normal_form(x, osm_combined_df)
-        )
-        df_obj = OtherGeoObjects.expand_toponym(df_obj)
 
-        df_obj["geometry"] = df_obj["other_geo_obj"].apply(lambda x: OtherGeoObjects.find_geometry(x, osm_combined_df))
-        df_obj["geo_obj_tag"] = df_obj["other_geo_obj"].apply(
-            lambda x: OtherGeoObjects.find_geo_obj_tag(x, osm_combined_df)
-        )
-        df_obj = df_obj[df_obj["geometry"].notna()]
+        osm_combined_df = OtherGeoObjects.run_osm_dfs(osm_id)
+
+        if not osm_combined_df.empty:
+            df_obj["other_geo_obj"] = df_obj["other_geo_obj"].apply(
+                lambda x: OtherGeoObjects.restoration_of_normal_form(x, osm_combined_df)
+            )
+            df_obj = OtherGeoObjects.expand_toponym(df_obj)
+
+            df_obj["geometry"] = df_obj["other_geo_obj"].apply(lambda x: OtherGeoObjects.find_geometry(x, osm_combined_df))
+            df_obj["geo_obj_tag"] = df_obj["other_geo_obj"].apply(
+                lambda x: OtherGeoObjects.find_geo_obj_tag(x, osm_combined_df)
+            )
+            df_obj = df_obj[df_obj["geometry"].notna()]
+
         return df_obj
