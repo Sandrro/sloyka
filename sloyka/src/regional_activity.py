@@ -361,7 +361,7 @@ if __name__ == "__main__":
         r"C:\Projects\IDU\sloyka\sloyka\sample_data\tvoygorod34.csv",
         sep=";",
         index_col=0,
-    )[:100]
+    )
 
     print(len(df))
 
@@ -373,4 +373,4 @@ if __name__ == "__main__":
         ra.processed_geodata["classified_text"],
     )
     res = ra.get_risks()
-    print(res)
+    res.to_feather(r"C:\Projects\IDU\sloyka\sloyka\sample_data\regional_activity.feather")
