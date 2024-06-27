@@ -1,73 +1,89 @@
-from yargy import rule, or_, and_
+
+from yargy import (
+    rule,
+    or_, and_
+)
 from yargy.interpretation import fact
 from yargy.predicates import (
-    eq,
-    lte,
-    gte,
-    gram,
-    type,
-    tag,
+    eq, lte, gte, gram, type, tag,
     length_eq,
-    in_,
-    in_caseless,
-    dictionary,
-    normalized,
-    caseless,
-    is_title,
+    in_, in_caseless, dictionary,
+    normalized, caseless,
+    is_title
 )
 from yargy.pipelines import morph_pipeline
 from yargy.tokenizer import QUOTES
 
-import warnings
 
-warnings.simplefilter("ignore")
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-
-
-Index = fact("Index", ["value"])
-Region = fact("Region", ["name", "type"])
-Raion = fact("Raion", ["name", "type"])
-Settlement = fact("Settlement", ["name", "type"])
-Street = fact("Street", ["name", "type"])
-Building = fact("Building", ["number", "type"])
-Room = fact("Room", ["number", "type"])
-AddrPart = fact("AddrPart", ["value"])
+Index = fact(
+    'Index',
+    ['value']
+)
+Region = fact(
+    'Region',
+    ['name', 'type']
+)
+Raion = fact(
+    'Raion',
+    ['name', 'type']
+)
+Settlement = fact(
+    'Settlement',
+    ['name', 'type']
+)
+Street = fact(
+    'Street',
+    ['name', 'type']
+)
+Building = fact(
+    'Building',
+    ['number', 'type']
+)
+Room = fact(
+    'Room',
+    ['number', 'type']
+)
+AddrPart = fact(
+    'AddrPart',
+    ['value']
+)
 
 
 def value(key):
     @property
     def field(self):
         return getattr(self, key)
-
     return field
 
 
 class Index(Index):
-    type = "индекс"
+    type = 'индекс'
+
+
 
 
 class Region(Region):
-    value = value("name")
+    value = value('name')
 
 
 class Raion(Raion):
-    value = value("name")
+    value = value('name')
 
 
 class Settlement(Settlement):
-    value = value("name")
+    value = value('name')
 
 
 class Street(Settlement):
-    value = value("name")
+    value = value('name')
 
 
 class Building(Building):
-    value = value("number")
+    value = value('number')
 
 
 class Room(Room):
-    value = value("number")
+    value = value('number')
 
 
 class AddrPart(AddrPart):
@@ -79,15 +95,24 @@ class AddrPart(AddrPart):
         return obj.AddrPart(part.value, part.type)
 
 
-DASH = eq("-")
-DOT = eq(".")
+DASH = eq('-')
+DOT = eq('.')
 
-ADJF = gram("ADJF")
-NOUN = gram("NOUN")
-INT = type("INT")
+ADJF = gram('ADJF')
+NOUN = gram('NOUN')
+INT = type('INT')
 TITLE = is_title()
 
-ANUM = rule(INT, DASH.optional(), in_caseless({"я", "й", "е", "ое", "ая", "ий", "ой"}))
+ANUM = rule(
+    INT,
+    DASH.optional(),
+    in_caseless({
+        'я', 'й', 'е',
+        'ое', 'ая', 'ий', 'ой'
+    })
+)
+
+
 
 
 #############
@@ -99,25 +124,43 @@ ANUM = rule(INT, DASH.optional(), in_caseless({"я", "й", "е", "ое", "ая",
 
 FED_OKRUG_NAME = or_(
     rule(
-        dictionary(
-            {
-                "дальневосточный",
-                "приволжский",
-                "сибирский",
-                "уральский",
-                "центральный",
-                "южный",
-            }
-        )
+        dictionary({
+            'дальневосточный',
+            'приволжский',
+            'сибирский',
+            'уральский',
+            'центральный',
+            'южный',
+        })
     ),
-    rule(caseless("северо"), DASH.optional(), dictionary({"западный", "кавказский"})),
-).interpretation(Region.name)
-
-FED_OKRUG_WORDS = or_(rule(normalized("федеральный"), normalized("округ")), rule(caseless("фо"))).interpretation(
-    Region.type.const("федеральный округ")
+    rule(
+        caseless('северо'),
+        DASH.optional(),
+        dictionary({
+            'западный',
+            'кавказский'
+        })
+    )
+).interpretation(
+    Region.name
 )
 
-FED_OKRUG = rule(FED_OKRUG_WORDS, FED_OKRUG_NAME).interpretation(Region)
+FED_OKRUG_WORDS = or_(
+    rule(
+        normalized('федеральный'),
+        normalized('округ')
+    ),
+    rule(caseless('фо'))
+).interpretation(
+    Region.type.const('федеральный округ')
+)
+
+FED_OKRUG = rule(
+    FED_OKRUG_WORDS,
+    FED_OKRUG_NAME
+).interpretation(
+    Region
+)
 
 
 #########
@@ -127,65 +170,81 @@ FED_OKRUG = rule(FED_OKRUG_WORDS, FED_OKRUG_NAME).interpretation(Region)
 ############
 
 
-RESPUBLIKA_WORDS = or_(rule(caseless("респ"), DOT.optional()), rule(normalized("республика"))).interpretation(
-    Region.type.const("республика")
+RESPUBLIKA_WORDS = or_(
+    rule(caseless('респ'), DOT.optional()),
+    rule(normalized('республика'))
+).interpretation(
+    Region.type.const('республика')
 )
 
 RESPUBLIKA_ADJF = or_(
     rule(
-        dictionary(
-            {
-                "удмуртский",
-                "чеченский",
-                "чувашский",
-            }
-        )
+        dictionary({
+            'удмуртский',
+            'чеченский',
+            'чувашский',
+        })
     ),
-    rule(caseless("карачаево"), DASH.optional(), normalized("черкесский")),
-    rule(caseless("кабардино"), DASH.optional(), normalized("балкарский")),
-).interpretation(Region.name)
+    rule(
+        caseless('карачаево'),
+        DASH.optional(),
+        normalized('черкесский')
+    ),
+    rule(
+        caseless('кабардино'),
+        DASH.optional(),
+        normalized('балкарский')
+    )
+).interpretation(
+    Region.name
+)
 
 RESPUBLIKA_NAME = or_(
     rule(
-        dictionary(
-            {
-                "адыгея",
-                "алтай",
-                "башкортостан",
-                "бурятия",
-                "дагестан",
-                "ингушетия",
-                "калмыкия",
-                "карелия",
-                "коми",
-                "крым",
-                "мордовия",
-                "татарстан",
-                "тыва",
-                "удмуртия",
-                "хакасия",
-                "саха",
-                "якутия",
-            }
-        )
+        dictionary({
+            'адыгея',
+            'алтай',
+            'башкортостан',
+            'бурятия',
+            'дагестан',
+            'ингушетия',
+            'калмыкия',
+            'карелия',
+            'коми',
+            'крым',
+            'мордовия',
+            'татарстан',
+            'тыва',
+            'удмуртия',
+            'хакасия',
+            'саха',
+            'якутия',
+        })
     ),
-    rule(caseless("марий"), caseless("эл")),
-    rule(normalized("северный"), normalized("осетия"), rule("-", normalized("алания")).optional()),
-).interpretation(Region.name)
-
-RESPUBLIKA_ABBR = in_caseless(
-    {
-        "кбр",
-        "кчр",
-        "рт",  # Татарстан
-    }
+    rule(caseless('марий'), caseless('эл')),
+    rule(
+        normalized('северный'), normalized('осетия'),
+        rule('-', normalized('алания')).optional()
+    )
 ).interpretation(
+    Region.name
+)
+
+RESPUBLIKA_ABBR = in_caseless({
+    'кбр',
+    'кчр',
+    'рт',  # Татарстан
+}).interpretation(
     Region.name  # TODO type
 )
 
 RESPUBLIKA = or_(
-    rule(RESPUBLIKA_ADJF, RESPUBLIKA_WORDS), rule(RESPUBLIKA_WORDS, RESPUBLIKA_NAME), rule(RESPUBLIKA_ABBR)
-).interpretation(Region)
+    rule(RESPUBLIKA_ADJF, RESPUBLIKA_WORDS),
+    rule(RESPUBLIKA_WORDS, RESPUBLIKA_NAME),
+    rule(RESPUBLIKA_ABBR)
+).interpretation(
+    Region
+)
 
 
 ##########
@@ -195,23 +254,29 @@ RESPUBLIKA = or_(
 ########
 
 
-KRAI_WORDS = normalized("край").interpretation(Region.type.const("край"))
+KRAI_WORDS = normalized('край').interpretation(
+    Region.type.const('край')
+)
 
-KRAI_NAME = dictionary(
-    {
-        "алтайский",
-        "забайкальский",
-        "камчатский",
-        "краснодарский",
-        "красноярский",
-        "пермский",
-        "приморский",
-        "ставропольский",
-        "хабаровский",
-    }
-).interpretation(Region.name)
+KRAI_NAME = dictionary({
+    'алтайский',
+    'забайкальский',
+    'камчатский',
+    'краснодарский',
+    'красноярский',
+    'пермский',
+    'приморский',
+    'ставропольский',
+    'хабаровский',
+}).interpretation(
+    Region.name
+)
 
-KRAI = rule(KRAI_NAME, KRAI_WORDS).interpretation(Region)
+KRAI = rule(
+    KRAI_NAME, KRAI_WORDS
+).interpretation(
+    Region
+)
 
 
 ############
@@ -221,67 +286,78 @@ KRAI = rule(KRAI_NAME, KRAI_WORDS).interpretation(Region)
 ############
 
 
-OBLAST_WORDS = or_(rule(normalized("область")), rule(caseless("обл"), DOT.optional())).interpretation(
-    Region.type.const("область")
+OBLAST_WORDS = or_(
+    rule(normalized('область')),
+    rule(
+        caseless('обл'),
+        DOT.optional()
+    )
+).interpretation(
+    Region.type.const('область')
 )
 
-OBLAST_NAME = dictionary(
-    {
-        "амурский",
-        "архангельский",
-        "астраханский",
-        "белгородский",
-        "брянский",
-        "владимирский",
-        "волгоградский",
-        "вологодский",
-        "воронежский",
-        "горьковский",
-        "ивановский",
-        "ивановский",
-        "иркутский",
-        "калининградский",
-        "калужский",
-        "камчатский",
-        "кемеровский",
-        "кировский",
-        "костромской",
-        "курганский",
-        "курский",
-        "ленинградский",
-        "липецкий",
-        "магаданский",
-        "московский",
-        "мурманский",
-        "нижегородский",
-        "новгородский",
-        "новосибирский",
-        "омский",
-        "оренбургский",
-        "орловский",
-        "пензенский",
-        "пермский",
-        "псковский",
-        "ростовский",
-        "рязанский",
-        "самарский",
-        "саратовский",
-        "сахалинский",
-        "свердловский",
-        "смоленский",
-        "тамбовский",
-        "тверской",
-        "томский",
-        "тульский",
-        "тюменский",
-        "ульяновский",
-        "челябинский",
-        "читинский",
-        "ярославский",
-    }
-).interpretation(Region.name)
+OBLAST_NAME = dictionary({
+    'амурский',
+    'архангельский',
+    'астраханский',
+    'белгородский',
+    'брянский',
+    'владимирский',
+    'волгоградский',
+    'вологодский',
+    'воронежский',
+    'горьковский',
+    'ивановский',
+    'ивановский',
+    'иркутский',
+    'калининградский',
+    'калужский',
+    'камчатский',
+    'кемеровский',
+    'кировский',
+    'костромской',
+    'курганский',
+    'курский',
+    'ленинградский',
+    'липецкий',
+    'магаданский',
+    'московский',
+    'мурманский',
+    'нижегородский',
+    'новгородский',
+    'новосибирский',
+    'омский',
+    'оренбургский',
+    'орловский',
+    'пензенский',
+    'пермский',
+    'псковский',
+    'ростовский',
+    'рязанский',
+    'самарский',
+    'саратовский',
+    'сахалинский',
+    'свердловский',
+    'смоленский',
+    'тамбовский',
+    'тверской',
+    'томский',
+    'тульский',
+    'тюменский',
+    'ульяновский',
+    'челябинский',
+    'читинский',
+    'ярославский',
+}).interpretation(
+    Region.name
+)
 
-OBLAST = rule(OBLAST_NAME, OBLAST_WORDS).interpretation(Region)
+OBLAST = rule(
+    OBLAST_NAME,
+    OBLAST_WORDS
+).interpretation(
+    Region
+)
 
 
 ##########
@@ -293,42 +369,69 @@ OBLAST = rule(OBLAST_NAME, OBLAST_WORDS).interpretation(Region)
 
 AUTO_OKRUG_NAME = or_(
     rule(
-        dictionary(
-            {
-                "чукотский",
-                "эвенкийский",
-                "корякский",
-                "ненецкий",
-                "таймырский",
-                "агинский",
-                "бурятский",
-            }
-        )
+        dictionary({
+            'чукотский',
+            'эвенкийский',
+            'корякский',
+            'ненецкий',
+            'таймырский',
+            'агинский',
+            'бурятский',
+        })
     ),
-    rule(caseless("коми"), "-", normalized("пермяцкий")),
-    rule(caseless("долгано"), "-", normalized("ненецкий")),
-    rule(caseless("ямало"), "-", normalized("ненецкий")),
-).interpretation(Region.name)
-
-AUTO_OKRUG_WORDS = or_(rule(normalized("автономный"), normalized("округ")), rule(caseless("ао"))).interpretation(
-    Region.type.const("автономный округ")
+    rule(caseless('коми'), '-', normalized('пермяцкий')),
+    rule(caseless('долгано'), '-', normalized('ненецкий')),
+    rule(caseless('ямало'), '-', normalized('ненецкий')),
+).interpretation(
+    Region.name
 )
 
-HANTI = rule(caseless("ханты"), "-", normalized("мансийский")).interpretation(Region.name)
+AUTO_OKRUG_WORDS = or_(
+    rule(
+        normalized('автономный'),
+        normalized('округ')
+    ),
+    rule(caseless('ао'))
+).interpretation(
+    Region.type.const('автономный округ')
+)
 
-BURAT = rule(caseless("усть"), "-", normalized("ордынский"), normalized("бурятский")).interpretation(Region.name)
+HANTI = rule(
+    caseless('ханты'), '-', normalized('мансийский')
+).interpretation(
+    Region.name
+)
+
+BURAT = rule(
+    caseless('усть'), '-', normalized('ордынский'),
+    normalized('бурятский')
+).interpretation(
+    Region.name
+)
 
 AUTO_OKRUG = or_(
     rule(AUTO_OKRUG_NAME, AUTO_OKRUG_WORDS),
     or_(
-        rule(HANTI, AUTO_OKRUG_WORDS, "-", normalized("югра")),
         rule(
-            caseless("хмао"),
+            HANTI,
+            AUTO_OKRUG_WORDS,
+            '-', normalized('югра')
+        ),
+        rule(
+            caseless('хмао'),
         ).interpretation(Region.name),
-        rule(caseless("хмао"), "-", caseless("югра")).interpretation(Region.name),
+        rule(
+            caseless('хмао'),
+            '-', caseless('югра')
+        ).interpretation(Region.name),
     ),
-    rule(BURAT, AUTO_OKRUG_WORDS),
-).interpretation(Region)
+    rule(
+        BURAT,
+        AUTO_OKRUG_WORDS
+    )
+).interpretation(
+    Region
+)
 
 
 ##########
@@ -338,30 +441,47 @@ AUTO_OKRUG = or_(
 ###########
 
 
-RAION_WORDS = or_(rule(caseless("р"), "-", in_caseless({"он", "н"})), rule(normalized("район"))).interpretation(
-    Raion.type.const("район")
+RAION_WORDS = or_(
+    rule(caseless('р'), '-', in_caseless({'он', 'н'})),
+    rule(normalized('район'))
+).interpretation(
+    Raion.type.const('район')
 )
 
-RAION_SIMPLE_NAME = and_(ADJF, TITLE)
+RAION_SIMPLE_NAME = and_(
+    ADJF,
+    TITLE
+)
 
 RAION_MODIFIERS = rule(
-    in_caseless(
-        {
-            "усть",
-            "северо",
-            "александрово",
-            "гаврилово",
-        }
-    ),
+    in_caseless({
+        'усть',
+        'северо',
+        'александрово',
+        'гаврилово',
+    }),
     DASH.optional(),
-    TITLE,
+    TITLE
 )
 
-RAION_COMPLEX_NAME = rule(RAION_MODIFIERS, RAION_SIMPLE_NAME)
+RAION_COMPLEX_NAME = rule(
+    RAION_MODIFIERS,
+    RAION_SIMPLE_NAME
+)
 
-RAION_NAME = or_(rule(RAION_SIMPLE_NAME), RAION_COMPLEX_NAME).interpretation(Raion.name)
+RAION_NAME = or_(
+    rule(RAION_SIMPLE_NAME),
+    RAION_COMPLEX_NAME
+).interpretation(
+    Raion.name
+)
 
-RAION = rule(RAION_NAME, RAION_WORDS).interpretation(Raion)
+RAION = rule(
+    RAION_NAME,
+    RAION_WORDS
+).interpretation(
+    Raion
+)
 
 
 ###########
@@ -373,243 +493,288 @@ RAION = rule(RAION_NAME, RAION_WORDS).interpretation(Raion)
 
 # Top 200 Russia cities, cover 75% of population
 
-COMPLEX = morph_pipeline(
-    [
-        "санкт-петербург",
-        "нижний новгород",
-        "н.новгород",
-        "ростов-на-дону",
-        "набережные челны",
-        "улан-удэ",
-        "нижний тагил",
-        "комсомольск-на-амуре",
-        "йошкар-ола",
-        "старый оскол",
-        "великий новгород",
-        "южно-сахалинск",
-        "петропавловск-камчатский",
-        "каменск-уральский",
-        "орехово-зуево",
-        "сергиев посад",
-        "новый уренгой",
-        "ленинск-кузнецкий",
-        "великие луки",
-        "каменск-шахтинский",
-        "усть-илимск",
-        "усолье-сибирский",
-        "кирово-чепецк",
-    ]
+COMPLEX = morph_pipeline([
+    'санкт-петербург',
+    'нижний новгород',
+    'н.новгород',
+    'ростов-на-дону',
+    'набережные челны',
+    'улан-удэ',
+    'нижний тагил',
+    'комсомольск-на-амуре',
+    'йошкар-ола',
+    'старый оскол',
+    'великий новгород',
+    'южно-сахалинск',
+    'петропавловск-камчатский',
+    'каменск-уральский',
+    'орехово-зуево',
+    'сергиев посад',
+    'новый уренгой',
+    'ленинск-кузнецкий',
+    'великие луки',
+    'каменск-шахтинский',
+    'усть-илимск',
+    'усолье-сибирский',
+    'кирово-чепецк',
+])
+
+SIMPLE = dictionary({
+    'москва',
+    'новосибирск',
+    'екатеринбург',
+    'казань',
+    'самара',
+    'омск',
+    'челябинск',
+    'уфа',
+    'волгоград',
+    'пермь',
+    'красноярск',
+    'воронеж',
+    'саратов',
+    'краснодар',
+    'тольятти',
+    'барнаул',
+    'ижевск',
+    'ульяновск',
+    'владивосток',
+    'ярославль',
+    'иркутск',
+    'тюмень',
+    'махачкала',
+    'хабаровск',
+    'оренбург',
+    'новокузнецк',
+    'кемерово',
+    'рязань',
+    'томск',
+    'астрахань',
+    'пенза',
+    'липецк',
+    'тула',
+    'киров',
+    'чебоксары',
+    'калининград',
+    'брянск',
+    'курск',
+    'иваново',
+    'магнитогорск',
+    'тверь',
+    'ставрополь',
+    'симферополь',
+    'белгород',
+    'архангельск',
+    'владимир',
+    'севастополь',
+    'сочи',
+    'курган',
+    'смоленск',
+    'калуга',
+    'чита',
+    'орёл',
+    'волжский',
+    'череповец',
+    'владикавказ',
+    'мурманск',
+    'сургут',
+    'вологда',
+    'саранск',
+    'тамбов',
+    'стерлитамак',
+    'грозный',
+    'якутск',
+    'кострома',
+    'петрозаводск',
+    'таганрог',
+    'нижневартовск',
+    'братск',
+    'новороссийск',
+    'дзержинск',
+    'шахта',
+    'нальчик',
+    'орск',
+    'сыктывкар',
+    'нижнекамск',
+    'ангарск',
+    'балашиха',
+    'благовещенск',
+    'прокопьевск',
+    'химки',
+    'псков',
+    'бийск',
+    'энгельс',
+    'рыбинск',
+    'балаково',
+    'северодвинск',
+    'армавир',
+    'подольск',
+    'королёв',
+    'сызрань',
+    'норильск',
+    'златоуст',
+    'мытищи',
+    'люберцы',
+    'волгодонск',
+    'новочеркасск',
+    'абакан',
+    'находка',
+    'уссурийск',
+    'березники',
+    'салават',
+    'электросталь',
+    'миасс',
+    'первоуральск',
+    'рубцовск',
+    'альметьевск',
+    'ковровый',
+    'коломна',
+    'керчь',
+    'майкоп',
+    'пятигорск',
+    'одинцово',
+    'копейск',
+    'хасавюрт',
+    'новомосковск',
+    'кисловодск',
+    'серпухов',
+    'новочебоксарск',
+    'нефтеюганск',
+    'димитровград',
+    'нефтекамск',
+    'черкесск',
+    'дербент',
+    'камышин',
+    'невинномысск',
+    'красногорск',
+    'мур',
+    'батайск',
+    'новошахтинск',
+    'ноябрьск',
+    'кызыл',
+    'октябрьский',
+    'ачинск',
+    'северск',
+    'новокуйбышевск',
+    'елец',
+    'евпатория',
+    'арзамас',
+    'обнинск',
+    'каспийск',
+    'элиста',
+    'пушкино',
+    'жуковский',
+    'междуреченск',
+    'сарапул',
+    'ессентуки',
+    'воткинск',
+    'ногинск',
+    'тобольск',
+    'ухта',
+    'серов',
+    'бердск',
+    'мичуринск',
+    'киселёвск',
+    'новотроицк',
+    'зеленодольск',
+    'соликамск',
+    'раменский',
+    'домодедово',
+    'магадан',
+    'глазов',
+    'железногорск',
+    'канск',
+    'назрань',
+    'гатчина',
+    'саров',
+    'новоуральск',
+    'воскресенск',
+    'долгопрудный',
+    'бугульма',
+    'кузнецк',
+    'губкин',
+    'кинешма',
+    'ейск',
+    'реутов',
+    'железногорск',
+    'чайковский',
+    'азов',
+    'бузулук',
+    'озёрск',
+    'балашов',
+    'юрга',
+    'кропоткин',
+    'клин'
+})
+
+GOROD_ABBR = in_caseless({
+    'спб',
+    'мск',
+    'нск'   # Новосибирск
+})
+
+GOROD_NAME = or_(
+    rule(SIMPLE),
+    COMPLEX,
+    rule(GOROD_ABBR)
+).interpretation(
+    Settlement.name
 )
 
-SIMPLE = dictionary(
-    {
-        "москва",
-        "новосибирск",
-        "екатеринбург",
-        "казань",
-        "самара",
-        "омск",
-        "челябинск",
-        "уфа",
-        "волгоград",
-        "пермь",
-        "красноярск",
-        "воронеж",
-        "саратов",
-        "краснодар",
-        "тольятти",
-        "барнаул",
-        "ижевск",
-        "ульяновск",
-        "владивосток",
-        "ярославль",
-        "иркутск",
-        "тюмень",
-        "махачкала",
-        "хабаровск",
-        "оренбург",
-        "новокузнецк",
-        "кемерово",
-        "рязань",
-        "томск",
-        "астрахань",
-        "пенза",
-        "липецк",
-        "тула",
-        "киров",
-        "чебоксары",
-        "калининград",
-        "брянск",
-        "курск",
-        "иваново",
-        "магнитогорск",
-        "тверь",
-        "ставрополь",
-        "симферополь",
-        "белгород",
-        "архангельск",
-        "владимир",
-        "севастополь",
-        "сочи",
-        "курган",
-        "смоленск",
-        "калуга",
-        "чита",
-        "орёл",
-        "волжский",
-        "череповец",
-        "владикавказ",
-        "мурманск",
-        "сургут",
-        "вологда",
-        "саранск",
-        "тамбов",
-        "стерлитамак",
-        "грозный",
-        "якутск",
-        "кострома",
-        "петрозаводск",
-        "таганрог",
-        "нижневартовск",
-        "братск",
-        "новороссийск",
-        "дзержинск",
-        "шахта",
-        "нальчик",
-        "орск",
-        "сыктывкар",
-        "нижнекамск",
-        "ангарск",
-        "балашиха",
-        "благовещенск",
-        "прокопьевск",
-        "химки",
-        "псков",
-        "бийск",
-        "энгельс",
-        "рыбинск",
-        "балаково",
-        "северодвинск",
-        "армавир",
-        "подольск",
-        "королёв",
-        "сызрань",
-        "норильск",
-        "златоуст",
-        "мытищи",
-        "люберцы",
-        "волгодонск",
-        "новочеркасск",
-        "абакан",
-        "находка",
-        "уссурийск",
-        "березники",
-        "салават",
-        "электросталь",
-        "миасс",
-        "первоуральск",
-        "рубцовск",
-        "альметьевск",
-        "ковровый",
-        "коломна",
-        "керчь",
-        "майкоп",
-        "пятигорск",
-        "одинцово",
-        "копейск",
-        "хасавюрт",
-        "новомосковск",
-        "кисловодск",
-        "серпухов",
-        "новочебоксарск",
-        "нефтеюганск",
-        "димитровград",
-        "нефтекамск",
-        "черкесск",
-        "дербент",
-        "камышин",
-        "невинномысск",
-        "красногорск",
-        "мур",
-        "батайск",
-        "новошахтинск",
-        "ноябрьск",
-        "кызыл",
-        "октябрьский",
-        "ачинск",
-        "северск",
-        "новокуйбышевск",
-        "елец",
-        "евпатория",
-        "арзамас",
-        "обнинск",
-        "каспийск",
-        "элиста",
-        "пушкино",
-        "жуковский",
-        "междуреченск",
-        "сарапул",
-        "ессентуки",
-        "воткинск",
-        "ногинск",
-        "тобольск",
-        "ухта",
-        "серов",
-        "бердск",
-        "мичуринск",
-        "киселёвск",
-        "новотроицк",
-        "зеленодольск",
-        "соликамск",
-        "раменский",
-        "домодедово",
-        "магадан",
-        "глазов",
-        "железногорск",
-        "канск",
-        "назрань",
-        "гатчина",
-        "саров",
-        "новоуральск",
-        "воскресенск",
-        "долгопрудный",
-        "бугульма",
-        "кузнецк",
-        "губкин",
-        "кинешма",
-        "ейск",
-        "реутов",
-        "железногорск",
-        "чайковский",
-        "азов",
-        "бузулук",
-        "озёрск",
-        "балашов",
-        "юрга",
-        "кропоткин",
-        "клин",
-    }
+SIMPLE = and_(
+    TITLE,
+    or_(
+        NOUN,
+        ADJF  # Железнодорожный, Юбилейный
+    )
 )
-
-GOROD_ABBR = in_caseless({"спб", "мск", "нск"})  # Новосибирск
-
-GOROD_NAME = or_(rule(SIMPLE), COMPLEX, rule(GOROD_ABBR)).interpretation(Settlement.name)
-
-SIMPLE = and_(TITLE, or_(NOUN, ADJF))  # Железнодорожный, Юбилейный
 
 COMPLEX = or_(
-    rule(SIMPLE, DASH.optional(), SIMPLE), rule(TITLE, DASH.optional(), caseless("на"), DASH.optional(), TITLE)
+    rule(
+        SIMPLE,
+        DASH.optional(),
+        SIMPLE
+    ),
+    rule(
+        TITLE,
+        DASH.optional(),
+        caseless('на'),
+        DASH.optional(),
+        TITLE
+    )
 )
 
-NAME = or_(rule(SIMPLE), COMPLEX)
-
-MAYBE_GOROD_NAME = or_(NAME, rule(NAME, "-", INT)).interpretation(Settlement.name)
-
-GOROD_WORDS = or_(rule(normalized("город")), rule(caseless("г"), DOT.optional())).interpretation(
-    Settlement.type.const("город")
+NAME = or_(
+    rule(SIMPLE),
+    COMPLEX
 )
 
-GOROD = or_(rule(GOROD_WORDS, MAYBE_GOROD_NAME), rule(GOROD_WORDS.optional(), GOROD_NAME)).interpretation(Settlement)
+MAYBE_GOROD_NAME = or_(
+    NAME,
+    rule(NAME, '-', INT)
+).interpretation(
+    Settlement.name
+)
+
+GOROD_WORDS = or_(
+    rule(normalized('город')),
+    rule(
+        caseless('г'),
+        DOT.optional()
+    )
+).interpretation(
+    Settlement.type.const('город')
+)
+
+GOROD = or_(
+    rule(GOROD_WORDS, MAYBE_GOROD_NAME),
+    rule(
+        GOROD_WORDS.optional(),
+        GOROD_NAME
+    )
+).interpretation(
+    Settlement
+)
 
 
 ##########
@@ -619,21 +784,32 @@ GOROD = or_(rule(GOROD_WORDS, MAYBE_GOROD_NAME), rule(GOROD_WORDS.optional(), GO
 ##########
 
 
-ADJS = gram("ADJS")
+ADJS = gram('ADJS')
 SIMPLE = and_(
     or_(
         NOUN,  # Александровка, Заречье, Горки
         ADJS,  # Кузнецово
         ADJF,  # Никольское, Новая, Марьино
     ),
-    TITLE,
+    TITLE
 )
 
-COMPLEX = rule(SIMPLE, DASH.optional(), SIMPLE)
+COMPLEX = rule(
+    SIMPLE,
+    DASH.optional(),
+    SIMPLE
+)
 
-NAME = or_(rule(SIMPLE), COMPLEX)
+NAME = or_(
+    rule(SIMPLE),
+    COMPLEX
+)
 
-SETTLEMENT_NAME = or_(NAME, rule(NAME, "-", INT), rule(NAME, ANUM))
+SETTLEMENT_NAME = or_(
+    NAME,
+    rule(NAME, '-', INT),
+    rule(NAME, ANUM)
+)
 
 
 ###########
@@ -643,13 +819,26 @@ SETTLEMENT_NAME = or_(NAME, rule(NAME, "-", INT), rule(NAME, ANUM))
 #############
 
 
-SELO_WORDS = or_(rule(caseless("с"), DOT.optional()), rule(normalized("село"))).interpretation(
-    Settlement.type.const("село")
+SELO_WORDS = or_(
+    rule(
+        caseless('с'),
+        DOT.optional()
+    ),
+    rule(normalized('село'))
+).interpretation(
+    Settlement.type.const('село')
 )
 
-SELO_NAME = SETTLEMENT_NAME.interpretation(Settlement.name)
+SELO_NAME = SETTLEMENT_NAME.interpretation(
+    Settlement.name
+)
 
-SELO = rule(SELO_WORDS, SELO_NAME).interpretation(Settlement)
+SELO = rule(
+    SELO_WORDS,
+    SELO_NAME
+).interpretation(
+    Settlement
+)
 
 
 ###########
@@ -659,13 +848,26 @@ SELO = rule(SELO_WORDS, SELO_NAME).interpretation(Settlement)
 #############
 
 
-DEREVNYA_WORDS = or_(rule(caseless("д"), DOT.optional()), rule(normalized("деревня"))).interpretation(
-    Settlement.type.const("деревня")
+DEREVNYA_WORDS = or_(
+    rule(
+        caseless('д'),
+        DOT.optional()
+    ),
+    rule(normalized('деревня'))
+).interpretation(
+    Settlement.type.const('деревня')
 )
 
-DEREVNYA_NAME = SETTLEMENT_NAME.interpretation(Settlement.name)
+DEREVNYA_NAME = SETTLEMENT_NAME.interpretation(
+    Settlement.name
+)
 
-DEREVNYA = rule(DEREVNYA_WORDS, DEREVNYA_NAME).interpretation(Settlement)
+DEREVNYA = rule(
+    DEREVNYA_WORDS,
+    DEREVNYA_NAME
+).interpretation(
+    Settlement
+)
 
 
 ###########
@@ -676,22 +878,48 @@ DEREVNYA = rule(DEREVNYA_WORDS, DEREVNYA_NAME).interpretation(Settlement)
 
 
 POSELOK_WORDS = or_(
-    rule(in_caseless({"п", "пос"}), DOT.optional()),
-    rule(normalized("посёлок")),
-    rule(caseless("р"), DOT.optional(), caseless("п"), DOT.optional()),
-    rule(normalized("рабочий"), normalized("посёлок")),
-    rule(caseless("пгт"), DOT.optional()),
-    rule(caseless("п"), DOT, caseless("г"), DOT, caseless("т"), DOT.optional()),
     rule(
-        normalized("посёлок"),
-        normalized("городского"),
-        normalized("типа"),
+        in_caseless({'п', 'пос'}),
+        DOT.optional()
     ),
-).interpretation(Settlement.type.const("посёлок"))
+    rule(normalized('посёлок')),
+    rule(
+        caseless('р'),
+        DOT.optional(),
+        caseless('п'),
+        DOT.optional()
+    ),
+    rule(
+        normalized('рабочий'),
+        normalized('посёлок')
+    ),
+    rule(
+        caseless('пгт'),
+        DOT.optional()
+    ),
+    rule(
+        caseless('п'), DOT, caseless('г'), DOT, caseless('т'),
+        DOT.optional()
+    ),
+    rule(
+        normalized('посёлок'),
+        normalized('городского'),
+        normalized('типа'),
+    ),
+).interpretation(
+    Settlement.type.const('посёлок')
+)
 
-POSELOK_NAME = SETTLEMENT_NAME.interpretation(Settlement.name)
+POSELOK_NAME = SETTLEMENT_NAME.interpretation(
+    Settlement.name
+)
 
-POSELOK = rule(POSELOK_WORDS, POSELOK_NAME).interpretation(Settlement)
+POSELOK = rule(
+    POSELOK_WORDS,
+    POSELOK_NAME
+).interpretation(
+    Settlement
+)
 
 
 ##############
@@ -701,110 +929,127 @@ POSELOK = rule(POSELOK_WORDS, POSELOK_NAME).interpretation(Settlement)
 ############
 
 
-ABBR = and_(length_eq(1), is_title())
+ABBR = and_(
+    length_eq(1),
+    is_title()
+)
 
-PART = and_(TITLE, or_(gram("Name"), gram("Surn")))
+PART = and_(
+    TITLE,
+    or_(
+        gram('Name'),
+        gram('Surn')
+    )
+)
 
 MAYBE_FIO = or_(
     rule(TITLE, PART),
     rule(PART, TITLE),
-    rule(ABBR, ".", TITLE),
-    rule(ABBR, ".", ABBR, ".", TITLE),
-    rule(TITLE, ABBR, ".", ABBR, "."),
+    rule(ABBR, '.', TITLE),
+    rule(ABBR, '.', ABBR, '.', TITLE),
+    rule(TITLE, ABBR, '.', ABBR, '.')
 )
 
 POSITION_WORDS_ = or_(
     rule(
-        dictionary(
-            {
-                "мичман",
-                "геолог",
-                "подводник",
-                "краевед",
-                "снайпер",
-                "штурман",
-                "бригадир",
-                "учитель",
-                "политрук",
-                "военком",
-                "ветеран",
-                "историк",
-                "пулемётчик",
-                "авиаконструктор",
-                "адмирал",
-                "академик",
-                "актер",
-                "актриса",
-                "архитектор",
-                "атаман",
-                "врач",
-                "воевода",
-                "генерал",
-                "губернатор",
-                "хирург",
-                "декабрист",
-                "разведчик",
-                "граф",
-                "десантник",
-                "конструктор",
-                "скульптор",
-                "писатель",
-                "поэт",
-                "капитан",
-                "князь",
-                "комиссар",
-                "композитор",
-                "космонавт",
-                "купец",
-                "лейтенант",
-                "лётчик",
-                "майор",
-                "маршал",
-                "матрос",
-                "подполковник",
-                "полковник",
-                "профессор",
-                "сержант",
-                "старшина",
-                "танкист",
-                "художник",
-                "герой",
-                "княгиня",
-                "строитель",
-                "дружинник",
-                "диктор",
-                "прапорщик",
-                "артиллерист",
-                "графиня",
-                "большевик",
-                "патриарх",
-                "сварщик",
-                "офицер",
-                "рыбак",
-                "брат",
-            }
-        )
+        dictionary({
+            'мичман',
+            'геолог',
+            'подводник',
+            'краевед',
+            'снайпер',
+            'штурман',
+            'бригадир',
+            'учитель',
+            'политрук',
+            'военком',
+            'ветеран',
+            'историк',
+            'пулемётчик',
+            'авиаконструктор',
+            'адмирал',
+            'академик',
+            'актер',
+            'актриса',
+            'архитектор',
+            'атаман',
+            'врач',
+            'воевода',
+            'генерал',
+            'губернатор',
+            'хирург',
+            'декабрист',
+            'разведчик',
+            'граф',
+            'десантник',
+            'конструктор',
+            'скульптор',
+            'писатель',
+            'поэт',
+            'капитан',
+            'князь',
+            'комиссар',
+            'композитор',
+            'космонавт',
+            'купец',
+            'лейтенант',
+            'лётчик',
+            'майор',
+            'маршал',
+            'матрос',
+            'подполковник',
+            'полковник',
+            'профессор',
+            'сержант',
+            'старшина',
+            'танкист',
+            'художник',
+            'герой',
+            'княгиня',
+            'строитель',
+            'дружинник',
+            'диктор',
+            'прапорщик',
+            'артиллерист',
+            'графиня',
+            'большевик',
+            'патриарх',
+            'сварщик',
+            'офицер',
+            'рыбак',
+            'брат',
+        })
     ),
-    rule(normalized("генерал"), normalized("армия")),
-    rule(normalized("герой"), normalized("россия")),
-    rule(normalized("герой"), normalized("российский"), normalized("федерация")),
-    rule(normalized("герой"), normalized("советский"), normalized("союз")),
+    rule(normalized('генерал'), normalized('армия')),
+    rule(normalized('герой'), normalized('россия')),
+    rule(
+        normalized('герой'),
+        normalized('российский'), normalized('федерация')),
+    rule(
+        normalized('герой'),
+        normalized('советский'), normalized('союз')
+    ),
 )
 
 ABBR_POSITION_WORDS = rule(
-    in_caseless(
-        {
-            "адм",
-            "ак",
-            "акад",
-        }
-    ),
-    DOT.optional(),
+    in_caseless({
+        'адм',
+        'ак',
+        'акад',
+    }),
+    DOT.optional()
 )
 
-POSITION_WORDS = or_(POSITION_WORDS_, ABBR_POSITION_WORDS)
+POSITION_WORDS = or_(
+    POSITION_WORDS_,
+    ABBR_POSITION_WORDS
+)
 
-MAYBE_PERSON = or_(MAYBE_FIO, rule(POSITION_WORDS, MAYBE_FIO), rule(POSITION_WORDS, TITLE))
+MAYBE_PERSON = or_(
+    MAYBE_FIO,
+    rule(POSITION_WORDS, MAYBE_FIO),
+    rule(POSITION_WORDS, TITLE)
+)
 
 
 ###########
@@ -814,9 +1059,24 @@ MAYBE_PERSON = or_(MAYBE_FIO, rule(POSITION_WORDS, MAYBE_FIO), rule(POSITION_WOR
 ##########
 
 
-IMENI_WORDS = or_(rule(caseless("им"), DOT.optional()), rule(caseless("имени")))
+IMENI_WORDS = or_(
+    rule(
+        caseless('им'),
+        DOT.optional()
+    ),
+    rule(caseless('имени'))
+)
 
-IMENI = or_(rule(IMENI_WORDS.optional(), MAYBE_PERSON), rule(IMENI_WORDS, TITLE))
+IMENI = or_(
+    rule(
+        IMENI_WORDS.optional(),
+        MAYBE_PERSON
+    ),
+    rule(
+        IMENI_WORDS,
+        TITLE
+    )
+)
 
 ##########
 #
@@ -825,40 +1085,48 @@ IMENI = or_(rule(IMENI_WORDS.optional(), MAYBE_PERSON), rule(IMENI_WORDS, TITLE)
 ##########
 
 
-LET_WORDS = or_(rule(caseless("лет")), rule(DASH.optional(), caseless("летия")))
-
-LET_NAME = in_caseless(
-    {
-        "влксм",
-        "ссср",
-        "алтая",
-        "башкирии",
-        "бурятии",
-        "дагестана",
-        "калмыкии",
-        "колхоза",
-        "комсомола",
-        "космонавтики",
-        "москвы",
-        "октября",
-        "пионерии",
-        "победы",
-        "приморья",
-        "района",
-        "совхоза",
-        "совхозу",
-        "татарстана",
-        "тувы",
-        "удмуртии",
-        "улуса",
-        "хакасии",
-        "целины",
-        "чувашии",
-        "якутии",
-    }
+LET_WORDS = or_(
+    rule(caseless('лет')),
+    rule(
+        DASH.optional(),
+        caseless('летия')
+    )
 )
 
-LET = rule(INT, LET_WORDS, LET_NAME)
+LET_NAME = in_caseless({
+    'влксм',
+    'ссср',
+    'алтая',
+    'башкирии',
+    'бурятии',
+    'дагестана',
+    'калмыкии',
+    'колхоза',
+    'комсомола',
+    'космонавтики',
+    'москвы',
+    'октября',
+    'пионерии',
+    'победы',
+    'приморья',
+    'района',
+    'совхоза',
+    'совхозу',
+    'татарстана',
+    'тувы',
+    'удмуртии',
+    'улуса',
+    'хакасии',
+    'целины',
+    'чувашии',
+    'якутии',
+})
+
+LET = rule(
+    INT,
+    LET_WORDS,
+    LET_NAME
+)
 
 
 ##########
@@ -868,30 +1136,39 @@ LET = rule(INT, LET_WORDS, LET_NAME)
 #############
 
 
-MONTH_WORDS = dictionary(
-    {
-        "январь",
-        "февраль",
-        "март",
-        "апрель",
-        "май",
-        "июнь",
-        "июль",
-        "август",
-        "сентябрь",
-        "октябрь",
-        "ноябрь",
-        "декабрь",
-    }
+MONTH_WORDS = dictionary({
+    'январь',
+    'февраль',
+    'март',
+    'апрель',
+    'май',
+    'июнь',
+    'июль',
+    'август',
+    'сентябрь',
+    'октябрь',
+    'ноябрь',
+    'декабрь',
+})
+
+DAY = and_(
+    INT,
+    gte(1),
+    lte(31)
 )
 
-DAY = and_(INT, gte(1), lte(31))
+YEAR = and_(
+    INT,
+    gte(1),
+    lte(2100)
+)
 
-YEAR = and_(INT, gte(1), lte(2100))
+YEAR_WORDS = normalized('год')
 
-YEAR_WORDS = normalized("год")
-
-DATE = or_(rule(DAY, MONTH_WORDS), rule(YEAR, YEAR_WORDS))
+DATE = or_(
+    rule(DAY, MONTH_WORDS),
+    rule(YEAR, YEAR_WORDS)
+)
 
 
 #########
@@ -902,54 +1179,63 @@ DATE = or_(rule(DAY, MONTH_WORDS), rule(YEAR, YEAR_WORDS))
 
 
 MODIFIER_WORDS_ = rule(
-    dictionary(
-        {
-            "большой",
-            "малый",
-            "средний",
-            "верхний",
-            "центральный",
-            "нижний",
-            "северный",
-            "дальний",
-            "первый",
-            "второй",
-            "старый",
-            "новый",
-            "красный",
-            "лесной",
-            "тихий",
-        }
-    ),
-    DASH.optional(),
+    dictionary({
+        'большой',
+        'малый',
+        'средний',
+
+        'верхний',
+        'центральный',
+        'нижний',
+        'северный',
+        'дальний',
+
+        'первый',
+        'второй',
+
+        'старый',
+        'новый',
+
+        'красный',
+        'лесной',
+        'тихий',
+    }),
+    DASH.optional()
 )
 
-ABBR_MODIFIER_WORDS = rule(in_caseless({"б", "м", "н"}), DOT.optional())
+ABBR_MODIFIER_WORDS = rule(
+    in_caseless({
+        'б', 'м', 'н'
+    }),
+    DOT.optional()
+)
 
 SHORT_MODIFIER_WORDS = rule(
-    in_caseless(
-        {
-            "больше",
-            "мало",
-            "средне",
-            "верх",
-            "верхне",
-            "центрально",
-            "нижне",
-            "северо",
-            "дальне",
-            "восточно",
-            "западно",
-            "перво",
-            "второ",
-            "старо",
-            "ново",
-            "красно",
-            "тихо",
-            "горно",
-        }
-    ),
-    DASH.optional(),
+    in_caseless({
+        'больше',
+        'мало',
+        'средне',
+
+        'верх',
+        'верхне',
+        'центрально',
+        'нижне',
+        'северо',
+        'дальне',
+        'восточно',
+        'западно',
+
+        'перво',
+        'второ',
+
+        'старо',
+        'ново',
+
+        'красно',
+        'тихо',
+        'горно',
+    }),
+    DASH.optional()
 )
 
 MODIFIER_WORDS = or_(
@@ -966,34 +1252,62 @@ MODIFIER_WORDS = or_(
 ##########
 
 
-ROD = gram("gent")
+ROD = gram('gent')
 
 SIMPLE = and_(
     or_(
         ADJF,  # Школьная
         and_(NOUN, ROD),  # Ленина, Победы
     ),
-    TITLE,
+    TITLE
 )
 
 COMPLEX = or_(
-    rule(and_(ADJF, TITLE), NOUN),
-    rule(TITLE, DASH.optional(), TITLE),
+    rule(
+        and_(ADJF, TITLE),
+        NOUN
+    ),
+    rule(
+        TITLE,
+        DASH.optional(),
+        TITLE
+    ),
 )
 
 # TODO
-EXCEPTION = dictionary({"арбат", "варварка"})
+EXCEPTION = dictionary({
+    'арбат',
+    'варварка'
+})
 
-MAYBE_NAME = or_(rule(SIMPLE), COMPLEX, rule(EXCEPTION))
-
-NAME = or_(MAYBE_NAME, LET, DATE, IMENI)
-
-NAME = rule(MODIFIER_WORDS.optional(), NAME)
-
-ADDR_CRF = tag("I").repeatable()
+MAYBE_NAME = or_(
+    rule(SIMPLE),
+    COMPLEX,
+    rule(EXCEPTION)
+)
 
 NAME = or_(
-    NAME, ANUM, rule(NAME, ANUM), rule(ANUM, NAME), rule(INT, DASH.optional(), NAME), rule(NAME, DASH, INT), ADDR_CRF
+    MAYBE_NAME,
+    LET,
+    DATE,
+    IMENI
+)
+
+NAME = rule(
+    MODIFIER_WORDS.optional(),
+    NAME
+)
+
+ADDR_CRF = tag('I').repeatable()
+
+NAME = or_(
+    NAME,
+    ANUM,
+    rule(NAME, ANUM),
+    rule(ANUM, NAME),
+    rule(INT, DASH.optional(), NAME),
+    rule(NAME, DASH, INT),
+    ADDR_CRF
 )
 
 ADDR_NAME = NAME
@@ -1006,13 +1320,26 @@ ADDR_NAME = NAME
 #########
 
 
-STREET_WORDS = or_(rule(normalized("улица")), rule(caseless("ул"), DOT.optional())).interpretation(
-    Street.type.const("улица")
+STREET_WORDS = or_(
+    rule(normalized('улица')),
+    rule(
+        caseless('ул'),
+        DOT.optional()
+    )
+).interpretation(
+    Street.type.const('улица')
 )
 
-STREET_NAME = ADDR_NAME.interpretation(Street.name)
+STREET_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-STREET = or_(rule(STREET_WORDS, STREET_NAME), rule(STREET_NAME, STREET_WORDS)).interpretation(Street)
+STREET = or_(
+    rule(STREET_WORDS, STREET_NAME),
+    rule(STREET_NAME, STREET_WORDS)
+).interpretation(
+    Street
+)
 
 
 ##########
@@ -1023,14 +1350,31 @@ STREET = or_(rule(STREET_WORDS, STREET_NAME), rule(STREET_NAME, STREET_WORDS)).i
 
 
 PROSPEKT_WORDS = or_(
-    rule(in_caseless({"пр", "просп"}), DOT.optional()),
-    rule(caseless("пр"), "-", in_caseless({"кт", "т"}), DOT.optional()),
-    rule(normalized("проспект")),
-).interpretation(Street.type.const("проспект"))
+    rule(
+        in_caseless({'пр', 'просп'}),
+        DOT.optional()
+    ),
+    rule(
+        caseless('пр'),
+        '-',
+        in_caseless({'кт', 'т'}),
+        DOT.optional()
+    ),
+    rule(normalized('проспект'))
+).interpretation(
+    Street.type.const('проспект')
+)
 
-PROSPEKT_NAME = ADDR_NAME.interpretation(Street.name)
+PROSPEKT_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-PROSPEKT = or_(rule(PROSPEKT_WORDS, PROSPEKT_NAME), rule(PROSPEKT_NAME, PROSPEKT_WORDS)).interpretation(Street)
+PROSPEKT = or_(
+    rule(PROSPEKT_WORDS, PROSPEKT_NAME),
+    rule(PROSPEKT_NAME, PROSPEKT_WORDS)
+).interpretation(
+    Street
+)
 
 
 ############
@@ -1041,14 +1385,28 @@ PROSPEKT = or_(rule(PROSPEKT_WORDS, PROSPEKT_NAME), rule(PROSPEKT_NAME, PROSPEKT
 
 
 PROEZD_WORDS = or_(
-    rule(caseless("пр"), DOT.optional()),
-    rule(caseless("пр"), "-", in_caseless({"зд", "д"}), DOT.optional()),
-    rule(normalized("проезд")),
-).interpretation(Street.type.const("проезд"))
+    rule(caseless('пр'), DOT.optional()),
+    rule(
+        caseless('пр'),
+        '-',
+        in_caseless({'зд', 'д'}),
+        DOT.optional()
+    ),
+    rule(normalized('проезд'))
+).interpretation(
+    Street.type.const('проезд')
+)
 
-PROEZD_NAME = ADDR_NAME.interpretation(Street.name)
+PROEZD_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-PROEZD = or_(rule(PROEZD_WORDS, PROEZD_NAME), rule(PROEZD_NAME, PROEZD_WORDS)).interpretation(Street)
+PROEZD = or_(
+    rule(PROEZD_WORDS, PROEZD_NAME),
+    rule(PROEZD_NAME, PROEZD_WORDS)
+).interpretation(
+    Street
+)
 
 
 ###########
@@ -1059,12 +1417,29 @@ PROEZD = or_(rule(PROEZD_WORDS, PROEZD_NAME), rule(PROEZD_NAME, PROEZD_WORDS)).i
 
 
 PEREULOK_WORDS = or_(
-    rule(caseless("п"), DOT), rule(caseless("пер"), DOT.optional()), rule(normalized("переулок"))
-).interpretation(Street.type.const("переулок"))
+    rule(
+        caseless('п'),
+        DOT
+    ),
+    rule(
+        caseless('пер'),
+        DOT.optional()
+    ),
+    rule(normalized('переулок'))
+).interpretation(
+    Street.type.const('переулок')
+)
 
-PEREULOK_NAME = ADDR_NAME.interpretation(Street.name)
+PEREULOK_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-PEREULOK = or_(rule(PEREULOK_WORDS, PEREULOK_NAME), rule(PEREULOK_NAME, PEREULOK_WORDS)).interpretation(Street)
+PEREULOK = or_(
+    rule(PEREULOK_WORDS, PEREULOK_NAME),
+    rule(PEREULOK_NAME, PEREULOK_WORDS)
+).interpretation(
+    Street
+)
 
 
 ########
@@ -1074,13 +1449,26 @@ PEREULOK = or_(rule(PEREULOK_WORDS, PEREULOK_NAME), rule(PEREULOK_NAME, PEREULOK
 ##########
 
 
-PLOSHAD_WORDS = or_(rule(caseless("пл"), DOT.optional()), rule(normalized("площадь"))).interpretation(
-    Street.type.const("площадь")
+PLOSHAD_WORDS = or_(
+    rule(
+        caseless('пл'),
+        DOT.optional()
+    ),
+    rule(normalized('площадь'))
+).interpretation(
+    Street.type.const('площадь')
 )
 
-PLOSHAD_NAME = ADDR_NAME.interpretation(Street.name)
+PLOSHAD_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-PLOSHAD = or_(rule(PLOSHAD_WORDS, PLOSHAD_NAME), rule(PLOSHAD_NAME, PLOSHAD_WORDS)).interpretation(Street)
+PLOSHAD = or_(
+    rule(PLOSHAD_WORDS, PLOSHAD_NAME),
+    rule(PLOSHAD_NAME, PLOSHAD_WORDS)
+).interpretation(
+    Street
+)
 
 
 ############
@@ -1096,11 +1484,26 @@ PLOSHAD = or_(rule(PLOSHAD_WORDS, PLOSHAD_NAME), rule(PLOSHAD_NAME, PLOSHAD_WORD
 # Сергеляхское 14 км.
 
 
-SHOSSE_WORDS = or_(rule(caseless("ш"), DOT), rule(normalized("шоссе"))).interpretation(Street.type.const("шоссе"))
+SHOSSE_WORDS = or_(
+    rule(
+        caseless('ш'),
+        DOT
+    ),
+    rule(normalized('шоссе'))
+).interpretation(
+    Street.type.const('шоссе')
+)
 
-SHOSSE_NAME = ADDR_NAME.interpretation(Street.name)
+SHOSSE_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-SHOSSE = or_(rule(SHOSSE_WORDS, SHOSSE_NAME), rule(SHOSSE_NAME, SHOSSE_WORDS)).interpretation(Street)
+SHOSSE = or_(
+    rule(SHOSSE_WORDS, SHOSSE_NAME),
+    rule(SHOSSE_NAME, SHOSSE_WORDS)
+).interpretation(
+    Street
+)
 
 
 ########
@@ -1110,13 +1513,26 @@ SHOSSE = or_(rule(SHOSSE_WORDS, SHOSSE_NAME), rule(SHOSSE_NAME, SHOSSE_WORDS)).i
 ##########
 
 
-NABEREG_WORDS = or_(rule(caseless("наб"), DOT.optional()), rule(normalized("набережная"))).interpretation(
-    Street.type.const("набережная")
+NABEREG_WORDS = or_(
+    rule(
+        caseless('наб'),
+        DOT.optional()
+    ),
+    rule(normalized('набережная'))
+).interpretation(
+    Street.type.const('набережная')
 )
 
-NABEREG_NAME = ADDR_NAME.interpretation(Street.name)
+NABEREG_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-NABEREG = or_(rule(NABEREG_WORDS, NABEREG_NAME), rule(NABEREG_NAME, NABEREG_WORDS)).interpretation(Street)
+NABEREG = or_(
+    rule(NABEREG_WORDS, NABEREG_NAME),
+    rule(NABEREG_NAME, NABEREG_WORDS)
+).interpretation(
+    Street
+)
 
 ########
 #
@@ -1125,11 +1541,306 @@ NABEREG = or_(rule(NABEREG_WORDS, NABEREG_NAME), rule(NABEREG_NAME, NABEREG_WORD
 ##########
 
 
-SAD_WORDS = or_(rule(caseless("са"), DOT.optional()), rule(normalized("сад"))).interpretation(Street.type.const("сад"))
+SAD_WORDS = or_(
+    rule(
+        caseless('са'),
+        DOT.optional()
+    ),
+    rule(normalized('сад'))
+).interpretation(
+    Street.type.const('сад')
+)
 
-SAD_NAME = ADDR_NAME.interpretation(Street.name)
+SAD_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-SAD = or_(rule(SAD_WORDS, SAD_NAME), rule(SAD_NAME, SAD_WORDS)).interpretation(Street)
+SAD = or_(
+    rule(SAD_WORDS, SAD_NAME),
+    rule(SAD_NAME, SAD_WORDS)
+).interpretation(
+    Street
+)
+
+########
+#
+#  POLE
+#
+##########
+
+
+POLE_WORDS = or_(
+    rule(
+        caseless('пол'),
+        DOT.optional()
+    ),
+    rule(normalized('поле'))
+).interpretation(
+    Street.type.const('поле')
+)
+
+POLE_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
+
+POLE = or_(
+    rule(POLE_WORDS, POLE_NAME),
+    rule(POLE_NAME, POLE_WORDS)
+).interpretation(
+    Street
+)
+
+########
+#
+#  KLAD
+#
+##########
+
+
+KLAD_WORDS = or_(
+    rule(
+        caseless('клад'),
+        DOT.optional()
+    ),
+    rule(normalized('кладбище'))
+).interpretation(
+    Street.type.const('кладбище')
+)
+
+KLAD_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
+
+KLAD = or_(
+    rule(KLAD_WORDS, KLAD_NAME),
+    rule(KLAD_NAME, KLAD_WORDS)
+).interpretation(
+    Street
+)
+
+########
+#
+#  PLAJ
+#
+##########
+
+
+PLAJ_WORDS = or_(
+    rule(
+        caseless('пля'),
+        DOT.optional()
+    ),
+    rule(normalized('пляж'))
+).interpretation(
+    Street.type.const('пляж')
+)
+
+PLAJ_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
+
+PLAJ = or_(
+    rule(PLAJ_WORDS, PLAJ_NAME),
+    rule(PLAJ_NAME, PLAJ_WORDS)
+).interpretation(
+    Street
+)
+
+########
+#
+#  PRUD
+#
+##########
+
+
+PRUD_WORDS = or_(
+    rule(
+        caseless('пру'),
+        DOT.optional()
+    ),
+    rule(normalized('пруд'))
+).interpretation(
+    Street.type.const('пруд')
+)
+
+PRUD_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
+
+PRUD = or_(
+    rule(PRUD_WORDS, PRUD_NAME),
+    rule(PRUD_NAME, PRUD_WORDS)
+).interpretation(
+    Street
+)
+
+########
+#
+#  VOKZAL
+#
+##########
+
+
+VOKZAL_WORDS = or_(
+    rule(
+        caseless('вок'),
+        DOT.optional()
+    ),
+    rule(normalized('вокзал'))
+).interpretation(
+    Street.type.const('вокзал')
+)
+
+VOKZAL_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
+
+VOKZAL = or_(
+    rule(VOKZAL_WORDS, VOKZAL_NAME),
+    rule(VOKZAL_NAME, VOKZAL_WORDS)
+).interpretation(
+    Street
+)
+
+########
+#
+#  METRO
+#
+##########
+
+
+METRO_WORDS = or_(
+    rule(
+        caseless('ст'),
+        DOT.optional()
+    ),
+    rule(normalized('метро'))
+).interpretation(
+    Street.type.const('метро')
+)
+
+METRO_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
+
+METRO = or_(
+    rule(METRO_WORDS, METRO_NAME),
+    rule(METRO_NAME, METRO_WORDS)
+).interpretation(
+    Street
+)
+
+########
+#
+#  TEATR
+#
+##########
+
+
+TEATR_WORDS = or_(
+    rule(
+        caseless('т'),
+        DOT.optional()
+    ),
+    rule(normalized('театр'))
+).interpretation(
+    Street.type.const('театр')
+)
+
+TEATR_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
+
+TEATR = or_(
+    rule(TEATR_WORDS, TEATR_NAME),
+    rule(TEATR_NAME, TEATR_WORDS)
+).interpretation(
+    Street
+)
+
+########
+#
+#  MUZEI
+#
+##########
+
+
+MUZEI_WORDS = or_(
+    rule(
+        caseless('муз'),
+        DOT.optional()
+    ),
+    rule(normalized('музей'))
+).interpretation(
+    Street.type.const('музей')
+)
+
+MUZEI_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
+
+MUZEI = or_(
+    rule(MUZEI_WORDS, MUZEI_NAME),
+    rule(MUZEI_NAME, MUZEI_WORDS)
+).interpretation(
+    Street
+)
+
+########
+#
+#  PAMETNIK
+#
+##########
+
+
+PAMETNIK_WORDS = or_(
+    rule(
+        caseless('пам'),
+        DOT.optional()
+    ),
+    rule(normalized('памятник'))
+).interpretation(
+    Street.type.const('памятник')
+)
+
+PAMETNIK_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
+
+PAMETNIK = or_(
+    rule(PAMETNIK_WORDS, PAMETNIK_NAME),
+    rule(PAMETNIK_NAME, PAMETNIK_WORDS)
+).interpretation(
+    Street
+)
+
+########
+#
+#  STATUIA
+#
+##########
+
+
+STATUIA_WORDS = or_(
+    rule(
+        caseless('стат'),
+        DOT.optional()
+    ),
+    rule(normalized('статуя'))
+).interpretation(
+    Street.type.const('статуя')
+)
+
+STATUIA_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
+
+STATUIA = or_(
+    rule(STATUIA_WORDS, STATUIA_NAME),
+    rule(STATUIA_NAME, STATUIA_WORDS)
+).interpretation(
+    Street
+)
 
 ########
 #
@@ -1138,13 +1849,26 @@ SAD = or_(rule(SAD_WORDS, SAD_NAME), rule(SAD_NAME, SAD_WORDS)).interpretation(S
 ##########
 
 
-PARK_WORDS = or_(rule(caseless("пар"), DOT.optional()), rule(normalized("парк"))).interpretation(
-    Street.type.const("парк")
+PARK_WORDS = or_(
+    rule(
+        caseless('пар'),
+        DOT.optional()
+    ),
+    rule(normalized('парк'))
+).interpretation(
+    Street.type.const('парк')
 )
 
-PARK_NAME = ADDR_NAME.interpretation(Street.name)
+PARK_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-PARK = or_(rule(PARK_WORDS, PARK_NAME), rule(PARK_NAME, PARK_WORDS)).interpretation(Street)
+PARK = or_(
+    rule(PARK_WORDS, PARK_NAME),
+    rule(PARK_NAME, PARK_WORDS)
+).interpretation(
+    Street
+)
 
 ########
 #
@@ -1153,13 +1877,26 @@ PARK = or_(rule(PARK_WORDS, PARK_NAME), rule(PARK_NAME, PARK_WORDS)).interpretat
 ##########
 
 
-SQVER_WORDS = or_(rule(caseless("ск"), DOT.optional()), rule(normalized("сквер"))).interpretation(
-    Street.type.const("сквер")
+SQVER_WORDS = or_(
+    rule(
+        caseless('ск'),
+        DOT.optional()
+    ),
+    rule(normalized('сквер'))
+).interpretation(
+    Street.type.const('сквер')
 )
 
-SQVER_NAME = ADDR_NAME.interpretation(Street.name)
+SQVER_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-SQVER = or_(rule(SQVER_WORDS, SQVER_NAME), rule(SQVER_NAME, SQVER_WORDS)).interpretation(Street)
+SQVER = or_(
+    rule(SQVER_WORDS, SQVER_NAME),
+    rule(SQVER_NAME, SQVER_WORDS)
+).interpretation(
+    Street
+)
 
 ########
 #
@@ -1168,13 +1905,26 @@ SQVER = or_(rule(SQVER_WORDS, SQVER_NAME), rule(SQVER_NAME, SQVER_WORDS)).interp
 ##########
 
 
-ROSCHA_WORDS = or_(rule(caseless("рощ"), DOT.optional()), rule(normalized("роща"))).interpretation(
-    Street.type.const("роща")
+ROSCHA_WORDS = or_(
+    rule(
+        caseless('рощ'),
+        DOT.optional()
+    ),
+    rule(normalized('роща'))
+).interpretation(
+    Street.type.const('роща')
 )
 
-ROSCHA_NAME = ADDR_NAME.interpretation(Street.name)
+ROSCHA_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-ROSCHA = or_(rule(ROSCHA_WORDS, ROSCHA_NAME), rule(ROSCHA_NAME, ROSCHA_WORDS)).interpretation(Street)
+ROSCHA = or_(
+    rule(ROSCHA_WORDS, ROSCHA_NAME),
+    rule(ROSCHA_NAME, ROSCHA_WORDS)
+).interpretation(
+    Street
+)
 
 ########
 #
@@ -1184,15 +1934,34 @@ ROSCHA = or_(rule(ROSCHA_WORDS, ROSCHA_NAME), rule(ROSCHA_NAME, ROSCHA_WORDS)).i
 
 
 BULVAR_WORDS = or_(
-    rule(caseless("б"), "-", caseless("р")),
-    rule(caseless("б"), DOT),
-    rule(caseless("бул"), DOT.optional()),
-    rule(normalized("бульвар")),
-).interpretation(Street.type.const("бульвар"))
+    rule(
+        caseless('б'),
+        '-',
+        caseless('р')
+    ),
+    rule(
+        caseless('б'),
+        DOT
+    ),
+    rule(
+        caseless('бул'),
+        DOT.optional()
+    ),
+    rule(normalized('бульвар'))
+).interpretation(
+    Street.type.const('бульвар')
+)
 
-BULVAR_NAME = ADDR_NAME.interpretation(Street.name)
+BULVAR_NAME = ADDR_NAME.interpretation(
+    Street.name
+)
 
-BULVAR = or_(rule(BULVAR_WORDS, BULVAR_NAME), rule(BULVAR_NAME, BULVAR_WORDS)).interpretation(Street)
+BULVAR = or_(
+    rule(BULVAR_WORDS, BULVAR_NAME),
+    rule(BULVAR_NAME, BULVAR_WORDS)
+).interpretation(
+    Street
+)
 
 
 ##############
@@ -1202,19 +1971,32 @@ BULVAR = or_(rule(BULVAR_WORDS, BULVAR_NAME), rule(BULVAR_NAME, BULVAR_WORDS)).i
 #############
 
 
-LETTER = in_caseless(set("абвгдежзиклмнопрстуфхшщэюя"))
+LETTER = in_caseless(set('абвгдежзиклмнопрстуфхшщэюя'))
 
 QUOTE = in_(QUOTES)
 
-LETTER = or_(rule(LETTER), rule(QUOTE, LETTER, QUOTE))
+LETTER = or_(
+    rule(LETTER),
+    rule(QUOTE, LETTER, QUOTE)
+)
 
-VALUE = rule(INT, LETTER.optional())
+VALUE = rule(
+    INT,
+    LETTER.optional()
+)
 
-SEP = in_(r"/\-")
+SEP = in_(r'/\-')
 
-VALUE = or_(rule(VALUE), rule(VALUE, SEP, VALUE), rule(VALUE, SEP, LETTER))
+VALUE = or_(
+    rule(VALUE),
+    rule(VALUE, SEP, VALUE),
+    rule(VALUE, SEP, LETTER)
+)
 
-ADDR_VALUE = rule(eq("№").optional(), VALUE)
+ADDR_VALUE = rule(
+    eq('№').optional(),
+    VALUE
+)
 
 
 ############
@@ -1224,11 +2006,26 @@ ADDR_VALUE = rule(eq("№").optional(), VALUE)
 #############
 
 
-DOM_WORDS = or_(rule(normalized("дом")), rule(caseless("д"), DOT)).interpretation(Building.type.const("дом"))
+DOM_WORDS = or_(
+    rule(normalized('дом')),
+    rule(
+        caseless('д'),
+        DOT
+    )
+).interpretation(
+    Building.type.const('дом')
+)
 
-DOM_VALUE = ADDR_VALUE.interpretation(Building.number)
+DOM_VALUE = ADDR_VALUE.interpretation(
+    Building.number
+)
 
-DOM = rule(DOM_WORDS, DOM_VALUE).interpretation(Building)
+DOM = rule(
+    DOM_WORDS,
+    DOM_VALUE
+).interpretation(
+    Building
+)
 
 
 ###########
@@ -1238,13 +2035,32 @@ DOM = rule(DOM_WORDS, DOM_VALUE).interpretation(Building)
 ##########
 
 
-KORPUS_WORDS = or_(rule(in_caseless({"корп", "кор"}), DOT.optional()), rule(normalized("корпус"))).interpretation(
-    Building.type.const("корпус")
+KORPUS_WORDS = or_(
+    rule(
+        in_caseless({'корп', 'кор'}),
+        DOT.optional()
+    ),
+    rule(normalized('корпус'))
+).interpretation(
+    Building.type.const('корпус')
 )
 
-KORPUS_VALUE = ADDR_VALUE.interpretation(Building.number)
+KORPUS_VALUE = ADDR_VALUE.interpretation(
+    Building.number
+)
 
-KORPUS = or_(rule(KORPUS_WORDS, KORPUS_VALUE), rule(KORPUS_VALUE, KORPUS_WORDS)).interpretation(Building)
+KORPUS = or_(
+    rule(
+        KORPUS_WORDS,
+        KORPUS_VALUE
+    ),
+    rule(
+        KORPUS_VALUE,
+        KORPUS_WORDS
+    )
+).interpretation(
+    Building
+)
 
 
 ###########
@@ -1254,13 +2070,26 @@ KORPUS = or_(rule(KORPUS_WORDS, KORPUS_VALUE), rule(KORPUS_VALUE, KORPUS_WORDS))
 ##########
 
 
-STROENIE_WORDS = or_(rule(caseless("стр"), DOT.optional()), rule(normalized("строение"))).interpretation(
-    Building.type.const("строение")
+STROENIE_WORDS = or_(
+    rule(
+        caseless('стр'),
+        DOT.optional()
+    ),
+    rule(normalized('строение'))
+).interpretation(
+    Building.type.const('строение')
 )
 
-STROENIE_VALUE = ADDR_VALUE.interpretation(Building.number)
+STROENIE_VALUE = ADDR_VALUE.interpretation(
+    Building.number
+)
 
-STROENIE = rule(STROENIE_WORDS, STROENIE_VALUE).interpretation(Building)
+STROENIE = rule(
+    STROENIE_WORDS,
+    STROENIE_VALUE
+).interpretation(
+    Building
+)
 
 
 ###########
@@ -1270,11 +2099,26 @@ STROENIE = rule(STROENIE_WORDS, STROENIE_VALUE).interpretation(Building)
 #############
 
 
-OFIS_WORDS = or_(rule(caseless("оф"), DOT.optional()), rule(normalized("офис"))).interpretation(Room.type.const("офис"))
+OFIS_WORDS = or_(
+    rule(
+        caseless('оф'),
+        DOT.optional()
+    ),
+    rule(normalized('офис'))
+).interpretation(
+    Room.type.const('офис')
+)
 
-OFIS_VALUE = ADDR_VALUE.interpretation(Room.number)
+OFIS_VALUE = ADDR_VALUE.interpretation(
+    Room.number
+)
 
-OFIS = rule(OFIS_WORDS, OFIS_VALUE).interpretation(Room)
+OFIS = rule(
+    OFIS_WORDS,
+    OFIS_VALUE
+).interpretation(
+    Room
+)
 
 
 ###########
@@ -1284,13 +2128,26 @@ OFIS = rule(OFIS_WORDS, OFIS_VALUE).interpretation(Room)
 #############
 
 
-KVARTIRA_WORDS = or_(rule(caseless("кв"), DOT.optional()), rule(normalized("квартира"))).interpretation(
-    Room.type.const("квартира")
+KVARTIRA_WORDS = or_(
+    rule(
+        caseless('кв'),
+        DOT.optional()
+    ),
+    rule(normalized('квартира'))
+).interpretation(
+    Room.type.const('квартира')
 )
 
-KVARTIRA_VALUE = ADDR_VALUE.interpretation(Room.number)
+KVARTIRA_VALUE = ADDR_VALUE.interpretation(
+    Room.number
+)
 
-KVARTIRA = rule(KVARTIRA_WORDS, KVARTIRA_VALUE).interpretation(Room)
+KVARTIRA = rule(
+    KVARTIRA_WORDS,
+    KVARTIRA_VALUE
+).interpretation(
+    Room
+)
 
 
 ###########
@@ -1300,7 +2157,15 @@ KVARTIRA = rule(KVARTIRA_WORDS, KVARTIRA_VALUE).interpretation(Room)
 #############
 
 
-INDEX = and_(INT, gte(100000), lte(999999)).interpretation(Index.value).interpretation(Index)
+INDEX = and_(
+    INT,
+    gte(100000),
+    lte(999999)
+).interpretation(
+    Index.value
+).interpretation(
+    Index
+)
 
 
 #############
@@ -1310,4 +2175,22 @@ INDEX = and_(INT, gte(100000), lte(999999)).interpretation(Index.value).interpre
 ############
 
 
-ADDR_PART = or_(PLOSHAD, SAD, ROSCHA, SQVER, PARK).interpretation(AddrPart.value).interpretation(AddrPart)
+ADDR_PART = or_(
+    SAD,
+    ROSCHA,
+    SQVER,
+    PARK,
+    POLE,
+    KLAD,
+    PLAJ,
+    PRUD,
+    VOKZAL,
+    METRO,
+    TEATR,
+    MUZEI,
+    PAMETNIK
+).interpretation(
+    AddrPart.value
+).interpretation(
+    AddrPart
+)
