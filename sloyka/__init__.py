@@ -25,10 +25,10 @@ __all__ = [
     "EmotionRecognizer",
 ]
 
-logger.remove()
-logger.add(
-    sys.stdout,
-    format="<green>{time:MM-DD HH:mm}</green> | <level>{level: <8}</level> | <cyan>{message}</cyan>",
-    level="INFO",
-    colorize=True,
-)
+# logger.remove()
+# logger.add(
+#     sys.stdout,
+#     format="<green>{time:MM-DD HH:mm}</green> | <level>{level: <8}</level> | <cyan>{message}</cyan>",
+#     level="INFO",
+#     colorize=True,
+# )

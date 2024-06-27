@@ -52,17 +52,12 @@ from tqdm import tqdm
 from loguru import logger
 
 from pandarallel import pandarallel
-from sloyka.src.geocoder.city_objects_getter import OtherGeoObjects
+from sloyka.src.geocoder.city_objects_extractor import OtherGeoObjects
 from sloyka.src.utils.data_getter.street_getter import Streets
 from sloyka.src.utils.data_getter.location_getter import Location
 from sloyka.src.utils.data_getter.geo_data_getter import GeoDataGetter
 from sloyka.src.geocoder.street_extractor import StreetExtractor
 from sloyka.src.geocoder.word_form_matcher import WordFormFinder
-
-import warnings
-
-warnings.simplefilter("ignore")
-warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 pandarallel.initialize(progress_bar=True, nb_workers=-1)
 
@@ -74,11 +69,6 @@ morph = pymorphy2.MorphAnalyzer()
 # morph_tagger = NewsMorphTagger(emb)
 # syntax_parser = NewsSyntaxParser(emb)
 # ner_tagger = NewsNERTagger(emb)
-warnings.simplefilter(action="ignore", category=FutureWarning)
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-
-
-
 
 stemmer = SnowballStemmer("russian")
 
@@ -333,6 +323,11 @@ class Geocoder:
         """
 
         initial_df = df.copy()
+
+        if search_for_objects:
+            df_obj = OtherGeoObjects.run(self.osm_id, df, text_column)
+            
+
         if tags:
             df_areas = self.get_df_areas(self.osm_id, tags)
             df_areas = self.preprocess_area_names(df_areas)
@@ -358,11 +353,9 @@ class Geocoder:
         del street_names
         gdf = self.create_gdf(df)
 
-        if search_for_objects:
-            df_obj = OtherGeoObjects.run(self.osm_id, df, text_column)
-            gdf = pd.concat([gdf, df_obj], ignore_index=True)
-            del df_obj
-            gdf["geo_obj_tag"] = gdf["geo_obj_tag"].apply(Geocoder.assign_street)
+        gdf = pd.concat([gdf, df_obj], ignore_index=True)
+        del df_obj
+        gdf["geo_obj_tag"] = gdf["geo_obj_tag"].apply(Geocoder.assign_street)
 
         gdf = pd.merge(gdf, initial_df, on=text_column, how='right')
 

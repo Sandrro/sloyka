@@ -4,17 +4,12 @@ import pandas as pd
 import osmnx as ox
 from shapely.geometry import Point, Polygon, MultiPolygon
 from loguru import logger
-from natasha import MorphVocab
+import pymorphy2
 from sloyka.src.utils.constants import NUM_CITY_OBJ
 from sloyka.src.geocoder.objects_address_extractor_by_rules import AddressExtractorExtra
 from sloyka.src.utils.data_getter.geo_data_getter import GeoDataGetter
 from rapidfuzz import fuzz
 import numpy as np
-
-import warnings
-
-warnings.simplefilter("ignore")
-warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 class OtherGeoObjects:
@@ -43,18 +38,23 @@ class OtherGeoObjects:
             {"historic": ["monument", "memorial"]},
             {"place": ["square"]},
         ]
-
+        
         osm_dfs = list()
         for tags in tags_list:
+            logger.debug(f'getting {osm_id, tags}')
             try:
                 tmp_df = OtherGeoObjects.get_and_process_osm_data(osm_id, tags)
                 osm_dfs.append(tmp_df)
             except RuntimeError:
+                logger.warning(f'Runtime error during fetching {osm_id, tags}')
                 continue
         if osm_dfs:
             osm_combined_df = pd.concat(osm_dfs, axis=0)
+            logger.debug(f'got {osm_id, tags}')
+            logger.debug(f'{osm_combined_df.shape}')
             return osm_combined_df
         else:
+            logger.warning(f'No data were gathered about city objects in {osm_id}')
             return pd.DataFrame()
 
     @staticmethod
@@ -76,7 +76,7 @@ class OtherGeoObjects:
         """
         if text is None:
             return None
-        morph = MorphVocab()
+        morph = pymorphy2.MorphAnalyzer()
         extractor = AddressExtractorExtra(morph)
 
         other_geo_obj = []
@@ -96,10 +96,10 @@ class OtherGeoObjects:
                     other_geo_obj.append(part.value)
                 elif part.type:
                     other_geo_obj.append(part.type)
-            if not other_geo_obj:
-                return other_geo_obj
+                if not other_geo_obj:
+                    return other_geo_obj
         except Exception as e:
-            # logger.exception(f"Error extracting geo objects: {e}")
+            # logger.warning(f"Error extracting geo objects: {e}")
             return other_geo_obj
         return other_geo_obj
 
