@@ -357,7 +357,6 @@ class Geocoder:
 
         del street_names
         gdf = self.create_gdf(df)
-        del df
 
         if search_for_objects:
             df_obj = OtherGeoObjects.run(self.osm_id, df, text_column)
