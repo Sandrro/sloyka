@@ -138,3 +138,5 @@ cache/
 
 # idea
 .idea/
+.graphml
+.geojson
