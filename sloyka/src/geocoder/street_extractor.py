@@ -45,7 +45,7 @@ class StreetExtractor:
         texts = StreetExtractor._preprocess_text_column(local_df, text_column)
         extracted_streets = StreetExtractor._extract_streets(texts, classifier)
         refined_streets = StreetExtractor._refine_street_data(extracted_streets)
-        building_numbers = StreetExtractor._extract_building_numbers(texts, refined_streets)
+        building_numbers = StreetExtractor._get_number(texts, refined_streets)
         toponyms = StreetExtractor._extract_toponyms(texts, refined_streets)
 
         # Combine results into a DataFrame
@@ -152,7 +152,7 @@ class StreetExtractor:
             return ""
 
     @staticmethod
-    def _extract_building_numbers(texts: List[str], streets: List[Optional[str]]) -> List[Optional[str]]:
+    def _get_number(texts: List[str], streets: List[Optional[str]]) -> List[Optional[str]]:
         """
         Extract building numbers from the text data.
 
@@ -167,7 +167,7 @@ class StreetExtractor:
         for text, street in zip(texts, streets):
             if street:
                 try:
-                    building_numbers.append(StreetExtractor._extract_building_number(text, street))
+                    building_numbers.append(StreetExtractor._extract_building_number_from_text(text, street))
                 except Exception as e:
                     logger.warning(f"Error extracting building number from text '{text}' with street '{street}': {e}")
                     building_numbers.append(None)
@@ -176,7 +176,7 @@ class StreetExtractor:
         return building_numbers
 
     @staticmethod
-    def _extract_building_number(text: str, street: str) -> str:
+    def _extract_building_number_from_text(text: str, street: str) -> str:
         """
         Extract building number from the text.
 
@@ -189,9 +189,9 @@ class StreetExtractor:
         """
         try:
             numbers = " ".join(re.findall(r"\d+", text))
-            return StreetExtractor.extract_building_num(text, street, numbers)
+            return StreetExtractor._check_if_extracted_number_legit(text, street, numbers)
         except Exception as e:
-            logger.warning(f"Error in _extract_building_number with text '{text}' and street '{street}': {e}")
+            logger.warning(f"Error in _extract_building_number_from_text with text '{text}' and street '{street}': {e}")
             return ""
 
     @staticmethod
@@ -312,7 +312,7 @@ class StreetExtractor:
         return None
 
     @staticmethod
-    def extract_building_num(text: str, street_name: str, number: Optional[str]) -> str:
+    def _check_if_extracted_number_legit(text: str, street_name: str, number: Optional[str]) -> str:
         """
         Extract building numbers near the specified street name in the text.
 
@@ -358,7 +358,7 @@ class StreetExtractor:
         Returns:
             List[int]: List of positions where the street name occurs.
         """
-        return [index for index, word in enumerate(words) if word == street_name]
+        return [index for index, word in enumerate(words) if word.lower() == street_name]
 
     @staticmethod
     def _search_building_number(words: List[str], position: int) -> str:
