@@ -1,4 +1,5 @@
-
+import warnings
+warnings.filterwarnings("ignore")
 
 import osmnx as ox
 import geopandas as gpd
@@ -112,7 +113,7 @@ class GeoDataGetter:
                     gdf = GeoDataGetter._get_features_from_place(place_name, category, tag)
                     gdf_list.append(gdf)
                 except AttributeError:
-                    # GeoDataGetter._handle_error(category, tag)
+                    logger.warning(f'Error processing {tags, place}')
                     pass
         return gdf_list
 
@@ -142,10 +143,10 @@ class GeoDataGetter:
         # Streets.logger.info("Retrieving drive graph")
         try:
             G_drive = ox.graph_from_polygon(city_bounds.dissolve()["geometry"].squeeze(), network_type="drive")
-            # Streets.logger.debug(f"Drive graph retrieved: {G_drive}")
+            logger.debug(f"Drive graph retrieved: {G_drive}")
             return G_drive
         except Exception as e:
-            # Streets.logger.error(f"Error retrieving drive graph: {e}")
+            logger.error(f"Error retrieving drive graph: {e}")
             raise e
 
     # def _handle_error(self, category, tag):

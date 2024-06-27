@@ -45,22 +45,22 @@ class WordFormFinder:
         """
         try:
             search_val = row.get("Street")
-            search_toponym = row.get("Toponims")
+            search_toponym = row.get("Toponyms")
             val_num = row.get("Numbers", "")
 
             if not search_val or pd.isna(search_val):
-                logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponims')}")
+                logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponyms')}")
                 return {"full_street_name": None, "only_full_street_name": None}
 
             for col in strts_df.columns[2:]:
                 matching_rows = self._find_matching_rows(strts_df, col, search_val, search_toponym)
 
-                if not matching_rows.empty:
-                    full_streets = [self._format_full_address(street, val_num) for street in matching_rows["street"].values]
-                    return {
-                        "full_street_name": ",".join(full_streets),
-                        "only_full_street_name": ",".join(matching_rows["street"].values)
-                    }
+            if not matching_rows.empty:
+                full_streets = [self._format_full_address(street, val_num) for street in matching_rows["street"].values]
+                return {
+                    "full_street_name": ",".join(full_streets),
+                    "only_full_street_name": ",".join(matching_rows["street"].values)
+                }
 
             # If no exact match found, check without toponym
             if search_val in strts_df[col].values:
@@ -71,11 +71,11 @@ class WordFormFinder:
                     "only_full_street_name": ",".join(only_streets_full)
                 }
             else:
-                logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponims')}'")
+                logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponyms')}'")
                 return {"full_street_name": None, "only_full_street_name": None}
 
         except Exception as e:
-            logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponims')}': {e}")
+            logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponyms')}': {e}")
 
             return {"full_street_name": None, "only_full_street_name": None}
 

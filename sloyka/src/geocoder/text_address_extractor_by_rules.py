@@ -12,9 +12,6 @@ from natasha import (
     Doc,
 )
 
-import pandas as pd
-import pymorphy2
-
 from sloyka.src.utils.constants import (
     EXCEPTIONS_CITY_COUNTRY)
 
