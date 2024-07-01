@@ -97,7 +97,9 @@ class RegionalActivity:
             processed_geodata[self.text]
             .progress_map(lambda x: self.text_classifier.run_text_classifier(x))
             .to_list()
-        )  # type: ignore
+        )
+        # )  # type: ignore
+        processed_geodata.dropna(subset=["text"], inplace=True)
         processed_geodata = City_services().run(
             df=processed_geodata, text_column=self.text
         )
@@ -176,7 +178,7 @@ class RegionalActivity:
             service_column (str, optional): The name of the column containing the services. Defaults to 'City_services'.
 
         Returns:
-            pd.DataFrame: A DataFrame with two columns: 'service' and 'counts', where 'service' is the name 
+            pd.DataFrame: A DataFrame with two columns: 'service' and 'counts', where 'service' is the name
             of each service and 'counts' is the number of occurrences of each service in the given DataFrame.
         """
 
@@ -226,24 +228,21 @@ class RegionalActivity:
         self,
         processed_data: Optional[gpd.GeoDataFrame] = None,
         top_n: int = 5,
-        to_df: bool = False,
     ) -> pd.DataFrame:
         """This function returns a pd.DataFrame with info about social risks based on provided texts.
 
         Args:
             top_n (int, optional): The number of most mentioned toponyms to be calculated. Defaults to 5.
-            to_df (bool, optional): Whether to return a DataFrame or a dictionary. Defaults to False.
 
         Returns:
             pd.DataFrame: Table with info about users altitude to the service in toponyms.
         """
+        if processed_data is None:
+            processed_data = self.processed_geodata
 
-        if not processed_data:
-            gdf_final = self.processed_geodata.copy()
-        else:
-            gdf_final = processed_data
+        gdf_final = processed_data
         top_n_toponyms = (
-            self.processed_geodata["only_full_street_name"]
+            processed_data["only_full_street_name"]
             .value_counts(normalize=True)
             .index[:top_n]
         )
@@ -257,6 +256,7 @@ class RegionalActivity:
             "negative",
             "neutral",
             "interpretation",
+            "geometry",
         ]
         risks = []
 
@@ -269,6 +269,9 @@ class RegionalActivity:
             )
 
             toponym_gdf_final = gdf_final.loc[gdf_final["id"].isin(all_ids)]
+
+            geom = toponym_gdf_final["geometry"].dropna().iloc[0]
+
             part_users = len(toponym_gdf_final["from_id"].unique()) / len(
                 gdf_final["from_id"].unique()
             )
@@ -278,14 +281,14 @@ class RegionalActivity:
 
             services = toponym_gdf_final["City_services"].apply(lambda x: list(set(x)))
             services = list(set([obj for inner_list in services for obj in inner_list]))
-            services_raing = (
+            services_rating = (
                 self.get_service_counts(data=toponym_gdf_final, services=services)
                 .sort_values(by="counts", ascending=False)[:top_n]["service"]
                 .to_list()
             )
 
             if services:
-                for service in services_raing:
+                for service in services_rating:
                     service_ids = self.get_service_ids(
                         data=toponym_gdf_final, service=service
                     )
@@ -300,43 +303,30 @@ class RegionalActivity:
                     users_id = service_gdf["from_id"].unique()
 
                     for user in users_id:
+                        pos = 0
+                        neg = 0
+
                         user_gdf = service_gdf.loc[service_gdf["from_id"] == user]
                         grouped = user_gdf.groupby("emotion_average")[
                             "group_name"
                         ].count()
 
-                        pos = 0
-                        neg = 0
-
-                        for emotion in grouped.index:
-                            if emotion in POSITIVE:
-                                pos += grouped[i]
-                            elif emotion in NEGATIVE:
-                                neg += grouped[i]
+                        neg, pos = self.count_emotions(grouped)
 
                         if pos > neg:
                             users_pos += 1
                         elif pos < neg:
                             users_neg += 1
                         else:
-                            users_neu = +1
+                            users_neu += 1
 
                     positive_coef = users_pos / len(users_id)
                     negative_coef = users_neg / len(users_id)
                     neutral_coef = users_neu / len(users_id)
 
-                    if negative_coef > positive_coef:
-                        interpretation = "reorganize"
-                    elif negative_coef < positive_coef:
-                        interpretation = "keep"
-                    elif (
-                        negative_coef == positive_coef
-                        and negative_coef != 0
-                        and neutral_coef != 0
-                    ):
-                        interpretation = "controversial"
-                    else:
-                        interpretation = "neutral"
+                    interpretation = self.interpretate_coef(
+                        negative_coef, positive_coef, neutral_coef
+                    )
 
                     risks.append(
                         [
@@ -348,6 +338,7 @@ class RegionalActivity:
                             negative_coef,
                             neutral_coef,
                             interpretation,
+                            geom,
                         ]
                     )
 
@@ -355,22 +346,87 @@ class RegionalActivity:
 
         return risks_df
 
+    @staticmethod
+    def interpretate_coef(
+        negative_coef: float, positive_coef: float, neutral_coef: float
+    ) -> str:
+        """
+        Interpretate the coefficients and return a string interpretation.
+
+        Args:
+            negative_coef (float): The negative coefficient.
+            positive_coef (float): The positive coefficient.
+            neutral_coef (float): The neutral coefficient.
+
+        Returns:
+            str: The interpretation of the coefficients.
+
+        Raises:
+            None.
+
+        Examples:
+            >>> interpretate_coef(0.5, 0.4, 0.1)
+            'keep'
+            >>> interpretate_coef(0.4, 0.5, 0.1)
+            'reorganize'
+            >>> interpretate_coef(0.4, 0.4, 0.2)
+            'controversial'
+            >>> interpretate_coef(0.0, 0.0, 1.0)
+            'neutral'
+        """
+        if negative_coef > positive_coef:
+            interpretation = "reorganize"
+        elif negative_coef < positive_coef:
+            interpretation = "keep"
+        elif (
+            negative_coef == positive_coef and negative_coef != 0 and neutral_coef != 0
+        ):
+            interpretation = "controversial"
+        else:
+            interpretation = "neutral"
+
+        return interpretation
+
+    @staticmethod
+    def count_emotions(grouped):
+        """
+        Counts the positive and negative emotions in the grouped data and returns the total count of negative and positive emotions.
+
+        Args:
+            grouped (pandas.DataFrame): The grouped data containing emotions.
+
+        Returns:
+            Tuple[int, int]: A tuple containing the count of negative emotions and positive emotions respectively.
+        """
+
+        pos = 0
+        neg = 0
+
+        for emotion in grouped.index:
+            if emotion in POSITIVE:
+                if emotion in grouped.index:
+                    pos += grouped[emotion]
+                else:
+                    continue
+            elif emotion in NEGATIVE:
+                if emotion in grouped.index:
+                    neg += grouped[emotion]
+                else:
+                    continue
+
+        return neg, pos
+
 
 if __name__ == "__main__":
     df = pd.read_csv(
-        r"C:\Projects\IDU\sloyka\sloyka\sample_data\tvoygorod34.csv",
+        r"C:\Projects\ITMO\sloyka\sloyka\sample_data\tvoygorod34.csv",
         sep=";",
-        index_col=0,
-    )
+    )[:100]
 
     print(len(df))
 
     ra = RegionalActivity(data=df, osm_id=3374767, text_column="text")
 
-    print(
-        ra.processed_geodata["Location"],
-        ra.processed_geodata["City_services"],
-        ra.processed_geodata["classified_text"],
-    )
-    res = ra.get_risks()
-    res.to_feather(r"C:\Projects\IDU\sloyka\sloyka\sample_data\regional_activity.feather")
+    print(ra.processed_geodata["Location"], ra.processed_geodata["City_services"])
+    res = gpd.GeoDataFrame(ra.get_risks(), geometry="geometry")
+    res.to_file(r"C:\Projects\ITMO\sloyka\sloyka\sample_data\regional_activity.geojson")
