@@ -52,17 +52,13 @@ from tqdm import tqdm
 from loguru import logger
 
 from pandarallel import pandarallel
-from sloyka.src.geocoder.city_objects_getter import OtherGeoObjects
+from sloyka.src.geocoder.city_objects_extractor import OtherGeoObjects
 from sloyka.src.utils.data_getter.street_getter import Streets
 from sloyka.src.utils.data_getter.location_getter import Location
 from sloyka.src.utils.data_getter.geo_data_getter import GeoDataGetter
+from sloyka.src.utils.data_preprocessing.preprocessor import PreprocessorInput
 from sloyka.src.geocoder.street_extractor import StreetExtractor
 from sloyka.src.geocoder.word_form_matcher import WordFormFinder
-
-import warnings
-
-warnings.simplefilter("ignore")
-warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 pandarallel.initialize(progress_bar=True, nb_workers=-1)
 
@@ -74,11 +70,6 @@ morph = pymorphy2.MorphAnalyzer()
 # morph_tagger = NewsMorphTagger(emb)
 # syntax_parser = NewsSyntaxParser(emb)
 # ner_tagger = NewsNERTagger(emb)
-warnings.simplefilter(action="ignore", category=FutureWarning)
-warnings.filterwarnings("ignore", category=DeprecationWarning)
-
-
-
 
 stemmer = SnowballStemmer("russian")
 
@@ -96,11 +87,13 @@ class Geocoder:
 
     def __init__(
         self,
+        df,
         model_path: str = "Geor111y/flair-ner-addresses-extractor",
         device: str = "cpu",
         osm_id: int = None,
         city_tags: dict ={"place": ["state"]}
     ):
+        self.df = PreprocessorInput().run(df)
         self.device = device
         flair.device = torch.device(device)
         self.classifier = SequenceTagger.load(model_path)
@@ -311,7 +304,7 @@ class Geocoder:
         return best_match, admin_level
 
     def run(
-        self, df: pd.DataFrame, tags:dict|None=None, text_column: str = "text", group_column: str | None = "group_name", search_for_objects=False
+        self, df: pd.DataFrame = None, tags:dict|None=None, text_column: str = "text", group_column: str | None = "group_name", search_for_objects=False
     ):
         """
         Runs the data processing pipeline on the input DataFrame.
@@ -331,8 +324,13 @@ class Geocoder:
         objects and street names, preprocesses the street names, finds the word form, creates a GeoDataFrame,
         merges it with the other geographic objects, assigns the street tag, and returns the final GeoDataFrame.
         """
-
+        df = self.df
         initial_df = df.copy()
+
+        if search_for_objects:
+            df_obj = OtherGeoObjects.run(self.osm_id, df, text_column)
+            
+
         if tags:
             df_areas = self.get_df_areas(self.osm_id, tags)
             df_areas = self.preprocess_area_names(df_areas)
@@ -358,11 +356,9 @@ class Geocoder:
         del street_names
         gdf = self.create_gdf(df)
 
-        if search_for_objects:
-            df_obj = OtherGeoObjects.run(self.osm_id, df, text_column)
-            gdf = pd.concat([gdf, df_obj], ignore_index=True)
-            del df_obj
-            gdf["geo_obj_tag"] = gdf["geo_obj_tag"].apply(Geocoder.assign_street)
+        gdf = pd.concat([gdf, df_obj], ignore_index=True)
+        del df_obj
+        gdf["geo_obj_tag"] = gdf["geo_obj_tag"].apply(Geocoder.assign_street)
 
         gdf = pd.merge(gdf, initial_df, on=text_column, how='right')
 
