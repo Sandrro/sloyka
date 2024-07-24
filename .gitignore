@@ -140,7 +140,3 @@ cache/
 .idea/
 .graphml
 .geojson
-
-# notebooks
-parser_with_loop (2).ipynb
-leons_work.ipynb

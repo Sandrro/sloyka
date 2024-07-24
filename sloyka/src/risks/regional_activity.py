@@ -8,7 +8,7 @@ import pandas as pd
 import geopandas as gpd
 
 from sloyka.src.geocoder.geocoder import Geocoder
-from sloyka.src.text_classifiers import TextClassifiers
+from sloyka.src.risks.text_classifier import TextClassifiers
 from sloyka.src.utils.data_processing.city_services_extract import City_services
 from sloyka.src.risks.emotion_classifier import EmotionRecognizer
 
@@ -87,18 +87,18 @@ class RegionalActivity:
         """
 
         if self.use_geocoded_data:
-            processed_geodata: gpd.GeoDataFrame = self.data.copy()  # type: ignore
+            processed_geodata: gpd.GeoDataFrame = self.data.copy()
         else:
-            processed_geodata: gpd.GeoDataFrame = Geocoder(
+            processed_geodata: gpd.GeoDataFrame = Geocoder(df=self.data,
                 device=self.device, osm_id=self.osm_id, city_tags=self.city_tags
-            ).run(df=self.data, text_column=self.text, group_column=self.group_name)  # type: ignore
+            ).run()
 
         processed_geodata[["classified_text", "probs"]] = (
             processed_geodata[self.text]
             .progress_map(lambda x: self.text_classifier.run_text_classifier(x))
             .to_list()
         )
-        # )  # type: ignore
+
         processed_geodata.dropna(subset=["text"], inplace=True)
         processed_geodata = City_services().run(
             df=processed_geodata, text_column=self.text
