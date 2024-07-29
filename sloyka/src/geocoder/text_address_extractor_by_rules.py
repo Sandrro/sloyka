@@ -1,5 +1,4 @@
 import re
-import numpy as np
 from typing import Optional
 from loguru import logger
 from natasha import (

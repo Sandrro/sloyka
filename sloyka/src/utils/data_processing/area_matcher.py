@@ -6,12 +6,14 @@ from sloyka.src.utils.data_getter.historical_geo_data_getter import HistGeoDataG
 from sloyka.src.utils.constants import AREA_STOPWORDS
 from sloyka.src.utils.constants import GROUP_STOPWORDS
 
-stemmer = SnowballStemmer("russian")
+
 
 
 class AreaMatcher:
+    
     def __init__(self):
         self.area_cache = {}
+        self.stemmer = SnowballStemmer("russian")
 
     def get_df_areas(self, osm_id, tags, date):
         if osm_id not in self.area_cache:
@@ -39,12 +41,12 @@ class AreaMatcher:
             r"[\"!?\u2665\u2022()|,.-:]", "", regex=True
         )
         df_areas["area_stems"] = df_areas["area_name_processed"].apply(
-            lambda x: [stemmer.stem(word) for word in x.split()]
+            lambda x: [self.stemmer.stem(word) for word in x.split()]
         )
         return df_areas
 
     def match_group_to_area(self, group_name, df_areas):
-        group_name_stems = [stemmer.stem(word) for word in group_name.split()]
+        group_name_stems = [self.stemmer.stem(word) for word in group_name.split()]
         max_partial_ratio = 20
         max_token_sort_ratio = 20
         best_match = None

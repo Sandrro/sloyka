@@ -8,14 +8,10 @@ from keybert import KeyBERT
 import nltk
 from nltk.corpus import stopwords
 import pymorphy3
+from transformers import BertModel
 
-from sloyka.src.utils.constants import STOPWORDS, TAG_ROUTER, SPB_DISTRICTS
-
-nltk.download("stopwords")
-
-
-RUS_STOPWORDS = stopwords.words("russian") + STOPWORDS
-
+from sloyka.src.utils.constants import STOPWORDS, TAG_ROUTER
+    
 
 def extract_keywords(
     self,
@@ -28,6 +24,7 @@ def extract_keywords(
     parents_stack_column: str,
     semantic_key_filter: float = 0.6,
     top_n: int = 1,
+
 ) -> pd.DataFrame or gpd.GeoDataFrame:
     """
     Extract keywords from the given data based on certain criteria.
@@ -47,7 +44,9 @@ def extract_keywords(
         pd.DataFrame or gpd.GeoDataFrame: Processed data with extracted keywords, toponym counts, and word counts.
     """
 
-    model = KeyBERT(model=self.model)
+    nltk.download("stopwords")
+    RUS_STOPWORDS = stopwords.words(self.language) + STOPWORDS
+
     morph = pymorphy3.MorphAnalyzer()
 
     data["words_score"] = None
@@ -98,7 +97,7 @@ def extract_keywords(
             texts_to_add = []
 
             for j, text in zip(ids_text_to_extract, texts_to_extract):
-                extraction = model.extract_keywords(text, top_n=top_n, stop_words=RUS_STOPWORDS)
+                extraction = self.model.extract_keywords(text, top_n=top_n, stop_words=RUS_STOPWORDS)
                 if extraction:
                     score = extraction[0][1]
                     if score > semantic_key_filter:
@@ -119,7 +118,7 @@ def extract_keywords(
             if words_to_add:
                 toponym_dict[toponym] = toponym_dict.get(toponym, 0) + 1
 
-                index = data.index[data.id == i][0]
+                index = data.index[data.index == i][0]
                 data.at[index, "words_score"] = words_to_add
                 data.at[index, "texts_ids"] = id_to_add
 

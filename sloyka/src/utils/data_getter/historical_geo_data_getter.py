@@ -1,6 +1,3 @@
-
-
-
 import osmnx as ox
 import geopandas as gpd
 import pandas as pd
@@ -58,7 +55,7 @@ class HistGeoDataGetter:
 
         HistGeoDataGetter.set_overpass_settings(date)
 
-        gdf_list = self._process_tags(tags, place, selected_columns, date)
+        gdf_list = self._process_tags(tags, place)
 
         if len(gdf_list) > 0:
             merged_gdf = pd.concat(gdf_list).reset_index().loc[:, selected_columns]
@@ -99,20 +96,20 @@ class HistGeoDataGetter:
         place = ox.project_gdf(ox.geocode_to_gdf(osm_type + str(osm_id), by_osmid=True))
         return place
 
-    def _process_tags(self, tags, place, selected_columns, date):
+    def _process_tags(self, tags, place):
         gdf_list = []
         place_name = place.name.iloc[0]
         for category, category_tags in tags.items():
             for tag in tqdm(category_tags, desc=f"Processing category {category}"):
                 try:
-                    gdf = self._get_features_from_place(place_name, category, tag, date)
+                    gdf = self._get_features_from_place(place_name, category, tag)
                     if len(gdf) > 0:
                         gdf_list.append(gdf)
                 except Exception as e:
                     print(f"Error processing {category}-{tag}: {e}")
         return gdf_list
 
-    def _get_features_from_place(self, place_name, category, tag, date):
+    def _get_features_from_place(self, place_name, category, tag):
         gdf = ox.features_from_place(place_name, tags={category: tag})
         gdf.geometry.dropna(inplace=True)
         gdf["tag"] = category

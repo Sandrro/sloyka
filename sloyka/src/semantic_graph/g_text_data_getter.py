@@ -4,7 +4,6 @@ import pymorphy3
 import geopandas as gpd
 import pandas as pd
 
-
 @staticmethod
 def get_tag(nodes: list, toponyms: list) -> dict:
     """

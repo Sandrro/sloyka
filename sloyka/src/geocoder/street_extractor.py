@@ -130,6 +130,7 @@ class StreetExtractor:
                     refined_streets.append(None)
             else:
                 refined_streets.append(None)
+                
         return refined_streets
 
     @staticmethod
@@ -145,7 +146,7 @@ class StreetExtractor:
         """
         try:
             street = re.sub(r"(\D)(\d)(\D)", r"\1 \2\3", street)
-            street = re.sub(r"\d+", "", street).strip().lower()
+            street = re.sub(r"\d+|-| ", "", street).strip().lower()
             return street
         except Exception as e:
             logger.warning(f"Error in _refine_street_name with street '{street}': {e}")
@@ -256,32 +257,32 @@ class StreetExtractor:
             logger.warning(f"Error in extract_toponym with text '{text}' and street_name '{street_name}': {e}")
             return None
 
-    @staticmethod
-    def _clean_text(text: str) -> str:
-        """
-        Clean the input text by removing punctuation and converting to lowercase.
+    # @staticmethod
+    # def _clean_text(text: str) -> str:
+    #     """
+    #     Clean the input text by removing punctuation and converting to lowercase.
 
-        Args:
-            text (str): The input text.
+    #     Args:
+    #         text (str): The input text.
 
-        Returns:
-            str: The cleaned text.
-        """
-        return text.translate(str.maketrans("", "", string.punctuation)).lower()
+    #     Returns:
+    #         str: The cleaned text.
+    #     """
+    #     return text.translate(str.maketrans("", "", string.punctuation)).lower()
 
-    @staticmethod
-    def _find_street_name_positions(words: List[str], street_name: str) -> List[int]:
-        """
-        Find positions of the street name in the list of words.
+    # @staticmethod
+    # def _find_street_name_positions(words: List[str], street_name: str) -> List[int]:
+    #     """
+    #     Find positions of the street name in the list of words.
 
-        Args:
-            words (List[str]): List of words from the cleaned text.
-            street_name (str): The name of the street to find.
+    #     Args:
+    #         words (List[str]): List of words from the cleaned text.
+    #         street_name (str): The name of the street to find.
 
-        Returns:
-            List[int]: List of positions where the street name occurs.
-        """
-        return [index for index, word in enumerate(words) if word == street_name]
+    #     Returns:
+    #         List[int]: List of positions where the street name occurs.
+    #     """
+    #     return [index for index, word in enumerate(words) if word == street_name]
 
     @staticmethod
     def _search_toponyms(words: List[str], position: int) -> Optional[str]:
@@ -299,16 +300,17 @@ class StreetExtractor:
         search_end = min(len(words), position + END_INDEX_POSITION)
 
         for i in range(search_start, search_end + 1):
-            word = words[i]
+            
             try:
+                word = words[i]
                 normal_form = morph.parse(word)[0].normal_form
+            
+                if normal_form in TARGET_TOPONYMS:
+                    return REPLACEMENT_DICT.get(normal_form, normal_form)
+            
             except Exception as e:
                 logger.warning(f"Error parsing word '{word}': {e}")
                 continue
-
-            if normal_form in TARGET_TOPONYMS:
-                return REPLACEMENT_DICT.get(normal_form, normal_form)
-
         return None
 
     @staticmethod

@@ -11,26 +11,12 @@ A class for parsing and working with VK comments and posts. Combines posts and c
 A class for working with street data.
 
 """
-import osmnx as ox
-import geopandas as gpd
 import pandas as pd
-from sloyka.src.utils.constants import (
-    GLOBAL_CRS,
-    GLOBAL_METRIC_CRS,
-)
-from shapely.ops import transform
 from tqdm import tqdm
 import requests
-import sys
 import datetime
 import time
-import osm2geojson
 import random
-from typing import List, Optional
-from osmapi import OsmApi
-import networkx as nx
-from loguru import logger
-
 
 class VKParser:
     API_VERISON = "5.131"
@@ -107,7 +93,7 @@ class VKParser:
         return post_ids
 
     @staticmethod
-    def get_subcomments(owner_id, post_id, access_token, params):
+    def get_subcomments(params):
         """
         Retrieves subcomments from the VK API.
 
@@ -136,7 +122,7 @@ class VKParser:
 
         return subcomments
 
-    def get_comments(owner_id, post_id, access_token):
+    def get_comments(self, owner_id, post_id, access_token):
         """
         Get comments for a post on VK using the specified owner ID, post ID, and access token.
 
@@ -175,7 +161,7 @@ class VKParser:
                 comments.append(item)
                 if item["thread"]["count"] > 0:
                     params["comment_id"] = item["id"]
-                    subcomments = VKParser.get_subcomments(owner_id, post_id, access_token, params)
+                    subcomments = VKParser.get_subcomments(params)
                     comments.extend(subcomments)
         return comments
 
@@ -210,7 +196,6 @@ class VKParser:
             pandas.DataFrame: A DataFrame containing the retrieved posts.
         """
     
-        domain = domain
         offset = 0
         all_posts = []
         if step > number_of_messages:
@@ -257,7 +242,7 @@ class VKParser:
         owner_id = VKParser.get_owner_id_by_domain(domain, access_token)
         all_comments = []
         for post_id in tqdm(post_ids):
-            comments = VKParser.get_comments(owner_id, post_id, access_token)
+            comments = VKParser().get_comments(owner_id, post_id, access_token)
             all_comments.extend(comments)
         df = VKParser.comments_to_dataframe(all_comments)
         df["type"] = "comment"

@@ -11,6 +11,7 @@ from .src import (
     City_services,
     AreaMatcher,
     EmotionRecognizer,
+    RegionalActivity
 )
 
 __all__ = [
@@ -23,6 +24,7 @@ __all__ = [
     "City_services",
     "AreaMatcher",
     "EmotionRecognizer",
+    "RegionalActivity"
 ]
 
 # logger.remove()
@@ -32,3 +34,9 @@ __all__ = [
 #     level="INFO",
 #     colorize=True,
 # )
+
+import os
+import sys
+
+folder = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(folder)

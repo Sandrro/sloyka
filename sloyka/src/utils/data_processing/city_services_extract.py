@@ -1,18 +1,18 @@
-import pandas as pd
 import numpy as np
 from flair.models import SequenceTagger
 from flair.data import Sentence
 from rapidfuzz import fuzz
-from typing import List
 from sloyka.src.utils.constants import CITY_SERVICES_NAMES
-
-tagger = SequenceTagger.load("Glebosol/city_services")
-
+from sloyka.src.utils.data_preprocessing.preprocessor import PreprocessorInput
 
 class City_services:
-    def extraction_services(text):
+
+    def __init__(self, model_name:str="Glebosol/city_services"):
+        self.tagger = SequenceTagger.load(model_name)
+
+    def extraction_services(self, text):
         sentence = Sentence(text)
-        tagger.predict(sentence)
+        self.tagger.predict(sentence)
         entities = sentence.get_spans("ner")
         entity_names = [entity.text for entity in entities]
         return entity_names
@@ -20,10 +20,6 @@ class City_services:
     def remove_last_letter(words):
         reduced_words = [word[:-1] for word in words]
         return reduced_words
-
-    # def replace_with_most_similar(entity_names: List[str], CITY_SERVICES_NAMES: List[str]) -> List[str]:
-    #     true_city_services_names = [difflib.get_close_matches(word_entity_names, CITY_SERVICES_NAMES, n=1, cutoff=0.0)[0] for word_entity_names in entity_names]
-    #     return true_city_services_names
 
     def replace_with_most_similar(list_of_entities):
         similarity_matrix = np.zeros((len(list_of_entities), len(CITY_SERVICES_NAMES)))
@@ -38,10 +34,10 @@ class City_services:
         return new_list_of_entities
 
     def run(self, df, text_column):
-        df["City_services_extraced"] = df[text_column].apply(lambda text: City_services.extraction_services(text))
-        df["City_services_cuted"] = df["City_services_extraced"].apply(
-            lambda row: City_services.remove_last_letter(row)
-        )
-        df["City_services"] = df["City_services_cuted"].apply(lambda row: City_services.replace_with_most_similar(row))
+        df = PreprocessorInput.run(df, text_column)
+        city_services = City_services()
+        df["City_services_extraced"] = df[text_column].apply(city_services.extraction_services)
+        df["City_services_cuted"] = df["City_services_extraced"].apply(City_services.remove_last_letter)
+        df["City_services"] = df["City_services_cuted"].apply(City_services.replace_with_most_similar)
         df.drop("City_services_cuted", axis=1, inplace=True)
         return df
