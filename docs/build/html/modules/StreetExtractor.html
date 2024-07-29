@@ -215,10 +215,11 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">General:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about/introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../about/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/pipeline.html">Main pipeline</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Receiving:</span></p>
 <ul class="current">
@@ -228,7 +229,7 @@
 <li class="toctree-l2"><a class="reference internal" href="GeoDataGetter.html">GeoDataGetter</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="geocoder.html">Geo-objects finder</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Geo-objects finder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="geocoder.html">Geocoding</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Geocoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Geocoder_special.html">Geocoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="OtherGeoObjects.html">OtherGeoObjects</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">StreetExtractor</a></li>
@@ -251,6 +252,7 @@
 <p class="caption" role="heading"><span class="caption-text">Visualization:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="visualize_graph.html">Graph visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../404.html">Page Not Found</a></li>
 </ul>
 
 </div>
@@ -297,29 +299,6 @@
 <dt class="sig sig-object py" id="sloyka.src.geocoder.street_extractor.StreetExtractor">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sloyka.src.geocoder.street_extractor.</span></span><span class="sig-name descname"><span class="pre">StreetExtractor</span></span><a class="reference internal" href="../_modules/sloyka/src/geocoder/street_extractor.html#StreetExtractor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.street_extractor.StreetExtractor" title="Link to this definition">¶</a></dt>
 <dd><dl class="py method">
-<dt class="sig sig-object py" id="sloyka.src.geocoder.street_extractor.StreetExtractor.extract_building_num">
-<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extract_building_num</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">street_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../_modules/sloyka/src/geocoder/street_extractor.html#StreetExtractor.extract_building_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.street_extractor.StreetExtractor.extract_building_num" title="Link to this definition">¶</a></dt>
-<dd><p>Extract building numbers near the specified street name in the text.</p>
-<p>This function identifies the position of a street name in the text and searches for related building numbers
-within a specified range of indexes around the street name.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>text</strong> (<em>str</em>) – The text containing the address.</p></li>
-<li><p><strong>street_name</strong> (<em>str</em>) – The name of the street to search around.</p></li>
-<li><p><strong>number</strong> (<em>Optional</em><em>[</em><em>str</em><em>]</em>) – Previously extracted building number.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>The first building number found if present, otherwise an empty string.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.geocoder.street_extractor.StreetExtractor.extract_ner_street">
 <em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">extract_ner_street</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classifier</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Series</span></span></span><a class="reference internal" href="../_modules/sloyka/src/geocoder/street_extractor.html#StreetExtractor.extract_ner_street"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.street_extractor.StreetExtractor.extract_ner_street" title="Link to this definition">¶</a></dt>
 <dd><p>Extract street addresses from text using a pre-trained custom NER model.</p>
@@ -434,7 +413,6 @@ within a specified range around the street name.</p>
             <ul>
 <li><a class="reference internal" href="#">StreetExtractor</a><ul>
 <li><a class="reference internal" href="#sloyka.src.geocoder.street_extractor.StreetExtractor"><code class="docutils literal notranslate"><span class="pre">StreetExtractor</span></code></a><ul>
-<li><a class="reference internal" href="#sloyka.src.geocoder.street_extractor.StreetExtractor.extract_building_num"><code class="docutils literal notranslate"><span class="pre">StreetExtractor.extract_building_num()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.geocoder.street_extractor.StreetExtractor.extract_ner_street"><code class="docutils literal notranslate"><span class="pre">StreetExtractor.extract_ner_street()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.geocoder.street_extractor.StreetExtractor.extract_toponym"><code class="docutils literal notranslate"><span class="pre">StreetExtractor.extract_toponym()</span></code></a></li>
 <li><a class="reference internal" href="#sloyka.src.geocoder.street_extractor.StreetExtractor.extractor"><code class="docutils literal notranslate"><span class="pre">StreetExtractor.extractor</span></code></a></li>

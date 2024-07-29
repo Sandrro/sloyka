@@ -34,3 +34,9 @@ __all__ = [
 #     level="INFO",
 #     colorize=True,
 # )
+
+import os
+import sys
+
+folder = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(folder)

@@ -20,5 +20,11 @@ class ClassifierInitializationError(BaseError):
     pass
 
 
+class DataError(BaseError):
+    pass
+
+class ConectionError(BaseError):
+    pass
+
 class ClassificationError(BaseError):
     pass

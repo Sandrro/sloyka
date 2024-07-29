@@ -3,7 +3,7 @@
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="OtherGeoObjects" href="OtherGeoObjects.html" /><link rel="prev" title="Geo-objects finder" href="geocoder.html" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="OtherGeoObjects" href="OtherGeoObjects.html" /><link rel="prev" title="Geocoding" href="geocoder.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
         <title>Geocoder - sloyka 0.1.0 documentation</title>
@@ -215,15 +215,21 @@
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
-  <p class="caption" role="heading"><span class="caption-text">About:</span></p>
+  <p class="caption" role="heading"><span class="caption-text">General:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../about/introduction.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../about/installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about/pipeline.html">Main pipeline</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Receiving:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="data_getter.html">Data getter</a></li>
-<li class="toctree-l1 current has-children"><a class="reference internal" href="geocoder.html">Geo-objects finder</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Geo-objects finder</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="data_getter.html">Data getter</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Data getter</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="VKParser.html">VKparser</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Streets.html">Streets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="GeoDataGetter.html">GeoDataGetter</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="geocoder.html">Geocoding</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Geocoding</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Geocoder</a></li>
 <li class="toctree-l2"><a class="reference internal" href="OtherGeoObjects.html">OtherGeoObjects</a></li>
 <li class="toctree-l2"><a class="reference internal" href="StreetExtractor.html">StreetExtractor</a></li>
@@ -234,7 +240,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="city_services_extract.html">Services extraction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="emotion_classifier.html">Emotion classifier</a></li>
-<li class="toctree-l1"><a class="reference internal" href="emotion_classifier.html#example">Example</a></li>
 <li class="toctree-l1"><a class="reference internal" href="text_classifier.html">Text Classifier</a></li>
 <li class="toctree-l1"><a class="reference internal" href="topic_modeler.html">Topic Modelling</a></li>
 </ul>
@@ -247,6 +252,7 @@
 <p class="caption" role="heading"><span class="caption-text">Visualization:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="visualize_graph.html">Graph visualization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../404.html">Page Not Found</a></li>
 </ul>
 
 </div>
@@ -291,7 +297,7 @@
 <span id="geocoder-special"></span><h1>Geocoder<a class="headerlink" href="#geocoder" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="sloyka.src.geocoder.geocoder.Geocoder">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sloyka.src.geocoder.geocoder.</span></span><span class="sig-name descname"><span class="pre">Geocoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Geor111y/flair-ner-addresses-extractor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">osm_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">city_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'place':</span> <span class="pre">['state']}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/geocoder/geocoder.html#Geocoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.geocoder.Geocoder" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sloyka.src.geocoder.geocoder.</span></span><span class="sig-name descname"><span class="pre">Geocoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'Geor111y/flair-ner-addresses-extractor'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">device</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'cpu'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">osm_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">city_tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'place':</span> <span class="pre">['state']}</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/geocoder/geocoder.html#Geocoder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.geocoder.Geocoder" title="Link to this definition">¶</a></dt>
 <dd><p>This class provides a functionality of simple geocoder</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.geocoder.geocoder.Geocoder.assign_street">
@@ -306,7 +312,7 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="sloyka.src.geocoder.geocoder.Geocoder.dir_path">
-<span class="sig-name descname"><span class="pre">dir_path</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'C:\\Users\\perisique\\AppData\\Roaming\\Python\\Python311\\site-packages\\sloyka\\src\\geocoder'</span></em><a class="headerlink" href="#sloyka.src.geocoder.geocoder.Geocoder.dir_path" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">dir_path</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'/Users/test/Documents/code/sloyka/sloyka/src/geocoder'</span></em><a class="headerlink" href="#sloyka.src.geocoder.geocoder.Geocoder.dir_path" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -428,7 +434,7 @@ removed, and the ‘area_stems’ column contains the stemmed names.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="sloyka.src.geocoder.geocoder.Geocoder.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'text'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'group_name'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_for_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/geocoder/geocoder.html#Geocoder.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.geocoder.Geocoder.run" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">DataFrame</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'text'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group_column</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'group_name'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_for_objects</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/geocoder/geocoder.html#Geocoder.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.geocoder.Geocoder.run" title="Link to this definition">¶</a></dt>
 <dd><p>Runs the data processing pipeline on the input DataFrame.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -463,7 +469,7 @@ contain any addresses according to the trained NER model).</p>
 
 </dd></dl>
 
-<p>Back to all <a class="reference internal" href="geocoder.html#geocoder"><span class="std std-ref">Geo-objects finder</span></a></p>
+<p>Back to all <a class="reference internal" href="geocoder.html#geocoder"><span class="std std-ref">Geocoding</span></a></p>
 </section>
 
         </article>
@@ -487,7 +493,7 @@ contain any addresses according to the trained NER model).</p>
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Geo-objects finder</div>
+                <div class="title">Geocoding</div>
                 
               </div>
             </a>

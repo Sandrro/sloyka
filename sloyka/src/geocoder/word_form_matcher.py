@@ -1,5 +1,4 @@
 import pandas as pd
-import numpy as np
 from typing import List, Optional
 from loguru import logger
 
@@ -45,7 +44,7 @@ class WordFormFinder:
         """
         try:
             search_val = row.get("Street")
-            search_toponym = row.get("Toponyms")
+            search_toponym = row.get("Toponyms", "")
             val_num = row.get("Numbers", "")
 
             if not search_val or pd.isna(search_val):
@@ -55,24 +54,25 @@ class WordFormFinder:
             for col in strts_df.columns[2:]:
                 matching_rows = self._find_matching_rows(strts_df, col, search_val, search_toponym)
 
-            if not matching_rows.empty:
-                full_streets = [self._format_full_address(street, val_num) for street in matching_rows["street"].values]
-                return {
-                    "full_street_name": ",".join(full_streets),
-                    "only_full_street_name": ",".join(matching_rows["street"].values)
-                }
+                if not matching_rows.empty:
+                    full_streets = [self._format_full_address(street, val_num) for street in matching_rows["street"].values]
+                    return {
+                        "full_street_name": ",".join(full_streets),
+                        "only_full_street_name": ",".join(matching_rows["street"].values)
+                    }
 
             # If no exact match found, check without toponym
-            if search_val in strts_df[col].values:
-                only_streets_full = strts_df.loc[strts_df[col] == search_val, "street"].values
-                full_streets = [self._format_full_address(street, val_num) for street in only_streets_full]
-                return {
-                    "full_street_name": ",".join(full_streets),
-                    "only_full_street_name": ",".join(only_streets_full)
-                }
-            else:
-                logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponyms')}'")
-                return {"full_street_name": None, "only_full_street_name": None}
+            for col in strts_df.columns[2:]:
+                if search_val in strts_df[col].values:
+                    only_streets_full = strts_df.loc[strts_df[col] == search_val, "street"].values
+                    full_streets = [self._format_full_address(street, val_num) for street in only_streets_full]
+                    return {
+                        "full_street_name": ";".join(full_streets),
+                        "only_full_street_name": ";".join(only_streets_full)
+                    }
+
+            logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponyms')}'")
+            return {"full_street_name": None, "only_full_street_name": None}
 
         except Exception as e:
             logger.warning(f"Error processing row with street '{row.get('Street')}' and toponym '{row.get('Toponyms')}': {e}")
@@ -129,27 +129,17 @@ class WordFormFinder:
         # Explode lists into rows and merge them back into the DataFrame
         merged_df.dropna(subset=["full_street_name", "only_full_street_name"], inplace=True)
 
-        merged_df["location_options"] = merged_df["full_street_name"].str.split(",")
-        merged_df["only_full_street_name"] = merged_df["only_full_street_name"].str.split(",")
+        merged_df["location_options"] = merged_df["full_street_name"].str.split(";")
+        merged_df["only_full_street_name"] = merged_df["only_full_street_name"].str.split(";")
 
         exploded_locations = merged_df["location_options"].explode().rename("addr_to_geocode")
         exploded_streets = merged_df["only_full_street_name"].explode().rename("only_full_street_name")
-        final_df = pd.concat([exploded_locations.to_frame(),exploded_streets.to_frame()], axis=1)
+        exploded_locations = exploded_locations.to_frame()
+        exploded_streets = exploded_streets.to_frame()
+        final_df = exploded_locations.join(exploded_streets)
 
         merged_df.drop(columns=["only_full_street_name"], inplace=True)
         final_df = merged_df.merge(final_df, left_index=True, right_index=True)
 
         return final_df
-
-# Example usage:
-# extractor = AddressExtractor(osm_city_name="Москва")
-# df = pd.DataFrame({"Street": ["Ленина", "Пушкина"], "Toponims": ["ул.", "пр."], "Numbers": ["12", "34"]})
-# strts_df = pd.DataFrame({
-#     "id": [1, 2],
-#     "osm_id": [1, 2],
-#     "name": ["Ленина", "Пушкина"],
-#     "toponim_name": ["ул.", "пр."],
-#     "street": ["улица Ленина", "проспект Пушкина"]
-# })
-# result = extractor.find_word_form(df, strts_df)
-# print(result)
+    

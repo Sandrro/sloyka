@@ -1,0 +1,1182 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d7" for="edge" attr.name="type" attr.type="string"/>
+<key id="d6" for="edge" attr.name="distance" attr.type="double"/>
+<key id="d5" for="node" attr.name="text_ids" attr.type="string"/>
+<key id="d4" for="node" attr.name="Lon" attr.type="float"/>
+<key id="d3" for="node" attr.name="Lat" attr.type="float"/>
+<key id="d2" for="node" attr.name="Location" attr.type="string"/>
+<key id="d1" for="node" attr.name="counts" attr.type="long"/>
+<key id="d0" for="node" attr.name="tag" attr.type="string"/>
+<graph edgedefault="directed"><node id="Гатчинская улица">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">2</data>
+  <data key="d2">Гатчинская улица, Петроградская сторона, Петровский округ, Санкт-Петербург, Северо-Западный федеральный округ, 197136, Россия</data>
+  <data key="d3">30.2976683</data>
+  <data key="d4">59.9627854</data>
+  <data key="d5">239824,216434</data>
+</node>
+<node id="банк">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="чехов">
+  <data key="d0">NOUN</data>
+  <data key="d1">3</data>
+</node>
+<node id="электричество">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Чкалова 25">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">25, улица Чкалова, Левашово, Санкт-Петербург, Северо-Западный федеральный округ, 194361, Россия</data>
+  <data key="d3">30.216043682655503</data>
+  <data key="d4">60.1006224</data>
+  <data key="d5">239533</data>
+</node>
+<node id="ремонт">
+  <data key="d0">NOUN</data>
+  <data key="d1">2</data>
+</node>
+<node id="улица Чкалова">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">4</data>
+  <data key="d2">улица Чкалова, Комарово, Санкт-Петербург, Северо-Западный федеральный округ, 197733, Россия</data>
+  <data key="d3">29.8146334</data>
+  <data key="d4">60.1912036</data>
+  <data key="d5">239480,239874,221832,200969</data>
+</node>
+<node id="водитель">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="чкалов">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="приорат">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="россия">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Крупской">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">улица Крупской, Смоленское, округ Невская застава, Санкт-Петербург, Северо-Западный федеральный округ, 192148, Россия</data>
+  <data key="d3">30.4147024</data>
+  <data key="d4">59.8868979</data>
+  <data key="d5">239434</data>
+</node>
+<node id="авария">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="переулок Нестерова">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">переулок Нестерова, Петроградская сторона, Введенский округ, Санкт-Петербург, Северо-Западный федеральный округ, 197198, Россия</data>
+  <data key="d3">30.2970859</data>
+  <data key="d4">59.9519121</data>
+  <data key="d5">230444</data>
+</node>
+<node id="маскарадный">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="котик">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Павловский мост">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Павловский мост, София, Пушкин, Санкт-Петербург, Северо-Западный федеральный округ, 196601, Россия</data>
+  <data key="d3">30.4086916</data>
+  <data key="d4">59.7135535</data>
+  <data key="d5">230201</data>
+</node>
+<node id="квартира">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Щербакова">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">2</data>
+  <data key="d2">улица Щербакова, Коломяги, округ Коломяги, Санкт-Петербург, Северо-Западный федеральный округ, 197375, Россия</data>
+  <data key="d3">30.2988277</data>
+  <data key="d4">60.0286843</data>
+  <data key="d5">230175,229859</data>
+</node>
+<node id="благодарить">
+  <data key="d0">INFN</data>
+  <data key="d1">2</data>
+</node>
+<node id="щербаков">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Гатчинское шоссе">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Гатчинское шоссе, Дудергоф, Красное Село, Санкт-Петербург, Северо-Западный федеральный округ, 198320, Россия</data>
+  <data key="d3">30.0998275</data>
+  <data key="d4">59.7001189</data>
+  <data key="d5">221784</data>
+</node>
+<node id="дорожник">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Ленинградская улица 23ю">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Ленинградская улица, Торики, округ Горелово, Санкт-Петербург, Северо-Западный федеральный округ, 198323, Россия</data>
+  <data key="d3">30.1139748</data>
+  <data key="d4">59.7852698</data>
+  <data key="d5">216634</data>
+</node>
+<node id="подсчёт">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="бензин">
+  <data key="d0">NOUN</data>
+  <data key="d1">2</data>
+</node>
+<node id="Балканская площадь д5">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Балканская площадь, Балканский округ, Санкт-Петербург, Северо-Западный федеральный округ, Россия</data>
+  <data key="d3">30.379063021860834</data>
+  <data key="d4">59.82974255</data>
+  <data key="d5">216631</data>
+</node>
+<node id="мебель">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="набережная канала Грибоедова 4">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">2</data>
+  <data key="d2">набережная канала Грибоедова, Апраксин двор, округ № 78, Санкт-Петербург, Северо-Западный федеральный округ, 191186, Россия</data>
+  <data key="d3">30.3261045</data>
+  <data key="d4">59.9347866</data>
+  <data key="d5">216430,187733</data>
+</node>
+<node id="думать">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="догадаться">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="сам">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="почтовый">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Урицкого">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">улица Урицкого, Зверинец, Павловск, Санкт-Петербург, Северо-Западный федеральный округ, 196621, Россия</data>
+  <data key="d3">30.473161</data>
+  <data key="d4">59.6847071</data>
+  <data key="d5">210163</data>
+</node>
+<node id="телефон">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Чехова">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">улица Чехова, Нойдорф, Стрельна, Санкт-Петербург, Северо-Западный федеральный округ, 198515, Россия</data>
+  <data key="d3">30.0035758</data>
+  <data key="d4">59.8476477</data>
+  <data key="d5">210011</data>
+</node>
+<node id="красотища">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Сельская улица">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Сельская улица, Песочный, Дибуны, Песочный, Санкт-Петербург, Северо-Западный федеральный округ, 197758, Россия</data>
+  <data key="d3">30.1544067</data>
+  <data key="d4">60.1270657</data>
+  <data key="d5">209578</data>
+</node>
+<node id="электроэнергия">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Ленинградская улица 23">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">23, Ленинградская улица, Новая Деревня, Пушкин, Санкт-Петербург, Северо-Западный федеральный округ, 196608, Россия</data>
+  <data key="d3">30.420773845993786</data>
+  <data key="d4">59.72594375</data>
+  <data key="d5">200645</data>
+</node>
+<node id="красота">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="сияние">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Геологическая улица">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Геологическая улица, округ Горелово, Санкт-Петербург, Северо-Западный федеральный округ, 198320, Россия</data>
+  <data key="d3">30.0737574</data>
+  <data key="d4">59.7503283</data>
+  <data key="d5">200442</data>
+</node>
+<node id="век">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="килограмм">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="умереть">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="суд">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="зверство">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="проплатить">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="прочитать">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="забыть">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="наркосделка">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="проспект Авиаконструкторов">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">2</data>
+  <data key="d2">проспект Авиаконструкторов, округ Юнтолово, Санкт-Петербург, Северо-Западный федеральный округ, 197372, Россия</data>
+  <data key="d3">30.2412807</data>
+  <data key="d4">60.0148655</data>
+  <data key="d5">200218,200224</data>
+</node>
+<node id="потерпевший">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="задерживать">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="спрашивать">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="авиаконструктор">
+  <data key="d0">NOUN</data>
+  <data key="d1">2</data>
+</node>
+<node id="спб">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="последний">
+  <data key="d0">ADJF</data>
+  <data key="d1">2</data>
+</node>
+<node id="стул">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="видео">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="зверь">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="отправить">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="сторис">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="насилие">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="верблюд">
+  <data key="d0">NOUN</data>
+  <data key="d1">4</data>
+</node>
+<node id="жираф">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="война">
+  <data key="d0">NOUN</data>
+  <data key="d1">3</data>
+</node>
+<node id="твояфизиономия">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="электрошокер">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="полиция">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="клуб">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="подумать">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="лидировать">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="гатчинский">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="найти">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="алкоголь">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="соболезнование">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Красная улица">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Галерная улица, Адмиралтейский округ, Санкт-Петербург, Северо-Западный федеральный округ, 197000, Россия</data>
+  <data key="d3">30.2941101</data>
+  <data key="d4">59.9332567</data>
+  <data key="d5">200009</data>
+</node>
+<node id="охранник">
+  <data key="d0">NOUN</data>
+  <data key="d1">3</data>
+</node>
+<node id="знать">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="сказать">
+  <data key="d0">INFN</data>
+  <data key="d1">2</data>
+</node>
+<node id="бастрыкин">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="ублюдок">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="повреждение">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="пиздец">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="избивать">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="подвал">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="закрывать">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="бандит">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="гадюшникнуть">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="фронт">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="погибший">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="охрана">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="уебок">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="набережная канала Грибоедова 8">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Paulsen, 109/8, набережная канала Грибоедова, Адмиралтейский округ, Санкт-Петербург, Северо-Западный федеральный округ, 190068, Россия</data>
+  <data key="d3">30.3002638</data>
+  <data key="d4">59.9254698</data>
+  <data key="d5">188175</data>
+</node>
+<node id="выйти">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="набережная канала Грибоедова 25">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Тарелка, 25, набережная канала Грибоедова, Апраксин двор, округ № 78, Санкт-Петербург, Северо-Западный федеральный округ, 191186, Россия</data>
+  <data key="d3">30.32492</data>
+  <data key="d4">59.9328715</data>
+  <data key="d5">188092</data>
+</node>
+<node id="школа">
+  <data key="d0">NOUN</data>
+  <data key="d1">2</data>
+</node>
+<node id="зима">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Комендантский проспект д64">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Комендантский проспект, округ Юнтолово, Санкт-Петербург, Северо-Западный федеральный округ, 197350, Россия</data>
+  <data key="d3">30.2362599</data>
+  <data key="d4">60.0277123</data>
+  <data key="d5">187381</data>
+</node>
+<node id="новгородский">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="Парашютная улица">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Парашютная улица, Малая Каменка, округ Коломяги, Санкт-Петербург, Северо-Западный федеральный округ, 197350, Россия</data>
+  <data key="d3">30.2288037</data>
+  <data key="d4">60.0515057</data>
+  <data key="d5">239657</data>
+</node>
+<node id="мечеть">
+  <data key="d0">NOUN</data>
+  <data key="d1">2</data>
+</node>
+<node id="Каменноостровский проспект">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Каменноостровский проспект, Петроградская сторона, округ Кронверкское, Санкт-Петербург, Северо-Западный федеральный округ, 197101, Россия</data>
+  <data key="d3">30.315194</data>
+  <data key="d4">59.9619848</data>
+  <data key="d5">239673</data>
+</node>
+<node id="набережная канала Грибоедова 21">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">2</data>
+  <data key="d2">набережная канала Грибоедова, Коломна, округ Коломна, Санкт-Петербург, Северо-Западный федеральный округ, 190121, Россия</data>
+  <data key="d3">30.2869546</data>
+  <data key="d4">59.9202373</data>
+  <data key="d5">239861,188013</data>
+</node>
+<node id="средневековье">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="кошка">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Волхонский переулок">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Волхонский переулок, Сергиево, округ Константиновское, Санкт-Петербург, Северо-Западный федеральный округ, 198218, Россия</data>
+  <data key="d3">30.085925</data>
+  <data key="d4">59.8239629</data>
+  <data key="d5">239383</data>
+</node>
+<node id="кладбище">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="набережная канала Грибоедова 431">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">набережная канала Грибоедова, Апраксин двор, округ № 78, Санкт-Петербург, Северо-Западный федеральный округ, 191186, Россия</data>
+  <data key="d3">30.3261045</data>
+  <data key="d4">59.9347866</data>
+  <data key="d5">221882</data>
+</node>
+<node id="февраль">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="проспект Урицкого 29">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">29, проспект Урицкого, Левашово, Санкт-Петербург, Северо-Западный федеральный округ, 194361, Россия</data>
+  <data key="d3">30.20541065</data>
+  <data key="d4">60.10071835</data>
+  <data key="d5">221821</data>
+</node>
+<node id="район">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Балтийский проспект 110">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Балтийский проспект, Каупилово, Лисий Нос, Санкт-Петербург, Северо-Западный федеральный округ, 197755, Россия</data>
+  <data key="d3">29.9944873</data>
+  <data key="d4">60.0238798</data>
+  <data key="d5">221464</data>
+</node>
+<node id="татьянино">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="площадь Европы">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">площадь Европы, Морской, округ Морской, Санкт-Петербург, Северо-Западный федеральный округ, Россия</data>
+  <data key="d3">30.206700529712066</data>
+  <data key="d4">59.9370444</data>
+  <data key="d5">216392</data>
+</node>
+<node id="африка">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Карельский мост">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Карельский мост, Карельский переулок, Новая Деревня, округ Ланское, Санкт-Петербург, Северо-Западный федеральный округ, 197183, Россия</data>
+  <data key="d3">30.294000086773856</data>
+  <data key="d4">59.9898871</data>
+  <data key="d5">216425</data>
+</node>
+<node id="мусороперерабатывающий">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="Варшавский проезд">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">2</data>
+  <data key="d2">Варшавский проезд, округ Измайловское, Санкт-Петербург, Северо-Западный федеральный округ, 190005, Россия</data>
+  <data key="d3">30.3081992</data>
+  <data key="d4">59.9066624</data>
+  <data key="d5">210018,200337</data>
+</node>
+<node id="доехать">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Соборная улица">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Соборная улица, Балканы, Колпино, Санкт-Петербург, Северо-Западный федеральный округ, 196653, Россия</data>
+  <data key="d3">30.5985436</data>
+  <data key="d4">59.757129</data>
+  <data key="d5">209571</data>
+</node>
+<node id="дворик">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="проспект Карла Маркса 9">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">9, проспект Карла Маркса, Левашово, Санкт-Петербург, Северо-Западный федеральный округ, 194361, Россия</data>
+  <data key="d3">30.216256</data>
+  <data key="d4">60.09974905</data>
+  <data key="d5">201363</data>
+</node>
+<node id="маркс">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Красноармейский переулок">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Красноармейский переулок, Просвещение, Петергоф, Санкт-Петербург, Северо-Западный федеральный округ, 198504, Россия</data>
+  <data key="d3">29.8526783</data>
+  <data key="d4">59.8941709</data>
+  <data key="d5">201058</data>
+</node>
+<node id="ленинградский">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Пушкина">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">улица Пушкина, Скачки, Красное Село, Санкт-Петербург, Северо-Западный федеральный округ, 198320, Россия</data>
+  <data key="d3">30.1100759</data>
+  <data key="d4">59.7577435</data>
+  <data key="d5">200415</data>
+</node>
+<node id="ветер">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="площадь Победы">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">площадь Победы, округ Пулковский меридиан, Санкт-Петербург, Северо-Западный федеральный округ, Россия</data>
+  <data key="d3">30.32177202420546</data>
+  <data key="d4">59.84294075</data>
+  <data key="d5">200057</data>
+</node>
+<node id="памятник">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="набережная канала Грибоедова 522">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">набережная канала Грибоедова, Апраксин двор, округ № 78, Санкт-Петербург, Северо-Западный федеральный округ, 191186, Россия</data>
+  <data key="d3">30.3261045</data>
+  <data key="d4">59.9347866</data>
+  <data key="d5">200297</data>
+</node>
+<node id="ходить">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="набережная канала Грибоедова 151">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">набережная канала Грибоедова, Апраксин двор, округ № 78, Санкт-Петербург, Северо-Западный федеральный округ, 191186, Россия</data>
+  <data key="d3">30.3261045</data>
+  <data key="d4">59.9347866</data>
+  <data key="d5">188275</data>
+</node>
+<node id="расписание">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<edge source="Гатчинская улица" target="банк">
+  <data key="d6">0.7102</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Гатчинская улица" target="чехов">
+  <data key="d6">0.6018</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Гатчинская улица" target="электричество">
+  <data key="d6">0.6161</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="чехов" target="красота">
+  <data key="d6">0.756725549697876</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="улица Чкалова 25" target="ремонт">
+  <data key="d6">0.6064</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Чкалова" target="водитель">
+  <data key="d6">0.627</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Чкалова" target="чкалов">
+  <data key="d6">0.8544</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Чкалова" target="приорат">
+  <data key="d6">0.8358</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Чкалова" target="россия">
+  <data key="d6">0.7032</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="водитель" target="авария">
+  <data key="d6">0.7609816193580627</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="улица Крупской" target="авария">
+  <data key="d6">0.6237</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="авария" target="водитель">
+  <data key="d6">0.7609816193580627</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="переулок Нестерова" target="маскарадный">
+  <data key="d6">0.7733</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="переулок Нестерова" target="котик">
+  <data key="d6">0.7179</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Павловский мост" target="квартира">
+  <data key="d6">0.6269</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Щербакова" target="благодарить">
+  <data key="d6">0.8156</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="улица Щербакова" target="щербаков">
+  <data key="d6">0.636</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Гатчинское шоссе" target="дорожник">
+  <data key="d6">0.6773</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Ленинградская улица 23ю" target="подсчёт">
+  <data key="d6">0.6024</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Ленинградская улица 23ю" target="бензин">
+  <data key="d6">0.6266</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="бензин" target="мебель">
+  <data key="d6">0.7643463015556335</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="бензин" target="телефон">
+  <data key="d6">0.7652198076248169</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="Балканская площадь д5" target="мебель">
+  <data key="d6">0.6536</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="мебель" target="бензин">
+  <data key="d6">0.7643463015556335</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="мебель" target="суд">
+  <data key="d6">0.7691755890846252</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="набережная канала Грибоедова 4" target="думать">
+  <data key="d6">0.6595</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="набережная канала Грибоедова 4" target="догадаться">
+  <data key="d6">0.6112</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="набережная канала Грибоедова 4" target="сам">
+  <data key="d6">0.8703</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="набережная канала Грибоедова 4" target="почтовый">
+  <data key="d6">0.6456</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="улица Урицкого" target="телефон">
+  <data key="d6">0.6826</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="телефон" target="бензин">
+  <data key="d6">0.7652198076248169</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="улица Чехова" target="чехов">
+  <data key="d6">0.7512</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Чехова" target="красотища">
+  <data key="d6">0.9027</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Сельская улица" target="электроэнергия">
+  <data key="d6">0.7143</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Ленинградская улица 23" target="красота">
+  <data key="d6">0.8312</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Ленинградская улица 23" target="сияние">
+  <data key="d6">0.6903</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="красота" target="забыть">
+  <data key="d6">0.7772195935249329</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="красота" target="чехов">
+  <data key="d6">0.756725549697876</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="Геологическая улица" target="век">
+  <data key="d6">0.8308</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Геологическая улица" target="килограмм">
+  <data key="d6">0.7786</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Геологическая улица" target="умереть">
+  <data key="d6">0.6749</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Геологическая улица" target="суд">
+  <data key="d6">0.6426</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Геологическая улица" target="зверство">
+  <data key="d6">0.6533</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Геологическая улица" target="проплатить">
+  <data key="d6">0.6274</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Геологическая улица" target="прочитать">
+  <data key="d6">0.7106</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Геологическая улица" target="забыть">
+  <data key="d6">0.6624</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Геологическая улица" target="наркосделка">
+  <data key="d6">0.6318</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="век" target="средневековье">
+  <data key="d6">0.7668315768241882</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="суд" target="мебель">
+  <data key="d6">0.7691755890846252</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="забыть" target="красота">
+  <data key="d6">0.7772195935249329</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="потерпевший">
+  <data key="d6">0.638</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="задерживать">
+  <data key="d6">0.6248</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="спрашивать">
+  <data key="d6">0.6253</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="авиаконструктор">
+  <data key="d6">0.8418</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="спб">
+  <data key="d6">0.8046</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="последний">
+  <data key="d6">0.6721</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="стул">
+  <data key="d6">0.8976</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="видео">
+  <data key="d6">0.673</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="зверь">
+  <data key="d6">1.0</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="отправить">
+  <data key="d6">0.711</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="сторис">
+  <data key="d6">0.8568</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="насилие">
+  <data key="d6">0.6657</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="верблюд">
+  <data key="d6">0.6166</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="жираф">
+  <data key="d6">0.9075</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="война">
+  <data key="d6">0.6917</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="твояфизиономия">
+  <data key="d6">0.6045</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="электрошокер">
+  <data key="d6">0.6007</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="полиция">
+  <data key="d6">0.7331</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="клуб">
+  <data key="d6">0.6768</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="подумать">
+  <data key="d6">0.6033</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="лидировать">
+  <data key="d6">0.7955</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="гатчинский">
+  <data key="d6">0.6948</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="найти">
+  <data key="d6">0.6601</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="алкоголь">
+  <data key="d6">0.7618</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Авиаконструкторов" target="соболезнование">
+  <data key="d6">0.6738</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="зверь" target="кошка">
+  <data key="d6">0.7714996933937073</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="Красная улица" target="охранник">
+  <data key="d6">0.7275</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Красная улица" target="знать">
+  <data key="d6">0.6897</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Красная улица" target="сказать">
+  <data key="d6">0.6399</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Красная улица" target="бастрыкин">
+  <data key="d6">0.8789</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Красная улица" target="ублюдок">
+  <data key="d6">0.9455</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Красная улица" target="повреждение">
+  <data key="d6">0.6671</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Красная улица" target="пиздец">
+  <data key="d6">0.7768</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Красная улица" target="избивать">
+  <data key="d6">0.745</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Красная улица" target="подвал">
+  <data key="d6">0.765</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Красная улица" target="закрывать">
+  <data key="d6">0.6412</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Красная улица" target="бандит">
+  <data key="d6">0.6366</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Красная улица" target="гадюшникнуть">
+  <data key="d6">0.6348</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Красная улица" target="фронт">
+  <data key="d6">0.8554</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Красная улица" target="погибший">
+  <data key="d6">0.6032</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="Красная улица" target="охрана">
+  <data key="d6">0.6762</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Красная улица" target="уебок">
+  <data key="d6">1.0</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="охранник" target="охрана">
+  <data key="d6">0.7548418641090393</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="охрана" target="охранник">
+  <data key="d6">0.7548418641090393</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="набережная канала Грибоедова 8" target="выйти">
+  <data key="d6">0.6792</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="набережная канала Грибоедова 25" target="школа">
+  <data key="d6">0.6843</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="набережная канала Грибоедова 25" target="зима">
+  <data key="d6">0.7169</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Комендантский проспект д64" target="новгородский">
+  <data key="d6">0.6097</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="Парашютная улица" target="мечеть">
+  <data key="d6">0.6831</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Каменноостровский проспект" target="мечеть">
+  <data key="d6">0.7471</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="набережная канала Грибоедова 21" target="средневековье">
+  <data key="d6">0.7443</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="набережная канала Грибоедова 21" target="кошка">
+  <data key="d6">0.6995</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="средневековье" target="век">
+  <data key="d6">0.7668315768241882</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="кошка" target="зверь">
+  <data key="d6">0.7714996933937073</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="Волхонский переулок" target="кладбище">
+  <data key="d6">0.6859</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="набережная канала Грибоедова 431" target="февраль">
+  <data key="d6">0.6945</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Урицкого 29" target="район">
+  <data key="d6">0.6363</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Балтийский проспект 110" target="татьянино">
+  <data key="d6">0.6707</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="площадь Европы" target="африка">
+  <data key="d6">0.6416</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Карельский мост" target="мусороперерабатывающий">
+  <data key="d6">0.6278</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="Варшавский проезд" target="чехов">
+  <data key="d6">0.7512</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Варшавский проезд" target="доехать">
+  <data key="d6">0.6519</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Соборная улица" target="дворик">
+  <data key="d6">0.6497</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="проспект Карла Маркса 9" target="маркс">
+  <data key="d6">0.875</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Красноармейский переулок" target="ленинградский">
+  <data key="d6">0.7151</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="улица Пушкина" target="ветер">
+  <data key="d6">0.6583</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="площадь Победы" target="памятник">
+  <data key="d6">0.6497</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="набережная канала Грибоедова 522" target="ходить">
+  <data key="d6">0.6183</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="набережная канала Грибоедова 151" target="расписание">
+  <data key="d6">0.778</data>
+  <data key="d7">содержит</data>
+</edge>
+</graph></graphml>

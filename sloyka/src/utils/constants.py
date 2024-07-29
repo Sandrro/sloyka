@@ -3,6 +3,11 @@ END_INDEX_POSITION: int = 4
 START_INDEX_POSITION: int = 3
 SCORE_THRESHOLD = 0.7
 
+TOPONYM_PATTERN = r"путепровод|улица|набережная реки|проспект"\
+            r"|бульвар|мост|переулок|площадь|переулок"\
+            r"|набережная|канала|канал|дорога на|дорога в"\
+            r"|шоссе|аллея|проезд|линия"
+
 TARGET_TOPONYMS = [
     "пр",
     "проспект",
@@ -35,7 +40,6 @@ REPLACEMENT_DICT = {
 
 GLOBAL_CRS = 4326
 GLOBAL_METRIC_CRS = 3857
-GLOBAL_EPSG = "EPSG:4326"
 
 OSM_TAGS = {
     "subway": ["yes"],

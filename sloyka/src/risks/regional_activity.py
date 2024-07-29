@@ -415,18 +415,3 @@ class RegionalActivity:
                     continue
 
         return neg, pos
-
-
-if __name__ == "__main__":
-    df = pd.read_csv(
-        r"C:\Projects\ITMO\sloyka\sloyka\sample_data\tvoygorod34.csv",
-        sep=";",
-    )[:100]
-
-    print(len(df))
-
-    ra = RegionalActivity(data=df, osm_id=3374767, text_column="text")
-
-    print(ra.processed_geodata["Location"], ra.processed_geodata["City_services"])
-    res = gpd.GeoDataFrame(ra.get_risks(), geometry="geometry")
-    res.to_file(r"C:\Projects\ITMO\sloyka\sloyka\sample_data\regional_activity.geojson")

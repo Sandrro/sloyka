@@ -37,7 +37,7 @@ from ..utils.data_preprocessing.preprocessor import (
     clean_from_links,
 )
 
-nltk.download("stopwords")
+
 
 
 from sloyka.src.utils.constants import TAG_ROUTER
@@ -63,6 +63,7 @@ class Semgraph:
         self.tokenizer = BertTokenizer.from_pretrained(bert_name)
         self.model_name = bert_name
         self.model = BertModel.from_pretrained(bert_name).to(device)
+
 
     @staticmethod
     def convert_df_to_edge_df(
@@ -135,6 +136,7 @@ class Semgraph:
         data = clean_from_links(data, text_column)
 
         extracted = extract_keywords(
+            self,
             data,
             text_column,
             text_type_column,
@@ -152,7 +154,7 @@ class Semgraph:
 
         preprocessed_df = self.convert_df_to_edge_df(data=df, toponym_column=toponym_column)
 
-        words_df = get_semantic_closeness(preprocessed_df, "TO", semantic_score_filter)
+        words_df = get_semantic_closeness(self, preprocessed_df, "TO", semantic_score_filter)
 
         graph_df = pd.concat([preprocessed_df, words_df], ignore_index=True)
         if directed:
@@ -256,43 +258,3 @@ class Semgraph:
                 joined_G.nodes[i]["total_counts"] = G.nodes[i][counts_attribute] + new_G.nodes[i]["counts"]
 
         return joined_G
-
-
-# debugging
-# if __name__ == '__main__':
-#     file = open("C:\\Users\\thebe\\Downloads\\test.geojson", encoding='utf-8')
-#     test_gdf = gpd.read_file(file)
-#
-#     sm = Semgraph()
-#
-#     G = sm.build_graph(test_gdf[:3000],
-#                        id_column='id',
-#                        text_column='text',
-#                        text_type_column='type',
-#                        toponym_column='only_full_street_name_numbers',
-#                        toponym_name_column='initial_street',
-#                        toponym_type_column='Toponims',
-#                        post_id_column='post_id',
-#                        parents_stack_column='parents_stack',
-#                        location_column='Location',
-#                        geometry_column='geometry')
-#
-#     # print(len(G.nodes))
-#     #
-#     # G = sm.update_graph(G,
-#     #                     test_gdf[3000:],
-#     #                     id_column='id',
-#     #                     text_column='text',
-#     #                     text_type_column='type',
-#     #                     toponym_column='only_full_street_name',
-#     #                     toponym_name_column='initial_street',
-#     #                     toponym_type_column='Toponims',
-#     #                     post_id_column='post_id',
-#     #                     parents_stack_column='parents_stack',
-#     #                     counts_attribute='counts',
-#     #                     location_column='Location',
-#     #                     geometry_column='geometry')
-#     #
-#     # print(len(G.nodes))
-#     #
-#     # nx.write_graphml(G, 'name.graphml', encoding='utf-8')

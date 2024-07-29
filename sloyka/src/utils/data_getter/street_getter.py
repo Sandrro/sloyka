@@ -1,18 +1,12 @@
-# streets.py
-
 import re
-import requests
-import osm2geojson
 import geopandas as gpd
-import networkx as nx
 import pandas as pd
-import osmnx as ox
 
 import warnings
 
 from sloyka.src.utils.data_getter.geo_data_getter import GeoDataGetter as dg
-from sloyka.src.utils.data_preprocessing import preprocessor as pp 
-
+from sloyka.src.utils.data_preprocessing import preprocessor as pp
+from sloyka.src.utils.constants import TOPONYM_PATTERN
 
 warnings.simplefilter("ignore")
 warnings.filterwarnings("ignore", category=DeprecationWarning)
@@ -29,8 +23,6 @@ class Streets:
     for a specified city from OSM and processing it to extract useful
     information for geocoding purposes.
     """
-
-    global_crs: int = 4326
 
     @staticmethod
     def get_street_names(gdf: gpd.GeoDataFrame) -> pd.DataFrame:
@@ -57,10 +49,7 @@ class Streets:
         """
         # Streets.logger.debug(f"Finding toponim words in {x}")
         pattern = re.compile(
-            r"путепровод|улица|набережная реки|проспект"
-            r"|бульвар|мост|переулок|площадь|переулок"
-            r"|набережная|канала|канал|дорога на|дорога в"
-            r"|шоссе|аллея|проезд|линия",
+            TOPONYM_PATTERN,
             re.IGNORECASE,
         )
 
@@ -80,10 +69,7 @@ class Streets:
         # Streets.logger.debug(f"Dropping words from {x}")
         try:
             lst = re.split(
-                r"путепровод|улица|набережная реки|проспект"
-                r"|бульвар|мост|переулок|площадь|переулок"
-                r"|набережная|канала|канал|дорога на|дорога в"
-                r"|шоссе|аллея|проезд|линия",
+                TOPONYM_PATTERN,
                 x,
             )
             lst.remove("")
