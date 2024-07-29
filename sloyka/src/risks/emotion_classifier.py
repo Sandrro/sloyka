@@ -34,8 +34,8 @@ class EmotionRecognizer:
     - text_column: The name of the column containing the text to be analyzed.
     """
 
-    def __init__(self, model_name=HuggingFaceModel.Text.Bert_Large, device=None):
-        self.device = device if device is not None else ("cuda" if torch.cuda.is_available() else "cpu")
+    def __init__(self, model_name=HuggingFaceModel.Text.Bert_Large, device='cpu'):
+        self.device = device
         self.model_name = model_name
 
         # Define the default model names to avoid repeated initialization
@@ -46,12 +46,17 @@ class EmotionRecognizer:
             HuggingFaceModel.Text.Bert_Tiny2,
         ]
 
+        self.recognizer = None
+
+    def init_base_recognizer(self):
+        self.recognizer = TextRecognizer(model=self.model_name, device=self.device)
+
+
     def recognize_emotion(self, text):
         """
         Return the emotion for a given text.
         """
-        recognizer = TextRecognizer(model=self.model_name, device=self.device)
-        emotion = recognizer.recognize(text, return_single_label=True)
+        emotion = self.recognizer.recognize(text, return_single_label=True)
         return emotion
 
     def recognize_average_emotion_from_multiple_models(self, df, text_column, models=None, average=True):

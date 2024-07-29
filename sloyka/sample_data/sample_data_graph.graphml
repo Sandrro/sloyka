@@ -1,0 +1,842 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d7" for="edge" attr.name="type" attr.type="string"/>
+<key id="d6" for="edge" attr.name="distance" attr.type="double"/>
+<key id="d5" for="node" attr.name="text_ids" attr.type="string"/>
+<key id="d4" for="node" attr.name="Lon" attr.type="float"/>
+<key id="d3" for="node" attr.name="Lat" attr.type="float"/>
+<key id="d2" for="node" attr.name="Location" attr.type="string"/>
+<key id="d1" for="node" attr.name="counts" attr.type="long"/>
+<key id="d0" for="node" attr.name="tag" attr.type="string"/>
+<graph edgedefault="directed"><node id="набережная реки Мойки  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">набережная реки Мойки, Коломна, округ Коломна, Санкт-Петербург, Северо-Западный федеральный округ, 190121, Россия</data>
+  <data key="d3">30.2792947</data>
+  <data key="d4">59.9271166</data>
+  <data key="d5">0</data>
+</node>
+<node id="консульский">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Рубинштейна  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">2</data>
+  <data key="d2">улица Рубинштейна, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191002, Россия</data>
+  <data key="d3">30.3435599</data>
+  <data key="d4">59.9282916</data>
+  <data key="d5">1,168</data>
+</node>
+<node id="фасад">
+  <data key="d0">NOUN</data>
+  <data key="d1">2</data>
+</node>
+<node id="уборка">
+  <data key="d0">NOUN</data>
+  <data key="d1">2</data>
+</node>
+<node id="Фурштатская улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">4</data>
+  <data key="d2">Фурштатская улица, Литейный округ, Санкт-Петербург, Северо-Западный федеральный округ, 191028, Россия</data>
+  <data key="d3">30.3489868</data>
+  <data key="d4">59.9453899</data>
+  <data key="d5">2,3,4,5</data>
+</node>
+<node id="штукатурный">
+  <data key="d0">ADJF</data>
+  <data key="d1">3</data>
+</node>
+<node id="проспект Бакунина  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">проспект Бакунина, Пески, округ Смольнинское, Санкт-Петербург, Северо-Западный федеральный округ, 191144, Россия</data>
+  <data key="d3">30.3894438</data>
+  <data key="d4">59.931434</data>
+  <data key="d5">22</data>
+</node>
+<node id="перекупной">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="Лиговский проспект 44 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Комедианты, 44, Лиговский проспект, округ Лиговка-Ямская, Санкт-Петербург, Северо-Западный федеральный округ, 191025, Россия</data>
+  <data key="d3">30.358565</data>
+  <data key="d4">59.9262409</data>
+  <data key="d5">23</data>
+</node>
+<node id="просить">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Коломенская улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">2</data>
+  <data key="d2">Коломенская улица, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191102, Россия</data>
+  <data key="d3">30.3544819</data>
+  <data key="d4">59.9253153</data>
+  <data key="d5">28,31</data>
+</node>
+<node id="мрак">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="снег">
+  <data key="d0">NOUN</data>
+  <data key="d1">12</data>
+</node>
+<node id="улица Марата 44 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">2</data>
+  <data key="d2">44, улица Марата, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191040, Россия</data>
+  <data key="d3">30.352218263378</data>
+  <data key="d4">59.9246706</data>
+  <data key="d5">30,56</data>
+</node>
+<node id="крыша">
+  <data key="d0">NOUN</data>
+  <data key="d1">2</data>
+</node>
+<node id="улица Грибоедова 22 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">улица Грибоедова, Нойдорф, Стрельна, Санкт-Петербург, Северо-Западный федеральный округ, 198515, Россия</data>
+  <data key="d3">30.0052411</data>
+  <data key="d4">59.8526888</data>
+  <data key="d5">37</data>
+</node>
+<node id="мусор">
+  <data key="d0">NOUN</data>
+  <data key="d1">4</data>
+</node>
+<node id="улица Ломоносова  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">улица Ломоносова, Горелово, округ Горелово, Санкт-Петербург, Северо-Западный федеральный округ, 188508, Россия</data>
+  <data key="d3">30.1323729</data>
+  <data key="d4">59.7641582</data>
+  <data key="d5">41</data>
+</node>
+<node id="двор">
+  <data key="d0">NOUN</data>
+  <data key="d1">2</data>
+</node>
+<node id="улица Рубинштейна 26 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">13-78, 26, улица Рубинштейна, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191002, Россия</data>
+  <data key="d3">30.34502787130291</data>
+  <data key="d4">59.929095700000005</data>
+  <data key="d5">46</data>
+</node>
+<node id="улица Достоевского  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">2</data>
+  <data key="d2">улица Достоевского, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191126, Россия</data>
+  <data key="d3">30.3459641</data>
+  <data key="d4">59.9229365</data>
+  <data key="d5">47,135</data>
+</node>
+<node id="помойка">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="мусорный">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Марата  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">2</data>
+  <data key="d2">улица Марата, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191126, Россия</data>
+  <data key="d3">30.3464552</data>
+  <data key="d4">59.9216938</data>
+  <data key="d5">48,99</data>
+</node>
+<node id="Пушкинская улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Пушкинская улица, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191040, Россия</data>
+  <data key="d3">30.3568124</data>
+  <data key="d4">59.9292534</data>
+  <data key="d5">49</data>
+</node>
+<node id="грязный">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Марата 4! Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">4, улица Марата, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191025, Россия</data>
+  <data key="d3">30.355505995013612</data>
+  <data key="d4">59.930835450000004</data>
+  <data key="d5">50</data>
+</node>
+<node id="марат">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Свечной переулок 27. Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Дикси, 27, Свечной переулок, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191119, Россия</data>
+  <data key="d3">30.3558338</data>
+  <data key="d4">59.9236439</data>
+  <data key="d5">51</data>
+</node>
+<node id="снегопад">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Загородный проспект  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Загородный проспект, округ Семёновский, Санкт-Петербург, Северо-Западный федеральный округ, 191180, Россия</data>
+  <data key="d3">30.335143</data>
+  <data key="d4">59.9231496</data>
+  <data key="d5">52</data>
+</node>
+<node id="улица Пестеля 12 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">12, улица Пестеля, Литейный округ, Санкт-Петербург, Северо-Западный федеральный округ, 191028, Россия</data>
+  <data key="d3">30.3456203</data>
+  <data key="d4">59.9428099</data>
+  <data key="d5">54</data>
+</node>
+<node id="Полтавская улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Полтавская улица, округ Лиговка-Ямская, Санкт-Петербург, Северо-Западный федеральный округ, 191036, Россия</data>
+  <data key="d3">30.3693501</data>
+  <data key="d4">59.9270115</data>
+  <data key="d5">58</data>
+</node>
+<node id="улица Рубинштейна 25 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">25, улица Рубинштейна, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191002, Россия</data>
+  <data key="d3">30.34272033311528</data>
+  <data key="d4">59.92755675</data>
+  <data key="d5">66</data>
+</node>
+<node id="модернизация">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Гороховая улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Гороховая улица, Апраксин двор, округ № 78, Санкт-Петербург, Северо-Западный федеральный округ, 190107, Россия</data>
+  <data key="d3">30.3129296</data>
+  <data key="d4">59.9346021</data>
+  <data key="d5">68</data>
+</node>
+<node id="парковаться">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Фурштатская улица 26 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Сырный сомелье, 26, Фурштатская улица, Литейный округ, Санкт-Петербург, Северо-Западный федеральный округ, 191123, Россия</data>
+  <data key="d3">30.3562442</data>
+  <data key="d4">59.9453935</data>
+  <data key="d5">71</data>
+</node>
+<node id="трактор">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Разъезжая улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Разъезжая улица, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191126, Россия</data>
+  <data key="d3">30.349025</data>
+  <data key="d4">59.923457</data>
+  <data key="d5">72</data>
+</node>
+<node id="улица Маяковского 21, Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">21/1, Павловское шоссе, Павловск-2, Пушкин, Санкт-Петербург, Северо-Западный федеральный округ, 196602, Россия</data>
+  <data key="d3">30.41503876174179</data>
+  <data key="d4">59.70769485</data>
+  <data key="d5">79</data>
+</node>
+<node id="Роменская улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Роменская улица, округ Лиговка-Ямская, Санкт-Петербург, Северо-Западный федеральный округ, 191119, Россия</data>
+  <data key="d3">30.3579171</data>
+  <data key="d4">59.9186481</data>
+  <data key="d5">80</data>
+</node>
+<node id="парковка">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Гагаринская улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Гагаринская улица, Литейный округ, Санкт-Петербург, Северо-Западный федеральный округ, 191187, Россия</data>
+  <data key="d3">30.3429066</data>
+  <data key="d4">59.9446258</data>
+  <data key="d5">85</data>
+</node>
+<node id="гагаринский">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="Днепропетровская улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Днепропетровская улица, Волково, округ Волковское, Санкт-Петербург, Северо-Западный федеральный округ, 192007, Россия</data>
+  <data key="d3">30.3595235</data>
+  <data key="d4">59.9137551</data>
+  <data key="d5">93</data>
+</node>
+<node id="Кузнечный переулок  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Кузнечный переулок, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191102, Россия</data>
+  <data key="d3">30.3555122</data>
+  <data key="d4">59.9269066</data>
+  <data key="d5">96</data>
+</node>
+<node id="Пушкинская улица 18. Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">18, Пушкинская улица, Горская, Сестрорецк, Санкт-Петербург, Северо-Западный федеральный округ, 197701, Россия</data>
+  <data key="d3">29.983351099999993</data>
+  <data key="d4">60.035821600000006</data>
+  <data key="d5">98</data>
+</node>
+<node id="улица Жуковского 36 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Евразия, 36, улица Жуковского, Пески, округ Смольнинское, Санкт-Петербург, Северо-Западный федеральный округ, 191000, Россия</data>
+  <data key="d3">30.3629079</data>
+  <data key="d4">59.9359161</data>
+  <data key="d5">100</data>
+</node>
+<node id="улица Маяковского  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">улица Маяковского, Сергиево, округ Константиновское, Санкт-Петербург, Северо-Западный федеральный округ, 198218, Россия</data>
+  <data key="d3">30.0810979</data>
+  <data key="d4">59.8314679</data>
+  <data key="d5">101</data>
+</node>
+<node id="лопата">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Загородный проспект 17. Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">17, Загородный проспект, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191002, Россия</data>
+  <data key="d3">30.338684816130446</data>
+  <data key="d4">59.9257042</data>
+  <data key="d5">105</data>
+</node>
+<node id="парадный">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="Исполкомская улица 5 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Doors, 5, Исполкомская улица, Пески, округ Смольнинское, Санкт-Петербург, Северо-Западный федеральный округ, 191167, Россия</data>
+  <data key="d3">30.3798228</data>
+  <data key="d4">59.9268181</data>
+  <data key="d5">108</data>
+</node>
+<node id="лёд">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Социалистическая улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Социалистическая улица, 3-е Парголово, Парголово, Санкт-Петербург, Северо-Западный федеральный округ, 194362, Россия</data>
+  <data key="d3">30.2652795</data>
+  <data key="d4">60.0833721</data>
+  <data key="d5">111</data>
+</node>
+<node id="конь">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Достоевского 9 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Кабинет-Портрет, 9, улица Достоевского, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191102, Россия</data>
+  <data key="d3">30.3493782</data>
+  <data key="d4">59.92596</data>
+  <data key="d5">113</data>
+</node>
+<node id="Новгородская улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Новгородская улица, Пески, округ Смольнинское, Санкт-Петербург, Северо-Западный федеральный округ, 191144, Россия</data>
+  <data key="d3">30.3842711</data>
+  <data key="d4">59.9339495</data>
+  <data key="d5">119</data>
+</node>
+<node id="новгородский">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="Кирочная улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Кирочная улица, Пески, округ Смольнинское, Санкт-Петербург, Северо-Западный федеральный округ, 191194, Россия</data>
+  <data key="d3">30.367103</data>
+  <data key="d4">59.9437782</data>
+  <data key="d5">121</data>
+</node>
+<node id="сквер">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Достоевского 5 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">5, улица Достоевского, Нойдорф, Стрельна, Санкт-Петербург, Северо-Западный федеральный округ, 198515, Россия</data>
+  <data key="d3">30.01535153364494</data>
+  <data key="d4">59.854865000000004</data>
+  <data key="d5">138</data>
+</node>
+<node id="достоевский">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Марата 14 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">14, улица Марата, Петро-Славянка, Санкт-Петербург, Северо-Западный федеральный округ, 196642, Россия</data>
+  <data key="d3">30.514466400000003</data>
+  <data key="d4">59.7993585</data>
+  <data key="d5">139</data>
+</node>
+<node id="улица Марата 18 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">РЕСО-Гарантия, 18, улица Марата, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191025, Россия</data>
+  <data key="d3">30.3539267</data>
+  <data key="d4">59.9284675</data>
+  <data key="d5">140</data>
+</node>
+<node id="Кузнечный переулок 10, Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">10, Кузнечный переулок, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191025, Россия</data>
+  <data key="d3">30.35134810199529</data>
+  <data key="d4">59.9276198</data>
+  <data key="d5">143</data>
+</node>
+<node id="улица Черняховского 16 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">16, улица Черняховского, округ Лиговка-Ямская, Санкт-Петербург, Северо-Западный федеральный округ, 191119, Россия</data>
+  <data key="d3">30.357187710022693</data>
+  <data key="d4">59.91834615</data>
+  <data key="d5">148</data>
+</node>
+<node id="черняховский">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="Лиговский переулок  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Лиговский переулок, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191025, Россия</data>
+  <data key="d3">30.3583602</data>
+  <data key="d4">59.9287082</data>
+  <data key="d5">151</data>
+</node>
+<node id="метро">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Рубинштейна 3. Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">3, улица Рубинштейна, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191025, Россия</data>
+  <data key="d3">30.34538323847577</data>
+  <data key="d4">59.9321865</data>
+  <data key="d5">154</data>
+</node>
+<node id="снежный">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="Тверская улица  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Тверская улица, Пески, округ Смольнинское, Санкт-Петербург, Северо-Западный федеральный округ, 193060, Россия</data>
+  <data key="d3">30.3783177</data>
+  <data key="d4">59.9469592</data>
+  <data key="d5">159</data>
+</node>
+<node id="теплоснабжение">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Солдатский переулок 5, Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Щукарь, 5, Солдатский переулок, Пески, округ Смольнинское, Санкт-Петербург, Северо-Западный федеральный округ, 191014, Россия</data>
+  <data key="d3">30.3621229</data>
+  <data key="d4">59.9364435</data>
+  <data key="d5">174</data>
+</node>
+<node id="нагреваться">
+  <data key="d0">INFN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Дегтярный переулок 22, Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">22, Дегтярный переулок, Пески, округ Смольнинское, Санкт-Петербург, Северо-Западный федеральный округ, 191015, Россия</data>
+  <data key="d3">30.380733659450627</data>
+  <data key="d4">59.9395708</data>
+  <data key="d5">178</data>
+</node>
+<node id="петербург">
+  <data key="d0">NOUN</data>
+  <data key="d1">2</data>
+</node>
+<node id="улица Восстания  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">улица Восстания, Кронштадт, Санкт-Петербург, Северо-Западный федеральный округ, 197760, Россия</data>
+  <data key="d3">29.7850475</data>
+  <data key="d4">59.9945073</data>
+  <data key="d5">181</data>
+</node>
+<node id="рекламный">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="улица Чайковского 24 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Курсы гражданской обороны Центрального района, 24, улица Чайковского, Литейный округ, Санкт-Петербург, Северо-Западный федеральный округ, 191123, Россия</data>
+  <data key="d3">30.3534517</data>
+  <data key="d4">59.9466867</data>
+  <data key="d5">185</data>
+</node>
+<node id="Лесной проспект  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Лесной проспект, Выборгская сторона, округ Сампсониевское, Санкт-Петербург, Северо-Западный федеральный округ, 194100, Россия</data>
+  <data key="d3">30.3450578</data>
+  <data key="d4">59.9781872</data>
+  <data key="d5">194</data>
+</node>
+<node id="троллейбус">
+  <data key="d0">NOUN</data>
+  <data key="d1">1</data>
+</node>
+<node id="Стремянная улица 1/6 Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">1/6, Стремянная улица, Владимирский округ, Санкт-Петербург, Северо-Западный федеральный округ, 191025, Россия</data>
+  <data key="d3">30.348654416994492</data>
+  <data key="d4">59.9311254</data>
+  <data key="d5">197</data>
+</node>
+<node id="дворовый">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<node id="Суворовский проспект  Санкт-Петербург Россия">
+  <data key="d0">TOPONYM</data>
+  <data key="d1">1</data>
+  <data key="d2">Суворовский проспект, Пески, округ Смольнинское, Санкт-Петербург, Северо-Западный федеральный округ, 193015, Россия</data>
+  <data key="d3">30.3818558</data>
+  <data key="d4">59.9420234</data>
+  <data key="d5">198</data>
+</node>
+<node id="советский">
+  <data key="d0">ADJF</data>
+  <data key="d1">1</data>
+</node>
+<edge source="набережная реки Мойки  Санкт-Петербург Россия" target="консульский">
+  <data key="d6">0.6475</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="улица Рубинштейна  Санкт-Петербург Россия" target="фасад">
+  <data key="d6">0.6336</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Рубинштейна  Санкт-Петербург Россия" target="уборка">
+  <data key="d6">0.6262</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Фурштатская улица  Санкт-Петербург Россия" target="штукатурный">
+  <data key="d6">0.8752</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="Фурштатская улица  Санкт-Петербург Россия" target="фасад">
+  <data key="d6">0.616</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="штукатурный" target="грязный">
+  <data key="d6">0.7682531476020813</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="проспект Бакунина  Санкт-Петербург Россия" target="перекупной">
+  <data key="d6">0.6095</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="Лиговский проспект 44 Санкт-Петербург Россия" target="просить">
+  <data key="d6">0.7207</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Коломенская улица  Санкт-Петербург Россия" target="мрак">
+  <data key="d6">0.6746</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Коломенская улица  Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.7167</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="снег" target="трактор">
+  <data key="d6">0.7826744318008423</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="снег" target="крыша">
+  <data key="d6">0.7692182064056396</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="снег" target="снегопад">
+  <data key="d6">0.8135702610015869</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="снег" target="мусор">
+  <data key="d6">0.7741389870643616</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="улица Марата 44 Санкт-Петербург Россия" target="крыша">
+  <data key="d6">0.619</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="крыша" target="снег">
+  <data key="d6">0.7692182064056396</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="улица Грибоедова 22 Санкт-Петербург Россия" target="мусор">
+  <data key="d6">0.7245</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="мусор" target="снег">
+  <data key="d6">0.7741389870643616</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="улица Ломоносова  Санкт-Петербург Россия" target="двор">
+  <data key="d6">0.6002</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Рубинштейна 26 Санкт-Петербург Россия" target="уборка">
+  <data key="d6">0.629</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Достоевского  Санкт-Петербург Россия" target="помойка">
+  <data key="d6">0.6433</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Достоевского  Санкт-Петербург Россия" target="мусорный">
+  <data key="d6">0.6539</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="улица Марата  Санкт-Петербург Россия" target="мусор">
+  <data key="d6">0.6322</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Марата  Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.6193</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Пушкинская улица  Санкт-Петербург Россия" target="грязный">
+  <data key="d6">0.6228</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="грязный" target="штукатурный">
+  <data key="d6">0.7682531476020813</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="улица Марата 4! Санкт-Петербург Россия" target="марат">
+  <data key="d6">0.8015</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Свечной переулок 27. Санкт-Петербург Россия" target="снегопад">
+  <data key="d6">0.6231</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="снегопад" target="снег">
+  <data key="d6">0.8135702610015869</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="Загородный проспект  Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.6135</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Пестеля 12 Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.7656</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Полтавская улица  Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.6374</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Рубинштейна 25 Санкт-Петербург Россия" target="модернизация">
+  <data key="d6">0.6023</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Гороховая улица  Санкт-Петербург Россия" target="парковаться">
+  <data key="d6">0.6996</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Фурштатская улица 26 Санкт-Петербург Россия" target="трактор">
+  <data key="d6">0.6535</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="трактор" target="снег">
+  <data key="d6">0.7826744318008423</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="Разъезжая улица  Санкт-Петербург Россия" target="мусор">
+  <data key="d6">0.613</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Маяковского 21, Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.6597</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Роменская улица  Санкт-Петербург Россия" target="парковка">
+  <data key="d6">0.6525</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Гагаринская улица  Санкт-Петербург Россия" target="гагаринский">
+  <data key="d6">0.9153</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="Днепропетровская улица  Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.6895</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Кузнечный переулок  Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.7006</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Пушкинская улица 18. Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.6203</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Жуковского 36 Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.6017</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Маяковского  Санкт-Петербург Россия" target="лопата">
+  <data key="d6">0.6342</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Загородный проспект 17. Санкт-Петербург Россия" target="парадный">
+  <data key="d6">0.6906</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="Исполкомская улица 5 Санкт-Петербург Россия" target="лёд">
+  <data key="d6">0.6375</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Социалистическая улица  Санкт-Петербург Россия" target="конь">
+  <data key="d6">0.63</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Достоевского 9 Санкт-Петербург Россия" target="двор">
+  <data key="d6">0.612</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Новгородская улица  Санкт-Петербург Россия" target="новгородский">
+  <data key="d6">0.7131</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="Кирочная улица  Санкт-Петербург Россия" target="сквер">
+  <data key="d6">0.684</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="сквер" target="петербург">
+  <data key="d6">0.7785663604736328</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="улица Достоевского 5 Санкт-Петербург Россия" target="достоевский">
+  <data key="d6">1.0</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Марата 14 Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.9555</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Марата 18 Санкт-Петербург Россия" target="мусор">
+  <data key="d6">0.7598</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Кузнечный переулок 10, Санкт-Петербург Россия" target="снег">
+  <data key="d6">0.6235</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Черняховского 16 Санкт-Петербург Россия" target="черняховский">
+  <data key="d6">0.7818</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="Лиговский переулок  Санкт-Петербург Россия" target="метро">
+  <data key="d6">0.6223</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="улица Рубинштейна 3. Санкт-Петербург Россия" target="снежный">
+  <data key="d6">0.6421</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="Тверская улица  Санкт-Петербург Россия" target="теплоснабжение">
+  <data key="d6">0.6524</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Солдатский переулок 5, Санкт-Петербург Россия" target="нагреваться">
+  <data key="d6">0.6174</data>
+  <data key="d7">активность</data>
+</edge>
+<edge source="Дегтярный переулок 22, Санкт-Петербург Россия" target="петербург">
+  <data key="d6">0.6345</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="петербург" target="сквер">
+  <data key="d6">0.7785663604736328</data>
+  <data key="d7">сходство</data>
+</edge>
+<edge source="улица Восстания  Санкт-Петербург Россия" target="рекламный">
+  <data key="d6">0.6186</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="улица Чайковского 24 Санкт-Петербург Россия" target="петербург">
+  <data key="d6">0.7381</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Лесной проспект  Санкт-Петербург Россия" target="троллейбус">
+  <data key="d6">0.6076</data>
+  <data key="d7">содержит</data>
+</edge>
+<edge source="Стремянная улица 1/6 Санкт-Петербург Россия" target="дворовый">
+  <data key="d6">0.6117</data>
+  <data key="d7">описание</data>
+</edge>
+<edge source="Суворовский проспект  Санкт-Петербург Россия" target="советский">
+  <data key="d6">0.6879</data>
+  <data key="d7">описание</data>
+</edge>
+</graph></graphml>

@@ -1,6 +1,7 @@
 import warnings
 warnings.filterwarnings("ignore")
 
+from contextlib import suppress
 import osmnx as ox
 import geopandas as gpd
 import pandas as pd
@@ -13,6 +14,8 @@ import requests
 import osm2geojson
 import networkx as nx
 from loguru import logger
+
+from sloyka.src.utils.exceptions import *
 
 class GeoDataGetter:
     """
@@ -40,7 +43,7 @@ class GeoDataGetter:
             df = df.loc[:, ["name", "geometry"] + list(tags.keys())]
             return df
         except Exception as e:
-            raise RuntimeError(f"Error retrieving OSM data for {osm_id_rel}: {e}")
+            raise ConectionError(f"Error retrieving OSM data for {osm_id_rel}: {e}")
 
     @staticmethod
     def get_city_bounds(osm_id: int) -> gpd.GeoDataFrame:
@@ -65,9 +68,9 @@ class GeoDataGetter:
             city_bounds = gpd.GeoDataFrame.from_features(resp["features"]).set_crs(GLOBAL_CRS)
             # Streets.logger.debug(f"City bounds retrieved: {city_bounds}")
             return city_bounds
-        except requests.exceptions.RequestException as e:
-            # Streets.logger.error(f"Error retrieving city bounds: {e}")
-            raise e
+        except requests.exceptions.RequestException as exc:
+            with suppress(ConectionError):
+                raise ConectionError(f'unable to get city bounds') from exc
 
     @staticmethod
     def get_features_from_id(
@@ -83,7 +86,8 @@ class GeoDataGetter:
             osm_id (int): The OpenStreetMap ID.
             tags (dict): The tags to filter by.
             osm_type (str, optional): The OpenStreetMap type. Defaults to "R".
-            selected_columns (list, optional): The selected columns to include in the result GeoDataFrame. Defaults to ['tag', 'element_type', 'osmid', 'name', 'geometry', 'centroid'].
+            selected_columns (list, optional): The selected columns to include in the result GeoDataFrame.
+            Defaults to ['tag', 'element_type', 'osmid', 'name', 'geometry', 'centroid'].
 
         Returns:
             gpd.GeoDataFrame: The GeoDataFrame containing the features.
@@ -140,16 +144,14 @@ class GeoDataGetter:
         each edge represents a street segment and each node represents
         an intersection.
         """
-        # Streets.logger.info("Retrieving drive graph")
+
         try:
             G_drive = ox.graph_from_polygon(city_bounds.dissolve()["geometry"].squeeze(), network_type="drive")
             logger.debug(f"Drive graph retrieved: {G_drive}")
-            return G_drive
-        except Exception as e:
-            logger.error(f"Error retrieving drive graph: {e}")
-            raise e
-
-    # def _handle_error(self, category, tag):
-    #     print(
-    #         f"\nFailed to export {category}-{tag}\nException Info:\n{chr(10).join([str(line) for line in sys.exc_info()])}"
-    #     )
+            if isinstance(G_drive, nx.Graph):
+                return G_drive
+            else:
+                raise AttributeError
+        except AttributeError as exc:
+            with suppress(ConectionError):
+                raise ConectionError(f"Error retrieving drive graph: {exc}") from exc

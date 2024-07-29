@@ -1,7 +1,6 @@
 from typing import List
 import re
 import pandas as pd
-import osmnx as ox
 from shapely.geometry import Point, Polygon, MultiPolygon
 from loguru import logger
 import pymorphy2
@@ -106,20 +105,23 @@ class OtherGeoObjects:
     @staticmethod
     def restoration_of_normal_form(other_geo_obj, osm_combined_df, threshold=0.7) -> List[str]:
         """
-        This function compares the extracted location entity with an OSM array and returns a normalized form if the percentage of similarity is at least 70%.
+        This function compares the extracted location entity with an OSM array
+        and returns a normalized form if the percentage of similarity is at least 70%.
         """
         osm_name_obj = osm_combined_df["name"].tolist()
         similarity_matrix = np.zeros((len(other_geo_obj), len(osm_name_obj)))
 
         def extract_numbers(s):
             return re.findall(r"\d+", s)
+        
+        percents = 100
 
         for i, word1 in enumerate(other_geo_obj):
             numbers_from_extraction = extract_numbers(word1)
             for j, word2 in enumerate(osm_name_obj):
                 numbers_from_OSM_name = extract_numbers(word2)
                 if numbers_from_extraction == numbers_from_OSM_name:
-                    similarity = fuzz.ratio(word1, word2) / 100.0
+                    similarity = fuzz.ratio(word1, word2) / percents
                 else:
                     similarity = 0
                 similarity_matrix[i, j] = similarity
@@ -135,9 +137,10 @@ class OtherGeoObjects:
         return restoration_list
 
     @staticmethod
-    def find_num_city_obj(text, NUM_CITY_OBJ) -> List[str]:
+    def find_num_city_obj(text) -> List[str]:
         """
-        This function searches for urban objects in the text, the names of which are represented as a number. For example, "school No. 6".
+        This function searches for urban objects in the text,
+        the names of which are represented as a number. For example, "school No. 6".
         """
         text = str(text)
         text = text.lower()
@@ -222,7 +225,7 @@ class OtherGeoObjects:
 
         df_obj["other_geo_obj"] = df_obj[text_column].apply(OtherGeoObjects.extract_geo_obj)
         df_obj["other_geo_obj_num"] = df_obj[text_column].apply(
-            lambda x: OtherGeoObjects.find_num_city_obj(x, NUM_CITY_OBJ)
+            lambda x: OtherGeoObjects.find_num_city_obj(x)
         )
         
         df_obj = OtherGeoObjects.combine_city_obj(df_obj)

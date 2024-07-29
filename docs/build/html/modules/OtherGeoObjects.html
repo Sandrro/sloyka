@@ -192,7 +192,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -287,7 +287,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -295,6 +295,36 @@
         <article role="main" id="furo-main-content">
           <section id="othergeoobjects">
 <span id="geo-objects"></span><h1>OtherGeoObjects<a class="headerlink" href="#othergeoobjects" title="Link to this heading">¶</a></h1>
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.get_and_process_osm_data">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">OtherGeoObjects.</span></span><span class="sig-name descname"><span class="pre">get_and_process_osm_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">osm_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/geocoder/city_objects_extractor.html#OtherGeoObjects.get_and_process_osm_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.get_and_process_osm_data" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves and processes OSM data for different urban objects.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.run_osm_dfs">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">OtherGeoObjects.</span></span><span class="sig-name descname"><span class="pre">run_osm_dfs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">osm_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">DataFrame</span></span></span><a class="reference internal" href="../_modules/sloyka/src/geocoder/city_objects_extractor.html#OtherGeoObjects.run_osm_dfs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.run_osm_dfs" title="Link to this definition">¶</a></dt>
+<dd><p>Collects dataframes with OSM spatial data, finds centroids and combines them into one.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.calculate_centroid">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">OtherGeoObjects.</span></span><span class="sig-name descname"><span class="pre">calculate_centroid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">geometry</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Point</span></span></span><a class="reference internal" href="../_modules/sloyka/src/geocoder/city_objects_extractor.html#OtherGeoObjects.calculate_centroid"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.calculate_centroid" title="Link to this definition">¶</a></dt>
+<dd><p>Calculates the centroid for polygons.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.extract_geo_obj">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">OtherGeoObjects.</span></span><span class="sig-name descname"><span class="pre">extract_geo_obj</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/sloyka/src/geocoder/city_objects_extractor.html#OtherGeoObjects.extract_geo_obj"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.extract_geo_obj" title="Link to this definition">¶</a></dt>
+<dd><p>The function extracts location entities from the text, using the Natasha library.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.restoration_of_normal_form">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">OtherGeoObjects.</span></span><span class="sig-name descname"><span class="pre">restoration_of_normal_form</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other_geo_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">osm_combined_df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.7</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../_modules/sloyka/src/geocoder/city_objects_extractor.html#OtherGeoObjects.restoration_of_normal_form"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.restoration_of_normal_form" title="Link to this definition">¶</a></dt>
+<dd><p>This function compares the extracted location entity with an OSM array and returns a normalized form if the percentage of similarity is at least 70%.</p>
+</dd></dl>
+
 </section>
 
         </article>
@@ -339,8 +369,31 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">OtherGeoObjects</a><ul>
+<li><a class="reference internal" href="#sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.get_and_process_osm_data"><code class="docutils literal notranslate"><span class="pre">OtherGeoObjects.get_and_process_osm_data()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.run_osm_dfs"><code class="docutils literal notranslate"><span class="pre">OtherGeoObjects.run_osm_dfs()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.calculate_centroid"><code class="docutils literal notranslate"><span class="pre">OtherGeoObjects.calculate_centroid()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.extract_geo_obj"><code class="docutils literal notranslate"><span class="pre">OtherGeoObjects.extract_geo_obj()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects.restoration_of_normal_form"><code class="docutils literal notranslate"><span class="pre">OtherGeoObjects.restoration_of_normal_form()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>

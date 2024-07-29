@@ -19,6 +19,7 @@ The TextClassifiers class has the following methods:
 @method:run_text_classifier: 
  Takes a text as input and returns the predicted categories and probabilities.
 """
+
 import pandas as pd
 from transformers import pipeline
 from sloyka.src.utils.exceptions import InvalidInputError, ClassifierInitializationError, ClassificationError
