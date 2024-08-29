@@ -97,7 +97,7 @@ def extract_keywords(
             texts_to_add = []
 
             for j, text in zip(ids_text_to_extract, texts_to_extract):
-                extraction = self.model.extract_keywords(text, top_n=top_n, stop_words=RUS_STOPWORDS)
+                extraction = KeyBERT().extract_keywords(docs=text, top_n=top_n, stop_words=RUS_STOPWORDS)
                 if extraction:
                     score = extraction[0][1]
                     if score > semantic_key_filter:
