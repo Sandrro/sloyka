@@ -1,44 +1,26 @@
-# import pandas as pd
+import geopandas as gpd
+import pytest
+from sloyka import Semgraph
 
-# from sloyka import Semgraph
+@pytest.fixture
+def sample_data():
+    gdf = gpd.read_parquet("sloyka\sample_data\sample_data_geocoded_emotioned.parquet")
+    gdf['type'] = 'post'
+    return gdf
 
 
-# sm = Semgraph()
-# test_df  = pd.read_feather("sloyka/sample_data/processed/df_strts.feather")[:20]
-# text_column='Текст комментария'
-# toponim_column='only_full_street_name'
-# toponim_name_column='initial_street'
-# toponim_type_column='Toponims'
-
-# def test_extract_keywords():
-#     result = sm.extract_keywords(test_df,
-#                                  text_column,
-#                                  toponim_column,
-#                                  toponim_name_column,
-#                                  toponim_type_column,
-#                                  semantic_key_filter=0.6,
-#                                  top_n=5)
-
-#     assert len(result) == 6
-
-# def test_get_semantic_closeness():
-#     df = pd.DataFrame([['TOPONIM_1', 'роза'], ['TOPONIM_2', 'куст']], columns=['toponims', 'words'])
-#     result = sm.get_semantic_closeness(df,
-#                                        column='words',
-#                                        similaryty_filter=0.5)
-
-#     check = round(float(result['SIMILARITY_SCORE'].iloc[0]), 3)
-
-#     assert check == round(0.655513, 3)
-
-# def test_build_semantic_graph():
-#     result = sm.build_semantic_graph(test_df,
-#                                      text_column,
-#                                      toponim_column,
-#                                      toponim_name_column,
-#                                      toponim_type_column,
-#                                      key_score_filter=0.4,
-#                                      semantic_score_filter=0.6,
-#                                      top_n=5)
+def test_build_semantic_graph(sample_data):
+    sm = Semgraph()
+    G = sm.build_graph(sample_data,
+                    id_column='message_id',
+                    text_column='Текст комментария',
+                    text_type_column="type",
+                    toponym_column='full_street_name',
+                    toponym_name_column='only_full_street_name',
+                    toponym_type_column='Toponyms',
+                    post_id_column="message_id",
+                    parents_stack_column="message_id",
+                    location_column='Location',
+                    geometry_column='geometry')
     
-#     assert len(result.edges) == 216
+    assert len(G.edges) == 88
