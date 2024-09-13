@@ -99,7 +99,7 @@ class RegionalActivity:
             .to_list()
         )
 
-        processed_geodata.dropna(subset=["text"], inplace=True)
+        processed_geodata.dropna(subset=[self.text], inplace=True)
         processed_geodata = City_services().run(
             df=processed_geodata, text_column=self.text
         )
