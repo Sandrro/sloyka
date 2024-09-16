@@ -1,7 +1,7 @@
 import pytest
 import torch
 import pandas as pd
-from sloyka import TextClassifiers
+from sloyka import EmotionRecognizer
 
 @pytest.fixture
 def sample_dataframe():
@@ -9,16 +9,12 @@ def sample_dataframe():
     204: 'Вся улица Жуковского и Восстания заклеена рекламой! Почему не действует полиция и администрация с ЖСК-1 ?'},
     'message_id': {203: 195, 204: 196}}
     return pd.DataFrame(s_data)
-
+    
 @pytest.fixture
 def model():
-    return TextClassifiers(
-        repository_id="Sandrro/text_to_function_v2",
-        number_of_categories=1,
-        device_type=torch.device("cpu"),
-    )
+    return EmotionRecognizer()
 
-def test_cats_probs(model, sample_dataframe):
-    sample_dataframe[["cats", "probs"]] = sample_dataframe["Текст комментария"].progress_map(lambda x: model.run_text_classifier(x)).to_list()
+def test_emotion_recognizer(model, sample_dataframe):
+    sample_dataframe["emotion"] = sample_dataframe["Текст комментария"].progress_map(lambda x: model.recognize_emotion(x))
     print(sample_dataframe)
-    assert sample_dataframe.iloc[0]["cats"] == "ЖКХ"
+    assert sample_dataframe.iloc[0]["emotion"] == "neutral"
