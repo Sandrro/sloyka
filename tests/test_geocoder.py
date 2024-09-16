@@ -6,18 +6,18 @@ from sloyka.src.geocoder.geocoder import Geocoder
 def sample_dataframe():
     s_data = {
         "text": [
-            "На биржевой 15 снова шумят!!"
+            "На рубинштейна 3 снова шумят!!"
         ]
     }
     return pd.DataFrame(s_data)
 
 
 def test_run_function(sample_dataframe):
-    instance = Geocoder(osm_id=337422, city_tags = { "place": ["state"] })
+    instance = Geocoder(df=sample_dataframe, osm_id=337422, city_tags = { "place": ["state"] }, text_column_name='text')
 
-    result_df = instance.run(df=sample_dataframe, group_column=None)
+    result_df = instance.run(group_column=None)
 
     print(result_df[['Street', 'Numbers']])
 
-    assert result_df.loc[0, "Street"] == "биржевой"
-    assert result_df.loc[0, "Numbers"] == "15"
+    assert result_df.loc[0, "Street"] == "рубинштейна"
+    assert result_df.loc[0, "Numbers"] == "3"
