@@ -2,29 +2,27 @@ name: Tests
 
 on:
   push:
-      branches:
-        - dev
+    branches:
+      - '**'  # Запускать при пуше в любую ветку
   pull_request:
-      branches:
-        - dev
+    branches:
+      - master
+      - dev
 
 jobs:
   test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.11]  # Define the Python versions you want to test
+        python-version: [3.11]
     steps:
       - name: Check disk usage
         run: df -h
-
-      # - name: Clean up disk space
-      #   run: sudo rm -rf /tmp/* /var/tmp/*
         
       - name: Check out repository
         uses: actions/checkout@v3
         with:
-            fetch-depth: 1
+          fetch-depth: 1
 
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
@@ -48,7 +46,7 @@ jobs:
           poetry install
 
       - name: Run tests
-        run: poetry run pytest  # Adjust according to your test framework
+        run: poetry run pytest
 
       - name: Clean up disk space
         run: sudo rm -rf /tmp/* /var/tmp/*
