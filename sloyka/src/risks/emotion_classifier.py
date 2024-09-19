@@ -34,7 +34,7 @@ class EmotionRecognizer:
     - text_column: The name of the column containing the text to be analyzed.
     """
 
-    def __init__(self, model_name=HuggingFaceModel.Text.Bert_Large, device='cpu'):
+    def __init__(self, model_name=HuggingFaceModel.Text.Bert_Tiny, device='cpu'):
         self.device = device
         self.model_name = model_name
 
@@ -46,10 +46,10 @@ class EmotionRecognizer:
             HuggingFaceModel.Text.Bert_Tiny2,
         ]
 
-        self.recognizer = None
-
-    def init_base_recognizer(self):
         self.recognizer = TextRecognizer(model=self.model_name, device=self.device)
+
+    #def init_base_recognizer(self):
+    #    self.recognizer = TextRecognizer(model=self.model_name, device=self.device)
 
 
     def recognize_emotion(self, text):
