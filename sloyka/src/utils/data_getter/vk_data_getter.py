@@ -244,11 +244,15 @@ class VKParser:
         for post_id in tqdm(post_ids):
             comments = VKParser().get_comments(owner_id, post_id, access_token)
             all_comments.extend(comments)
-        df = VKParser.comments_to_dataframe(all_comments)
-        df["type"] = "comment"
-        df = df.reset_index(drop=True)
-        print("comments downloaded")
-        return df
+        if len(all_comments) > 0:
+            df = VKParser.comments_to_dataframe(all_comments)
+            df["type"] = "comment"
+            df = df.reset_index(drop=True)
+            print("comments downloaded")
+            return df
+        else:
+            print("no comments")
+            return None
 
     @staticmethod
     def run_parser(domain, access_token, cutoff_date, number_of_messages=float("inf"), step=100):
@@ -267,17 +271,20 @@ class VKParser:
         post_ids = df_posts["id"].tolist()
 
         df_comments = VKParser.run_comments(domain=owner_id, post_ids=post_ids, access_token=access_token)
-        df_comments.loc[df_comments["parents_stack"].apply(lambda x: len(x) > 0), "type"] = "reply"
-        for i in range(len(df_comments)):
-            tmp = df_comments["parents_stack"].iloc[i]
-            if tmp is not None:
-                if len(tmp) > 0:
-                    df_comments["parents_stack"].iloc[i] = tmp[0]
-                else:
-                    df_comments["parents_stack"].iloc[i] = None
+        if df_comments is not None:
+            df_comments.loc[df_comments["parents_stack"].apply(lambda x: len(x) > 0), "type"] = "reply"
+            for i in range(len(df_comments)):
+                tmp = df_comments["parents_stack"].iloc[i]
+                if tmp is not None:
+                    if len(tmp) > 0:
+                        df_comments["parents_stack"].iloc[i] = tmp[0]
+                    else:
+                        df_comments["parents_stack"].iloc[i] = None
 
-        df_combined = df_comments.join(df_posts, on="post_id", rsuffix="_post")
-        df_combined = pd.concat([df_posts, df_comments], ignore_index=True)
+            df_combined = df_comments.join(df_posts, on="post_id", rsuffix="_post")
+            df_combined = pd.concat([df_posts, df_comments], ignore_index=True)
+        else:
+            df_combined = df_posts
         df_group_name = VKParser.get_group_name(domain, access_token)
         df_combined["group_name"] = df_group_name["group_name"][0]
 
