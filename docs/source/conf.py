@@ -7,7 +7,10 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 import os
 import sys
-sys.path.insert(0, os.path.abspath('./sloyka'))
+
+folder = os.getcwd().split("\\docs")[0]
+sys.path.append(folder)
+
 
 project = 'sloyka'
 copyright = '2024, itmo_idu'

@@ -1,4 +1,5 @@
 .. _Geocoder_special:
+
 Geocoder
 ==================
 .. autoclass:: sloyka.src.geocoder.geocoder.Geocoder

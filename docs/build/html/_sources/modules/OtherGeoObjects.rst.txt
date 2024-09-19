@@ -4,7 +4,7 @@ OtherGeoObjects
 ==================
 .. currentmodule:: sloyka.src.geocoder
 
-.. autoclass:: city_objects_extractor.OtherGeoObjects
+.. autoclass:: sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects
    :members:
    :undoc-members:
 

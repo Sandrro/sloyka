@@ -5,11 +5,11 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Streets" href="Streets.html" /><link rel="prev" title="Data getter" href="data_getter.html" />
 
-    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
-        <title>VKparser - sloyka 0.1.0 documentation</title>
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
+        <title>VKparser - sloyka 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=387cc868" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
     <link rel="stylesheet" type="text/css" href="../_static/_static/custom.css" />
     
     
@@ -89,19 +89,6 @@
       <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
     </svg>
   </symbol>
-  <symbol id="svg-sun-half" viewBox="0 0 24 24">
-    <title>Auto light/dark mode</title>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
-      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-      <circle cx="12" cy="12" r="9" />
-      <path d="M13 12h5" />
-      <path d="M13 15h4" />
-      <path d="M13 18h1" />
-      <path d="M13 9h4" />
-      <path d="M13 6h1" />
-    </svg>
-  </symbol>
   <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
     <title>Auto light/dark, in light mode</title>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -142,7 +129,7 @@
       <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
       <path d="M13.5 6.5l4 4" />
       <path d="M20 21l2 -2l-2 -2" />
-      <path d="M17 17l-2 2l2 2" /
+      <path d="M17 17l-2 2l2 2" />
     </svg>
   </symbol>
   <symbol id="svg-eye" viewBox="0 0 24 24">
@@ -180,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">sloyka 0.1.0 documentation</div></a>
+      <a href="../index.html"><div class="brand">sloyka 0.2.1 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -192,7 +179,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -207,7 +194,7 @@
     <img class="sidebar-logo" src="../_static/logo.png" alt="Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">sloyka 0.1.0 documentation</span>
+  <span class="sidebar-brand-text">sloyka 0.2.1 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -287,7 +274,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -295,6 +282,166 @@
         <article role="main" id="furo-main-content">
           <section id="vkparser">
 <span id="id1"></span><h1>VKparser<a class="headerlink" href="#vkparser" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">sloyka.src.utils.data_getter.vk_data_getter.</span></span><span class="sig-name descname"><span class="pre">VKParser</span></span><a class="reference internal" href="../_modules/sloyka/src/utils/data_getter/vk_data_getter.html#VKParser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser" title="Link to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.API_VERISON">
+<span class="sig-name descname"><span class="pre">API_VERISON</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'5.131'</span></em><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.API_VERISON" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.COUNT_ITEMS">
+<span class="sig-name descname"><span class="pre">COUNT_ITEMS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">100</span></em><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.COUNT_ITEMS" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.TIMEOUT_LIMIT">
+<span class="sig-name descname"><span class="pre">TIMEOUT_LIMIT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">15</span></em><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.TIMEOUT_LIMIT" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.comments_to_dataframe">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">comments_to_dataframe</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">comments</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/utils/data_getter/vk_data_getter.html#VKParser.comments_to_dataframe"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.comments_to_dataframe" title="Link to this definition">¶</a></dt>
+<dd><p>Convert comments to a DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>comments</strong> – List of comments to be converted.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing specific columns from the input comments.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_comments">
+<span class="sig-name descname"><span class="pre">get_comments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">owner_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/utils/data_getter/vk_data_getter.html#VKParser.get_comments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_comments" title="Link to this definition">¶</a></dt>
+<dd><p>Get comments for a post on VK using the specified owner ID, post ID, and access token.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>owner_id</strong> (<em>int</em>) – The ID of the post owner.</p></li>
+<li><p><strong>post_id</strong> (<em>int</em>) – The ID of the post.</p></li>
+<li><p><strong>access_token</strong> (<em>str</em>) – The access token for authentication.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of dictionaries containing comment information.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_group_name">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_group_name</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">accsess_token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/utils/data_getter/vk_data_getter.html#VKParser.get_group_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_group_name" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_group_post_ids">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_group_post_ids</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_num_limit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span></span></span><a class="reference internal" href="../_modules/sloyka/src/utils/data_getter/vk_data_getter.html#VKParser.get_group_post_ids"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_group_post_ids" title="Link to this definition">¶</a></dt>
+<dd><p>A static method to retrieve a list of post IDs for a given group, based on the owner ID,
+access token, post number limit, and step size. Returns a list of post IDs.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_owner_id_by_domain">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_owner_id_by_domain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/utils/data_getter/vk_data_getter.html#VKParser.get_owner_id_by_domain"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_owner_id_by_domain" title="Link to this definition">¶</a></dt>
+<dd><p>Get the owner ID of a VK group by its domain.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain</strong> (<em>str</em>) – The domain of the VK group.</p></li>
+<li><p><strong>access_token</strong> (<em>str</em>) – The access token for the VK API.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The owner ID of the VK group, or None if the request was not successful.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_subcomments">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_subcomments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/utils/data_getter/vk_data_getter.html#VKParser.get_subcomments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_subcomments" title="Link to this definition">¶</a></dt>
+<dd><p>Retrieves subcomments from the VK API.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>owner_id</strong> (<em>int</em>) – The ID of the owner of the comments.</p></li>
+<li><p><strong>post_id</strong> (<em>int</em>) – The ID of the post.</p></li>
+<li><p><strong>access_token</strong> (<em>str</em>) – The access token for authentication.</p></li>
+<li><p><strong>params</strong> (<em>dict</em>) – Additional parameters for the API request.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of subcomments retrieved from the API.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.run_comments">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_comments</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/utils/data_getter/vk_data_getter.html#VKParser.run_comments"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.run_comments" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.run_parser">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_parser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_messages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/utils/data_getter/vk_data_getter.html#VKParser.run_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.run_parser" title="Link to this definition">¶</a></dt>
+<dd><p>Runs the parser with the given parameters and returns a combined DataFrame of posts and comments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>owner_id</strong> – The owner ID for the parser.</p></li>
+<li><p><strong>access_token</strong> – The user token for authentication.</p></li>
+<li><p><strong>step</strong> – The step size for fetching data.</p></li>
+<li><p><strong>cutoff_date</strong> – The cutoff date for fetching data.</p></li>
+<li><p><strong>number_of_messages</strong> – The maximum number of messages to fetch. Defaults to positive infinity.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A combined DataFrame of posts and comments.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="sloyka.src.utils.data_getter.vk_data_getter.VKParser.run_posts">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_posts</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">domain</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">access_token</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cutoff_date</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_messages</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/sloyka/src/utils/data_getter/vk_data_getter.html#VKParser.run_posts"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.run_posts" title="Link to this definition">¶</a></dt>
+<dd><p>A function to retrieve posts from a social media API based on specified parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>owner_id</strong> (<em>int</em>) – The ID of the owner whose posts are being retrieved.</p></li>
+<li><p><strong>access_token</strong> (<em>str</em>) – The authentication token for accessing the API.</p></li>
+<li><p><strong>step</strong> (<em>int</em>) – The number of posts to retrieve in each API call.</p></li>
+<li><p><strong>cutoff_date</strong> (<em>str</em>) – The date to stop retrieving posts (format: ‘%Y-%m-%d’).</p></li>
+<li><p><strong>number_of_messages</strong> (<em>float</em>) – The maximum number of messages to retrieve (default is infinity).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A DataFrame containing the retrieved posts.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </section>
 
         </article>
@@ -339,15 +486,48 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">VKparser</a><ul>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser"><code class="docutils literal notranslate"><span class="pre">VKParser</span></code></a><ul>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.API_VERISON"><code class="docutils literal notranslate"><span class="pre">VKParser.API_VERISON</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.COUNT_ITEMS"><code class="docutils literal notranslate"><span class="pre">VKParser.COUNT_ITEMS</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.TIMEOUT_LIMIT"><code class="docutils literal notranslate"><span class="pre">VKParser.TIMEOUT_LIMIT</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.comments_to_dataframe"><code class="docutils literal notranslate"><span class="pre">VKParser.comments_to_dataframe()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_comments"><code class="docutils literal notranslate"><span class="pre">VKParser.get_comments()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_group_name"><code class="docutils literal notranslate"><span class="pre">VKParser.get_group_name()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_group_post_ids"><code class="docutils literal notranslate"><span class="pre">VKParser.get_group_post_ids()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_owner_id_by_domain"><code class="docutils literal notranslate"><span class="pre">VKParser.get_owner_id_by_domain()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.get_subcomments"><code class="docutils literal notranslate"><span class="pre">VKParser.get_subcomments()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.run_comments"><code class="docutils literal notranslate"><span class="pre">VKParser.run_comments()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.run_parser"><code class="docutils literal notranslate"><span class="pre">VKParser.run_parser()</span></code></a></li>
+<li><a class="reference internal" href="#sloyka.src.utils.data_getter.vk_data_getter.VKParser.run_posts"><code class="docutils literal notranslate"><span class="pre">VKParser.run_posts()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=01f34227"></script>
+</div><script src="../_static/documentation_options.js?v=37f418d5"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
     </body>
 </html>

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../../../genindex.html" /><link rel="search" title="Search" href="../../../../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.08.06 -->
-        <title>sloyka.src.utils.data_processing.city_services_extract - sloyka 0.2.1 documentation</title>
+        <title>sloyka.src.utils.data_getter.street_getter - sloyka 0.2.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -273,63 +273,133 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <h1>Source code for sloyka.src.utils.data_processing.city_services_extract</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">flair.models</span> <span class="kn">import</span> <span class="n">SequenceTagger</span>
-<span class="kn">from</span> <span class="nn">flair.data</span> <span class="kn">import</span> <span class="n">Sentence</span>
-<span class="kn">from</span> <span class="nn">rapidfuzz</span> <span class="kn">import</span> <span class="n">fuzz</span>
-<span class="kn">from</span> <span class="nn">sloyka.src.utils.constants</span> <span class="kn">import</span> <span class="n">CITY_SERVICES_NAMES</span>
-<span class="kn">from</span> <span class="nn">sloyka.src.utils.data_preprocessing.preprocessor</span> <span class="kn">import</span> <span class="n">PreprocessorInput</span>
+          <h1>Source code for sloyka.src.utils.data_getter.street_getter</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<div class="viewcode-block" id="City_services">
-<a class="viewcode-back" href="../../../../../modules/city_services_extract.html#sloyka.src.utils.data_processing.city_services_extract.City_services">[docs]</a>
-<span class="k">class</span> <span class="nc">City_services</span><span class="p">:</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model_name</span><span class="p">:</span><span class="nb">str</span><span class="o">=</span><span class="s2">&quot;Glebosol/city_services&quot;</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span> <span class="o">=</span> <span class="n">SequenceTagger</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">model_name</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">sloyka.src.utils.data_getter.geo_data_getter</span> <span class="kn">import</span> <span class="n">GeoDataGetter</span> <span class="k">as</span> <span class="n">dg</span>
+<span class="kn">from</span> <span class="nn">sloyka.src.utils.data_preprocessing</span> <span class="kn">import</span> <span class="n">preprocessor</span> <span class="k">as</span> <span class="n">pp</span>
+<span class="kn">from</span> <span class="nn">sloyka.src.utils.constants</span> <span class="kn">import</span> <span class="n">TOPONYM_PATTERN</span>
 
-<div class="viewcode-block" id="City_services.extraction_services">
-<a class="viewcode-back" href="../../../../../modules/city_services_extract.html#sloyka.src.utils.data_processing.city_services_extract.City_services.extraction_services">[docs]</a>
-    <span class="k">def</span> <span class="nf">extraction_services</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
-        <span class="n">sentence</span> <span class="o">=</span> <span class="n">Sentence</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
-        <span class="n">entities</span> <span class="o">=</span> <span class="n">sentence</span><span class="o">.</span><span class="n">get_spans</span><span class="p">(</span><span class="s2">&quot;ner&quot;</span><span class="p">)</span>
-        <span class="n">entity_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">entity</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="n">entities</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">entity_names</span></div>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">StreetsError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Custom exception for streets-related errors&quot;&quot;&quot;</span>
+
+    <span class="k">pass</span>
 
 
-<div class="viewcode-block" id="City_services.remove_last_letter">
-<a class="viewcode-back" href="../../../../../modules/city_services_extract.html#sloyka.src.utils.data_processing.city_services_extract.City_services.remove_last_letter">[docs]</a>
-    <span class="k">def</span> <span class="nf">remove_last_letter</span><span class="p">(</span><span class="n">words</span><span class="p">):</span>
-        <span class="n">reduced_words</span> <span class="o">=</span> <span class="p">[</span><span class="n">word</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">words</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">reduced_words</span></div>
+<div class="viewcode-block" id="Streets">
+<a class="viewcode-back" href="../../../../../modules/Streets.html#sloyka.src.utils.data_getter.street_getter.Streets">[docs]</a>
+<span class="k">class</span> <span class="nc">Streets</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class encapsulates functionality for retrieving street data</span>
+<span class="sd">    for a specified city from OSM and processing it to extract useful</span>
+<span class="sd">    information for geocoding purposes.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Streets.get_street_names">
+<a class="viewcode-back" href="../../../../../modules/Streets.html#sloyka.src.utils.data_getter.street_getter.Streets.get_street_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_street_names</span><span class="p">(</span><span class="n">gdf</span><span class="p">:</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Method extracts the unique street names from a</span>
+<span class="sd">        GeoDataFrame of street segments.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Streets.logger.info(&quot;Extracting street names&quot;)</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">gdf</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">explode</span><span class="p">()</span><span class="o">.</span><span class="n">dropna</span><span class="p">())</span>
+        <span class="n">df_streets</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">names</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;street&quot;</span><span class="p">])</span>
+        <span class="c1"># Streets.logger.debug(f&quot;Street names extracted: {df_streets}&quot;)</span>
+        <span class="k">return</span> <span class="n">df_streets</span></div>
 
 
-<div class="viewcode-block" id="City_services.replace_with_most_similar">
-<a class="viewcode-back" href="../../../../../modules/city_services_extract.html#sloyka.src.utils.data_processing.city_services_extract.City_services.replace_with_most_similar">[docs]</a>
-    <span class="k">def</span> <span class="nf">replace_with_most_similar</span><span class="p">(</span><span class="n">list_of_entities</span><span class="p">):</span>
-        <span class="n">similarity_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">list_of_entities</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">CITY_SERVICES_NAMES</span><span class="p">)))</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">word1</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">list_of_entities</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">word2</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">CITY_SERVICES_NAMES</span><span class="p">):</span>
-                <span class="n">similarity</span> <span class="o">=</span> <span class="n">fuzz</span><span class="o">.</span><span class="n">ratio</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">100.0</span>
-                <span class="n">similarity_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">similarity</span>
-        <span class="n">new_list_of_entities</span> <span class="o">=</span> <span class="n">list_of_entities</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">list_of_entities</span><span class="p">)):</span>
-            <span class="n">max_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">similarity_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">new_list_of_entities</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">CITY_SERVICES_NAMES</span><span class="p">[</span><span class="n">max_index</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">new_list_of_entities</span></div>
+<div class="viewcode-block" id="Streets.find_toponim_words_from_name">
+<a class="viewcode-back" href="../../../../../modules/Streets.html#sloyka.src.utils.data_getter.street_getter.Streets.find_toponim_words_from_name">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">find_toponim_words_from_name</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A method to find toponim words from the given name string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (str): The input name string.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: The found toponim word from the input name string, or None if not found.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Streets.logger.debug(f&quot;Finding toponim words in {x}&quot;)</span>
+        <span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+            <span class="n">TOPONYM_PATTERN</span><span class="p">,</span>
+            <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">match</span> <span class="o">=</span> <span class="n">pattern</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="City_services.run">
-<a class="viewcode-back" href="../../../../../modules/city_services_extract.html#sloyka.src.utils.data_processing.city_services_extract.City_services.run">[docs]</a>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">text_column</span><span class="p">):</span>
-        <span class="n">df</span> <span class="o">=</span> <span class="n">PreprocessorInput</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">text_column</span><span class="p">)</span>
-        <span class="n">city_services</span> <span class="o">=</span> <span class="n">City_services</span><span class="p">()</span>
-        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;City_services_extraced&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">text_column</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">city_services</span><span class="o">.</span><span class="n">extraction_services</span><span class="p">)</span>
-        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;City_services_cuted&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;City_services_extraced&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">City_services</span><span class="o">.</span><span class="n">remove_last_letter</span><span class="p">)</span>
-        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;City_services&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;City_services_cuted&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">City_services</span><span class="o">.</span><span class="n">replace_with_most_similar</span><span class="p">)</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;City_services_cuted&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">df</span></div>
+<div class="viewcode-block" id="Streets.drop_words_from_name">
+<a class="viewcode-back" href="../../../../../modules/Streets.html#sloyka.src.utils.data_getter.street_getter.Streets.drop_words_from_name">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">drop_words_from_name</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function drops parts of street names that are not the name</span>
+<span class="sd">        of the street (e.g. avenue).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Streets.logger.debug(f&quot;Dropping words from {x}&quot;)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">lst</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span>
+                <span class="n">TOPONYM_PATTERN</span><span class="p">,</span>
+                <span class="n">x</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">lst</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">x</span></div>
+
+
+<div class="viewcode-block" id="Streets.clear_names">
+<a class="viewcode-back" href="../../../../../modules/Streets.html#sloyka.src.utils.data_getter.street_getter.Streets.clear_names">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">clear_names</span><span class="p">(</span><span class="n">streets_df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This function pre-process the street names from the OSM.</span>
+<span class="sd">        This step is necessary to match recognised street addresses later.</span>
+<span class="sd">        We need to do this match because Nominatim is very sensitive geocoder</span>
+<span class="sd">        and requires almost exact match between addresses in the OSM database</span>
+<span class="sd">        and the geocoding address.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Streets.logger.info(&quot;Clearing street names&quot;)</span>
+        <span class="n">streets_df</span><span class="p">[</span><span class="s2">&quot;toponim_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">streets_df</span><span class="p">[</span><span class="s2">&quot;street&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">Streets</span><span class="o">.</span><span class="n">find_toponim_words_from_name</span><span class="p">)</span>
+        <span class="n">streets_df</span><span class="p">[</span><span class="s2">&quot;street_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">streets_df</span><span class="p">[</span><span class="s2">&quot;street&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">Streets</span><span class="o">.</span><span class="n">drop_words_from_name</span><span class="p">)</span>
+        <span class="c1"># Streets.logger.debug(f&quot;Street names cleared: {streets_df}&quot;)</span>
+        <span class="k">return</span> <span class="n">streets_df</span></div>
+
+
+<div class="viewcode-block" id="Streets.run">
+<a class="viewcode-back" href="../../../../../modules/Streets.html#sloyka.src.utils.data_getter.street_getter.Streets.run">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">osm_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        A static method to run the process of getting street data based on the given</span>
+<span class="sd">        OSM id, returning a pandas DataFrame.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Streets.logger.info(f&quot;Running street data retrieval for osm_id {osm_id}&quot;)</span>
+        <span class="n">city_bounds</span> <span class="o">=</span> <span class="n">dg</span><span class="o">.</span><span class="n">get_city_bounds</span><span class="p">(</span><span class="n">osm_id</span><span class="p">)</span>
+        <span class="n">streets_graph</span> <span class="o">=</span> <span class="n">dg</span><span class="o">.</span><span class="n">get_drive_graph</span><span class="p">(</span><span class="n">city_bounds</span><span class="p">)</span>
+        <span class="n">streets_gdf</span> <span class="o">=</span> <span class="n">pp</span><span class="o">.</span><span class="n">graph_to_gdf</span><span class="p">(</span><span class="n">streets_graph</span><span class="p">)</span>
+        <span class="n">streets_df</span> <span class="o">=</span> <span class="n">Streets</span><span class="o">.</span><span class="n">get_street_names</span><span class="p">(</span><span class="n">streets_gdf</span><span class="p">)</span>
+        <span class="n">streets_df</span> <span class="o">=</span> <span class="n">Streets</span><span class="o">.</span><span class="n">clear_names</span><span class="p">(</span><span class="n">streets_df</span><span class="p">)</span>
+        <span class="c1"># Streets.logger.info(f&quot;Street data retrieval complete: {streets_df}&quot;)</span>
+        <span class="k">return</span> <span class="n">streets_df</span></div>
 </div>
 
 </pre></div>
