@@ -1,6 +1,6 @@
 # SLOYKA
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
-[![Documentation Status](https://readthedocs.org/projects/soika/badge/?version=latest)](https://soika.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/sloyka/badge/?version=latest)](https://sloyka.readthedocs.io/ru/latest/?badge=latest)
 [![PythonVersion](https://img.shields.io/badge/python-3.11-blue)](https://pypi.org/project/scikit-learn/)
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Tests](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/2dev_ci_on_pr.yaml/badge.svg?branch=dev)](https://github.com/GeorgeKontsevik/sloyka/actions/workflows/2dev_ci_on_pr.yaml)
