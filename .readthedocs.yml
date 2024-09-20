@@ -7,13 +7,9 @@ build:
   jobs:
     post_install:
       # Install dependencies
-      - pip install sphinx furo readthedocs-sphinx-search sphinx-autobuild sphinx-design  sphinx-hoverxref sphinx-inline-tabs sphinx-issues sphinx-notfound-page myst-parser sphinx-rtd-theme
-
-python:
-  install:
-    - method: poetry
-      path: ./
-      extras: ["dependencies", "docs"]
+      - pip install docs/requirements.txt
 
 sphinx:
   configuration: docs/source/conf.py
+
+#sphinx furo readthedocs-sphinx-search sphinx-autobuild sphinx-design  sphinx-hoverxref sphinx-inline-tabs sphinx-issues sphinx-notfound-page myst-parser sphinx-rtd-theme
