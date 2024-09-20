@@ -6,5 +6,6 @@ Geocoder
    :members:
    :undoc-members:
    :no-members: run
+   :no-index:
 
 Back to all :ref:`geocoder`
