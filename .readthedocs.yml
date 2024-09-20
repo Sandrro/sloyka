@@ -12,6 +12,7 @@ build:
 python:
   install:
     - method: poetry
+      path: ./
       extras: ["dependencies", "docs"]
 
 sphinx:
