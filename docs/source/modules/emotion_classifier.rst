@@ -7,7 +7,6 @@ Emotion classifier
    :members:
    :undoc-members:
 
-
 Example
 -------
 .. code-block:: bash

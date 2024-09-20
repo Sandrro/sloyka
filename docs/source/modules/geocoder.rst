@@ -1,14 +1,13 @@
 .. _geocoder:
-==================
+
 Geocoding
 ==================
-To perform classification with generalized linear models, see
-:ref:`Geocoder_special`.
+To perform classification with generalized linear models, see :ref:`Geocoder_special`.
 
 Geocoder
 -------------------
 .. autoclass:: sloyka.src.geocoder.geocoder.Geocoder
-    :members: run
+   :members: run
 
 OtherGeoObjects
 ---------------------

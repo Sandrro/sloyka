@@ -6,3 +6,4 @@ StreetExtractor
 .. autoclass:: sloyka.src.geocoder.street_extractor.StreetExtractor
    :members:
    :undoc-members: process_pipeline
+   :no-index:
