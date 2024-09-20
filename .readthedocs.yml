@@ -9,5 +9,10 @@ build:
       # Install dependencies
       - pip install sphinx furo readthedocs-sphinx-search sphinx-autobuild sphinx-design  sphinx-hoverxref sphinx-inline-tabs sphinx-issues sphinx-notfound-page myst-parser sphinx-rtd-theme
 
+python:
+  install:
+    - method: poetry
+      extras: ["dependencies", "docs"]
+
 sphinx:
   configuration: docs/source/conf.py
