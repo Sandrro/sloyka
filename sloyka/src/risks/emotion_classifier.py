@@ -17,15 +17,15 @@ import gc
 
 class EmotionRecognizer:
     """
-    This class is designed to categorise input texts into emotion categories.
+    This class is designed to categorize input texts into emotion categories.
 
-        Attributes:
+    Attributes:
 
     - model: This attribute holds the model used for emotion recognition. It defaults to HuggingFaceModel.Text.Bert_Large,
-    but can be set to any other compatible model during the instantiation of the class.
+      but can be set to any other compatible model during the instantiation of the class.
 
-    - device: the device to use for inference. It automatically selects 'cuda' (GPU) if a compatible GPU
-    is available and CUDA is enabled, otherwise, it falls back to 'cpu'.
+    - device: The device to use for inference. It automatically selects 'cuda' (GPU) if a compatible GPU
+      is available and CUDA is enabled, otherwise, it falls back to 'cpu'.
 
     - text: The text to be analyzed.
 
@@ -33,6 +33,7 @@ class EmotionRecognizer:
 
     - text_column: The name of the column containing the text to be analyzed.
     """
+
 
     def __init__(self, model_name=HuggingFaceModel.Text.Bert_Tiny, device='cpu'):
         self.device = device

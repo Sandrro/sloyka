@@ -14,7 +14,7 @@ or to visualize already existing nodes and links and their further interpretatio
 SLOYKA also provides methods for modeling social risks regarding the emotional evaluation of mentioned places.
 
 Main features
---------
+--------------
 * Social media parsing: getting posts, comments and replys
 * City services and places extraction
 * Emotion and text classifiers categorizing
