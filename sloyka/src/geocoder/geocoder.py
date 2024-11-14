@@ -47,6 +47,7 @@ from sloyka.src.geocoder.city_objects_extractor import OtherGeoObjects
 from sloyka.src.utils.data_getter.street_getter import Streets
 from sloyka.src.utils.data_getter.location_getter import Location
 from sloyka.src.utils.data_getter.geo_data_getter import GeoDataGetter
+from sloyka.src.utils.data_processing.area_matcher import AreaMatcher
 from sloyka.src.utils.data_preprocessing.preprocessor import PreprocessorInput
 from sloyka.src.geocoder.street_extractor import StreetExtractor
 from sloyka.src.geocoder.word_form_matcher import WordFormFinder
@@ -315,17 +316,8 @@ class Geocoder:
             df_obj = OtherGeoObjects.run(self.osm_id, df, text_column)
             
 
-        if tags:
-            df_areas = self.get_df_areas(self.osm_id, tags)
-            df_areas = self.preprocess_area_names(df_areas)
-
-            if group_column and group_column in df.columns:
-                for i, group_name in enumerate(df[group_column]):
-                    processed_group_name = self.preprocess_group_name(group_name)
-                    best_match, admin_level = self.match_group_to_area(processed_group_name, df_areas)
-                    df.at[i, "territory"] = best_match
-                    df.at[i, "key"] = admin_level
-            del df_areas
+        if group_column:
+            df = AreaMatcher.run(self.osm_id)
 
         df[text_column] = df[text_column].astype(str).str.replace('\n', ' ')
         df[text_column] = df[text_column].apply(str)
