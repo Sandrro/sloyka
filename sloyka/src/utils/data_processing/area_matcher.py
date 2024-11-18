@@ -27,81 +27,42 @@ class AreaMatcher:
             self.area_cache[osm_id] = df_areas
         return self.area_cache[osm_id]
 
-    def get_osm_areas(self, osm_id, osm_type="relation"):
+    def get_osm_areas(self, place_name, tags={"boundary": "administrative", "place": True}):
         """
-        Загружает и обрабатывает геометрии областей и населенных пунктов из OSM для заданного OSM ID.
+        Загружает и обрабатывает геометрии областей и населенных пунктов из OSM по названию территории с использованием osmnx.
+
         Args:
-            osm_id (int): Идентификатор объекта в OSM.
-            osm_type (str): Тип объекта в OSM (по умолчанию "relation").
+            place_name (str): Название территории (например, "Ленинградская область").
+            tags (dict): Словарь тэгов OSM для фильтрации объектов (по умолчанию административные границы и place).
+
         Returns:
             GeoDataFrame: Обработанный GeoDataFrame с уникальными областями и геометриями.
         """
-        query = f"""
-            [out:json];
-            {osm_type}({osm_id});
-            map_to_area -> .a;
-            (
-            node(area.a)[place];
-            way(area.a)[place];
-            relation(area.a)[place];
-            relation(area.a)[boundary=administrative];
-            );
-            out geom;
-        """
-        url = "http://overpass-api.de/api/interpreter"
-        response = requests.get(url, params={'data': query})
-        data = response.json()
-
-        elements = data['elements']
-        places = []
-
-        for elem in elements:
-            if 'tags' in elem:
-                name = elem['tags'].get('name')
-                place = elem['tags'].get('place')
-                admin_level = elem['tags'].get('admin_level')
-                
-                if elem['type'] == 'node':
-                    geometry = Point(elem['lon'], elem['lat'])
-                elif elem['type'] == 'way' and 'geometry' in elem:
-                    coords = [(point['lon'], point['lat']) for point in elem['geometry']]
-                    geometry = Polygon(coords) if len(coords) >= 4 else Point(coords[0])
-                elif elem['type'] == 'relation' and 'members' in elem:
-                    polygons = []
-                    for member in elem['members']:
-                        if member['type'] == 'way' and 'geometry' in member:
-                            coords = [(point['lon'], point['lat']) for point in member['geometry']]
-                            if len(coords) >= 4:
-                                polygons.append(Polygon(coords))
-                            elif len(coords) == 1:
-                                polygons.append(Point(coords[0]).buffer(100))
-                    geometry = MultiPolygon(polygons) if len(polygons) > 1 else polygons[0] if polygons else None
-
-                if name and geometry:
-                    places.append({
-                        'name': name,
-                        'place': place,
-                        'admin_level': admin_level,
-                        'geometry': geometry
-                    })
-
-        gdf = gpd.GeoDataFrame(places, geometry='geometry', crs="EPSG:4326")
-
-        centroid = gdf.geometry.centroid.to_crs("EPSG:4326").unary_union.centroid
-        utm_zone = int((centroid.x + 180) // 6) + 1
-        utm_crs = f"EPSG:{32600 + utm_zone if centroid.y >= 0 else 32700 + utm_zone}"
-        gdf = gdf.to_crs(utm_crs)
-
-        gdf['geometry'] = gdf.apply(lambda row: row.geometry.buffer(100) 
-                                    if row.geometry.geom_type == 'Point' or 
-                                    (row.geometry.geom_type == 'Polygon' and len(row.geometry.exterior.coords) < 4) 
-                                    else row.geometry, axis=1)
-
+        try:
+            gdf = ox.geometries_from_place(place_name, tags=tags)
+        except Exception as e:
+            raise RuntimeError(f"Ошибка загрузки данных из OSM для '{place_name}': {e}")
+        
+        if gdf.empty:
+            raise ValueError(f"Данные для территории '{place_name}' не найдены.")
+        
         gdf = gdf.to_crs("EPSG:4326")
+        
+        columns_to_keep = ["geometry", "name", "place", "admin_level"]
+        gdf.reset_index(drop=True, inplace=True)
+        gdf = gdf[[col for col in columns_to_keep if col in gdf.columns]]
 
-        gdf.admin_level.fillna(12, inplace=True)
-        gdf.admin_level = gdf.admin_level.astype(int)
-        gdf = gdf.sort_values('admin_level').drop_duplicates(subset=['name'], keep='first')
+        if "admin_level" in gdf.columns:
+            gdf["admin_level"].fillna(12, inplace=True)
+            gdf["admin_level"] = gdf["admin_level"].astype(int)
+            gdf = gdf[gdf["admin_level"] >= 4]
+            gdf = gdf.sort_values("admin_level").drop_duplicates(subset=["name"], keep="first")
+        
+        gdf.reset_index(drop=True, inplace=True)
+        gdf = gdf[gdf.geometry.geom_type != 'LineString']
+        gdf["geometry"] = gdf.to_crs(4326).geometry.apply(
+            lambda geom: geom.buffer(500) if geom.geom_type == "Point" else geom
+        )
 
         return gdf
 
@@ -180,9 +141,9 @@ class AreaMatcher:
 
         return best_match, admin_level
     
-    def run(self, df, osm_id):
+    def run(self, df, place_name):
         df['processed_group_name'] = df.group_name.map(lambda x: self.preprocess_group_name(x))
-        df_areas = self.get_osm_areas(osm_id)
+        df_areas = self.get_osm_areas(place_name)
         df_areas = self.preprocess_area_names(df_areas)
         df[["best_match", "admin_level"]] = df.apply(
             lambda row: pd.Series(self.match_group_to_area(row["processed_group_name"], df_areas)), axis=1
