@@ -137,15 +137,20 @@ class AreaMatcher:
                 max_partial_ratio = partial_ratio
                 max_token_sort_ratio = token_sort_ratio
                 best_match = row["area_name"]
-                admin_level = row["admin_level"]
 
-        return best_match, admin_level
+        return best_match
     
-    def run(self, df, place_name):
+    def run(self, df, from_osm: bool = True, areas = None, place_name: str = None):
         df['processed_group_name'] = df.group_name.map(lambda x: self.preprocess_group_name(x))
-        df_areas = self.get_osm_areas(place_name)
+        print('processed group names')
+        if from_osm:
+            df_areas = self.get_osm_areas(place_name)
+        else:
+            df_areas = areas
         df_areas = self.preprocess_area_names(df_areas)
-        df[["best_match", "admin_level"]] = df.apply(
+        print('processed area names')
+        df["best_match"] = df.apply(
             lambda row: pd.Series(self.match_group_to_area(row["processed_group_name"], df_areas)), axis=1
         )
+        print('found matches')
         return df
