@@ -22,7 +22,7 @@ The TextClassifiers class has the following methods:
 
 import pandas as pd
 from transformers import pipeline
-from sloyka.src.utils.exceptions import InvalidInputError, ClassifierInitializationError, ClassificationError
+from soika.src.utils.exceptions import InvalidInputError, ClassifierInitializationError, ClassificationError
 
 
 class TextClassifiers:

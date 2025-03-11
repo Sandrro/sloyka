@@ -9,7 +9,7 @@ the order in which they are run is important.
    :align: center
    :alt: photo
 
-   SLOYKA's sections
+   SOIKA's sections
 
 The main sections were divided into:
 * Data receiving (a step possible to skip only if there is already geolocated

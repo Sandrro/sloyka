@@ -4,9 +4,9 @@ import pandas as pd
 from shapely.geometry import Point, Polygon, MultiPolygon
 from loguru import logger
 import pymorphy2
-from sloyka.src.utils.constants import NUM_CITY_OBJ
-from sloyka.src.geocoder.objects_address_extractor_by_rules import AddressExtractorExtra
-from sloyka.src.utils.data_getter.geo_data_getter import GeoDataGetter
+from soika.src.utils.constants import NUM_CITY_OBJ
+from soika.src.geocoder.objects_address_extractor_by_rules import AddressExtractorExtra
+from soika.src.utils.data_getter.geo_data_getter import GeoDataGetter
 from rapidfuzz import fuzz
 import numpy as np
 from tqdm import tqdm

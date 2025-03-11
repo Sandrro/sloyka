@@ -4,7 +4,6 @@ import pandas as pd
 import geopandas as gpd
 import osmnx as ox
 import networkx as nx
-import numpy as np
 from loguru import logger
 
 

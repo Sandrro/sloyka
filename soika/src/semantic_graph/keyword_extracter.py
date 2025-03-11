@@ -7,10 +7,9 @@ from tqdm import tqdm
 from keybert import KeyBERT
 import nltk
 from nltk.corpus import stopwords
-import pymorphy3
-from transformers import BertModel
+import pymorphy2
 
-from sloyka.src.utils.constants import STOPWORDS, TAG_ROUTER
+from soika.src.utils.constants import STOPWORDS, TAG_ROUTER
     
 
 def extract_keywords(
@@ -24,30 +23,28 @@ def extract_keywords(
     parents_stack_column: str,
     semantic_key_filter: float = 0.6,
     top_n: int = 1,
-
 ) -> pd.DataFrame or gpd.GeoDataFrame:
     """
-    Extract keywords from the given data based on certain criteria.
+    Извлекает ключевые слова из данных с учётом заданных критериев.
 
     Args:
-        data (pd.DataFrame or gpd.GeoDataFrame): The input data containing information.
-        text_column (str): The column in the data containing text information.
-        text_type_column (str): The column in the data indicating the type of text (e.g., post, comment, reply).
-        toponym_column (str): The column in the data containing toponym information.
-        id_column (str): The column in the data containing unique text identifiers.
-        post_id_column (str): The column in the data containing post identifiers for comments and replies.
-        parents_stack_column (str): The column in the data containing information about parent-child relationships to comments.
-        semantic_key_filter (float, optional): The threshold for semantic key filtering. Defaults to 0.75.
-        top_n (int, optional): The number of top keywords to extract. Defaults to 1.
+        data (pd.DataFrame или gpd.GeoDataFrame): входные данные.
+        text_column (str): столбец с текстом.
+        text_type_column (str): столбец, указывающий тип текста (например, пост, комментарий, ответ).
+        toponym_column (str): столбец с топонимами.
+        id_column (str): столбец с уникальными идентификаторами текста.
+        post_id_column (str): столбец с идентификаторами постов (для комментариев и ответов).
+        parents_stack_column (str): столбец с информацией о родительско-дочерних связях.
+        semantic_key_filter (float, optional): порог семантического фильтра. По умолчанию 0.6.
+        top_n (int, optional): число извлекаемых ключевых слов. По умолчанию 1.
 
     Returns:
-        pd.DataFrame or gpd.GeoDataFrame: Processed data with extracted keywords, toponym counts, and word counts.
+        pd.DataFrame или gpd.GeoDataFrame: обработанные данные с извлечёнными ключевыми словами, счетчиками топонимов и словами.
     """
-
     nltk.download("stopwords")
     RUS_STOPWORDS = stopwords.words(self.language) + STOPWORDS
 
-    morph = pymorphy3.MorphAnalyzer()
+    morph = pymorphy2.MorphAnalyzer()
 
     data["words_score"] = None
     data["texts_ids"] = None
@@ -71,33 +68,35 @@ def extract_keywords(
             toponym = data[toponym_column].loc[data[id_column] == i].iloc[0]
 
             ids_text_to_extract = list(
-                (
-                    data[id_column].loc[
-                        (data[post_id_column] == i)
-                        & (~data[id_column].isin(exclude_list))
-                        & (~data[parents_stack_column].isin(chain_toponym_list))
-                    ]
-                )
+                data[id_column].loc[
+                    (data[post_id_column] == i)
+                    & (~data[id_column].isin(exclude_list))
+                    & (~data[parents_stack_column].isin(chain_toponym_list))
+                ]
             )
 
             texts_to_extract = list(
-                (
-                    data[text_column].loc[
-                        (data[post_id_column] == i)
-                        & (~data[id_column].isin(exclude_list))
-                        & (~data[parents_stack_column].isin(chain_toponym_list))
-                    ]
-                )
+                data[text_column].loc[
+                    (data[post_id_column] == i)
+                    & (~data[id_column].isin(exclude_list))
+                    & (~data[parents_stack_column].isin(chain_toponym_list))
+                ]
             )
 
-            ids_text_to_extract.extend(list(data[id_column].loc[data[id_column] == i]))
-            texts_to_extract.extend(list(data[text_column].loc[data[id_column] == i]))
+            ids_text_to_extract.extend(
+                list(data[id_column].loc[data[id_column] == i])
+            )
+            texts_to_extract.extend(
+                list(data[text_column].loc[data[id_column] == i])
+            )
             words_to_add = []
             id_to_add = []
             texts_to_add = []
 
             for j, text in zip(ids_text_to_extract, texts_to_extract):
-                extraction = KeyBERT().extract_keywords(docs=text, top_n=top_n, stop_words=RUS_STOPWORDS)
+                extraction = KeyBERT().extract_keywords(
+                    docs=text, top_n=top_n, stop_words=RUS_STOPWORDS
+                )
                 if extraction:
                     score = extraction[0][1]
                     if score > semantic_key_filter:

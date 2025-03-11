@@ -20,7 +20,6 @@ toponym columns.
 Creates a new DataFrame by aggregating the data based on the provided text and toponyms columns.
 """
 
-import nltk
 import pandas as pd
 import geopandas as gpd
 import networkx as nx
@@ -40,7 +39,7 @@ from ..utils.data_preprocessing.preprocessor import (
 
 
 
-from sloyka.src.utils.constants import TAG_ROUTER
+from soika.src.utils.constants import TAG_ROUTER
 
 
 class Semgraph:

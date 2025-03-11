@@ -1,13 +1,13 @@
 import sys
 import os
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../sloyka/sample_data")))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../soika/sample_data")))
 import geopandas as gpd
 import pytest
-from sloyka import Semgraph
+from soika import Semgraph
 
 @pytest.fixture
 def sample_data():
-    sample_data_path = os.path.join(os.path.dirname(__file__), "../sloyka/sample_data/sample_data_geocoded_emotioned.parquet")
+    sample_data_path = os.path.join(os.path.dirname(__file__), "../soika/sample_data/sample_data_geocoded_emotioned.parquet")
     gdf = gpd.read_parquet(sample_data_path)
     gdf['type'] = 'post'
     return gdf

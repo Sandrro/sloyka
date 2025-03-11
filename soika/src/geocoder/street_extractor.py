@@ -4,7 +4,6 @@ from tqdm import tqdm
 from loguru import logger
 from typing import Tuple, List, Optional
 
-import string
 import math
 from typing import Optional
 from loguru import logger
@@ -14,8 +13,8 @@ from flair.data import Sentence
 import pymorphy2
 morph = pymorphy2.MorphAnalyzer()
 
-from sloyka.src.geocoder.text_address_extractor_by_rules import NatashaExtractor
-from sloyka.src.utils.constants import (
+from soika.src.geocoder.text_address_extractor_by_rules import NatashaExtractor
+from soika.src.utils.constants import (
     START_INDEX_POSITION,
     REPLACEMENT_DICT,
     TARGET_TOPONYMS,

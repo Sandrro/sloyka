@@ -3,7 +3,7 @@
 Semantic graph
 -------------------------------------------------
 
-.. automodule:: sloyka.src.semantic_graph.semantic_graph_builder
+.. automodule:: soika.src.semantic_graph.semantic_graph_builder
    :members:
    :undoc-members:
 
