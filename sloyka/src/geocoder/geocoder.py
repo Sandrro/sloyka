@@ -106,7 +106,6 @@ class Geocoder:
             street_names_df[case] = street_names_df["street_name"].apply(
                 lambda x: morph.parse(x)[0].inflect({case}).word if morph.parse(x)[0].inflect({case}) else None
             )
-        logger.info(f"{street_names_df}")
         return street_names_df
 
 
