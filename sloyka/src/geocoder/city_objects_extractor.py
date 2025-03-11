@@ -9,7 +9,8 @@ from sloyka.src.geocoder.objects_address_extractor_by_rules import AddressExtrac
 from sloyka.src.utils.data_getter.geo_data_getter import GeoDataGetter
 from rapidfuzz import fuzz
 import numpy as np
-
+from tqdm import tqdm
+tqdm.pandas()
 
 class OtherGeoObjects:
     @staticmethod
@@ -18,7 +19,7 @@ class OtherGeoObjects:
         Retrieves and processes OSM data for different urban objects.
         """
         df = GeoDataGetter.get_osm_data(osm_id, tags)
-        df["geometry"] = df["geometry"].apply(OtherGeoObjects.calculate_centroid)
+        df["geometry"] = df["geometry"].progress_apply(OtherGeoObjects.calculate_centroid)
         df.rename(columns={df.columns[-1]: "geo_obj_tag"}, inplace=True)
         return df
 
@@ -69,38 +70,31 @@ class OtherGeoObjects:
             return None
 
     @staticmethod
-    def extract_geo_obj(text) -> List[str]:
+    def extract_geo_obj(text, morph=None, extractor=None) -> List[str]:
         """
-        The function extracts location entities from the text, using the Natasha library.
+        Extracts location entities from the text using the Natasha library.
         """
-        if text is None:
-            return None
-        morph = pymorphy2.MorphAnalyzer()
-        extractor = AddressExtractorExtra(morph)
+        if not text:
+            return []
 
-        other_geo_obj = []
+        # Avoid repeated initialization of heavy objects
+        if morph is None:
+            morph = pymorphy2.MorphAnalyzer()
+        if extractor is None:
+            extractor = AddressExtractorExtra(morph)
 
-        matches = extractor(text)
-        if not matches:
-            return other_geo_obj
         try:
-            for match in matches:
-                if not match:
-                    continue
-                part = match.fact
-                if part.value and part.type:
-                    combined_phrase = f"{part.value} {part.type}"
-                    other_geo_obj.append(combined_phrase)
-                elif part.value:
-                    other_geo_obj.append(part.value)
-                elif part.type:
-                    other_geo_obj.append(part.type)
-                if not other_geo_obj:
-                    return other_geo_obj
-        except Exception as e:
-            # logger.warning(f"Error extracting geo objects: {e}")
-            return other_geo_obj
-        return other_geo_obj
+            matches = extractor(text)
+            if not matches:
+                return []
+
+            return [
+                f"{match.fact.value} {match.fact.type}".strip()
+                for match in matches if match and match.fact
+            ]
+        except Exception:
+            return []
+
 
     @staticmethod
     def restoration_of_normal_form(other_geo_obj, osm_combined_df, threshold=0.7) -> List[str]:
@@ -222,22 +216,26 @@ class OtherGeoObjects:
         df_obj = df.copy()
         df_obj["Numbers"] = pd.NA
         # osm_combined_df = OtherGeoObjects.run_osm_dfs(osm_id)
-
-        df_obj["other_geo_obj"] = df_obj[text_column].apply(OtherGeoObjects.extract_geo_obj)
-        df_obj["other_geo_obj_num"] = df_obj[text_column].apply(
+        print('Extracting objects')
+        df_obj["other_geo_obj"] = df_obj[text_column].progress_apply(OtherGeoObjects.extract_geo_obj)
+        print("Searching for object numbers")
+        df_obj["other_geo_obj_num"] = df_obj[text_column].progress_apply(
             lambda x: OtherGeoObjects.find_num_city_obj(x)
         )
         
         df_obj = OtherGeoObjects.combine_city_obj(df_obj)
 
+        print("Collecting OSM data")
         osm_combined_df = OtherGeoObjects.run_osm_dfs(osm_id)
 
         if not osm_combined_df.empty:
-            df_obj["other_geo_obj"] = df_obj["other_geo_obj"].apply(
+            print("restoring normal form of objects")
+            df_obj["other_geo_obj"] = df_obj["other_geo_obj"].progress_apply(
                 lambda x: OtherGeoObjects.restoration_of_normal_form(x, osm_combined_df)
             )
             df_obj = OtherGeoObjects.expand_toponym(df_obj)
 
+            print("Matching objects and geometries")
             df_obj["geometry"] = df_obj["other_geo_obj"].apply(lambda x: OtherGeoObjects.find_geometry(x, osm_combined_df))
             df_obj["geo_obj_tag"] = df_obj["other_geo_obj"].apply(
                 lambda x: OtherGeoObjects.find_geo_obj_tag(x, osm_combined_df)
