@@ -66,6 +66,7 @@ class Geocoder:
         df,
         model_path: str = "Geor111y/flair-ner-addresses-extractor",
         device: str = "cpu",
+        territory_name: str = None,
         osm_id: int = None,
         city_tags: dict ={"place": ["state"]},
         stemmer_lang: str = "russian",
@@ -77,11 +78,14 @@ class Geocoder:
         flair.device = torch.device(device)
         self.classifier = SequenceTagger.load(model_path)
         self.osm_id = osm_id
-        self.osm_city_name = (
-            GeoDataGetter()
-            .get_features_from_id(osm_id=self.osm_id,tags=city_tags, selected_columns=["name", "geometry"])
-            .iloc[0]["name"]
-        )
+        if territory_name:
+            self.osm_city_name = territory_name
+        else:    
+            self.osm_city_name = (
+                GeoDataGetter()
+                .get_features_from_id(osm_id=self.osm_id,tags=city_tags, selected_columns=["name", "geometry"])
+                .iloc[0]["name"]
+            )
         self.street_names = Streets.run(self.osm_id)
         self.stemmer = SnowballStemmer(stemmer_lang)
         
@@ -102,6 +106,7 @@ class Geocoder:
             street_names_df[case] = street_names_df["street_name"].apply(
                 lambda x: morph.parse(x)[0].inflect({case}).word if morph.parse(x)[0].inflect({case}) else None
             )
+        logger.info(f"{street_names_df}")
         return street_names_df
 
 
