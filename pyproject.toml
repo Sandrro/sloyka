@@ -89,7 +89,7 @@ pytest = "7.4.3"
 ipykernel = "6.29.0"
 
 [build-system]
-requires = ["poetry-core", "setuptools", "wheel", "distutils"]
+requires = ["poetry-core", "setuptools", "wheel"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.black]
