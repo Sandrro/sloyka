@@ -2,9 +2,9 @@
 
 OtherGeoObjects
 ==================
-.. currentmodule:: sloyka.src.geocoder
+.. currentmodule:: soika.src.geocoder
 
-.. autoclass:: sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects
+.. autoclass:: soika.src.geocoder.city_objects_extractor.OtherGeoObjects
    :members:
    :undoc-members:
    :no-index:

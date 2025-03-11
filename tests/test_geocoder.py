@@ -1,6 +1,6 @@
 import pandas as pd
 import pytest
-from sloyka.src.geocoder.geocoder import Geocoder
+from soika.src.geocoder.geocoder import Geocoder
 
 @pytest.fixture
 def sample_dataframe():

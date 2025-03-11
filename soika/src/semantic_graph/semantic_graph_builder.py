@@ -40,7 +40,7 @@ from ..utils.data_preprocessing.preprocessor import (
 
 
 
-from sloyka.src.utils.constants import TAG_ROUTER
+from soika.src.utils.constants import TAG_ROUTER
 
 
 class Semgraph:

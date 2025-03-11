@@ -1,10 +1,10 @@
 [tool.poetry]
-name = "sloyka"
+name = "soika"
 version = "0.2.5"
 description = "Library for city identity analysis from social media posts and comments"
 authors = ["sandrro, georgekontsevik"]
 readme = "README.md"
-packages = [{ include = "sloyka" }]
+packages = [{ include = "soika" }]
 
 [tool.poetry.dependencies]
 python = ">=3.10.6,<3.12"

@@ -1,4 +1,4 @@
-FILES = ./sloyka/src/*
+FILES = ./soika/src/*
 
 lint:
 	@echo "Running pylint check..."

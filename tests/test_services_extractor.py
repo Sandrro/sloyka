@@ -1,6 +1,6 @@
 import pytest
 import pandas as pd
-from sloyka import City_services
+from soika import City_services
 
 @pytest.fixture
 def sample_dataframe():

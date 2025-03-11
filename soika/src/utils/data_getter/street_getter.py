@@ -4,9 +4,9 @@ import pandas as pd
 
 import warnings
 
-from sloyka.src.utils.data_getter.geo_data_getter import GeoDataGetter as dg
-from sloyka.src.utils.data_preprocessing import preprocessor as pp
-from sloyka.src.utils.constants import TOPONYM_PATTERN
+from soika.src.utils.data_getter.geo_data_getter import GeoDataGetter as dg
+from soika.src.utils.data_preprocessing import preprocessor as pp
+from soika.src.utils.constants import TOPONYM_PATTERN
 
 warnings.simplefilter("ignore")
 warnings.filterwarnings("ignore", category=DeprecationWarning)

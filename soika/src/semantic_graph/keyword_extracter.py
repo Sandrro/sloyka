@@ -10,7 +10,7 @@ from nltk.corpus import stopwords
 import pymorphy3
 from transformers import BertModel
 
-from sloyka.src.utils.constants import STOPWORDS, TAG_ROUTER
+from soika.src.utils.constants import STOPWORDS, TAG_ROUTER
     
 
 def extract_keywords(
