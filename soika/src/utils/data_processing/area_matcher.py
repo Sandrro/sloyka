@@ -1,10 +1,7 @@
 import re
-import requests
 import pandas as pd
-import geopandas as gpd
-from rapidfuzz import fuzz, process
+from rapidfuzz import fuzz
 from nltk.stem.snowball import SnowballStemmer
-from shapely.geometry import Polygon, Point, MultiPolygon
 from soika.src.utils.data_getter.historical_geo_data_getter import HistGeoDataGetter
 from soika.src.utils.constants import (
     AREA_STOPWORDS,

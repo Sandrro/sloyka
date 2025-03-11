@@ -1,23 +1,22 @@
 import re
 import networkx as nx
-import pymorphy3
+import pymorphy2
 import geopandas as gpd
 import pandas as pd
 
 @staticmethod
 def get_tag(nodes: list, toponyms: list) -> dict:
     """
-    Get attributes of part of speech for the given nodes, with the option to specify toponyms.
+    Получает атрибуты частей речи для заданных узлов, с учётом исключения топонимов.
 
     Args:
-        nodes (list): list of strings representing the nodes
-        toponyms (list): list of strings representing the toponyms
+        nodes (list): список строк с узлами
+        toponyms (list): список строк с топонимами
 
     Returns:
-        dict: dictionary containing attributes for the nodes
+        dict: словарь с атрибутами для узлов
     """
-
-    morph = pymorphy3.MorphAnalyzer()
+    morph = pymorphy2.MorphAnalyzer()
     attrs = {}
 
     for i in nodes:

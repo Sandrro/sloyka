@@ -20,7 +20,6 @@ toponym columns.
 Creates a new DataFrame by aggregating the data based on the provided text and toponyms columns.
 """
 
-import nltk
 import pandas as pd
 import geopandas as gpd
 import networkx as nx
