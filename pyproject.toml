@@ -1,10 +1,15 @@
 [tool.poetry]
 name = "soika"
-version = "0.2.6"
+version = "0.2.7"
 description = "Library for city identity analysis from social media posts and comments"
 authors = ["sandrro, georgekontsevik"]
 readme = "README.md"
 packages = [{ include = "soika" }]
+
+[[tool.poetry.source]]
+name = "torch"
+url = "https://download.pytorch.org/whl/cu126"
+priority = "explicit"
 
 [tool.poetry.dependencies]
 python = ">=3.10.6,<3.12"
@@ -18,7 +23,6 @@ networkx = "3.3"
 osm2geojson = "0.2.3"
 osmnx = "1.5.1"
 pymorphy2 = "0.9.1"
-torch = "2.1.1"
 tqdm = "4.64.1"
 geopy = "2.3.0"
 shapely = "2.0.1"
@@ -32,6 +36,7 @@ rapidfuzz = "^3.9.0"
 osmapi = "^4.0.0"
 folium = "^0.16.0"
 hypernetx = "^2.3.5"
+torch = {version = "^2.6.0+cu126", source = "torch"}
 
 
 [tool.poetry.group.docs]
