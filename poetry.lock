@@ -6180,4 +6180,4 @@ pymorphy2 = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10.6,<3.12"
-content-hash = "c5461ac71893dbcd7c6afef7afaf2ccfc8212b6155b86d6bd6c97091fa3d2aca"
+content-hash = "0d78313b2e90a7849b2c6b4b3f3b5448099532f5d18b053a56ec6dedf9321e66"
