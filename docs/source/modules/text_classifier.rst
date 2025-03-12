@@ -8,7 +8,7 @@ pre-trained rubert-tiny2 model trained on 90,000 marked accesses. The main metho
 city functions with their probability of being correctly identified.
 
 
-.. automodule:: sloyka.src.risks.text_classifier
+.. automodule:: soika.src.risks.text_classifier
    :members:
    :undoc-members:
    :show-inheritance:

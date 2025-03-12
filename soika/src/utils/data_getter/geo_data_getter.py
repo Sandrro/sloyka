@@ -5,7 +5,7 @@ from contextlib import suppress
 import osmnx as ox
 import geopandas as gpd
 import pandas as pd
-from sloyka.src.utils.constants import (
+from soika.src.utils.constants import (
     GLOBAL_CRS,
     GLOBAL_METRIC_CRS,
 )
@@ -15,7 +15,7 @@ import osm2geojson
 import networkx as nx
 from loguru import logger
 
-from sloyka.src.utils.exceptions import *
+from soika.src.utils.exceptions import *
 
 class GeoDataGetter:
     """

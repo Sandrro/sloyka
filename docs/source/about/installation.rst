@@ -5,4 +5,4 @@ To install Sloyka, run:
 
 .. code-block:: bash
 
-   pip install sloyka
+   pip install soika

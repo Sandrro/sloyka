@@ -11,11 +11,11 @@ Sloyka is a library for analyzing city identity using social media data.
    about/installation
    about/pipeline
 
-.. figure:: /image/sloyka_map.png
+.. figure:: /image/soika_map.png
    :align: center
    :alt: photo
 
-   SLOYKA'S ROADMAP
+   SOIKA'S ROADMAP
 
 .. toctree::
    :maxdepth: 1

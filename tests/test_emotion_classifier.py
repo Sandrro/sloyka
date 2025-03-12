@@ -1,7 +1,7 @@
 import pytest
 import torch
 import pandas as pd
-from sloyka import EmotionRecognizer
+from soika import EmotionRecognizer
 
 @pytest.fixture
 def sample_dataframe():

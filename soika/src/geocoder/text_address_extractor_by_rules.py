@@ -11,7 +11,7 @@ from natasha import (
     Doc,
 )
 
-from sloyka.src.utils.constants import (
+from soika.src.utils.constants import (
     EXCEPTIONS_CITY_COUNTRY)
 
 

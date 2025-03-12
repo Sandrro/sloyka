@@ -6,17 +6,17 @@ To perform classification with generalized linear models, see :ref:`Geocoder_spe
 
 Geocoder
 -------------------
-.. autoclass:: sloyka.src.geocoder.geocoder.Geocoder
+.. autoclass:: soika.src.geocoder.geocoder.Geocoder
    :members: run
 
 OtherGeoObjects
 ---------------------
-.. autoclass:: sloyka.src.geocoder.city_objects_extractor.OtherGeoObjects
+.. autoclass:: soika.src.geocoder.city_objects_extractor.OtherGeoObjects
    :members: run
 
 StreetExtractor
 ---------------------
-.. autoclass:: sloyka.src.geocoder.street_extractor.StreetExtractor
+.. autoclass:: soika.src.geocoder.street_extractor.StreetExtractor
    :members: process_pipeline
 
 more:

@@ -6,8 +6,6 @@ from natasha.extractors import Extractor
 
 from ..utils.data_processing.rule_for_natasha import ADDR_PART
 
-from loguru import logger
-
 
 class AddrExtractorError(Exception):
     """Custom exception for address extractor errors"""

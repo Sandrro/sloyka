@@ -2,7 +2,7 @@
 
 Geocoder
 ==================
-.. autoclass:: sloyka.src.geocoder.geocoder.Geocoder
+.. autoclass:: soika.src.geocoder.geocoder.Geocoder
    :members:
    :undoc-members:
    :no-members: run

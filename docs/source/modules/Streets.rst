@@ -4,6 +4,6 @@ Streets
 ==========================
 A class for working with street data.
 
-.. autoclass:: sloyka.src.utils.data_getter.street_getter.Streets
+.. autoclass:: soika.src.utils.data_getter.street_getter.Streets
    :members:
    :undoc-members:

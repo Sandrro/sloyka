@@ -1,7 +1,7 @@
 import osmnx as ox
 import geopandas as gpd
 import pandas as pd
-from sloyka.src.utils.constants import (
+from soika.src.utils.constants import (
     GLOBAL_CRS,
     GLOBAL_METRIC_CRS,
 )

@@ -7,10 +7,10 @@ from typing import Union, Optional
 import pandas as pd
 import geopandas as gpd
 
-from sloyka.src.geocoder.geocoder import Geocoder
-from sloyka.src.risks.text_classifier import TextClassifiers
-from sloyka.src.utils.data_processing.city_services_extract import City_services
-from sloyka.src.risks.emotion_classifier import EmotionRecognizer
+from soika.src.geocoder.geocoder import Geocoder
+from soika.src.risks.text_classifier import TextClassifiers
+from soika.src.utils.data_processing.city_services_extract import City_services
+from soika.src.risks.emotion_classifier import EmotionRecognizer
 
 POSITIVE = ["happiness", "enthusiasm"]
 NEGATIVE = ["sadness", "anger", "fear", "disgust"]
@@ -18,7 +18,7 @@ NEGATIVE = ["sadness", "anger", "fear", "disgust"]
 
 class RegionalActivity:
     """This class is aimed to produce a geodataframe with the main information about users activity.
-    It uses other sloyka modules such as Geocoder, TextClassifiers, City_services and EmotionRecognizer to process data.
+    It uses other soika modules such as Geocoder, TextClassifiers, City_services and EmotionRecognizer to process data.
     Processed data is saved in class attribute 'processed_geodata' and
     after class initialization can be called with RegionalActivity.processed_geodata.
 
@@ -27,7 +27,7 @@ class RegionalActivity:
         data (pd.DataFrame): DataFrame with posts, comments and replies in text format
         with additional information such as
         date, group_name, text_type, parents_id and so on.
-        Expected to be formed from sloyka.VKParser.run class function output.
+        Expected to be formed from soika.VKParser.run class function output.
         osm_id (int): OSM ID of the place from which geograhic data should be retrieved.
         tags (dict): toponyms_dict with tags to be used in the Geocoder
         (e.g. {'admin_level': [5, 6]}).
@@ -70,7 +70,7 @@ class RegionalActivity:
             number_of_categories=number_of_categories,
             device_type=device,
         )
-        self.processed_geodata: gpd.GeoDataFrame = self.run_sloyka_modules()
+        self.processed_geodata: gpd.GeoDataFrame = self.run_soika_modules()
         self.top_topics = (
             self.processed_geodata.copy()["classified_text"].value_counts(
                 normalize=True
@@ -78,7 +78,7 @@ class RegionalActivity:
             * 100
         )
 
-    def run_sloyka_modules(self) -> gpd.GeoDataFrame:
+    def run_soika_modules(self) -> gpd.GeoDataFrame:
         """This function runs data with the main functions of the Geocoder, TextClassifiers,City_services and
         EmotionRecognizer classes. If path_to_save was provided it also saves data in the path.
 
@@ -126,7 +126,7 @@ class RegionalActivity:
         """
 
         self.data = data
-        self.processed_geodata = self.run_sloyka_modules()
+        self.processed_geodata = self.run_soika_modules()
 
     @staticmethod
     def get_chain_ids(

@@ -3,7 +3,7 @@
 Emotion classifier
 ==================
 
-.. automodule:: sloyka.src.risks.emotion_classifier
+.. automodule:: soika.src.risks.emotion_classifier
    :members:
    :undoc-members:
 

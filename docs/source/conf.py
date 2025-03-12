@@ -12,7 +12,7 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..
 sys.path.insert(0, project_root)
 
 
-project = 'sloyka'
+project = 'soika'
 copyright = '2024, itmo_idu'
 author = 'itmo_idu'
 version = '0.2'

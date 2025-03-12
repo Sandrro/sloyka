@@ -1,7 +1,7 @@
 import pytest
 import torch
 import pandas as pd
-from sloyka import TextClassifiers
+from soika import TextClassifiers
 
 @pytest.fixture
 def sample_dataframe():
