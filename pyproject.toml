@@ -36,7 +36,7 @@ rapidfuzz = "^3.9.0"
 osmapi = "^4.0.0"
 folium = "^0.16.0"
 hypernetx = "^2.3.5"
-torch = {version = "^2.6.0+cu126", source = "torch"}
+torch = {version = "^2.6.0", source = "torch"}
 
 
 [tool.poetry.group.docs]
