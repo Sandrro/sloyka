@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "soika"
-version = "0.2.7"
+version = "0.2.8"
 description = "Library for city identity analysis from social media posts and comments"
 authors = ["sandrro, georgekontsevik"]
 readme = "README.md"
@@ -18,7 +18,7 @@ matplotlib = "3.7.0"
 nltk = "3.8.1"
 geopandas = "0.14.4"
 numpy = "1.25.2"
-flair = "0.12.2"
+flair = "0.15.1"
 networkx = "3.3"
 osm2geojson = "0.2.3"
 osmnx = "1.5.1"
