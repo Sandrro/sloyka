@@ -1,47 +1,42 @@
 [tool.poetry]
 name = "soika"
-version = "0.2.5"
+version = "0.2.8"
 description = "Library for city identity analysis from social media posts and comments"
 authors = ["sandrro, georgekontsevik"]
 readme = "README.md"
 packages = [{ include = "soika" }]
 
+[[tool.poetry.source]]
+name = "torch"
+url = "https://download.pytorch.org/whl/cu126"
+priority = "explicit"
+
 [tool.poetry.dependencies]
 python = ">=3.10.6,<3.12"
 pandas = "2.2.2"
 matplotlib = "3.7.0"
-seaborn = "0.12.2"
 nltk = "3.8.1"
-scikit-learn = "1.4.2"
-spacy = "3.5.0"
-geopandas = "0.12.2"
+geopandas = "0.14.4"
 numpy = "1.25.2"
-flair = "0.12.2"
+flair = "0.15.1"
 networkx = "3.3"
 osm2geojson = "0.2.3"
 osmnx = "1.5.1"
 pymorphy2 = "0.9.1"
-pymorphy2-dicts-ru = "2.4.417127.4579844"
-torch = "2.1.1"
 tqdm = "4.64.1"
 geopy = "2.3.0"
 shapely = "2.0.1"
-transformers = "4.26.1"
+transformers = ">=4.31.0"
 bertopic = "0.15.0"
-autodocsumm = "0.2.11"
-vk-api = "11.9.9"
 natasha = "1.6.0"
 loguru = "0.7.2"
 pandarallel = "1.6.5"
 keybert = "0.8.3"
-pyarrow = "15.0.0"
 rapidfuzz = "^3.9.0"
 osmapi = "^4.0.0"
-aniemore = "^1.2.3"
-scipy = "1.12"
 folium = "^0.16.0"
-mapclassify = "^2.6.1"
 hypernetx = "^2.3.5"
+torch = {version = "^2.6.0", source = "torch"}
 
 
 [tool.poetry.group.docs]
