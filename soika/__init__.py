@@ -2,29 +2,29 @@ from loguru import logger
 import sys
 
 from .src import (
-    EventDetection,
+    #EventDetection,
     Geocoder,
-    TextClassifiers,
+    #TextClassifiers,
     GeoDataGetter,
-    Semgraph,
+    #Semgraph,
     VKParser,
-    City_services,
+    #City_services,
     AreaMatcher,
-    EmotionRecognizer,
-    RegionalActivity
+    #EmotionRecognizer,
+    #RegionalActivity
 )
 
 __all__ = [
-    "EventDetection",
-    "TextClassifiers",
+    #"EventDetection",
+    #"TextClassifiers",
     "Geocoder",
     "GeoDataGetter",
-    "Semgraph",
+    #"Semgraph",
     "VKParser",
-    "City_services",
+    #"City_services",
     "AreaMatcher",
-    "EmotionRecognizer",
-    "RegionalActivity"
+    #"EmotionRecognizer",
+    #"RegionalActivity"
 ]
 
 # logger.remove()
