@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "soika"
-version = "0.3.0"
+version = "0.3.0.1"
 description = "Library for city identity analysis from social media posts and comments"
 authors = ["sandrro", "georgekontsevik"]
 readme = "README.md"
@@ -15,24 +15,25 @@ priority = "explicit"
 python = ">=3.10.6,<3.12"
 
 # Зависимости, необходимые для работы модулей Geocoder и VKParser.
-flair       = { version = "0.15.1", optional = true }      # используется для моделей и обработки текста
-geopandas   = { version = "0.14.4", optional = true }      # работа с геоданными
-pandas      = { version = "2.2.2", optional = true }         # обработка табличных данных
-pymorphy2   = { version = "0.9.1", optional = true }         # морфологический анализ
-torch       = { version = "^2.6.0", source = "torch", optional = true }  # глубокое обучение
-rapidfuzz   = { version = "^3.9.0", optional = true }        # нечеткое сравнение строк
-nltk        = { version = "3.8.1", optional = true }         # обработка естественного языка
-shapely     = { version = "2.0.1", optional = true }         # работа с геометрией
-tqdm        = { version = "4.64.1", optional = true }        # индикатор прогресса
-loguru      = { version = "0.7.2", optional = true }         # логирование
-pandarallel= { version = "1.6.5", optional = true }          # параллельные вычисления для pandas
-osmnx       = { version = "1.5.1", optional = true }         # извлечение данных OpenStreetMap
-osmapi      = { version = "^4.0.0", optional = true }        # работа с OSM API
-osm2geojson = { version = "0.2.3", optional = true }         # конвертация OSM в GeoJSON
-networkx    = { version = "3.3", optional = true }           # работа с графами
-numpy       = { version = "1.25.2", optional = true }        # вычисления с массивами
-geopy       = { version = "2.3.0", optional = true }         # геокодирование (Nominatim и др.)
-requests    = { version = "^2.28.0", optional = true }       # HTTP-запросы
+flair        = { version = "0.15.1", optional = true }      # используется для моделей и обработки текста
+geopandas    = { version = "0.14.4", optional = true }      # работа с геоданными
+pandas       = { version = "2.2.2", optional = true }         # обработка табличных данных
+pymorphy2    = { version = "0.9.1", optional = true }         # морфологический анализ
+torch        = { version = "^2.6.0", source = "torch", optional = true }  # глубокое обучение
+rapidfuzz    = { version = "^3.9.0", optional = true }        # нечеткое сравнение строк
+nltk         = { version = "3.8.1", optional = true }         # обработка естественного языка
+shapely      = { version = "2.0.1", optional = true }         # работа с геометрией
+tqdm         = { version = "4.64.1", optional = true }        # индикатор прогресса
+loguru       = { version = "0.7.2", optional = true }         # логирование
+pandarallel  = { version = "1.6.5", optional = true }         # параллельные вычисления для pandas
+osmnx        = { version = "1.5.1", optional = true }         # извлечение данных OpenStreetMap
+osmapi       = { version = "^4.0.0", optional = true }        # работа с OSM API
+osm2geojson  = { version = "0.2.3", optional = true }         # конвертация OSM в GeoJSON
+networkx     = { version = "3.3", optional = true }           # работа с графами
+numpy        = { version = "1.25.2", optional = true }        # вычисления с массивами
+geopy        = { version = "2.3.0", optional = true }         # геокодирование (Nominatim и др.)
+requests     = { version = "^2.28.0", optional = true }       # HTTP-запросы
+natasha      = { version = "1.6.0", optional = true }         # обработка именованных сущностей и др.
 
 [tool.poetry.extras]
 geocoder = [
@@ -53,7 +54,8 @@ geocoder = [
     "networkx",
     "numpy",
     "geopy",
-    "requests"
+    "requests",
+    "natasha"
 ]
 
 vk_parser = [

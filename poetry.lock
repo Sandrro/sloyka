@@ -1513,6 +1513,22 @@ pyside6 = ["pyside6"]
 test = ["flaky", "ipyparallel", "pre-commit", "pytest (>=7.0)", "pytest-asyncio (==0.23.2)", "pytest-cov", "pytest-timeout"]
 
 [[package]]
+name = "ipymarkup"
+version = "0.9.0"
+description = "NER, syntax tree markup visualisations for Jupyter Notebook"
+optional = true
+python-versions = "*"
+groups = ["main"]
+markers = "extra == \"geocoder\""
+files = [
+    {file = "ipymarkup-0.9.0-py3-none-any.whl", hash = "sha256:6ef17080e7b2dd339634337e676c0a257c8ff6c8cb54884cff91011e5a15d3f6"},
+    {file = "ipymarkup-0.9.0.tar.gz", hash = "sha256:3f4bfa10fd66293201af8484a7e6bcb723bf2e33d9a6aa00882671af9ca26911"},
+]
+
+[package.dependencies]
+intervaltree = ">=3"
+
+[[package]]
 name = "ipython"
 version = "8.34.0"
 description = "IPython: Productive Interactive Computing"
@@ -2631,6 +2647,43 @@ linkify = ["linkify-it-py (>=2.0,<3.0)"]
 rtd = ["ipython", "sphinx (>=7)", "sphinx-autodoc2 (>=0.5.0,<0.6.0)", "sphinx-book-theme (>=1.1,<2.0)", "sphinx-copybutton", "sphinx-design", "sphinx-pyscript", "sphinx-tippy (>=0.4.3)", "sphinx-togglebutton", "sphinxext-opengraph (>=0.9.0,<0.10.0)", "sphinxext-rediraffe (>=0.2.7,<0.3.0)"]
 testing = ["beautifulsoup4", "coverage[toml]", "defusedxml", "pytest (>=8,<9)", "pytest-cov", "pytest-param-files (>=0.6.0,<0.7.0)", "pytest-regressions", "sphinx-pytest"]
 testing-docutils = ["pygments", "pytest (>=8,<9)", "pytest-param-files (>=0.6.0,<0.7.0)"]
+
+[[package]]
+name = "natasha"
+version = "1.6.0"
+description = "Named-entity recognition for russian language"
+optional = true
+python-versions = "*"
+groups = ["main"]
+markers = "extra == \"geocoder\""
+files = [
+    {file = "natasha-1.6.0-py3-none-any.whl", hash = "sha256:e12b130d05a0b4d2eb6442092ed5b5769a68a311c17f2095b1aa739fb8d6dc78"},
+    {file = "natasha-1.6.0.tar.gz", hash = "sha256:46082e6b382ad3a6bc07d8de4677c70f955347e5eb77ef0e0ac4147da18b12ad"},
+]
+
+[package.dependencies]
+ipymarkup = ">=0.8.0"
+navec = ">=0.9.0"
+pymorphy2 = "*"
+razdel = ">=0.5.0"
+slovnet = ">=0.6.0"
+yargy = ">=0.16.0"
+
+[[package]]
+name = "navec"
+version = "0.10.0"
+description = "Compact high quality word embeddings for russian language"
+optional = true
+python-versions = "*"
+groups = ["main"]
+markers = "extra == \"geocoder\""
+files = [
+    {file = "navec-0.10.0-py3-none-any.whl", hash = "sha256:c4e24519ed5af3f6984f763c61c3a281b2923b59c72b88ea8c1c11aa81265e18"},
+    {file = "navec-0.10.0.tar.gz", hash = "sha256:4f23474b1c279af6c605f84e7873e87c47ca58b0c538a3f9d30d90c609c9fd21"},
+]
+
+[package.dependencies]
+numpy = "*"
 
 [[package]]
 name = "nbclient"
@@ -3942,6 +3995,19 @@ files = [
 all = ["numpy"]
 
 [[package]]
+name = "razdel"
+version = "0.5.0"
+description = "Splits russian text into tokens, sentences, section. Rule-based"
+optional = true
+python-versions = "*"
+groups = ["main"]
+markers = "extra == \"geocoder\""
+files = [
+    {file = "razdel-0.5.0-py3-none-any.whl", hash = "sha256:76f59691c3216b47d32fef6274c18c12d61f602f1444b7ef4b135b03801f6d37"},
+    {file = "razdel-0.5.0.tar.gz", hash = "sha256:4334c0fdfe34d4e888cf0ed854968c9df14f0a547df909a77f4634f9ffe626e6"},
+]
+
+[[package]]
 name = "readthedocs-sphinx-search"
 version = "0.3.2"
 description = "Sphinx extension to enable search as you type for docs hosted on Read the Docs."
@@ -4604,6 +4670,24 @@ files = [
     {file = "six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81"},
 ]
 markers = {main = "extra == \"geocoder\" or extra == \"vk-parser\""}
+
+[[package]]
+name = "slovnet"
+version = "0.6.0"
+description = "Deep-learning based NLP modeling for Russian language"
+optional = true
+python-versions = "*"
+groups = ["main"]
+markers = "extra == \"geocoder\""
+files = [
+    {file = "slovnet-0.6.0-py3-none-any.whl", hash = "sha256:bdecc3d7cbe5758a675316855d988339592e657565c0f2bc84f5dadb2e056ea4"},
+    {file = "slovnet-0.6.0.tar.gz", hash = "sha256:02d2257bdc9b9cc1d242bd34ee2c861c648f7083ef7898fe1468abcc381ef799"},
+]
+
+[package.dependencies]
+navec = "*"
+numpy = "*"
+razdel = "*"
 
 [[package]]
 name = "sniffio"
@@ -5855,11 +5939,27 @@ files = [
     {file = "wrapt-1.17.2.tar.gz", hash = "sha256:41388e9d4d1522446fe79d3213196bd9e3b301a336965b9e27ca2788ebd122f3"},
 ]
 
+[[package]]
+name = "yargy"
+version = "0.16.0"
+description = "Rule-based facts extraction for Russian language"
+optional = true
+python-versions = "*"
+groups = ["main"]
+markers = "extra == \"geocoder\""
+files = [
+    {file = "yargy-0.16.0-py3-none-any.whl", hash = "sha256:7ca469fa47b336367fab49e8f33ccc195584f69ab758e8196f2fdaa7492adf22"},
+    {file = "yargy-0.16.0.tar.gz", hash = "sha256:c917eefb32a40c23c46b6ca88d68927072dd00ab94e90fd5dc6ab0a62b59b593"},
+]
+
+[package.dependencies]
+pymorphy2 = "*"
+
 [extras]
-geocoder = ["flair", "geopandas", "geopy", "loguru", "networkx", "nltk", "numpy", "osm2geojson", "osmapi", "osmnx", "pandarallel", "pandas", "pymorphy2", "rapidfuzz", "requests", "shapely", "torch", "tqdm"]
+geocoder = ["flair", "geopandas", "geopy", "loguru", "natasha", "networkx", "nltk", "numpy", "osm2geojson", "osmapi", "osmnx", "pandarallel", "pandas", "pymorphy2", "rapidfuzz", "requests", "shapely", "torch", "tqdm"]
 vk-parser = ["pandas", "requests", "tqdm"]
 
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10.6,<3.12"
-content-hash = "fe165a30ec75983ec6b68629fcdea3d0f3f4f3ee298fe3ca28fd776e8911131e"
+content-hash = "a7eabfd1d364b7f09c97c09e6db249d5aa7fc65e18545584a38a3f19544e0539"
