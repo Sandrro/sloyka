@@ -52,15 +52,14 @@ from soika.src.utils.data_preprocessing.preprocessor import PreprocessorInput
 from soika.src.geocoder.street_extractor import StreetExtractor
 from soika.src.geocoder.word_form_matcher import WordFormFinder
 
-pandarallel.initialize(progress_bar=True, nb_workers=-1)
 tqdm.pandas()
 
 
 class Geocoder:
     """
-    This class provides a functionality of simple geocoder
+    This class provides functionality of a simple geocoder.
     """
-
+    pandarallel_initialized = False
     def __init__(
         self,
         df,
@@ -68,10 +67,15 @@ class Geocoder:
         device: str = "cpu",
         territory_name: str = None,
         osm_id: int = None,
-        city_tags: dict ={"place": ["state"]},
+        city_tags: dict = {"place": ["state"]},
         stemmer_lang: str = "russian",
-        text_column_name:str = 'text'
+        text_column_name: str = 'text',
+        nb_workers: int = -1
     ):
+        if not Geocoder.pandarallel_initialized:
+            pandarallel.initialize(progress_bar=True, nb_workers=nb_workers)
+            Geocoder.pandarallel_initialized = True
+
         self.text_column_name = text_column_name
         self.df = PreprocessorInput().run(df, text_column_name)
         self.device = device
@@ -80,16 +84,14 @@ class Geocoder:
         self.osm_id = osm_id
         if territory_name:
             self.osm_city_name = territory_name
-        else:    
+        else:
             self.osm_city_name = (
                 GeoDataGetter()
-                .get_features_from_id(osm_id=self.osm_id,tags=city_tags, selected_columns=["name", "geometry"])
+                .get_features_from_id(osm_id=self.osm_id, tags=city_tags, selected_columns=["name", "geometry"])
                 .iloc[0]["name"]
             )
         self.street_names = Streets.run(self.osm_id)
         self.stemmer = SnowballStemmer(stemmer_lang)
-        
-
 
     @staticmethod
     def get_stem(street_names_df: pd.DataFrame) -> pd.DataFrame:

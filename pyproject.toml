@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "soika"
-version = "0.3.0.1"
+version = "0.3.0.2"
 description = "Library for city identity analysis from social media posts and comments"
 authors = ["sandrro", "georgekontsevik"]
 readme = "README.md"
